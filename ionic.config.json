@@ -1,0 +1,7 @@
+{
+  "name": "ThutoData-App",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
