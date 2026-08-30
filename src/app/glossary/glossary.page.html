@@ -1,0 +1,254 @@
+<ion-content [fullscreen]="true">
+
+  <!-- =========================================
+       HERO
+  ========================================= -->
+
+  <section class="glossary-hero">
+
+    <div class="hero-content">
+
+      <span class="section-label">
+        THUTODATA GLOSSARY
+      </span>
+
+      <h1>
+        Key Terms Explained
+        <span>in Simple Language</span>
+      </h1>
+
+      <p>
+        Understand important university, application,
+        qualification and funding terms before you apply.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       SEARCH
+  ========================================= -->
+
+  <section class="search-section">
+
+    <div class="search-container">
+
+      <div class="search-box">
+
+        <ion-icon name="search-outline"></ion-icon>
+
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Search for a term, abbreviation or keyword..."
+          aria-label="Search glossary">
+
+        @if (searchTerm) {
+
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearSearch()">
+
+            <ion-icon name="close-outline"></ion-icon>
+
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       CATEGORY FILTER
+  ========================================= -->
+
+  <section class="category-section">
+
+    <div class="category-container">
+
+      <button
+        *ngFor="let category of categories"
+        type="button"
+        class="category-button"
+        [class.active]="selectedCategory === category"
+        (click)="selectCategory(category)">
+
+        {{ category }}
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       RESULTS
+  ========================================= -->
+
+  <section class="terms-section">
+
+    <div class="terms-container">
+
+
+      <div class="results-header">
+
+        <div>
+
+          <span class="section-label">
+            GLOSSARY
+          </span>
+
+          <h2>
+            Important Terms
+          </h2>
+
+        </div>
+
+        <span class="term-count">
+
+          {{ filteredTerms.length }}
+
+          {{ filteredTerms.length === 1 ? 'term' : 'terms' }}
+
+        </span>
+
+      </div>
+
+
+      <!-- =====================================
+           TERM CARDS
+      ====================================== -->
+
+      <div class="terms-grid">
+
+        <article
+          *ngFor="let item of filteredTerms"
+          class="term-card">
+
+
+          <div class="term-top">
+
+            <div>
+
+              <span class="term-category">
+                {{ item.category }}
+              </span>
+
+              <h3>
+                {{ item.term }}
+              </h3>
+
+            </div>
+
+            @if (item.abbreviation) {
+
+              <span class="abbreviation">
+                {{ item.abbreviation }}
+              </span>
+
+            }
+
+          </div>
+
+
+          <div class="term-definition">
+
+            <p>
+              {{ item.definition }}
+            </p>
+
+          </div>
+
+
+        </article>
+
+
+        <!-- ===================================
+             NO RESULTS
+        ==================================== -->
+
+        <div
+          *ngIf="filteredTerms.length === 0"
+          class="no-results">
+
+          <div class="no-results-icon">
+
+            <ion-icon name="search-outline"></ion-icon>
+
+          </div>
+
+          <h3>
+            No terms found
+          </h3>
+
+          <p>
+            We couldn't find a glossary term matching
+            your search.
+          </p>
+
+          <button
+            type="button"
+            class="reset-button"
+            (click)="clearSearch()">
+
+            Clear Search
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       LEARNING TIP
+  ========================================= -->
+
+  <section class="tip-section">
+
+    <div class="tip-container">
+
+      <div class="tip-icon">
+
+        <ion-icon name="bulb-outline"></ion-icon>
+
+      </div>
+
+      <div class="tip-content">
+
+        <span class="section-label">
+          THUTODATA TIP
+        </span>
+
+        <h2>
+          Don't just memorise the terms.
+          Understand them.
+        </h2>
+
+        <p>
+          University applications often use terms that may
+          be unfamiliar. Understanding these terms can help
+          you make better decisions about your education.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <app-footer></app-footer>
+
+</ion-content>

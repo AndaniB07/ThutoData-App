@@ -1,0 +1,351 @@
+<ion-content [fullscreen]="true">
+
+  <!-- =========================================
+       SEARCH HEADER
+  ========================================= -->
+
+  <section class="search-container">
+
+    <div class="search-header">
+
+      <span class="section-label">
+        THUTODATA COLLEGES
+      </span>
+
+      <h1>
+        Find a TVET College
+      </h1>
+
+      <p>
+        Explore Technical and Vocational Education and Training
+        colleges across South Africa.
+      </p>
+
+    </div>
+
+
+    <!-- SEARCH BAR -->
+
+    <div class="search-bar">
+
+      <div class="search-field">
+
+        <ion-icon
+          name="search-outline">
+        </ion-icon>
+
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Search colleges, provinces or locations..."
+          aria-label="Search colleges">
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       MAIN COLLEGE SECTION
+  ========================================= -->
+
+  <section class="colleges-section">
+
+    <div class="colleges-layout">
+
+
+      <!-- =====================================
+           FILTER SIDEBAR
+      ====================================== -->
+
+      <aside class="filter-sidebar">
+
+        <div class="filter-header">
+
+          <h2>
+            Filter Colleges
+          </h2>
+
+          <button
+            type="button"
+            (click)="clearFilters()">
+
+            Clear
+
+          </button>
+
+        </div>
+
+
+        <!-- PROVINCE -->
+
+        <div class="filter-group">
+
+          <label for="province">
+            Province
+          </label>
+
+          <select
+            id="province"
+            [(ngModel)]="selectedProvince">
+
+            <option
+              *ngFor="let province of provinces"
+              [value]="province">
+
+              {{ province }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- COLLEGE TYPE -->
+
+        <div class="filter-group">
+
+          <label for="type">
+            Institution Type
+          </label>
+
+          <select
+            id="type"
+            [(ngModel)]="selectedType">
+
+            <option
+              *ngFor="let type of types"
+              [value]="type">
+
+              {{ type }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="filter-info">
+
+          <ion-icon
+            name="information-circle-outline">
+          </ion-icon>
+
+          <p>
+            More filters such as programmes and
+            qualifications will be available once
+            the college information API is connected.
+          </p>
+
+        </div>
+
+      </aside>
+
+
+      <!-- =====================================
+           COLLEGES RESULTS
+      ====================================== -->
+
+      <div class="colleges-results">
+
+
+        <!-- RESULTS HEADER -->
+
+        <div class="results-header">
+
+          <div>
+
+            <span class="section-label">
+              COLLEGES
+            </span>
+
+            <h2>
+              Available Colleges
+            </h2>
+
+          </div>
+
+
+          <div class="college-count">
+
+            {{ filteredColleges.length }}
+
+            {{
+              filteredColleges.length === 1
+                ? 'College'
+                : 'Colleges'
+            }}
+
+          </div>
+
+        </div>
+
+
+        <!-- ===================================
+             COLLEGE GRID
+        ==================================== -->
+
+        <div class="colleges-grid">
+
+
+          <!-- COLLEGE CARD -->
+
+          <article
+            *ngFor="let college of filteredColleges"
+            class="college-card">
+
+
+            <div class="college-card-top">
+
+              <div class="college-icon">
+
+                <ion-icon
+                  name="school-outline">
+                </ion-icon>
+
+              </div>
+
+              <span class="college-type">
+
+                {{ college.type }}
+
+              </span>
+
+            </div>
+
+
+            <div class="college-card-content">
+
+              <h3>
+                {{ college.name }}
+              </h3>
+
+              <div class="college-location">
+
+                <ion-icon
+                  name="location-outline">
+                </ion-icon>
+
+                <span>
+                  {{ college.location }}
+                </span>
+
+              </div>
+
+              <p>
+                {{ college.description }}
+              </p>
+
+            </div>
+
+
+            <div class="college-card-footer">
+
+              <button
+                type="button"
+                class="learn-button">
+
+                View College
+
+                <ion-icon
+                  name="arrow-forward-outline">
+                </ion-icon>
+
+              </button>
+
+            </div>
+
+
+          </article>
+
+
+          <!-- =================================
+               NO RESULTS
+          ================================== -->
+
+          <div
+            *ngIf="filteredColleges.length === 0"
+            class="no-results">
+
+            <div class="no-results-icon">
+
+              <ion-icon
+                name="search-outline">
+              </ion-icon>
+
+            </div>
+
+            <h3>
+              No colleges found
+            </h3>
+
+            <p>
+              Try changing your search or filters.
+            </p>
+
+            <button
+              type="button"
+              class="reset-button"
+              (click)="clearFilters()">
+
+              Clear Filters
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       INFORMATION SECTION
+  ========================================= -->
+
+  <section class="information-section">
+
+    <div class="information-container">
+
+      <div class="information-icon">
+
+        <ion-icon
+          name="bulb-outline">
+        </ion-icon>
+
+      </div>
+
+      <div>
+
+        <span class="section-label">
+          KNOW YOUR OPTIONS
+        </span>
+
+        <h2>
+          University isn't the only route to a career.
+        </h2>
+
+        <p>
+          TVET colleges provide practical and vocational
+          education that can help students develop skills
+          for further study, employment or entrepreneurship.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <app-footer></app-footer>
+</ion-content>

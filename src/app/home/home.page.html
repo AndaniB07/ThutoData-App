@@ -1,0 +1,442 @@
+<ion-content [fullscreen]="true">
+
+  <!-- =========================================
+       HERO SECTION
+  ========================================= -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <span class="hero-label">
+        WELCOME TO THUTODATA
+      </span>
+
+      <h1>
+        Your route to
+        <span>University.</span>
+      </h1>
+
+      <p class="hero-tagline">
+        Information you can understand.
+        Skills you can use.
+      </p>
+
+      <p class="hero-description">
+        Finding information about universities, colleges and
+        bursaries can be overwhelming. ThutoData brings important
+        education information together in one simple and accessible
+        platform.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a
+          routerLink="/tabs/universities"
+          class="primary-button">
+
+          Find a University
+
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+
+        </a>
+
+        <a
+          routerLink="/tabs/bursaries"
+          class="secondary-button">
+
+          Find Funding
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       QUICK ACCESS
+  ========================================= -->
+
+  <section class="quick-section">
+
+    <div class="section-container">
+
+      <div class="section-heading">
+
+        <span class="section-label">
+          EXPLORE
+        </span>
+
+        <h2>
+          Find what you're looking for
+        </h2>
+
+        <p>
+          Explore opportunities and information to help you
+          plan your education journey.
+        </p>
+
+      </div>
+
+
+      <div class="quick-grid">
+
+
+        <!-- UNIVERSITIES -->
+
+        <a
+          routerLink="/tabs/universities"
+          class="quick-card">
+
+          <div class="quick-icon">
+
+            <ion-icon name="school-outline"></ion-icon>
+
+          </div>
+
+          <h3>
+            Universities
+          </h3>
+
+          <p>
+            Explore universities across South Africa and
+            compare programmes, requirements and locations.
+          </p>
+
+          <span class="card-link">
+
+            Explore Universities
+
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+          </span>
+
+        </a>
+
+
+        <!-- TVET COLLEGES -->
+
+        <a
+          routerLink="/colleges"
+          class="quick-card">
+
+          <div class="quick-icon">
+
+            <ion-icon name="business-outline"></ion-icon>
+
+          </div>
+
+          <h3>
+            TVET Colleges
+          </h3>
+
+          <p>
+            Discover vocational and occupational training
+            opportunities at TVET colleges.
+          </p>
+
+          <span class="card-link">
+
+            Explore Colleges
+
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+          </span>
+
+        </a>
+
+
+        <!-- BURSARIES -->
+
+        <a
+          routerLink="/tabs/bursaries"
+          class="quick-card">
+
+          <div class="quick-icon">
+
+            <ion-icon name="cash-outline"></ion-icon>
+
+          </div>
+
+          <h3>
+            Bursaries
+          </h3>
+
+          <p>
+            Find funding opportunities that can help you
+            pay for your education.
+          </p>
+
+          <span class="card-link">
+
+            Find Bursaries
+
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+          </span>
+
+        </a>
+
+
+        <!-- GLOSSARY -->
+
+        <a
+          routerLink="/glossary"
+          class="quick-card">
+
+          <div class="quick-icon">
+
+            <ion-icon name="book-outline"></ion-icon>
+
+          </div>
+
+          <h3>
+            Glossary
+          </h3>
+
+          <p>
+            Understand important university and funding
+            terms explained in simple language.
+          </p>
+
+          <span class="card-link">
+
+            Learn the Terms
+
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+          </span>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       WHY THUTODATA
+  ========================================= -->
+
+  <section class="why-section">
+
+    <div class="why-container">
+
+
+      <div class="why-content">
+
+        <span class="section-label">
+          WHY THUTODATA?
+        </span>
+
+        <h2>
+          Education information shouldn't be difficult to find.
+        </h2>
+
+        <p>
+          For many students, especially those from rural
+          communities, finding clear information about
+          university applications and funding can be difficult.
+        </p>
+
+        <p>
+          ThutoData brings this information together and
+          presents it in a simpler way so that students can
+          understand their options and make informed decisions.
+        </p>
+
+        <a
+          routerLink="/about"
+          class="text-button">
+
+          Learn more about ThutoData
+
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+
+        </a>
+
+      </div>
+
+
+      <div class="why-cards">
+
+
+        <!-- FIND INFORMATION -->
+
+        <div class="why-card">
+
+          <div class="why-card-icon">
+
+            <ion-icon name="search-outline"></ion-icon>
+
+          </div>
+
+          <div>
+
+            <h3>
+              Find Information
+            </h3>
+
+            <p>
+              Search for universities, colleges and bursaries
+              in one place.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- MAKE COMPARISONS -->
+
+        <div class="why-card">
+
+          <div class="why-card-icon">
+
+            <ion-icon name="filter-outline"></ion-icon>
+
+          </div>
+
+          <div>
+
+            <h3>
+              Make Comparisons
+            </h3>
+
+            <p>
+              Use filters to find opportunities that match
+              your needs.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- UNDERSTAND OPTIONS -->
+
+        <div class="why-card">
+
+          <div class="why-card-icon">
+
+            <ion-icon name="bulb-outline"></ion-icon>
+
+          </div>
+
+          <div>
+
+            <h3>
+              Understand Your Options
+            </h3>
+
+            <p>
+              Learn about important application and funding
+              requirements in simple language.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       DIGITAL LITERACY
+  ========================================= -->
+
+  <section class="literacy-section">
+
+    <div class="literacy-container">
+
+      <div class="literacy-icon">
+
+        <ion-icon name="compass-outline"></ion-icon>
+
+      </div>
+
+      <div class="literacy-content">
+
+        <span class="section-label">
+          MORE THAN INFORMATION
+        </span>
+
+        <h2>
+          Build skills for your future.
+        </h2>
+
+        <p>
+          ThutoData is designed not only to help you find
+          information, but also to help you develop the
+          skills needed to search for, understand and
+          evaluate information independently.
+        </p>
+
+        <a
+          routerLink="/glossary"
+          class="secondary-button">
+
+          Start Learning
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       FINAL CALL TO ACTION
+  ========================================= -->
+
+  <section class="cta-section">
+
+    <div class="cta-container">
+
+      <h2>
+        Ready to explore your options?
+      </h2>
+
+      <p>
+        Start discovering universities, colleges and
+        bursaries today.
+      </p>
+
+      <div class="cta-buttons">
+
+        <a
+          routerLink="/tabs/universities"
+          class="primary-button">
+
+          Explore Universities
+
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+
+        </a>
+
+        <a
+          routerLink="/tabs/bursaries"
+          class="cta-link">
+
+          Find Bursaries
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+<app-footer></app-footer>
+</ion-content>

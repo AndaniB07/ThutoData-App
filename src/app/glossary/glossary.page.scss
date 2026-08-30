@@ -1,0 +1,642 @@
+/* =========================================
+   GLOSSARY PAGE
+========================================= */
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.glossary-hero {
+  padding: 75px 7% 65px;
+
+  background: #ffffff;
+
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+
+  margin: 0 auto;
+}
+
+.section-label {
+  display: inline-block;
+
+  margin-bottom: 12px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.2px;
+
+  color: #667085;
+}
+
+.glossary-hero h1 {
+  margin: 0;
+
+  font-size: 44px;
+
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  color: #172033;
+}
+
+.glossary-hero h1 span {
+  display: block;
+
+  color: #3f51b5;
+}
+
+.glossary-hero p {
+  max-width: 650px;
+
+  margin: 18px auto 0;
+
+  font-size: 16px;
+
+  line-height: 1.7;
+
+  color: #667085;
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.search-section {
+  padding: 0 7% 25px;
+
+  background: #ffffff;
+}
+
+.search-container {
+  max-width: 850px;
+
+  margin: 0 auto;
+}
+
+.search-box {
+  height: 56px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 0 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #d9dde7;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 4px 15px rgba(16, 24, 40, 0.06);
+}
+
+.search-box > ion-icon {
+  flex-shrink: 0;
+
+  font-size: 21px;
+
+  color: #667085;
+}
+
+.search-box input {
+  flex: 1;
+
+  min-width: 0;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  color: #172033;
+}
+
+.search-box input::placeholder {
+  color: #98a2b3;
+}
+
+.clear-button {
+  width: 34px;
+
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #f1f3f7;
+
+  color: #667085;
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   CATEGORY FILTER
+========================================= */
+
+.category-section {
+  padding: 20px 7% 40px;
+
+  background: #ffffff;
+}
+
+.category-container {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 10px;
+}
+
+.category-button {
+  padding: 10px 17px;
+
+  border: 1px solid #d9dde7;
+
+  border-radius: 30px;
+
+  background: #ffffff;
+
+  color: #667085;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.category-button:hover {
+  border-color: #3f51b5;
+
+  color: #3f51b5;
+}
+
+.category-button.active {
+  border-color: #3f51b5;
+
+  background: #3f51b5;
+
+  color: #ffffff;
+}
+
+
+/* =========================================
+   TERMS
+========================================= */
+
+.terms-section {
+  padding: 55px 7% 80px;
+
+  background: #f7f9fc;
+}
+
+.terms-container {
+  max-width: 1200px;
+
+  margin: 0 auto;
+}
+
+.results-header {
+  margin-bottom: 28px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.results-header .section-label {
+  margin-bottom: 7px;
+}
+
+.results-header h2 {
+  margin: 0;
+
+  font-size: 28px;
+
+  color: #172033;
+}
+
+.term-count {
+  padding: 8px 14px;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e7eaf0;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  color: #667085;
+}
+
+
+/* =========================================
+   TERM GRID
+========================================= */
+
+.terms-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+
+/* =========================================
+   TERM CARD
+========================================= */
+
+.term-card {
+  min-height: 270px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 25px;
+
+  background: #ffffff;
+
+  border: 1px solid #e7eaf0;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 4px 16px rgba(16, 24, 40, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.term-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 10px 25px rgba(16, 24, 40, 0.08);
+}
+
+.term-top {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.term-category {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  text-transform: uppercase;
+
+  color: #3f51b5;
+}
+
+.term-card h3 {
+  margin: 0;
+
+  font-size: 20px;
+
+  line-height: 1.35;
+
+  color: #172033;
+}
+
+.abbreviation {
+  flex-shrink: 0;
+
+  padding: 7px 10px;
+
+  border-radius: 7px;
+
+  background: #f1f3f7;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: #667085;
+}
+
+.term-definition {
+  margin-top: 20px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid #eef0f4;
+}
+
+.term-definition p {
+  margin: 0;
+
+  font-size: 14px;
+
+  line-height: 1.75;
+
+  color: #667085;
+}
+
+
+/* =========================================
+   NO RESULTS
+========================================= */
+
+.no-results {
+  grid-column: 1 / -1;
+
+  padding: 70px 20px;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border: 1px solid #e7eaf0;
+
+  border-radius: 16px;
+}
+
+.no-results-icon {
+  width: 55px;
+  height: 55px;
+
+  margin: 0 auto 18px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f1f3f7;
+}
+
+.no-results-icon ion-icon {
+  font-size: 25px;
+
+  color: #667085;
+}
+
+.no-results h3 {
+  margin: 0 0 8px;
+
+  font-size: 20px;
+
+  color: #172033;
+}
+
+.no-results p {
+  margin: 0 0 20px;
+
+  font-size: 14px;
+
+  color: #667085;
+}
+
+.reset-button {
+  padding: 10px 18px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #3f51b5;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   LEARNING TIP
+========================================= */
+
+.tip-section {
+  padding: 70px 7%;
+
+  background: #ffffff;
+}
+
+.tip-container {
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  padding: 40px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 25px;
+
+  border: 1px solid #e7eaf0;
+
+  border-radius: 18px;
+
+  background: #f7f9fc;
+}
+
+.tip-icon {
+  width: 55px;
+  height: 55px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: #ffffff;
+}
+
+.tip-icon ion-icon {
+  font-size: 26px;
+
+  color: #3f51b5;
+}
+
+.tip-content h2 {
+  margin: 0 0 12px;
+
+  font-size: 27px;
+
+  line-height: 1.3;
+
+  color: #172033;
+}
+
+.tip-content p {
+  margin: 0;
+
+  font-size: 14px;
+
+  line-height: 1.75;
+
+  color: #667085;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .terms-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .glossary-hero {
+    padding: 55px 20px 45px;
+  }
+
+  .glossary-hero h1 {
+    font-size: 34px;
+  }
+
+  .glossary-hero p {
+    font-size: 15px;
+  }
+
+  .search-section {
+    padding: 0 20px 20px;
+  }
+
+  .category-section {
+    padding: 15px 20px 30px;
+  }
+
+  .category-container {
+    justify-content: flex-start;
+
+    overflow-x: auto;
+
+    flex-wrap: nowrap;
+
+    padding-bottom: 5px;
+  }
+
+  .category-button {
+    flex-shrink: 0;
+  }
+
+  .terms-section {
+    padding: 40px 20px 55px;
+  }
+
+  .results-header {
+    align-items: flex-start;
+  }
+
+  .results-header h2 {
+    font-size: 24px;
+  }
+
+  .terms-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .term-card {
+    min-height: auto;
+  }
+
+  .tip-section {
+    padding: 50px 20px;
+  }
+
+  .tip-container {
+    padding: 28px;
+
+    flex-direction: column;
+  }
+
+  .tip-content h2 {
+    font-size: 24px;
+  }
+
+}

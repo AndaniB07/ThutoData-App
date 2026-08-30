@@ -1,0 +1,261 @@
+<ion-content [fullscreen]="true">
+
+  <div class="register-page">
+
+    <div class="register-card">
+
+      <!-- BRAND -->
+
+      <div class="brand">
+        <span>Thuto</span><strong>Data</strong>
+      </div>
+
+
+      <!-- HEADER -->
+
+      <div class="register-header">
+
+        <h1>
+          Create your account
+        </h1>
+
+        <p>
+          Join ThutoData and start exploring your options
+          for further education.
+        </p>
+
+      </div>
+
+
+      <!-- FORM -->
+
+      <form
+        (ngSubmit)="register()"
+        #registerForm="ngForm">
+
+
+        <!-- NAME -->
+
+        <div class="name-row">
+
+          <div class="form-group">
+
+            <label for="firstName">
+              First name
+            </label>
+
+            <input
+              id="firstName"
+              name="firstName"
+              type="text"
+              [(ngModel)]="firstName"
+              placeholder="First name"
+              required>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="lastName">
+              Last name
+            </label>
+
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              [(ngModel)]="lastName"
+              placeholder="Last name"
+              required>
+
+          </div>
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+          <label for="email">
+            Email address
+          </label>
+
+          <div class="input-wrapper">
+
+            <ion-icon
+              name="mail-outline">
+            </ion-icon>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              [(ngModel)]="email"
+              placeholder="Enter your email"
+              required>
+
+          </div>
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+          <label for="password">
+            Password
+          </label>
+
+          <div class="input-wrapper">
+
+            <ion-icon
+              name="lock-closed-outline">
+            </ion-icon>
+
+            <input
+              id="password"
+              name="password"
+              [type]="showPassword ? 'text' : 'password'"
+              [(ngModel)]="password"
+              placeholder="Create a password"
+              required>
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePassword()">
+
+              <ion-icon
+                [name]="
+                  showPassword
+                    ? 'eye-off-outline'
+                    : 'eye-outline'
+                ">
+              </ion-icon>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- CONFIRM PASSWORD -->
+
+        <div class="form-group">
+
+          <label for="confirmPassword">
+            Confirm password
+          </label>
+
+          <div class="input-wrapper">
+
+            <ion-icon
+              name="lock-closed-outline">
+            </ion-icon>
+
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              [type]="
+                showConfirmPassword
+                  ? 'text'
+                  : 'password'
+              "
+              [(ngModel)]="confirmPassword"
+              placeholder="Confirm your password"
+              required>
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="toggleConfirmPassword()">
+
+              <ion-icon
+                [name]="
+                  showConfirmPassword
+                    ? 'eye-off-outline'
+                    : 'eye-outline'
+                ">
+              </ion-icon>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACCOUNT NOTICE -->
+
+        <div class="account-notice">
+
+          <ion-icon
+            name="information-circle-outline">
+          </ion-icon>
+
+          <p>
+            This account is created as a student/user account.
+            Administrator accounts are managed separately.
+          </p>
+
+        </div>
+
+
+        <!-- REGISTER BUTTON -->
+
+        <button
+          type="submit"
+          class="register-button"
+          [disabled]="!registerForm.valid">
+
+          Create Account
+
+          <ion-icon
+            name="arrow-forward-outline">
+          </ion-icon>
+
+        </button>
+
+      </form>
+
+
+      <!-- LOGIN -->
+
+      <div class="login-section">
+
+        <span>
+          Already have an account?
+        </span>
+
+        <a routerLink="/login">
+          Sign in
+        </a>
+
+      </div>
+
+
+      <!-- BACK -->
+
+      <div class="back-home">
+
+        <a routerLink="/tabs/home">
+
+          <ion-icon
+            name="arrow-back-outline">
+          </ion-icon>
+
+          Back to ThutoData
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>
