@@ -1,6 +1,0 @@
-@Thuto_HostAddress = http://localhost:5096
-
-GET {{Thuto_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
