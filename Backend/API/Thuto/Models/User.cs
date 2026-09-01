@@ -12,6 +12,9 @@ namespace Thuto.Models
 
         [Required]
         public string Email { get; set; }
+      
+        [Required]
+        public string PasswordHash { get; set; }
 
         public int? Grade { get; set; }
 
