@@ -19,7 +19,7 @@ export interface University {
 })
 export class UniversityService {
 
-  private apiUrl = 'https://localhost:7105/api';
+  private apiUrl = 'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api';
 
   constructor(private http: HttpClient) {}
 

@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 export class SavedService {
 
   private readonly universitiesUrl =
-    'https://localhost:7105/api/PinnedUniversities';
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/PinnedUniversities';
 
   private readonly coursesUrl =
-    'https://localhost:7105/api/PinnedCourses';
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/PinnedCourses';
 
 
   constructor(

@@ -145,7 +145,7 @@ export class UniversityDetailsPage implements OnInit {
 
 
   private readonly apiUrl =
-    'https://localhost:7105/api/Universities';
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Universities';
 
 
   constructor(

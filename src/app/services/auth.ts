@@ -33,7 +33,7 @@ export interface AuthResponse {
 export class Auth {
 
   private readonly apiUrl =
-    'https://localhost:7105/api/Auth';
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Auth';
 
   private readonly tokenKey =
     'thutodata-token';

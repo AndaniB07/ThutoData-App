@@ -52,7 +52,7 @@ interface Funding {
 })
 export class BursariesPage implements OnInit {
 
-  private apiUrl = 'https://localhost:7105/api/Funding';
+  private apiUrl = 'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Funding';
 
   searchTerm = '';
 

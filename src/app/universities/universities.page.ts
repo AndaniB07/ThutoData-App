@@ -98,16 +98,16 @@ export class UniversitiesPage implements OnInit {
   ========================== */
 
   private universitiesApi =
-    'https://localhost:7105/api/Universities';
+   'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Universities';
 
   private facultiesApi =
-    'https://localhost:7105/api/Faculties';
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Faculties';
 
   private coursesApi =
-    'https://localhost:7105/api/Courses';
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Courses';
 
   private courseOfferingsApi =
-    'https://localhost:7105/api/CourseOfferings';
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/CourseOfferings';
 
 
   /* =========================

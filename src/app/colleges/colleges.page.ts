@@ -51,7 +51,7 @@ interface College {
 })
 export class CollegesPage implements OnInit {
 
-  private apiUrl = 'https://localhost:7105/api/Universities';
+  private apiUrl = 'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Universities';
 
   // =========================
   // SEARCH
