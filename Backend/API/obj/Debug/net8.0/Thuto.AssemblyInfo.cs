@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Thuto")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b6858a883a1f6bb9e31571b23232581fa496205")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b394e434a8bd2c70e4835950f04c3ed2fcde0b62")]
 [assembly: System.Reflection.AssemblyProductAttribute("Thuto")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Thuto")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

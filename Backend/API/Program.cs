@@ -17,7 +17,9 @@ builder.Services.AddCors(options =>
   options.AddPolicy("AllowFrontend", policy =>
   {
     policy
-        .WithOrigins("http://localhost:8100")
+        .WithOrigins(
+    "http://localhost:8100",
+    "https://thutodata-web-hafzhxd8gmbggsfs.centralindia-01.azurewebsites.net")
         .AllowAnyHeader()
         .AllowAnyMethod();
   });
