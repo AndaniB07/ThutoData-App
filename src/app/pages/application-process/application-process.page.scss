@@ -1,0 +1,465 @@
+/* =========================================================
+   APPLICATION PROCESS PAGE
+   ========================================================= */
+
+ion-content {
+  --background: #f7f9fc;
+}
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.page-container {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 25px 22px 0;
+}
+
+
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
+
+.hero-section {
+  text-align: center;
+  padding: 45px 20px 35px;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.hero-section h1 {
+  margin: 0 auto 16px;
+  font-size: 36px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #172033;
+}
+
+.hero-section p {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #667085;
+}
+
+
+/* =========================================================
+   STEP CARDS
+   ========================================================= */
+
+.step-card {
+  position: relative;
+
+  margin: 22px 0;
+
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #e8ecf2;
+
+  box-shadow: 0 4px 16px rgba(23, 32, 51, 0.06);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+/* Desktop hover effect */
+
+@media (min-width: 768px) {
+  .step-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 10px 28px rgba(23, 32, 51, 0.10);
+
+    border-color: #dce3ed;
+  }
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+ion-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 24px 25px 18px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   STEP NUMBER
+   ========================================================= */
+
+.step-number {
+  flex: 0 0 48px;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #1f6feb;
+  color: #ffffff;
+
+  font-size: 19px;
+  font-weight: 800;
+
+  box-shadow:
+    0 5px 12px rgba(31, 111, 235, 0.22);
+}
+
+
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
+
+ion-card-title {
+  margin: 0;
+
+  font-size: 21px;
+  line-height: 1.3;
+
+  font-weight: 750;
+
+  color: #172033;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+ion-card-content {
+  padding: 0 25px 25px;
+
+  font-size: 16px;
+  line-height: 1.75;
+
+  color: #475467;
+}
+
+
+/* Paragraphs */
+
+ion-card-content p {
+  margin: 0 0 15px;
+}
+
+
+/* =========================================================
+   SUBHEADINGS
+   ========================================================= */
+
+ion-card-content h3 {
+  margin: 22px 0 7px;
+
+  font-size: 16px;
+  line-height: 1.4;
+
+  font-weight: 750;
+
+  color: #172033;
+}
+
+ion-card-content h3:first-child {
+  margin-top: 0;
+}
+
+
+/* =========================================================
+   LISTS
+   ========================================================= */
+
+ion-card-content ul {
+  margin: 10px 0 5px;
+
+  padding-left: 23px;
+}
+
+ion-card-content li {
+  margin-bottom: 11px;
+
+  padding-left: 4px;
+}
+
+ion-card-content li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   STRONG TEXT
+   ========================================================= */
+
+ion-card-content strong {
+  font-weight: 700;
+  color: #172033;
+}
+
+
+/* =========================================================
+   TIP BOX
+   ========================================================= */
+
+.tip-box {
+  margin-top: 20px;
+
+  padding: 15px 17px;
+
+  border-radius: 12px;
+
+  background: #f0f6ff;
+
+  border-left: 4px solid #1f6feb;
+
+  color: #475467;
+
+  font-size: 15px;
+
+  line-height: 1.65;
+}
+
+.tip-box strong {
+  color: #1f5fba;
+}
+
+
+/* =========================================================
+   FINAL SECTION
+   ========================================================= */
+
+.final-section {
+  text-align: center;
+
+  margin: 35px auto 0;
+
+  padding: 38px 25px 55px;
+
+  max-width: 750px;
+}
+
+.final-section h2 {
+  margin: 0 0 10px;
+
+  font-size: 30px;
+
+  line-height: 1.25;
+
+  font-weight: 800;
+
+  color: #172033;
+}
+
+.final-section p {
+  max-width: 620px;
+
+  margin: 0 auto;
+
+  font-size: 16px;
+
+  line-height: 1.7;
+
+  color: #667085;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .page-container {
+    padding: 18px 16px 0;
+  }
+
+  .hero-section {
+    padding: 35px 12px 25px;
+  }
+
+  .hero-section h1 {
+    font-size: 30px;
+  }
+
+  .hero-section p {
+    font-size: 16px;
+  }
+
+  .step-card {
+    margin: 18px 0;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .page-container {
+    padding: 10px 12px 0;
+  }
+
+
+  /* Hero */
+
+  .hero-section {
+    padding: 25px 8px 20px;
+  }
+
+  .hero-section h1 {
+    font-size: 26px;
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+  }
+
+  .hero-section p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+
+  /* Cards */
+
+  .step-card {
+    margin: 15px 0;
+    border-radius: 15px;
+  }
+
+
+  /* Header */
+
+  ion-card-header {
+    gap: 12px;
+    padding: 19px 18px 14px;
+  }
+
+
+  /* Number */
+
+  .step-number {
+    flex-basis: 42px;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 17px;
+  }
+
+
+  /* Title */
+
+  ion-card-title {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+
+  /* Content */
+
+  ion-card-content {
+    padding: 0 18px 20px;
+
+    font-size: 15px;
+
+    line-height: 1.65;
+  }
+
+
+  /* Headings */
+
+  ion-card-content h3 {
+    font-size: 15px;
+    margin-top: 18px;
+  }
+
+
+  /* Lists */
+
+  ion-card-content ul {
+    padding-left: 21px;
+  }
+
+  ion-card-content li {
+    margin-bottom: 9px;
+  }
+
+
+  /* Tips */
+
+  .tip-box {
+    padding: 13px 14px;
+
+    font-size: 14px;
+
+    margin-top: 17px;
+  }
+
+
+  /* Final */
+
+  .final-section {
+    padding: 30px 15px 45px;
+  }
+
+  .final-section h2 {
+    font-size: 25px;
+  }
+
+  .final-section p {
+    font-size: 15px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .hero-section h1 {
+    font-size: 23px;
+  }
+
+  ion-card-header {
+    align-items: flex-start;
+  }
+
+  .step-number {
+    flex-basis: 38px;
+
+    width: 38px;
+    height: 38px;
+
+    font-size: 16px;
+  }
+
+  ion-card-title {
+    font-size: 17px;
+  }
+
+}

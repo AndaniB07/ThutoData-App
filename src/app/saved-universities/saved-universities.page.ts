@@ -302,7 +302,7 @@ export class SavedUniversitiesPage implements OnInit {
     );
 
     this.router.navigate([
-      '/university-details',
+      '/tabs/university-details',
       universityId
     ]);
 

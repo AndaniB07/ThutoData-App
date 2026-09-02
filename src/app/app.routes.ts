@@ -80,19 +80,6 @@ export const routes: Routes = [
 
 
   // =========================================
-  // ABOUT US
-  // =========================================
-
-  {
-    path: 'about-us',
-
-    loadComponent: () =>
-      import('./about-us/about-us.page')
-        .then(m => m.AboutUsPage)
-  },
-
-
-  // =========================================
   // LOGIN
   // =========================================
 
@@ -117,101 +104,5 @@ export const routes: Routes = [
         .then(m => m.SignUpPage)
   },
 
-
-  // =========================================
-  // COLLEGES
-  // =========================================
-
-  {
-    path: 'colleges',
-
-    loadComponent: () =>
-      import('./colleges/colleges.page')
-        .then(m => m.CollegesPage)
-  },
-
-
-  // =========================================
-  // GLOSSARY
-  // =========================================
-
-  {
-    path: 'glossary',
-
-    loadComponent: () =>
-      import('./glossary/glossary.page')
-        .then(m => m.GlossaryPage)
-  },
-
-
-  // =========================================
-  // MORE
-  // =========================================
-
-  {
-    path: 'more',
-
-    loadComponent: () =>
-      import('./more/more.page')
-        .then(m => m.MorePage)
-  },
-
-
-  // =========================================
-  // PROFILE
-  // =========================================
-
-  {
-    path: 'profile',
-
-    canActivate: [
-      authGuard
-    ],
-
-    loadComponent: () =>
-      import('./pages/profile/profile.page')
-        .then(m => m.ProfilePage)
-  },
-
-
-  // =========================================
-  // UNIVERSITY DETAILS
-  // =========================================
-
-  {
-    path: 'university-details/:id',
-
-    loadComponent: () =>
-      import(
-        './details/university-details/university-details.page'
-      )
-      .then(
-        m => m.UniversityDetailsPage
-      )
-  },
-
-  // =========================================
-  // BURSARY DETAILS
-  // =========================================
-
-  {
-    path: 'bursary-details',
-
-    loadComponent: () =>
-      import(
-        './details/bursary-details/bursary-details.page'
-      )
-      .then(
-        m => m.BursaryDetailsPage
-      )
-  },
-  {
-    path: 'saved-universities',
-    loadComponent: () => import('./saved-universities/saved-universities.page').then( m => m.SavedUniversitiesPage)
-  },
-  {
-    path: 'saved-courses',
-    loadComponent: () => import('./saved-courses/saved-courses.page').then( m => m.SavedCoursesPage)
-  }
 
 ];
