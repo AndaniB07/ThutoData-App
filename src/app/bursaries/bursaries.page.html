@@ -1,17 +1,516 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Bursaries
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Bursaries</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Bursaries page"></app-explore-container>
+  <!-- =====================================================
+       HERO / SEARCH
+  ====================================================== -->
+
+  <section class="search-section">
+
+    <div class="search-header">
+
+      <span class="eyebrow">
+        BURSARIES & FUNDING
+      </span>
+
+      <div>
+        <img
+          src="assets/icon/ThutoData_Logo_Transparent.png"
+          alt="ThutoData Logo"
+          class="hero-logo">
+      </div>
+
+      <h1>
+        Find Funding for Your Future
+      </h1>
+
+      <p>
+        Explore bursaries and funding opportunities
+        that can help you pay for your studies.
+      </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+      <ion-icon
+        name="search-outline">
+      </ion-icon>
+
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search bursaries, providers or opportunities...">
+
+
+      <button
+        *ngIf="searchTerm"
+        (click)="searchTerm = ''"
+        aria-label="Clear search">
+
+        <ion-icon
+          name="close-outline">
+        </ion-icon>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       MAIN CONTENT
+  ====================================================== -->
+
+  <section class="bursaries-section">
+
+    <div class="page-layout">
+
+
+      <!-- =================================================
+           FILTER SIDEBAR
+      ================================================== -->
+
+      <aside class="filter-sidebar">
+
+        <div class="filter-heading">
+
+          <div>
+
+            <div class="filter-title">
+
+              <ion-icon
+                name="filter-outline">
+              </ion-icon>
+
+              <h2>
+                Filters
+              </h2>
+
+            </div>
+
+            <p>
+              Narrow your results
+            </p>
+
+          </div>
+
+
+          <button
+            *ngIf="hasActiveFilters"
+            class="clear-button"
+            (click)="clearFilters()">
+
+            Clear
+
+          </button>
+
+        </div>
+
+
+        <!-- FUNDING TYPE -->
+
+        <div class="filter-group">
+
+          <label>
+            Funding Type
+          </label>
+
+          <select
+            [(ngModel)]="selectedFundingType">
+
+            <option value="">
+              All funding types
+            </option>
+
+            <option value="Bursary">
+              Bursary
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- DEADLINE -->
+
+        <div class="filter-group">
+
+          <label>
+            Deadline
+          </label>
+
+          <select
+            [(ngModel)]="selectedDeadline">
+
+            <option value="">
+              All opportunities
+            </option>
+
+            <option value="open">
+              Currently open
+            </option>
+
+            <option value="30-days">
+              Closing within 30 days
+            </option>
+
+            <option value="expired">
+              Closed / expired
+            </option>
+
+            <option value="no-deadline">
+              No deadline provided
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="filter-information">
+
+          <ion-icon
+            name="school-outline">
+          </ion-icon>
+
+          <p>
+            Always check the official provider's
+            website for the latest eligibility
+            requirements and application dates.
+          </p>
+
+        </div>
+
+      </aside>
+
+
+      <!-- =================================================
+           RESULTS
+      ================================================== -->
+
+      <main class="results-area">
+
+
+        <!-- LOADING -->
+
+        <div
+          class="loading-message"
+          *ngIf="isLoading">
+
+          <ion-icon
+            name="refresh-outline">
+          </ion-icon>
+
+          <p>
+            Loading bursaries...
+          </p>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+          class="error-message"
+          *ngIf="hasError && !isLoading">
+
+          <ion-icon
+            name="close-outline">
+          </ion-icon>
+
+          <h2>
+            Unable to load bursaries
+          </h2>
+
+          <p>
+            Please make sure the backend is running
+            and try again.
+          </p>
+
+          <button
+            (click)="loadFunding()">
+
+            Try Again
+
+          </button>
+
+        </div>
+
+
+        <!-- RESULTS -->
+
+        <ng-container
+          *ngIf="!isLoading && !hasError">
+
+
+          <!-- RESULTS HEADER -->
+
+          <div class="results-header">
+
+            <div>
+
+              <h2>
+                Bursaries & Funding
+              </h2>
+
+              <p>
+
+                Showing
+
+                <strong>
+                  {{ filteredFunding.length }}
+                </strong>
+
+                of
+
+                <strong>
+                  {{ funding.length }}
+                </strong>
+
+                opportunities
+
+              </p>
+
+            </div>
+
+
+            <div class="result-count">
+
+              {{ filteredFunding.length }}
+
+            </div>
+
+          </div>
+
+
+          <!-- FUNDING GRID -->
+
+          <div
+            class="bursaries-grid"
+            *ngIf="
+              filteredFunding.length > 0;
+              else noResults
+            ">
+
+
+            <!-- FUNDING CARD -->
+
+            <article
+              class="bursary-card"
+              *ngFor="
+                let item of filteredFunding
+              ">
+
+
+              <!-- CARD TOP -->
+
+              <div class="card-top">
+
+                <div class="bursary-icon">
+
+                  <ion-icon
+                    name="school-outline">
+                  </ion-icon>
+
+                </div>
+
+
+                <span
+                  class="funding-badge">
+
+                  {{ item.fundingType }}
+
+                </span>
+
+              </div>
+
+
+              <!-- CARD CONTENT -->
+
+              <div class="card-content">
+
+                <h3>
+                  {{ item.fundingName }}
+                </h3>
+
+
+                <div class="provider">
+
+                  <ion-icon
+                    name="business-outline">
+                  </ion-icon>
+
+                  <span>
+                    {{ item.provider }}
+                  </span>
+
+                </div>
+
+
+                <p class="description">
+
+                  {{ item.description }}
+
+                </p>
+
+
+                <!-- DEADLINE -->
+
+                <div
+                  class="deadline"
+                  [class.expired]="
+                    isExpired(item.deadline)
+                  ">
+
+                  <ion-icon
+                    name="calendar-outline">
+                  </ion-icon>
+
+                  <div>
+
+                    <span class="deadline-label">
+                      Application deadline
+                    </span>
+
+                    <strong>
+                      {{ formatDeadline(item.deadline) }}
+                    </strong>
+
+                  </div>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <span
+                  class="deadline-status"
+                  [class.closed]="
+                    isExpired(item.deadline)
+                  "
+                  [class.soon]="
+                    getDeadlineStatus(item.deadline)
+                    === 'Closing soon'
+                  ">
+
+                  {{ getDeadlineStatus(item.deadline) }}
+
+                </span>
+
+
+                <!-- ELIGIBILITY -->
+
+                <details class="eligibility">
+
+                  <summary>
+                    Who can apply?
+                  </summary>
+
+                  <p>
+                    {{ item.eligibility }}
+                  </p>
+
+                </details>
+
+              </div>
+
+
+              <!-- CARD FOOTER -->
+
+              <div class="card-footer">
+
+                <span>
+                  Financial Support
+                </span>
+
+
+                <button
+                  class="details-button"
+                  *ngIf="item.applicationURL"
+                  (click)="
+                    openApplication(
+                      item.applicationURL
+                    )
+                  ">
+
+                  Apply / Learn More
+
+                  <ion-icon
+                    name="open-outline">
+                  </ion-icon>
+
+                </button>
+
+
+                <span
+                  class="no-link"
+                  *ngIf="!item.applicationURL">
+
+                  No application link
+
+                </span>
+
+              </div>
+
+            </article>
+
+          </div>
+
+
+          <!-- NO RESULTS -->
+
+          <ng-template #noResults>
+
+            <div class="no-results">
+
+              <div class="no-results-icon">
+
+                <ion-icon
+                  name="search-outline">
+                </ion-icon>
+
+              </div>
+
+
+              <h2>
+                No funding opportunities found
+              </h2>
+
+
+              <p>
+                Try changing your search or
+                removing one of the filters.
+              </p>
+
+
+              <button
+                class="reset-button"
+                (click)="clearFilters()">
+
+                Clear Filters
+
+              </button>
+
+            </div>
+
+          </ng-template>
+
+
+        </ng-container>
+
+      </main>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <app-footer></app-footer>
+
 </ion-content>

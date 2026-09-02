@@ -1,0 +1,446 @@
+ion-content {
+  --background: #f7f9fc;
+}
+
+.profile-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+
+/* =========================================
+   WELCOME
+========================================= */
+
+.welcome-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.profile-avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: #e8eefc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  flex-shrink: 0;
+}
+
+.welcome-text h1 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.welcome-text p {
+  margin: 0;
+  color: #667085;
+  font-size: 16px;
+}
+
+
+/* =========================================
+   SECTIONS
+========================================= */
+
+.section {
+  margin-bottom: 38px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  margin: 0 0 5px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.section-heading p {
+  margin: 0;
+  color: #667085;
+  font-size: 14px;
+}
+
+
+/* =========================================
+   EDIT BUTTON
+========================================= */
+
+.edit-button {
+  border: none;
+  background: transparent;
+  color: #3157d5;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+
+/* =========================================
+   PROFILE CARD
+========================================= */
+
+.profile-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.profile-row:last-child {
+  border-bottom: none;
+}
+
+.profile-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #f1f4fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-row > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 13px;
+  color: #667085;
+}
+
+.profile-row strong {
+  font-size: 15px;
+  color: #172033;
+}
+
+
+/* =========================================
+   APPLICATION JOURNEY
+========================================= */
+
+.journey-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 25px;
+}
+
+.progress-header {
+  margin-bottom: 14px;
+}
+
+.progress-header > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-label {
+  font-weight: 600;
+  color: #172033;
+}
+
+.progress-header strong {
+  color: #3157d5;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #e9edf3;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: #3157d5;
+  border-radius: 20px;
+}
+
+.progress-text {
+  margin: 14px 0 0;
+  color: #667085;
+  font-size: 14px;
+}
+
+
+/* =========================================
+   QUICK CARDS
+========================================= */
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.quick-card {
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.quick-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+}
+
+.quick-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #f1f4fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  flex-shrink: 0;
+}
+
+.quick-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.quick-card strong {
+  color: #172033;
+  font-size: 15px;
+}
+
+.quick-card small {
+  color: #667085;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   ACCOUNT
+========================================= */
+
+.account-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.account-card button {
+  width: 100%;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 19px 22px;
+  text-align: left;
+  cursor: pointer;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.account-card button:last-child {
+  border-bottom: none;
+}
+
+.account-card button > span:first-child {
+  font-size: 21px;
+  width: 30px;
+  text-align: center;
+}
+
+.account-card button div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.account-card strong {
+  color: #172033;
+  font-size: 15px;
+}
+
+.account-card small {
+  color: #667085;
+  font-size: 13px;
+}
+
+.arrow {
+  font-size: 25px;
+  color: #98a2b3;
+}
+
+.logout-button strong {
+  color: #d92d20;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .profile-page {
+    padding: 30px 18px 60px;
+  }
+
+  .welcome-section {
+    align-items: flex-start;
+  }
+
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 27px;
+  }
+
+  .welcome-text h1 {
+    font-size: 24px;
+  }
+
+  .welcome-text p {
+    font-size: 14px;
+  }
+
+  .quick-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-row {
+    padding: 18px;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+  }
+
+}
+
+
+/* =========================================
+   EYEBROW
+========================================= */
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+
+  color: #3157d5;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================================
+   COMING SOON
+========================================= */
+
+.coming-soon-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  padding: 24px;
+}
+
+.coming-soon-icon {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 12px;
+
+  background: #f1f4fa;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 24px;
+
+  flex-shrink: 0;
+}
+
+.coming-soon-card h3 {
+  margin: 0 0 6px;
+
+  color: #172033;
+
+  font-size: 16px;
+}
+
+.coming-soon-card p {
+  margin: 0;
+
+  color: #667085;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   LOADING / ERROR
+========================================= */
+
+.error-message {
+  padding: 30px;
+
+  text-align: center;
+
+  color: #667085;
+
+  font-size: 14px;
+}
+
+
+/* =========================================
+   QUICK CARD COUNT
+========================================= */
+
+.quick-card small {
+  line-height: 1.4;
+}

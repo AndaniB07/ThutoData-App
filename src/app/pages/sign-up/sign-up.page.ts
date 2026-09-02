@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent,IonIcon } from '@ionic/angular';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+
+import {
+  IonContent,
+  IonIcon
+} from '@ionic/angular';
+
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-register',
   standalone: true,
+
   imports: [
     CommonModule,
     FormsModule,
@@ -14,6 +21,7 @@ import { RouterLink } from '@angular/router';
     IonIcon,
     RouterLink
   ],
+
   templateUrl: './sign-up.page.html',
   styleUrls: ['./sign-up.page.scss']
 })
@@ -28,49 +36,154 @@ export class SignUpPage {
   showPassword = false;
   showConfirmPassword = false;
 
+  errorMessage = '';
+  successMessage = '';
+  loading = false;
+
+
+  constructor(
+    private auth: Auth,
+    private router: Router
+  ) {}
+
+
+  // =========================================
+  // REGISTER
+  // =========================================
+
   register(): void {
 
+    this.errorMessage = '';
+    this.successMessage = '';
+
+
+    // Check required fields
     if (
-      !this.firstName ||
-      !this.lastName ||
-      !this.email ||
+      !this.firstName.trim() ||
+      !this.lastName.trim() ||
+      !this.email.trim() ||
       !this.password ||
       !this.confirmPassword
     ) {
-      alert('Please complete all fields.');
+
+      this.errorMessage =
+        'Please complete all fields.';
+
       return;
     }
 
-    if (this.password !== this.confirmPassword) {
-      alert('Passwords do not match.');
+
+    // Check passwords
+    if (
+      this.password !==
+      this.confirmPassword
+    ) {
+
+      this.errorMessage =
+        'Passwords do not match.';
+
       return;
     }
 
-    /*
-     * TEMPORARY REGISTRATION
-     *
-     * This will later send the information
-     * to the ThutoData API.
-     */
 
-    console.log('Registration:', {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email
+    // Basic password check
+    if (this.password.length < 6) {
+
+      this.errorMessage =
+        'Password must be at least 6 characters long.';
+
+      return;
+    }
+
+
+    this.loading = true;
+
+
+    // Combine first and last name
+    const fullName =
+      `${this.firstName.trim()} ${this.lastName.trim()}`;
+
+
+    // Send registration to backend
+    this.auth.register(
+      fullName,
+      this.email,
+      this.password,
+      null
+    )
+    .subscribe({
+
+      next: (response) => {
+
+        console.log(
+          'Registration successful:',
+          response
+        );
+
+        this.loading = false;
+
+        this.successMessage =
+          'Account created successfully! Redirecting to login...';
+
+
+        // Give user a moment to see success message
+        setTimeout(() => {
+
+          this.router.navigate(['/login']);
+
+        }, 1200);
+
+      },
+
+
+      error: (error) => {
+
+        console.error(
+          'Registration error:',
+          error
+        );
+
+        this.loading = false;
+
+
+        if (
+          error?.error?.message
+        ) {
+
+          this.errorMessage =
+            error.error.message;
+
+        } else {
+
+          this.errorMessage =
+            'Unable to create your account. Please try again.';
+
+        }
+
+      }
+
     });
 
-    alert(
-      'Registration system is not connected yet. ' +
-      'This will be connected to the ThutoData API.'
-    );
   }
+
+
+  // =========================================
+  // SHOW / HIDE PASSWORD
+  // =========================================
 
   togglePassword(): void {
-    this.showPassword = !this.showPassword;
+
+    this.showPassword =
+      !this.showPassword;
+
   }
 
+
   toggleConfirmPassword(): void {
-    this.showConfirmPassword = !this.showConfirmPassword;
+
+    this.showConfirmPassword =
+      !this.showConfirmPassword;
+
   }
 
 }

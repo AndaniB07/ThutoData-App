@@ -1,5 +1,13 @@
 <ion-content [fullscreen]="true">
 
+
+  <!-- =========================================
+       ACCESSIBILITY CONTROLS
+  ========================================= -->
+
+  <app-accessibility-controls></app-accessibility-controls>
+
+  
   <!-- =========================================
        HERO SECTION
   ========================================= -->
@@ -11,6 +19,14 @@
       <span class="hero-label">
         WELCOME TO THUTODATA
       </span>
+
+      <div>
+        <img src="assets/icon/ThutoData_Logo_Transparent.png"
+      alt="ThutoData Logo"
+      class="hero-logo">
+      </div>
+      
+
 
       <h1>
         Your route to
@@ -251,7 +267,7 @@
         </p>
 
         <a
-          routerLink="/about"
+          routerLink="/about-us"
           class="text-button">
 
           Learn more about ThutoData

@@ -1,0 +1,379 @@
+ion-content {
+  --background: #f7f9fc;
+}
+
+.saved-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 24px 80px;
+}
+
+
+/* HEADER */
+
+.page-header {
+  margin-bottom: 35px;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  border: none;
+  background: transparent;
+
+  color: #3157d5;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  padding: 8px 0;
+  margin-bottom: 25px;
+
+  cursor: pointer;
+}
+
+.back-button ion-icon {
+  font-size: 20px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.title-icon {
+  width: 58px;
+  height: 58px;
+
+  border-radius: 14px;
+
+  background: #e8eefc;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.title-icon ion-icon {
+  font-size: 28px;
+  color: #3157d5;
+}
+
+.eyebrow {
+  display: inline-block;
+
+  margin-bottom: 6px;
+
+  color: #3157d5;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.title-row h1 {
+  margin: 0 0 6px;
+
+  color: #172033;
+
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.title-row p {
+  margin: 0;
+
+  color: #667085;
+
+  font-size: 15px;
+}
+
+
+/* SECTION */
+
+.section-heading {
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  margin: 0 0 5px;
+
+  color: #172033;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.section-heading p {
+  margin: 0;
+
+  color: #667085;
+
+  font-size: 14px;
+}
+
+
+/* COURSE LIST */
+
+.course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.course-card {
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+}
+
+.course-main {
+  width: 100%;
+
+  border: none;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 20px 22px;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.course-main:hover {
+  background: #fafbfc;
+}
+
+.course-icon {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 12px;
+
+  background: #f1f4fa;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.course-icon ion-icon {
+  font-size: 25px;
+  color: #3157d5;
+}
+
+.course-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.course-info h3 {
+  margin: 0 0 6px;
+
+  color: #172033;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.qualification {
+  margin: 0 0 4px;
+
+  color: #3157d5;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.university {
+  margin: 0;
+
+  color: #667085;
+
+  font-size: 13px;
+}
+
+.arrow {
+  font-size: 21px;
+  color: #98a2b3;
+
+  flex-shrink: 0;
+}
+
+
+/* REMOVE BUTTON */
+
+.remove-button {
+  width: 100%;
+
+  border: none;
+
+  border-top: 1px solid #edf0f4;
+
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 11px;
+
+  color: #d92d20;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background: #fff7f6;
+}
+
+.remove-button ion-icon {
+  font-size: 17px;
+}
+
+.remove-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* EMPTY / ERROR / LOADING */
+
+.state-card {
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  padding: 45px 25px;
+
+  text-align: center;
+}
+
+.loading-icon {
+  width: 60px;
+  height: 60px;
+
+  margin: 0 auto 18px;
+
+  border-radius: 50%;
+
+  background: #f1f4fa;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 26px;
+}
+
+.state-card h2 {
+  margin: 0 0 8px;
+
+  color: #172033;
+
+  font-size: 20px;
+}
+
+.state-card p {
+  max-width: 500px;
+
+  margin: 0 auto 20px;
+
+  color: #667085;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* BUTTONS */
+
+.browse-button,
+.retry-button {
+  border: none;
+
+  background: #3157d5;
+
+  color: #ffffff;
+
+  border-radius: 9px;
+
+  padding: 11px 18px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.browse-button:hover,
+.retry-button:hover {
+  opacity: 0.9;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .saved-page {
+    padding: 25px 18px 60px;
+  }
+
+  .title-row {
+    align-items: flex-start;
+  }
+
+  .title-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .title-icon ion-icon {
+    font-size: 24px;
+  }
+
+  .title-row h1 {
+    font-size: 24px;
+  }
+
+  .title-row p {
+    font-size: 14px;
+  }
+
+  .course-main {
+    padding: 17px;
+    gap: 12px;
+  }
+
+  .course-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+}

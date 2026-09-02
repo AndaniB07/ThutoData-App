@@ -1,0 +1,537 @@
+<ion-content [fullscreen]="true">
+
+  <!-- =========================================
+       TOP BAR
+  ========================================== -->
+
+  <div class="details-topbar">
+
+    <button
+      class="back-button"
+      type="button"
+      (click)="goBack()">
+
+      <ion-icon
+        name="arrow-back-outline">
+      </ion-icon>
+
+      <span>
+        Back to Colleges
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <!-- =========================================
+       LOADING
+  ========================================== -->
+
+  <div
+    class="state-container"
+    *ngIf="loading">
+
+    <ion-icon
+      name="school-outline"
+      class="loading-icon">
+    </ion-icon>
+
+    <p>
+      Loading college information...
+    </p>
+
+  </div>
+
+
+  <!-- =========================================
+       ERROR
+  ========================================== -->
+
+  <div
+    class="state-container error-state"
+    *ngIf="!loading && error">
+
+    <div class="state-icon">
+
+      <ion-icon
+        name="school-outline">
+      </ion-icon>
+
+    </div>
+
+    <h2>
+      Unable to load college
+    </h2>
+
+    <p>
+      We couldn't load the college information
+      right now. Please try again.
+    </p>
+
+    <button
+      class="primary-button"
+      type="button"
+      (click)="retry()">
+
+      Try Again
+
+    </button>
+
+  </div>
+
+
+  <!-- =========================================
+       COLLEGE DETAILS
+  ========================================== -->
+
+  <div
+    class="details-page"
+    *ngIf="!loading && !error">
+
+
+    <!-- =======================================
+         HERO
+    ======================================== -->
+
+    <section class="college-hero">
+
+      <div class="hero-icon">
+
+        <ion-icon
+          name="school-outline">
+        </ion-icon>
+
+      </div>
+
+
+      <div class="hero-content">
+
+        <span class="institution-badge">
+          TVET COLLEGE
+        </span>
+
+
+        <h1>
+          {{ college.universityName }}
+        </h1>
+
+
+        <p
+          class="hero-location"
+          *ngIf="college.city || college.province">
+
+          <ion-icon
+            name="location-outline">
+          </ion-icon>
+
+          <span>
+
+            {{ college.city }}
+
+            <span
+              *ngIf="college.city && college.province">
+              ,
+            </span>
+
+            {{ college.province }}
+
+          </span>
+
+        </p>
+
+
+        <p
+          class="hero-description"
+          *ngIf="college.description">
+
+          {{ college.description }}
+
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =======================================
+         QUICK INFORMATION
+    ======================================== -->
+
+    <section class="info-grid">
+
+
+      <!-- LOCATION -->
+
+      <div class="info-card">
+
+        <div class="info-icon">
+
+          <ion-icon
+            name="location-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <span class="info-label">
+            Location
+          </span>
+
+          <strong>
+            {{ college.city || 'Not available' }}
+          </strong>
+
+          <small>
+            {{ college.province || 'South Africa' }}
+          </small>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- COLLEGE TYPE -->
+
+      <div class="info-card">
+
+        <div class="info-icon">
+
+          <ion-icon
+            name="business-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <span class="info-label">
+            College Type
+          </span>
+
+          <strong>
+            {{ college.universityType || 'Public' }}
+          </strong>
+
+          <small>
+            TVET College
+          </small>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- INSTITUTION -->
+
+      <div class="info-card">
+
+        <div class="info-icon">
+
+          <ion-icon
+            name="school-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <span class="info-label">
+            Institution
+          </span>
+
+          <strong>
+            {{ college.abbreviation || college.universityName }}
+          </strong>
+
+          <small>
+            TVET institution
+          </small>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =======================================
+         ABOUT
+    ======================================== -->
+
+    <section class="content-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon">
+
+          <ion-icon
+            name="school-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            About the College
+          </h2>
+
+          <p>
+            Learn more about this institution
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <p class="section-text">
+
+        {{ college.description ||
+        'Information about this college will be available soon.' }}
+
+      </p>
+
+    </section>
+
+
+
+    <!-- =======================================
+         COURSES
+    ======================================== -->
+
+    <section class="content-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon">
+
+          <ion-icon
+            name="book-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Courses & Programmes
+          </h2>
+
+          <p>
+            Study opportunities available at this college
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="empty-information">
+
+        <ion-icon
+          name="book-outline">
+        </ion-icon>
+
+        <h3>
+          Course information coming soon
+        </h3>
+
+        <p>
+          Course and programme information for this
+          college will be added to ThutoData.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =======================================
+         FUNDING
+    ======================================== -->
+
+    <section class="content-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon">
+
+          <ion-icon
+            name="business-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Funding & Bursaries
+          </h2>
+
+          <p>
+            Financial support for students
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="empty-information">
+
+        <ion-icon
+          name="business-outline">
+        </ion-icon>
+
+        <h3>
+          Funding information coming soon
+        </h3>
+
+        <p>
+          Bursaries and funding opportunities linked
+          to this college will be displayed here.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =======================================
+         IMPORTANT DATES
+    ======================================== -->
+
+    <section class="content-card">
+
+      <div class="section-heading">
+
+        <div class="section-icon">
+
+          <ion-icon
+            name="calendar-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Important Dates
+          </h2>
+
+          <p>
+            Keep track of application deadlines
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="empty-information">
+
+        <ion-icon
+          name="calendar-outline">
+        </ion-icon>
+
+        <h3>
+          Important dates coming soon
+        </h3>
+
+        <p>
+          Application and registration dates will be
+          displayed here when available.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =======================================
+         OFFICIAL WEBSITE
+    ======================================== -->
+
+    <section
+      class="website-card"
+      *ngIf="college.websiteURL">
+
+
+      <div class="website-content">
+
+        <div class="website-icon">
+
+          <ion-icon
+            name="globe-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Official College Website
+          </h2>
+
+          <p>
+            Visit the official website for more
+            information, applications and contact details.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="website-button"
+        type="button"
+        (click)="openWebsite()">
+
+        Visit Website
+
+        <ion-icon
+          name="chevron-forward-outline">
+        </ion-icon>
+
+      </button>
+
+    </section>
+
+
+
+    <!-- =======================================
+         BACK BUTTON
+    ======================================== -->
+
+    <div class="bottom-action">
+
+      <button
+        class="secondary-button"
+        type="button"
+        (click)="goBack()">
+
+        <ion-icon
+          name="arrow-back-outline">
+        </ion-icon>
+
+        Back to Colleges
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</ion-content>

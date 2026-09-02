@@ -1,0 +1,460 @@
+<ion-content [fullscreen]="true">
+
+  <div class="profile-page">
+
+
+    <!-- =========================================
+         LOGGED-IN USER
+    ========================================== -->
+
+    <ng-container *ngIf="user as currentUser">
+
+
+      <!-- =======================================
+           WELCOME
+      ======================================== -->
+
+      <section class="welcome-section">
+
+        <div class="profile-avatar">
+          <span>👤</span>
+        </div>
+
+        <div class="welcome-text">
+
+          <span class="eyebrow">
+            MY THUTODATA
+          </span>
+
+          <h1>
+            Welcome back, {{ currentUser.name }}!
+          </h1>
+
+          <p>
+            Manage your ThutoData account and
+            saved information.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- =======================================
+           PROFILE INFORMATION
+      ======================================== -->
+
+      <section class="section">
+
+        <div class="section-heading">
+
+          <div>
+
+            <h2>
+              Profile Information
+            </h2>
+
+            <p>
+              Your account information
+            </p>
+
+          </div>
+
+          <button
+            class="edit-button"
+            type="button"
+            (click)="editProfile()">
+
+            ✏️ Edit
+
+          </button>
+
+        </div>
+
+
+        <div class="profile-card">
+
+
+          <!-- NAME -->
+
+          <div class="profile-row">
+
+            <div class="profile-icon">
+              👤
+            </div>
+
+            <div>
+
+              <span class="label">
+                Full Name
+              </span>
+
+              <strong>
+                {{ currentUser.name }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="profile-row">
+
+            <div class="profile-icon">
+              📧
+            </div>
+
+            <div>
+
+              <span class="label">
+                Email
+              </span>
+
+              <strong>
+                {{ currentUser.email }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- GRADE -->
+
+          <div class="profile-row">
+
+            <div class="profile-icon">
+              🎓
+            </div>
+
+            <div>
+
+              <span class="label">
+                Current Grade
+              </span>
+
+              <strong>
+                {{ currentUser.grade ?? 'Not specified' }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =======================================
+           SAVED INFORMATION
+      ======================================== -->
+
+      <section class="section">
+
+        <div class="section-heading">
+
+          <div>
+
+            <h2>
+              My Saved Information
+            </h2>
+
+            <p>
+              Keep important information for later
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="quick-grid">
+
+
+          <!-- ===================================
+               SAVED UNIVERSITIES
+          ==================================== -->
+
+          <button
+            class="quick-card"
+            type="button"
+            (click)="viewUniversities()">
+
+            <span class="quick-icon">
+              🏫
+            </span>
+
+            <div>
+
+              <strong>
+                Saved Universities
+              </strong>
+
+              <small
+                *ngIf="!loadingSavedInformation">
+
+                {{ savedUniversities }}
+                {{ savedUniversities === 1
+                  ? 'university'
+                  : 'universities' }}
+                saved
+
+              </small>
+
+              <small
+                *ngIf="loadingSavedInformation">
+
+                Loading...
+
+              </small>
+
+            </div>
+
+            <span class="arrow">
+              ›
+            </span>
+
+          </button>
+
+
+          <!-- ===================================
+               SAVED COURSES
+          ==================================== -->
+
+          <button
+            class="quick-card"
+            type="button"
+            (click)="viewCourses()">
+
+            <span class="quick-icon">
+              📚
+            </span>
+
+            <div>
+
+              <strong>
+                Saved Courses
+              </strong>
+
+              <small
+                *ngIf="!loadingSavedInformation">
+
+                {{ savedCourses }}
+                {{ savedCourses === 1
+                  ? 'course'
+                  : 'courses' }}
+                saved
+
+              </small>
+
+              <small
+                *ngIf="loadingSavedInformation">
+
+                Loading...
+
+              </small>
+
+            </div>
+
+            <span class="arrow">
+              ›
+            </span>
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- =======================================
+           APPLICATION JOURNEY
+      ======================================== -->
+
+      <section class="section">
+
+        <div class="section-heading">
+
+          <div>
+
+            <h2>
+              My Application Journey
+            </h2>
+
+            <p>
+              Track your university application journey
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="coming-soon-card">
+
+          <div class="coming-soon-icon">
+            📋
+          </div>
+
+          <div>
+
+            <h3>
+              Application tracking coming soon
+            </h3>
+
+            <p>
+              In a future version, you will be able
+              to track your university applications,
+              important dates and application progress
+              from your ThutoData profile.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =======================================
+           ACCOUNT
+      ======================================== -->
+
+      <section class="section">
+
+        <div class="section-heading">
+
+          <div>
+
+            <h2>
+              Account
+            </h2>
+
+            <p>
+              Manage your ThutoData account
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="account-card">
+
+
+          <!-- EDIT PROFILE -->
+
+          <button
+            type="button"
+            (click)="editProfile()">
+
+            <span>
+              👤
+            </span>
+
+            <div>
+
+              <strong>
+                Edit Profile
+              </strong>
+
+              <small>
+                Update your personal information
+              </small>
+
+            </div>
+
+            <span class="arrow">
+              ›
+            </span>
+
+          </button>
+
+
+          <!-- SETTINGS -->
+
+          <button
+            type="button"
+            (click)="openSettings()">
+
+            <span>
+              ⚙️
+            </span>
+
+            <div>
+
+              <strong>
+                Settings
+              </strong>
+
+              <small>
+                Manage your account preferences
+              </small>
+
+            </div>
+
+            <span class="arrow">
+              ›
+            </span>
+
+          </button>
+
+
+          <!-- LOGOUT -->
+
+          <button
+            type="button"
+            class="logout-button"
+            (click)="logout()">
+
+            <span>
+              🚪
+            </span>
+
+            <div>
+
+              <strong>
+                Log Out
+              </strong>
+
+              <small>
+                Sign out of your account
+              </small>
+
+            </div>
+
+            <span class="arrow">
+              ›
+            </span>
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+    </ng-container>
+
+
+    <!-- =========================================
+         NO USER
+    ========================================== -->
+
+    <div
+      class="error-message"
+      *ngIf="!user">
+
+      <p>
+        Loading your profile...
+      </p>
+
+    </div>
+
+
+  </div>
+
+</ion-content>

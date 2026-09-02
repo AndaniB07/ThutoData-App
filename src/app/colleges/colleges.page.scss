@@ -2,9 +2,8 @@
    COLLEGES PAGE
 ========================================= */
 
-:host {
-  display: block;
-  height: 100%;
+ion-content {
+  --background: #f7f8fa;
 }
 
 
@@ -12,99 +11,118 @@
    SEARCH SECTION
 ========================================= */
 
-.search-container {
-  padding: 70px 7% 45px;
-
+.search-section {
+  width: 100%;
   background: #ffffff;
+  padding: 55px 24px 45px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #eeeeF2;
 }
 
 .search-header {
-  max-width: 850px;
-
+  max-width: 900px;
   margin: 0 auto;
-
   text-align: center;
 }
 
-.section-label {
-  display: inline-block;
+.eyebrow {
+  display: block;
 
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 
   font-size: 12px;
-
   font-weight: 700;
+  letter-spacing: 1.8px;
 
-  letter-spacing: 1.2px;
+  color: #6b4eff;
+}
 
-  color: #667085;
+.hero-logo {
+  display: block;
+
+  width: 150px;
+  max-width: 100%;
+  height: auto;
+
+  margin: 0 auto 22px;
 }
 
 .search-header h1 {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
 
-  font-size: 42px;
-
+  font-size: 38px;
   line-height: 1.2;
+  font-weight: 750;
 
-  color: #172033;
+  color: #22222a;
 }
 
 .search-header p {
-  margin: 0;
+  max-width: 700px;
+
+  margin: 0 auto;
 
   font-size: 16px;
-
   line-height: 1.7;
 
-  color: #667085;
+  color: #70707c;
 }
 
 
 /* =========================================
-   SEARCH BAR
+   SEARCH BOX
 ========================================= */
 
-.search-bar {
-  max-width: 800px;
-
-  margin: 35px auto 0;
-}
-
-.search-field {
-  height: 56px;
+.search-box {
+  max-width: 720px;
 
   display: flex;
-
   align-items: center;
 
   gap: 12px;
 
-  padding: 0 18px;
+  margin: 30px auto 0;
 
-  border: 1px solid #d9dde7;
+  padding: 0 16px;
 
-  border-radius: 12px;
+  min-height: 56px;
 
   background: #ffffff;
 
-  box-shadow:
-    0 4px 15px rgba(16, 24, 40, 0.06);
+  border: 1px solid #dedee7;
+  border-radius: 14px;
+
+  box-shadow: 0 4px 18px rgba(40, 30, 70, 0.06);
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.search-field ion-icon {
+.search-box:focus-within {
+  border-color: #8a76eb;
+
+  box-shadow:
+    0 0 0 3px rgba(107, 78, 255, 0.10),
+    0 5px 20px rgba(40, 30, 70, 0.07);
+}
+
+.search-box > ion-icon {
   flex-shrink: 0;
 
   font-size: 21px;
 
-  color: #667085;
+  color: #777783;
 }
 
-.search-field input {
+.search-box input {
   width: 100%;
 
-  border: none;
+  flex: 1;
 
+  border: none;
   outline: none;
 
   background: transparent;
@@ -113,34 +131,72 @@
 
   font-size: 15px;
 
-  color: #172033;
+  color: #292933;
 }
 
-.search-field input::placeholder {
-  color: #98a2b3;
+.search-box input::placeholder {
+  color: #9a9aa5;
+}
+
+.search-box button {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #858591;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.search-box button:hover {
+  background: #f1edff;
+  color: #6b4eff;
+}
+
+.search-box button ion-icon {
+  font-size: 19px;
 }
 
 
 /* =========================================
-   MAIN SECTION
+   MAIN CONTENT
 ========================================= */
 
-.colleges-section {
-  padding: 50px 7% 80px;
+.universities-section {
+  width: 100%;
 
-  background: #f7f9fc;
+  padding: 45px 24px 70px;
+
+  box-sizing: border-box;
 }
 
-.colleges-layout {
-  max-width: 1250px;
+.page-layout {
+  max-width: 1200px;
 
   margin: 0 auto;
 
   display: grid;
 
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 250px minmax(0, 1fr);
 
-  gap: 35px;
+  gap: 32px;
 
   align-items: start;
 }
@@ -151,58 +207,86 @@
 ========================================= */
 
 .filter-sidebar {
-  padding: 25px;
-
   position: sticky;
 
   top: 20px;
 
   background: #ffffff;
 
-  border: 1px solid #e7eaf0;
-
+  border: 1px solid #e8e8ee;
   border-radius: 16px;
 
-  box-shadow:
-    0 4px 16px rgba(16, 24, 40, 0.05);
+  padding: 22px;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 3px 14px rgba(40, 30, 70, 0.04);
 }
 
-.filter-header {
+.filter-heading {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 24px;
+}
+
+.filter-title {
   display: flex;
 
   align-items: center;
 
-  justify-content: space-between;
-
-  padding-bottom: 20px;
-
-  margin-bottom: 20px;
-
-  border-bottom: 1px solid #eef0f4;
+  gap: 9px;
 }
 
-.filter-header h2 {
+.filter-title ion-icon {
+  font-size: 19px;
+
+  color: #6b4eff;
+}
+
+.filter-title h2 {
   margin: 0;
 
-  font-size: 17px;
+  font-size: 18px;
+  font-weight: 700;
 
-  color: #172033;
+  color: #292933;
 }
 
-.filter-header button {
+.filter-heading p {
+  margin: 5px 0 0;
+
+  font-size: 12px;
+
+  color: #858591;
+}
+
+.clear-button {
+  padding: 6px 9px;
+
   border: none;
 
   background: transparent;
 
-  color: #3f51b5;
-
-  font-family: inherit;
+  color: #6b4eff;
 
   font-size: 12px;
-
   font-weight: 600;
 
   cursor: pointer;
+
+  border-radius: 6px;
+
+  transition:
+    background 0.2s ease;
+}
+
+.clear-button:hover {
+  background: #f1edff;
 }
 
 
@@ -211,7 +295,11 @@
 ========================================= */
 
 .filter-group {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
+}
+
+.filter-group:last-child {
+  margin-bottom: 0;
 }
 
 .filter-group label {
@@ -220,75 +308,55 @@
   margin-bottom: 8px;
 
   font-size: 13px;
-
   font-weight: 600;
 
-  color: #344054;
+  color: #44444f;
 }
 
 .filter-group select {
   width: 100%;
 
-  padding: 11px 12px;
+  min-height: 44px;
 
-  border: 1px solid #d9dde7;
+  padding: 0 36px 0 12px;
 
-  border-radius: 8px;
+  border: 1px solid #dedee7;
 
-  background: #ffffff;
+  border-radius: 9px;
 
-  color: #344054;
+  background-color: #ffffff;
+
+  color: #35353f;
 
   font-family: inherit;
 
   font-size: 13px;
 
+  cursor: pointer;
+
   outline: none;
 
-  cursor: pointer;
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .filter-group select:focus {
-  border-color: #3f51b5;
+  border-color: #8a76eb;
+
+  box-shadow:
+    0 0 0 3px rgba(107, 78, 255, 0.10);
 }
 
 
 /* =========================================
-   FILTER INFORMATION
+   RESULTS AREA
 ========================================= */
 
-.filter-info {
-  display: flex;
-
-  align-items: flex-start;
-
-  gap: 9px;
-
-  padding: 14px;
-
-  border-radius: 10px;
-
-  background: #f7f9fc;
-}
-
-.filter-info ion-icon {
-  flex-shrink: 0;
-
-  margin-top: 2px;
-
-  font-size: 18px;
-
-  color: #667085;
-}
-
-.filter-info p {
-  margin: 0;
-
-  font-size: 11px;
-
-  line-height: 1.6;
-
-  color: #667085;
+.results-area {
+  min-width: 0;
 }
 
 
@@ -297,43 +365,56 @@
 ========================================= */
 
 .results-header {
-  margin-bottom: 25px;
-
   display: flex;
 
-  align-items: flex-end;
-
+  align-items: center;
   justify-content: space-between;
 
   gap: 20px;
-}
 
-.results-header .section-label {
-  margin-bottom: 6px;
+  margin-bottom: 22px;
 }
 
 .results-header h2 {
-  margin: 0;
+  margin: 0 0 5px;
 
-  font-size: 25px;
+  font-size: 23px;
+  line-height: 1.3;
+  font-weight: 700;
 
-  color: #172033;
+  color: #292933;
 }
 
-.college-count {
-  padding: 8px 14px;
-
-  border: 1px solid #e7eaf0;
-
-  border-radius: 20px;
-
-  background: #ffffff;
-
-  color: #667085;
+.results-header p {
+  margin: 0;
 
   font-size: 13px;
 
-  font-weight: 600;
+  color: #858591;
+}
+
+.results-header strong {
+  color: #44444f;
+}
+
+.result-count {
+  width: 44px;
+  height: 44px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #f1edff;
+
+  color: #6047d9;
+
+  font-size: 16px;
+  font-weight: 700;
 }
 
 
@@ -341,11 +422,11 @@
    COLLEGE GRID
 ========================================= */
 
-.colleges-grid {
+.universities-grid {
   display: grid;
 
   grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+    repeat(2, minmax(0, 1fr));
 
   gap: 20px;
 }
@@ -355,34 +436,37 @@
    COLLEGE CARD
 ========================================= */
 
-.college-card {
-  min-height: 330px;
+.university-card {
+  min-width: 0;
 
   display: flex;
 
   flex-direction: column;
 
-  padding: 23px;
-
   background: #ffffff;
 
-  border: 1px solid #e7eaf0;
+  border: 1px solid #e8e8ee;
 
   border-radius: 16px;
 
+  overflow: hidden;
+
   box-shadow:
-    0 4px 16px rgba(16, 24, 40, 0.05);
+    0 3px 14px rgba(40, 30, 70, 0.04);
 
   transition:
     transform 0.2s ease,
+    border-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 
-.college-card:hover {
-  transform: translateY(-4px);
+.university-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #d8cffb;
 
   box-shadow:
-    0 10px 25px rgba(16, 24, 40, 0.09);
+    0 9px 25px rgba(40, 30, 70, 0.09);
 }
 
 
@@ -390,48 +474,55 @@
    CARD TOP
 ========================================= */
 
-.college-card-top {
+.card-top {
   display: flex;
 
   align-items: center;
-
   justify-content: space-between;
 
-  gap: 10px;
+  gap: 12px;
+
+  padding: 20px 20px 0;
 }
 
-.college-icon {
+.university-icon {
   width: 48px;
   height: 48px;
 
-  display: flex;
+  flex-shrink: 0;
 
+  display: flex;
   align-items: center;
   justify-content: center;
 
+  background: #f1edff;
+
   border-radius: 12px;
-
-  background: #f1f3f7;
 }
 
-.college-icon ion-icon {
-  font-size: 23px;
+.university-icon ion-icon {
+  font-size: 24px;
 
-  color: #3f51b5;
+  color: #6b4eff;
 }
 
-.college-type {
+.institution-badge {
+  display: inline-flex;
+
+  align-items: center;
+
   padding: 6px 9px;
 
-  border-radius: 20px;
+  background: #f6f6f9;
 
-  background: #f1f3f7;
+  border-radius: 7px;
 
-  color: #667085;
+  color: #6e6e79;
 
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: 600;
 
-  font-weight: 700;
+  white-space: nowrap;
 }
 
 
@@ -439,50 +530,61 @@
    CARD CONTENT
 ========================================= */
 
-.college-card-content {
+.card-content {
   flex: 1;
 
-  padding-top: 20px;
+  padding: 20px;
 }
 
-.college-card h3 {
-  margin: 0 0 10px;
+.card-content h3 {
+  margin: 0 0 11px;
 
-  font-size: 19px;
-
+  font-size: 18px;
   line-height: 1.35;
+  font-weight: 700;
 
-  color: #172033;
+  color: #292933;
 }
 
-.college-location {
+.location {
   display: flex;
 
-  align-items: center;
+  align-items: flex-start;
 
-  gap: 6px;
+  gap: 7px;
 
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 
-  color: #667085;
-
-  font-size: 12px;
-}
-
-.college-location ion-icon {
-  font-size: 15px;
-
-  color: #667085;
-}
-
-.college-card-content p {
-  margin: 0;
+  color: #6f6f7b;
 
   font-size: 13px;
+  line-height: 1.5;
+}
 
-  line-height: 1.7;
+.location ion-icon {
+  flex-shrink: 0;
 
-  color: #667085;
+  margin-top: 2px;
+
+  font-size: 17px;
+
+  color: #6b4eff;
+}
+
+.card-content > p {
+  margin: 0;
+
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+
+  overflow: hidden;
+
+  font-size: 13px;
+  line-height: 1.65;
+
+  color: #777783;
 }
 
 
@@ -490,38 +592,177 @@
    CARD FOOTER
 ========================================= */
 
-.college-card-footer {
-  padding-top: 18px;
-
-  border-top: 1px solid #eef0f4;
-}
-
-.learn-button {
+.card-footer {
   display: flex;
 
   align-items: center;
+  justify-content: space-between;
 
-  gap: 6px;
+  gap: 15px;
 
-  padding: 0;
+  padding: 15px 20px;
+
+  border-top: 1px solid #eeeeF2;
+
+  background: #fcfcfd;
+}
+
+.card-footer > span {
+  min-width: 0;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #777783;
+}
+
+.details-button {
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 8px 11px;
+
+  border-radius: 8px;
+
+  background: #f1edff;
+
+  color: #6047d9;
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.details-button:hover {
+  background: #e8e1ff;
+
+  transform: translateX(2px);
+}
+
+.details-button ion-icon {
+  font-size: 15px;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading-message {
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  padding: 40px 20px;
+
+  text-align: center;
+}
+
+.loading-message ion-icon {
+  font-size: 38px;
+
+  color: #6b4eff;
+}
+
+.loading-message p {
+  margin: 0;
+
+  font-size: 14px;
+
+  color: #777783;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.error-message {
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  padding: 40px 20px;
+
+  text-align: center;
+}
+
+.error-message > ion-icon {
+  font-size: 42px;
+
+  color: #b42318;
+}
+
+.error-message p {
+  max-width: 500px;
+
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: #777783;
+}
+
+.error-message button {
+  margin-top: 5px;
+
+  padding: 10px 16px;
 
   border: none;
 
-  background: transparent;
+  border-radius: 8px;
 
-  color: #3f51b5;
+  background: #6b4eff;
+
+  color: #ffffff;
 
   font-family: inherit;
 
   font-size: 13px;
-
-  font-weight: 700;
+  font-weight: 600;
 
   cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
-.learn-button ion-icon {
-  font-size: 15px;
+.error-message button:hover {
+  background: #5940df;
+
+  transform: translateY(-1px);
 }
 
 
@@ -530,148 +771,102 @@
 ========================================= */
 
 .no-results {
-  grid-column: 1 / -1;
-
-  padding: 65px 20px;
-
-  text-align: center;
-
-  background: #ffffff;
-
-  border: 1px solid #e7eaf0;
-
-  border-radius: 16px;
-}
-
-.no-results-icon {
-  width: 55px;
-  height: 55px;
-
-  margin: 0 auto 15px;
+  min-height: 330px;
 
   display: flex;
+
+  flex-direction: column;
 
   align-items: center;
   justify-content: center;
 
-  border-radius: 50%;
+  padding: 50px 20px;
 
-  background: #f1f3f7;
+  text-align: center;
+}
+
+.no-results-icon {
+  width: 62px;
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 18px;
+
+  border-radius: 16px;
+
+  background: #f1edff;
 }
 
 .no-results-icon ion-icon {
-  font-size: 25px;
+  font-size: 29px;
 
-  color: #667085;
+  color: #6b4eff;
 }
 
-.no-results h3 {
+.no-results h2 {
   margin: 0 0 8px;
 
-  color: #172033;
-
   font-size: 20px;
+  font-weight: 700;
+
+  color: #292933;
 }
 
 .no-results p {
+  max-width: 450px;
+
   margin: 0 0 20px;
 
-  color: #667085;
+  font-size: 14px;
+  line-height: 1.6;
 
-  font-size: 13px;
+  color: #777783;
 }
 
 .reset-button {
-  padding: 10px 18px;
+  padding: 10px 17px;
 
   border: none;
 
   border-radius: 8px;
 
-  background: #3f51b5;
+  background: #f1edff;
 
-  color: #ffffff;
+  color: #6047d9;
 
   font-family: inherit;
 
   font-size: 13px;
-
   font-weight: 600;
 
   cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.reset-button:hover {
+  background: #e8e1ff;
+
+  transform: translateY(-1px);
 }
 
 
 /* =========================================
-   INFORMATION SECTION
+   BUTTON ACCESSIBILITY
 ========================================= */
 
-.information-section {
-  padding: 70px 7%;
+button:focus-visible,
+select:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(107, 78, 255, 0.25);
 
-  background: #ffffff;
-}
-
-.information-container {
-  max-width: 1000px;
-
-  margin: 0 auto;
-
-  padding: 40px;
-
-  display: flex;
-
-  align-items: flex-start;
-
-  gap: 25px;
-
-  background: #f7f9fc;
-
-  border: 1px solid #e7eaf0;
-
-  border-radius: 18px;
-}
-
-.information-icon {
-  width: 55px;
-  height: 55px;
-
-  flex-shrink: 0;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 13px;
-
-  background: #ffffff;
-}
-
-.information-icon ion-icon {
-  font-size: 26px;
-
-  color: #3f51b5;
-}
-
-.information-container h2 {
-  margin: 0 0 12px;
-
-  font-size: 27px;
-
-  line-height: 1.3;
-
-  color: #172033;
-}
-
-.information-container p {
-  margin: 0;
-
-  font-size: 14px;
-
-  line-height: 1.75;
-
-  color: #667085;
+  outline-offset: 2px;
 }
 
 
@@ -679,17 +874,20 @@
    TABLET
 ========================================= */
 
-@media (max-width: 1050px) {
+@media (max-width: 950px) {
 
-  .colleges-layout {
-    grid-template-columns: 220px 1fr;
+  .page-layout {
+    grid-template-columns: 220px minmax(0, 1fr);
 
-    gap: 25px;
+    gap: 22px;
   }
 
-  .colleges-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+  .universities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-header h1 {
+    font-size: 34px;
   }
 
 }
@@ -699,50 +897,165 @@
    MOBILE
 ========================================= */
 
-@media (max-width: 750px) {
+@media (max-width: 700px) {
 
-  .search-container {
-    padding: 50px 20px 35px;
+  .search-section {
+    padding: 40px 18px 35px;
+  }
+
+  .hero-logo {
+    width: 125px;
+
+    margin-bottom: 18px;
   }
 
   .search-header h1 {
-    font-size: 34px;
+    font-size: 29px;
   }
 
-  .colleges-section {
-    padding: 35px 20px 60px;
+  .search-header p {
+    font-size: 14px;
   }
 
-  .colleges-layout {
-    grid-template-columns: 1fr;
+  .search-box {
+    margin-top: 24px;
 
-    gap: 30px;
+    min-height: 52px;
+  }
+
+  .universities-section {
+    padding: 30px 16px 55px;
+  }
+
+  .page-layout {
+    display: block;
   }
 
   .filter-sidebar {
     position: static;
+
+    margin-bottom: 28px;
   }
 
-  .colleges-grid {
+  .filter-heading {
+    margin-bottom: 20px;
+  }
+
+  .results-header {
+    margin-bottom: 18px;
+  }
+
+  .results-header h2 {
+    font-size: 21px;
+  }
+
+  .universities-grid {
     grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+  .search-section {
+    padding: 32px 14px 28px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+  }
+
+  .hero-logo {
+    width: 110px;
+  }
+
+  .search-header h1 {
+    font-size: 25px;
+  }
+
+  .search-header p {
+    font-size: 13px;
+
+    line-height: 1.6;
+  }
+
+  .search-box {
+    padding: 0 13px;
+
+    gap: 9px;
+  }
+
+  .search-box input {
+    font-size: 14px;
+  }
+
+  .universities-section {
+    padding: 24px 12px 45px;
+  }
+
+  .filter-sidebar {
+    padding: 18px;
   }
 
   .results-header {
     align-items: flex-start;
   }
 
-  .information-section {
-    padding: 50px 20px;
+  .result-count {
+    width: 40px;
+    height: 40px;
+
+    font-size: 14px;
   }
 
-  .information-container {
-    padding: 28px;
+  .card-top {
+    padding: 17px 17px 0;
+  }
+
+  .card-content {
+    padding: 17px;
+  }
+
+  .card-content h3 {
+    font-size: 17px;
+  }
+
+  .card-footer {
+    padding: 13px 17px;
+  }
+
+}
+
+
+/* =========================================
+   VERY SMALL SCREENS
+========================================= */
+
+@media (max-width: 360px) {
+
+  .institution-badge {
+    display: none;
+  }
+
+  .card-footer {
+    align-items: flex-start;
 
     flex-direction: column;
   }
 
-  .information-container h2 {
-    font-size: 23px;
+  .details-button {
+    width: 100%;
+
+    justify-content: center;
+
+    box-sizing: border-box;
   }
 
 }
