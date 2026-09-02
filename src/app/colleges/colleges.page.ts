@@ -1,177 +1,289 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonIcon } from '@ionic/angular';
-import { FooterComponent } from '../components/footer/footer.component';
+import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 
+import {
+  IonContent,
+  IonIcon
+} from '@ionic/angular';
+
+import { addIcons } from 'ionicons';
+import {
+  searchOutline,
+  filterOutline,
+  locationOutline,
+  schoolOutline,
+  chevronForwardOutline,
+  closeOutline
+} from 'ionicons/icons';
+
+import { FooterComponent } from '../components/footer/footer.component';
+
 interface College {
-  name: string;
-  province: string;
-  location: string;
+  universityID: number;
+  universityName: string;
+  abbreviation: string | null;
   description: string;
-  type: string;
+  province: string;
+  city: string;
+  institutionType: string;
+  universityType: string;
+  websiteURL: string;
 }
 
 @Component({
   selector: 'app-colleges',
   standalone: true,
+
   imports: [
     CommonModule,
     FormsModule,
+    RouterLink,
     IonContent,
     IonIcon,
-    FooterComponent,
-    RouterLink
+    FooterComponent
   ],
+
   templateUrl: './colleges.page.html',
   styleUrls: ['./colleges.page.scss']
 })
-export class CollegesPage {
+export class CollegesPage implements OnInit {
+
+  private apiUrl = 'https://localhost:7105/api/Universities';
+
+  // =========================
+  // SEARCH
+  // =========================
 
   searchTerm = '';
 
-  selectedProvince = 'All Provinces';
-  selectedType = 'All Types';
 
-  provinces = [
-    'All Provinces',
-    'Eastern Cape',
-    'Free State',
-    'Gauteng',
-    'KwaZulu-Natal',
-    'Limpopo',
-    'Mpumalanga',
-    'Northern Cape',
-    'North West',
-    'Western Cape'
-  ];
+  // =========================
+  // FILTERS
+  // =========================
 
-  types = [
-    'All Types',
-    'TVET College'
-  ];
+  selectedProvince = '';
 
-  /*
-   * TEMPORARY DATA
-   * -----------------------------------------
-   * This will later be replaced by data
-   * received from our API/database.
-   */
+  selectedCity = '';
 
-  colleges: College[] = [
+  selectedCollegeType = '';
 
-    {
-      name: 'Tshwane South TVET College',
-      province: 'Gauteng',
-      location: 'Pretoria, Gauteng',
-      type: 'TVET College',
-      description:
-        'A public TVET college offering vocational and occupational programmes designed to provide students with practical skills for the workplace.'
-    },
 
-    {
-      name: 'Motheo TVET College',
-      province: 'Free State',
-      location: 'Bloemfontein, Free State',
-      type: 'TVET College',
-      description:
-        'A public TVET college providing students with technical, vocational and occupational education and training.'
-    },
+  // =========================
+  // COLLEGE DATA
+  // =========================
 
-    {
-      name: 'Coastal KZN TVET College',
-      province: 'KwaZulu-Natal',
-      location: 'Durban, KwaZulu-Natal',
-      type: 'TVET College',
-      description:
-        'A public TVET college offering a range of vocational and occupational programmes across campuses in KwaZulu-Natal.'
-    },
+  colleges: College[] = [];
 
-    {
-      name: 'Umfolozi TVET College',
-      province: 'KwaZulu-Natal',
-      location: 'Richards Bay, KwaZulu-Natal',
-      type: 'TVET College',
-      description:
-        'A public college providing technical and vocational education and training to students in northern KwaZulu-Natal.'
-    },
 
-    {
-      name: 'Vhembe TVET College',
-      province: 'Limpopo',
-      location: 'Venda, Limpopo',
-      type: 'TVET College',
-      description:
-        'A public TVET college offering vocational and occupational programmes to students in Limpopo.'
-    },
+  // =========================
+  // FILTER OPTIONS
+  // =========================
 
-    {
-      name: 'Waterberg TVET College',
-      province: 'Limpopo',
-      location: 'Mokopane, Limpopo',
-      type: 'TVET College',
-      description:
-        'A public TVET college providing students with technical and vocational skills for further study and employment.'
-    },
+  availableProvinces: string[] = [];
 
-    {
-      name: 'Ekurhuleni West TVET College',
-      province: 'Gauteng',
-      location: 'Germiston, Gauteng',
-      type: 'TVET College',
-      description:
-        'A public TVET college offering vocational and occupational programmes across several campuses in Gauteng.'
-    },
+  availableCities: string[] = [];
 
-    {
-      name: 'Nkangala TVET College',
-      province: 'Mpumalanga',
-      location: 'Emalahleni, Mpumalanga',
-      type: 'TVET College',
-      description:
-        'A public TVET college offering technical and vocational education and training in Mpumalanga.'
-    },
+  availableCollegeTypes: string[] = [];
 
-    {
-      name: 'King Hintsa TVET College',
-      province: 'Eastern Cape',
-      location: 'Eastern Cape',
-      type: 'TVET College',
-      description:
-        'A public TVET college providing vocational and occupational training to students in the Eastern Cape.'
-    }
 
-  ];
+  // =========================
+  // STATE
+  // =========================
 
+  loading = true;
+
+  errorMessage = '';
+
+
+  constructor(private http: HttpClient) {
+
+    addIcons({
+      searchOutline,
+      filterOutline,
+      locationOutline,
+      schoolOutline,
+      chevronForwardOutline,
+      closeOutline
+    });
+
+  }
+
+
+  // =========================
+  // PAGE LOAD
+  // =========================
+
+  ngOnInit(): void {
+
+    this.loadColleges();
+
+  }
+
+
+  // =========================
+  // LOAD COLLEGES
+  // =========================
+
+  loadColleges(): void {
+
+    this.loading = true;
+
+    this.errorMessage = '';
+
+    this.http.get<College[]>(this.apiUrl).subscribe({
+
+      next: (data) => {
+
+        console.log('========== COLLEGES API ==========');
+        console.log('RAW DATA:', data);
+        console.log('IS ARRAY:', Array.isArray(data));
+        console.log('TOTAL RECORDS:', data?.length);
+
+
+        // Only keep colleges
+        this.colleges = data.filter(
+          institution =>
+            institution.institutionType?.toLowerCase() === 'college'
+        );
+
+
+        console.log('TOTAL COLLEGES:', this.colleges.length);
+
+
+        // Build filter options from actual API data
+        this.buildFilterOptions();
+
+
+        this.loading = false;
+
+      },
+
+
+      error: (error) => {
+
+        console.error('College API error:', error);
+
+        this.errorMessage =
+          'Unable to load colleges. Please make sure the backend is running.';
+
+        this.colleges = [];
+
+        this.loading = false;
+
+      }
+
+    });
+
+  }
+
+
+  // =========================
+  // BUILD FILTER OPTIONS
+  // =========================
+
+  buildFilterOptions(): void {
+
+    // Provinces
+    this.availableProvinces = [
+      ...new Set(
+        this.colleges
+          .map(college => college.province)
+          .filter(
+            (province): province is string =>
+              !!province
+          )
+      )
+    ].sort();
+
+
+    // Cities
+    this.availableCities = [
+      ...new Set(
+        this.colleges
+          .map(college => college.city)
+          .filter(
+            (city): city is string =>
+              !!city
+          )
+      )
+    ].sort();
+
+
+    // College types
+    this.availableCollegeTypes = [
+      ...new Set(
+        this.colleges
+          .map(college => college.universityType)
+          .filter(
+            (type): type is string =>
+              !!type
+          )
+      )
+    ].sort();
+
+  }
+
+
+  // =========================
+  // FILTERED COLLEGES
+  // =========================
 
   get filteredColleges(): College[] {
 
     const search = this.searchTerm
-      .trim()
-      .toLowerCase();
+      .toLowerCase()
+      .trim();
+
 
     return this.colleges.filter(college => {
 
+      // SEARCH
       const matchesSearch =
         !search ||
-        college.name.toLowerCase().includes(search) ||
-        college.province.toLowerCase().includes(search) ||
-        college.location.toLowerCase().includes(search) ||
-        college.description.toLowerCase().includes(search);
 
+        college.universityName
+          ?.toLowerCase()
+          .includes(search) ||
+
+        college.city
+          ?.toLowerCase()
+          .includes(search) ||
+
+        college.province
+          ?.toLowerCase()
+          .includes(search) ||
+
+        college.abbreviation
+          ?.toLowerCase()
+          .includes(search);
+
+
+      // PROVINCE
       const matchesProvince =
-        this.selectedProvince === 'All Provinces' ||
+        !this.selectedProvince ||
         college.province === this.selectedProvince;
 
-      const matchesType =
-        this.selectedType === 'All Types' ||
-        college.type === this.selectedType;
+
+      // CITY
+      const matchesCity =
+        !this.selectedCity ||
+        college.city === this.selectedCity;
+
+
+      // COLLEGE TYPE
+      const matchesCollegeType =
+        !this.selectedCollegeType ||
+        college.universityType === this.selectedCollegeType;
+
 
       return (
         matchesSearch &&
         matchesProvince &&
-        matchesType
+        matchesCity &&
+        matchesCollegeType
       );
 
     });
@@ -179,13 +291,84 @@ export class CollegesPage {
   }
 
 
+  // =========================
+  // CLEAR FILTERS
+  // =========================
+
   clearFilters(): void {
 
     this.searchTerm = '';
 
-    this.selectedProvince = 'All Provinces';
+    this.selectedProvince = '';
 
-    this.selectedType = 'All Types';
+    this.selectedCity = '';
+
+    this.selectedCollegeType = '';
+
+  }
+
+
+  // =========================
+  // ACTIVE FILTER CHECK
+  // =========================
+
+  get hasActiveFilters(): boolean {
+
+    return !!(
+      this.searchTerm ||
+      this.selectedProvince ||
+      this.selectedCity ||
+      this.selectedCollegeType
+    );
+
+  }
+
+
+  // =========================
+  // PROVINCE CHANGE
+  // =========================
+
+  onProvinceChange(): void {
+
+    // If a province is selected,
+    // only show cities from that province.
+
+    if (this.selectedProvince) {
+
+      this.availableCities = [
+        ...new Set(
+          this.colleges
+            .filter(
+              college =>
+                college.province === this.selectedProvince
+            )
+            .map(college => college.city)
+            .filter(
+              (city): city is string =>
+                !!city
+            )
+        )
+      ].sort();
+
+    } else {
+
+      // Show all cities again
+      this.availableCities = [
+        ...new Set(
+          this.colleges
+            .map(college => college.city)
+            .filter(
+              (city): city is string =>
+                !!city
+            )
+        )
+      ].sort();
+
+    }
+
+
+    // Reset city when province changes
+    this.selectedCity = '';
 
   }
 

@@ -1,0 +1,1083 @@
+/* =========================================================
+   THUTODATA — UNIVERSITIES PAGE
+========================================================= */
+
+ion-content {
+  --background: #f7f8fc;
+}
+
+
+/* =========================================================
+   SEARCH HERO
+========================================================= */
+
+.search-section {
+  background: linear-gradient(
+    135deg,
+    #102a43 0%,
+    #163d5c 50%,
+    #1f5875 100%
+  );
+
+  padding: 70px 7% 65px;
+  color: white;
+}
+
+
+.search-header {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.eyebrow {
+  display: inline-block;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 18px;
+
+  opacity: 0.85;
+}
+
+
+.hero-logo {
+  width: 110px;
+  height: auto;
+
+  margin: 5px auto 18px;
+
+  display: block;
+}
+
+
+.search-header h1 {
+  margin: 0;
+
+  font-size: clamp(32px, 5vw, 52px);
+
+  font-weight: 800;
+
+  line-height: 1.1;
+
+  letter-spacing: -1px;
+}
+
+
+.search-header p {
+  max-width: 680px;
+
+  margin: 20px auto 0;
+
+  font-size: 17px;
+
+  line-height: 1.7;
+
+  opacity: 0.9;
+}
+
+
+/* =========================================================
+   SEARCH BOX
+========================================================= */
+
+.search-box {
+  max-width: 760px;
+
+  margin: 38px auto 0;
+
+  background: white;
+
+  border-radius: 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 6px 8px 6px 18px;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+
+.search-box > ion-icon {
+  color: #667085;
+
+  font-size: 23px;
+
+  flex-shrink: 0;
+}
+
+
+.search-box input {
+  flex: 1;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #1d2939;
+
+  font-size: 15px;
+
+  padding: 14px 4px;
+}
+
+
+.search-box input::placeholder {
+  color: #98a2b3;
+}
+
+
+.search-box button {
+  border: none;
+
+  background: #eef2f6;
+
+  color: #667085;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 10px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.search-box button:hover {
+  background: #e4e7ec;
+
+  color: #1d2939;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.universities-section {
+  padding: 55px 7% 80px;
+}
+
+
+.page-layout {
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 260px 1fr;
+
+  gap: 45px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   FILTER SIDEBAR
+========================================================= */
+
+.filter-sidebar {
+  background: white;
+
+  border: 1px solid #eaecf0;
+
+  border-radius: 16px;
+
+  padding: 24px;
+
+  position: sticky;
+
+  top: 25px;
+
+  box-shadow:
+    0 4px 15px rgba(16, 24, 40, 0.04);
+}
+
+
+.filter-heading {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding-bottom: 22px;
+
+  border-bottom: 1px solid #eaecf0;
+
+  margin-bottom: 25px;
+}
+
+
+.filter-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+
+.filter-title ion-icon {
+  font-size: 20px;
+
+  color: #1f5875;
+}
+
+
+.filter-title h2 {
+  margin: 0;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  color: #101828;
+}
+
+
+.filter-heading p {
+  margin: 5px 0 0;
+
+  font-size: 13px;
+
+  color: #667085;
+}
+
+
+.clear-button {
+  border: none;
+
+  background: transparent;
+
+  color: #1f5875;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 3px 0;
+}
+
+
+.clear-button:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   FILTER GROUPS
+========================================================= */
+
+.filter-group {
+  margin-bottom: 25px;
+}
+
+
+.filter-group label {
+  display: block;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #344054;
+
+  margin-bottom: 9px;
+}
+
+
+.filter-group select {
+  width: 100%;
+
+  height: 44px;
+
+  padding: 0 12px;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #344054;
+
+  font-size: 14px;
+
+  outline: none;
+
+  cursor: pointer;
+
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.filter-group select:focus {
+  border-color: #1f5875;
+
+  box-shadow:
+    0 0 0 3px rgba(31, 88, 117, 0.12);
+}
+
+
+.filter-group small {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #98a2b3;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   RESULTS HEADER
+========================================================= */
+
+.results-area {
+  min-width: 0;
+}
+
+
+.results-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 28px;
+}
+
+
+.results-header h2 {
+  margin: 0;
+
+  color: #101828;
+
+  font-size: 26px;
+
+  font-weight: 750;
+}
+
+
+.results-header p {
+  margin: 7px 0 0;
+
+  color: #667085;
+
+  font-size: 14px;
+}
+
+
+.results-header strong {
+  color: #344054;
+}
+
+
+.result-count {
+  width: 48px;
+
+  height: 48px;
+
+  border-radius: 12px;
+
+  background: #e8f1f5;
+
+  color: #1f5875;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 17px;
+
+  font-weight: 750;
+}
+
+
+/* =========================================================
+   UNIVERSITY GRID
+========================================================= */
+
+.universities-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 22px;
+}
+
+
+/* =========================================================
+   UNIVERSITY CARD
+========================================================= */
+
+.university-card {
+  background: white;
+
+  border: 1px solid #eaecf0;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  min-height: 340px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.university-card:hover {
+  transform: translateY(-4px);
+
+  border-color: #cbd5df;
+
+  box-shadow:
+    0 12px 30px rgba(16, 24, 40, 0.09);
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.card-top {
+  padding: 20px 20px 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+
+.university-icon {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 12px;
+
+  background: #e8f1f5;
+
+  color: #1f5875;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+.university-icon ion-icon {
+  font-size: 24px;
+}
+
+
+/* =========================================================
+   APS BADGE
+========================================================= */
+
+.aps-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  background: #eef5f8;
+
+  color: #1f5875;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.card-content {
+  padding: 20px;
+
+  flex: 1;
+}
+
+
+.card-content h3 {
+  margin: 0;
+
+  color: #101828;
+
+  font-size: 18px;
+
+  line-height: 1.35;
+
+  font-weight: 750;
+}
+
+
+.location {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin-top: 13px;
+
+  color: #667085;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+.location ion-icon {
+  flex-shrink: 0;
+
+  margin-top: 2px;
+
+  font-size: 17px;
+
+  color: #1f5875;
+}
+
+
+.card-content p {
+  margin: 15px 0 0;
+
+  color: #667085;
+
+  font-size: 13px;
+
+  line-height: 1.65;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 4;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CARD FOOTER
+========================================================= */
+
+.card-footer {
+  padding: 15px 20px;
+
+  border-top: 1px solid #eaecf0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+
+.card-footer > span {
+  color: #667085;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+.details-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #1f5875;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  padding: 0;
+}
+
+
+.details-button ion-icon {
+  font-size: 15px;
+
+  transition: transform 0.2s ease;
+}
+
+
+.details-button:hover {
+  color: #102a43;
+}
+
+
+.details-button:hover ion-icon {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-message {
+  min-height: 250px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #667085;
+}
+
+
+.loading-message ion-icon {
+  font-size: 40px;
+
+  color: #1f5875;
+
+  margin-bottom: 10px;
+}
+
+
+.loading-message p {
+  margin: 0;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error-message {
+  background: white;
+
+  border: 1px solid #fecdca;
+
+  border-radius: 14px;
+
+  padding: 30px;
+
+  text-align: center;
+
+  color: #b42318;
+}
+
+
+.error-message ion-icon {
+  font-size: 35px;
+
+  margin-bottom: 10px;
+}
+
+
+.error-message p {
+  margin: 0 0 18px;
+
+  color: #667085;
+}
+
+
+.error-message button {
+  border: none;
+
+  background: #1f5875;
+
+  color: white;
+
+  border-radius: 8px;
+
+  padding: 10px 18px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   NO RESULTS
+========================================================= */
+
+.no-results {
+  background: white;
+
+  border: 1px solid #eaecf0;
+
+  border-radius: 16px;
+
+  padding: 60px 25px;
+
+  text-align: center;
+}
+
+
+.no-results-icon {
+  width: 58px;
+
+  height: 58px;
+
+  margin: 0 auto 18px;
+
+  border-radius: 50%;
+
+  background: #f2f4f7;
+
+  color: #667085;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+.no-results-icon ion-icon {
+  font-size: 26px;
+}
+
+
+.no-results h2 {
+  margin: 0;
+
+  color: #101828;
+
+  font-size: 21px;
+}
+
+
+.no-results p {
+  max-width: 430px;
+
+  margin: 10px auto 20px;
+
+  color: #667085;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+.reset-button {
+  border: none;
+
+  background: #1f5875;
+
+  color: white;
+
+  padding: 11px 20px;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.reset-button:hover {
+  background: #102a43;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .universities-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .page-layout {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+  }
+
+
+  .filter-sidebar {
+    position: static;
+  }
+
+
+  .universities-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .search-section {
+    padding: 50px 20px 45px;
+  }
+
+
+  .search-header h1 {
+    font-size: 34px;
+  }
+
+
+  .search-header p {
+    font-size: 15px;
+  }
+
+
+  .universities-section {
+    padding: 35px 20px 60px;
+  }
+
+
+  .filter-sidebar {
+    padding: 20px;
+  }
+
+
+  .results-header {
+    align-items: flex-start;
+  }
+
+
+  .results-header h2 {
+    font-size: 22px;
+  }
+
+
+  .result-count {
+    width: 42px;
+
+    height: 42px;
+
+    font-size: 15px;
+  }
+
+
+  .universities-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+
+  .university-card {
+    min-height: auto;
+  }
+
+
+  .card-footer {
+    flex-wrap: wrap;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .search-header h1 {
+    font-size: 29px;
+  }
+
+
+  .search-box {
+    padding-left: 13px;
+  }
+
+
+  .search-box input {
+    font-size: 13px;
+  }
+
+
+  .card-content h3 {
+    font-size: 17px;
+  }
+
+}
+
+
+/* =========================================
+   CARD TOP ACTIONS
+========================================= */
+
+.card-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* =========================================
+   SAVE BUTTON
+========================================= */
+
+.save-button {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #e4e1ec;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #8c8998;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.save-button ion-icon {
+  font-size: 20px;
+}
+
+.save-button:hover {
+  background: #f5f2ff;
+  border-color: #d9d0ff;
+  color: #6b4eff;
+  transform: translateY(-1px);
+}
+
+.save-button.saved {
+  background: #f1edff;
+  border-color: #d8ceff;
+  color: #6b4eff;
+}
+
+.save-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .card-top-actions {
+    gap: 6px;
+  }
+
+  .save-button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .save-button ion-icon {
+    font-size: 19px;
+  }
+
+}

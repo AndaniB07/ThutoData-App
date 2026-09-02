@@ -1,0 +1,819 @@
+<ion-header>
+
+  <ion-toolbar class="details-toolbar">
+
+    <ion-buttons slot="start">
+
+      <ion-button
+        fill="clear"
+        (click)="goBack()"
+        class="back-button">
+
+        <ion-icon
+          slot="icon-only"
+          name="arrow-back-outline">
+        </ion-icon>
+
+      </ion-button>
+
+    </ion-buttons>
+
+
+    <ion-title>
+      University Details
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+
+  <!-- =========================
+       LOADING
+  ========================== -->
+
+  <div
+    class="loading-container"
+    *ngIf="loading">
+
+    <ion-spinner
+      name="crescent">
+    </ion-spinner>
+
+    <h2>
+      Loading university...
+    </h2>
+
+    <p>
+      Please wait while we retrieve the information.
+    </p>
+
+  </div>
+
+
+  <!-- =========================
+       ERROR
+  ========================== -->
+
+  <div
+    class="error-container"
+    *ngIf="!loading && error">
+
+    <div class="error-icon">
+      !
+    </div>
+
+    <h2>
+      Unable to load university
+    </h2>
+
+    <p>
+      We could not retrieve the university information.
+    </p>
+
+    <ion-button
+      expand="block"
+      (click)="retry()">
+
+      Try Again
+
+    </ion-button>
+
+  </div>
+
+
+  <!-- =========================
+       UNIVERSITY DETAILS
+  ========================== -->
+
+  <div
+    class="details-page"
+    *ngIf="!loading && university">
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="university-hero">
+
+      <div class="university-logo">
+
+        <ion-icon
+          name="school-outline">
+        </ion-icon>
+
+      </div>
+
+
+      <div class="hero-content">
+
+        <p class="institution-label">
+          UNIVERSITY
+        </p>
+
+        <h1>
+          {{ university.universityName }}
+        </h1>
+
+        <p
+          class="abbreviation"
+          *ngIf="university.abbreviation">
+
+          {{ university.abbreviation }}
+
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         QUICK INFORMATION
+    ========================== -->
+
+    <section class="quick-info">
+
+
+      <div class="quick-info-item">
+
+        <ion-icon
+          name="location-outline">
+        </ion-icon>
+
+        <div>
+
+          <span>
+            Location
+          </span>
+
+          <strong>
+            {{ university.city || 'Not available' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="quick-info-item">
+
+        <ion-icon
+          name="business-outline">
+        </ion-icon>
+
+        <div>
+
+          <span>
+            Type
+          </span>
+
+          <strong>
+            {{ university.universityType || 'Public' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="quick-info-item">
+
+        <ion-icon
+          name="school-outline">
+        </ion-icon>
+
+        <div>
+
+          <span>
+            Institution
+          </span>
+
+          <strong>
+            {{ university.institutionType || 'University' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section class="details-card">
+
+      <div class="card-heading">
+
+        <div class="card-icon">
+
+          <ion-icon
+            name="information-circle-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            About
+          </h2>
+
+          <p>
+            About this university
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <p class="description">
+
+        {{
+          university.description ||
+          'No description available.'
+        }}
+
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         LOCATION
+    ========================== -->
+
+    <section class="details-card">
+
+      <div class="card-heading">
+
+        <div class="card-icon">
+
+          <ion-icon
+            name="location-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Location
+          </h2>
+
+          <p>
+            Where the university is located
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="information-list">
+
+
+        <div class="information-row">
+
+          <span>
+            Province
+          </span>
+
+          <strong>
+            {{ university.province || 'Not available' }}
+          </strong>
+
+        </div>
+
+
+        <div class="information-row">
+
+          <span>
+            City
+          </span>
+
+          <strong>
+            {{ university.city || 'Not available' }}
+          </strong>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         INSTITUTION INFORMATION
+    ========================== -->
+
+    <section class="details-card">
+
+      <div class="card-heading">
+
+        <div class="card-icon">
+
+          <ion-icon
+            name="business-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Institution Information
+          </h2>
+
+          <p>
+            University details
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="information-list">
+
+
+        <div class="information-row">
+
+          <span>
+            Institution Type
+          </span>
+
+          <strong>
+            {{ university.institutionType || 'Not available' }}
+          </strong>
+
+        </div>
+
+
+        <div class="information-row">
+
+          <span>
+            University Type
+          </span>
+
+          <strong>
+            {{ university.universityType || 'Not available' }}
+          </strong>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         COURSES
+    ========================== -->
+
+    <section class="details-card">
+
+      <div class="card-heading">
+
+        <div class="card-icon">
+
+          <ion-icon
+            name="book-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Courses & Programmes
+          </h2>
+
+          <p>
+            Programmes offered by this university
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- COURSE LIST -->
+
+      <div
+        class="course-list"
+        *ngIf="
+          university.courseOfferings &&
+          university.courseOfferings.length > 0
+        ">
+
+
+        <div
+          class="course-item"
+          *ngFor="
+            let course of university.courseOfferings
+          ">
+
+
+          <!-- COURSE ICON -->
+
+          <div class="course-icon">
+
+            <ion-icon
+              name="book-outline">
+            </ion-icon>
+
+          </div>
+
+
+          <!-- COURSE INFORMATION -->
+
+          <div class="course-information">
+
+            <strong>
+
+              {{
+                course.course?.courseName ||
+                course.courseName ||
+                course.Course?.courseName ||
+                course.Course?.CourseName ||
+                'Course'
+              }}
+
+            </strong>
+
+
+            <p
+              *ngIf="course.apsRequirement">
+
+              APS Requirement:
+              {{ course.apsRequirement }}
+
+            </p>
+
+
+            <!-- COURSE CODE -->
+
+            <p
+              *ngIf="
+                course.course?.courseCode ||
+                course.courseCode ||
+                course.Course?.courseCode ||
+                course.Course?.CourseCode
+              ">
+
+              Course Code:
+
+              {{
+                course.course?.courseCode ||
+                course.courseCode ||
+                course.Course?.courseCode ||
+                course.Course?.CourseCode
+              }}
+
+            </p>
+
+          </div>
+
+
+          <!-- SAVE COURSE -->
+
+          <button
+            type="button"
+            class="course-save-button"
+
+            [class.saved]="
+              isCourseSaved(course)
+            "
+
+            [disabled]="
+              savingCourseId ===
+              getCourseId(course)
+            "
+
+            (click)="
+              toggleCourseSave(course)
+            "
+
+            [attr.aria-label]="
+              isCourseSaved(course)
+              ? 'Remove course from saved items'
+              : 'Save course'
+            ">
+
+
+            <ion-icon
+              [name]="
+                isCourseSaved(course)
+                ? 'star'
+                : 'star-outline'
+              ">
+            </ion-icon>
+
+
+          </button>
+
+
+        </div>
+
+
+      </div>
+
+
+      <!-- NO COURSES -->
+
+      <div
+        class="empty-state"
+        *ngIf="
+          !university.courseOfferings ||
+          university.courseOfferings.length === 0
+        ">
+
+        <ion-icon
+          name="book-outline">
+        </ion-icon>
+
+        <p>
+          Course information will be available soon.
+        </p>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         FUNDING
+    ========================== -->
+
+    <section class="details-card">
+
+      <div class="card-heading">
+
+        <div class="card-icon">
+
+          <ion-icon
+            name="school-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Funding & Bursaries
+          </h2>
+
+          <p>
+            Funding opportunities
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="funding-list"
+        *ngIf="
+          university.universityFundings &&
+          university.universityFundings.length > 0
+        ">
+
+
+        <div
+          class="funding-item"
+          *ngFor="
+            let funding of university.universityFundings
+          ">
+
+          <ion-icon
+            name="school-outline">
+          </ion-icon>
+
+          <strong>
+
+            {{
+              funding.funding?.fundingName ||
+              funding.fundingName ||
+              'Funding opportunity'
+            }}
+
+          </strong>
+
+        </div>
+
+
+      </div>
+
+
+      <div
+        class="empty-state"
+        *ngIf="
+          !university.universityFundings ||
+          university.universityFundings.length === 0
+        ">
+
+        <ion-icon
+          name="school-outline">
+        </ion-icon>
+
+        <p>
+          Funding information will be available soon.
+        </p>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         IMPORTANT DATES
+    ========================== -->
+
+    <section class="details-card">
+
+      <div class="card-heading">
+
+        <div class="card-icon">
+
+          <ion-icon
+            name="calendar-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Important Dates
+          </h2>
+
+          <p>
+            Application and registration dates
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="dates-list"
+        *ngIf="
+          university.importantDates &&
+          university.importantDates.length > 0
+        ">
+
+
+        <div
+          class="date-item"
+          *ngFor="
+            let date of university.importantDates
+          ">
+
+
+          <div class="date-icon">
+
+            <ion-icon
+              name="calendar-outline">
+            </ion-icon>
+
+          </div>
+
+
+          <div>
+
+            <strong>
+
+              {{
+                date.title ||
+                date.eventName ||
+                'Important Date'
+              }}
+
+            </strong>
+
+            <p>
+
+              {{
+                date.date |
+                date:'dd MMMM yyyy'
+              }}
+
+            </p>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+      <div
+        class="empty-state"
+        *ngIf="
+          !university.importantDates ||
+          university.importantDates.length === 0
+        ">
+
+        <ion-icon
+          name="calendar-outline">
+        </ion-icon>
+
+        <p>
+          Important dates will be available soon.
+        </p>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         WEBSITE
+    ========================== -->
+
+    <section
+      class="website-card"
+      *ngIf="university.websiteURL">
+
+
+      <div class="website-icon">
+
+        <ion-icon
+          name="globe-outline">
+        </ion-icon>
+
+      </div>
+
+
+      <div class="website-content">
+
+        <h2>
+          Official Website
+        </h2>
+
+        <p>
+          Visit the official university website for
+          applications and additional information.
+        </p>
+
+      </div>
+
+
+      <ion-button
+        expand="block"
+        (click)="openWebsite()">
+
+        Visit Website
+
+      </ion-button>
+
+
+    </section>
+
+
+    <!-- =========================
+         BACK
+    ========================== -->
+
+    <div class="bottom-button">
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        (click)="goBack()">
+
+        <ion-icon
+          slot="start"
+          name="arrow-back-outline">
+        </ion-icon>
+
+        Back to Universities
+
+      </ion-button>
+
+    </div>
+
+
+  </div>
+
+
+</ion-content>

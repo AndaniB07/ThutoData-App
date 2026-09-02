@@ -1,55 +1,175 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent,IonIcon } from '@ionic/angular';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+import {
+  IonContent,
+  IonIcon
+} from '@ionic/angular';
+
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-login',
   standalone: true,
+
   imports: [
-    CommonModule,
     FormsModule,
+    RouterLink,
     IonContent,
     IonIcon,
-    RouterLink
+    CommonModule
   ],
+
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss']
 })
 export class LoginPage {
 
   email = '';
+
   password = '';
 
   showPassword = false;
 
+  errorMessage = '';
+
+  loading = false;
+
+
+  constructor(
+    private auth: Auth,
+    private router: Router
+  ) {}
+
+
+  // =========================================
+  // LOGIN
+  // =========================================
+
   login(): void {
 
-    if (!this.email || !this.password) {
-      alert('Please enter your email and password.');
+    this.errorMessage = '';
+
+
+    // Validate fields
+
+    if (
+      !this.email.trim() ||
+      !this.password
+    ) {
+
+      this.errorMessage =
+        'Please enter your email and password.';
+
       return;
+
     }
 
-    /*
-     * TEMPORARY LOGIN
-     *
-     * The real authentication will be connected
-     * to our API once the backend is completed.
-     */
 
-    console.log('Login attempted:', {
-      email: this.email
-    });
+    // Prevent multiple clicks
 
-    alert(
-      'Login system is not connected yet. ' +
-      'This will be connected to the ThutoData API.'
-    );
+    if (this.loading) {
+
+      return;
+
+    }
+
+
+    this.loading = true;
+
+
+    // =========================================
+    // CALL BACKEND
+    // =========================================
+
+    this.auth
+      .login(
+        this.email,
+        this.password
+      )
+      .subscribe({
+
+        // =====================================
+        // LOGIN SUCCESS
+        // =====================================
+
+        next: (response) => {
+
+          console.log(
+            'Login response received:',
+            response
+          );
+
+
+          this.loading = false;
+
+
+          // Navigate ONLY after the user
+          // has been saved by Auth.login()
+
+          this.router.navigate(['/tabs/home']);
+
+        },
+
+
+        // =====================================
+        // LOGIN ERROR
+        // =====================================
+
+        error: (error) => {
+
+          console.error(
+            'Login error:',
+            error
+          );
+
+
+          this.loading = false;
+
+
+          if (
+            error.status === 401
+          ) {
+
+            this.errorMessage =
+              'Incorrect email or password. Please check your details and try again.';
+
+          }
+
+          else if (
+            error.status === 0
+          ) {
+
+            this.errorMessage =
+              'Unable to connect to the server. Please make sure the backend is running.';
+
+          }
+
+          else {
+
+            this.errorMessage =
+              'Something went wrong. Please try again.';
+
+          }
+
+        }
+
+      });
+
   }
 
+
+  // =========================================
+  // SHOW / HIDE PASSWORD
+  // =========================================
+
   togglePassword(): void {
-    this.showPassword = !this.showPassword;
+
+    this.showPassword =
+      !this.showPassword;
+
   }
 
 }

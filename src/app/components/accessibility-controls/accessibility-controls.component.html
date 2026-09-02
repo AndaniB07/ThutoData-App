@@ -1,0 +1,67 @@
+<div class="accessibility-controls">
+
+  <!-- READ ALOUD -->
+
+  <button
+    type="button"
+    class="accessibility-button"
+    (click)="readPage()"
+    aria-label="Read this page aloud">
+
+    <span class="icon">🔊</span>
+    <span>Read Aloud</span>
+
+  </button>
+
+
+  <!-- STOP -->
+
+  <button
+    type="button"
+    class="accessibility-button stop-button"
+    (click)="stopReading()"
+    aria-label="Stop reading">
+
+    <span class="icon">⏹</span>
+    <span>Stop</span>
+
+  </button>
+
+
+  <!-- TEXT SIZE -->
+
+  <div class="text-size-control">
+
+    <label for="text-size">
+      <span class="small-a">A</span>
+      Text Size
+      <span class="large-a">A</span>
+    </label>
+
+    <input
+      id="text-size"
+      type="range"
+      min="80"
+      max="200"
+      step="10"
+      [(ngModel)]="textSize"
+      (input)="changeTextSize()"
+      aria-label="Change text size">
+
+    <span class="size-value">
+      {{ textSize }}%
+    </span>
+
+  </div>
+
+  <button
+  type="button"
+  class="reset-text-button"
+  (click)="resetTextSize()"
+  aria-label="Reset text size to normal">
+
+  Reset
+
+</button>
+
+</div>

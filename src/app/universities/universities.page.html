@@ -1,17 +1,601 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Universities
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Universities</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Universities page"></app-explore-container>
+  <!-- =========================
+       SEARCH HEADER
+  ========================== -->
+
+  <section class="search-section">
+
+    <div class="search-header">
+
+      <span class="eyebrow">
+        UNIVERSITIES
+      </span>
+
+      <div>
+        <img
+          src="assets/icon/ThutoData_Logo_Transparent.png"
+          alt="ThutoData Logo"
+          class="hero-logo">
+      </div>
+
+      <h1>
+        Find Your University
+      </h1>
+
+      <p>
+        Explore universities across South Africa and find
+        programmes that match your interests and goals.
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         SEARCH
+    ========================== -->
+
+    <div class="search-box">
+
+      <ion-icon
+        name="search-outline">
+      </ion-icon>
+
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search universities, cities or provinces...">
+
+      <button
+        *ngIf="searchTerm"
+        (click)="searchTerm = ''"
+        aria-label="Clear search">
+
+        <ion-icon
+          name="close-outline">
+        </ion-icon>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MAIN CONTENT
+  ========================== -->
+
+  <section class="universities-section">
+
+    <div class="page-layout">
+
+
+      <!-- =========================
+           FILTER SIDEBAR
+      ========================== -->
+
+      <aside class="filter-sidebar">
+
+        <div class="filter-heading">
+
+          <div>
+
+            <div class="filter-title">
+
+              <ion-icon
+                name="filter-outline">
+              </ion-icon>
+
+              <h2>
+                Filters
+              </h2>
+
+            </div>
+
+            <p>
+              Narrow your results
+            </p>
+
+          </div>
+
+
+          <button
+            *ngIf="hasActiveFilters"
+            class="clear-button"
+            (click)="clearFilters()">
+
+            Clear
+
+          </button>
+
+        </div>
+
+
+        <!-- PROVINCE -->
+
+        <div class="filter-group">
+
+          <label>
+            Province
+          </label>
+
+          <select
+            [(ngModel)]="selectedProvince">
+
+            <option value="">
+              All provinces
+            </option>
+
+            <option value="Eastern Cape">
+              Eastern Cape
+            </option>
+
+            <option value="Free State">
+              Free State
+            </option>
+
+            <option value="Gauteng">
+              Gauteng
+            </option>
+
+            <option value="KwaZulu-Natal">
+              KwaZulu-Natal
+            </option>
+
+            <option value="Limpopo">
+              Limpopo
+            </option>
+
+            <option value="Mpumalanga">
+              Mpumalanga
+            </option>
+
+            <option value="Northern Cape">
+              Northern Cape
+            </option>
+
+            <option value="North West">
+              North West
+            </option>
+
+            <option value="Western Cape">
+              Western Cape
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- FACULTY -->
+
+        <div class="filter-group">
+
+          <label>
+            Faculty
+          </label>
+
+          <select
+            [(ngModel)]="selectedFaculty"
+            (ngModelChange)="onFacultyChange()">
+
+            <option value="">
+              All faculties
+            </option>
+
+            <option
+              *ngFor="let faculty of availableFaculties"
+              [value]="faculty.facultyID">
+
+              {{ faculty.facultyName }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- COURSE -->
+
+        <div class="filter-group">
+
+          <label>
+            Course
+          </label>
+
+          <select
+            [(ngModel)]="selectedCourse"
+            (ngModelChange)="onCourseChange()">
+
+            <option value="">
+              All courses
+            </option>
+
+            <option
+              *ngFor="let course of availableCourses"
+              [value]="course.courseID">
+
+              {{ course.courseName }}
+
+              <span *ngIf="course.courseCode">
+                ({{ course.courseCode }})
+              </span>
+
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- QUALIFICATION TYPE -->
+
+        <div class="filter-group">
+
+          <label>
+            Qualification Type
+          </label>
+
+          <select
+            [(ngModel)]="selectedQualification">
+
+            <option value="">
+              All qualification types
+            </option>
+
+            <option
+              *ngFor="let type of qualificationTypes"
+              [value]="type">
+
+              {{ type }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- UNIVERSITY TYPE -->
+
+        <div class="filter-group">
+
+          <label>
+            University Type
+          </label>
+
+          <select
+            [(ngModel)]="selectedUniversityType">
+
+            <option value="">
+              All university types
+            </option>
+
+            <option
+              *ngFor="let type of universityTypes"
+              [value]="type">
+
+              {{ type }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+
+      </aside>
+
+
+      <!-- =========================
+           RESULTS
+      ========================== -->
+
+      <main class="results-area">
+
+
+        <!-- RESULTS HEADER -->
+
+        <div class="results-header">
+
+          <div>
+
+            <h2>
+              Universities
+            </h2>
+
+            <p>
+
+              Showing
+
+              <strong>
+                {{ filteredUniversities.length }}
+              </strong>
+
+              of
+
+              <strong>
+                {{ universities.length }}
+              </strong>
+
+              universities
+
+            </p>
+
+          </div>
+
+
+          <div class="result-count">
+
+            {{ filteredUniversities.length }}
+
+          </div>
+
+        </div>
+
+
+        <!-- LOADING -->
+
+        <div
+          class="loading-message"
+          *ngIf="loading">
+
+          <ion-icon
+            name="school-outline">
+          </ion-icon>
+
+          <p>
+            Loading universities...
+          </p>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+          class="error-message"
+          *ngIf="!loading && errorMessage">
+
+          <ion-icon
+            name="close-outline">
+          </ion-icon>
+
+          <p>
+            {{ errorMessage }}
+          </p>
+
+          <button
+            (click)="loadAllData()">
+
+            Try Again
+
+          </button>
+
+        </div>
+
+
+        <!-- =========================
+             UNIVERSITY GRID
+        ========================== -->
+
+        <div
+          class="universities-grid"
+          *ngIf="
+            !loading &&
+            !errorMessage &&
+            filteredUniversities.length > 0
+          ">
+
+          <article
+            class="university-card"
+            *ngFor="let university of filteredUniversities">
+
+
+            <!-- CARD TOP -->
+
+            <div class="card-top">
+
+              <div class="university-icon">
+
+                <ion-icon
+                  name="school-outline">
+                </ion-icon>
+
+              </div>
+
+              <div class="card-top-actions">
+
+                <span class="institution-badge">
+                  University
+                </span>
+
+
+                <!-- SAVE BUTTON -->
+
+                <button
+                  type="button"
+                  class="save-button"
+                  [class.saved]="
+                    isUniversitySaved(
+                      university.universityID
+                    )
+                  "
+                  [disabled]="
+                    savingUniversityId ===
+                    university.universityID
+                  "
+                  (click)="
+                    toggleUniversitySave(
+                      university.universityID
+                    )
+                  "
+                  [attr.aria-label]="
+                    isUniversitySaved(
+                      university.universityID
+                    )
+                    ? 'Remove university from saved items'
+                    : 'Save university'
+                  ">
+
+                  <ion-icon
+                    [name]="
+                      isUniversitySaved(
+                        university.universityID
+                      )
+                      ? 'star'
+                      : 'star-outline'
+                    ">
+                  </ion-icon>
+
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- CARD CONTENT -->
+
+            <div class="card-content">
+
+              <h3>
+                {{ university.universityName }}
+              </h3>
+
+
+              <!-- ABBREVIATION -->
+
+              <span
+                class="abbreviation"
+                *ngIf="university.abbreviation">
+
+                {{ university.abbreviation }}
+
+              </span>
+
+
+              <!-- LOCATION -->
+
+              <div class="location">
+
+                <ion-icon
+                  name="location-outline">
+                </ion-icon>
+
+                <span>
+
+                  {{ university.city }}
+
+                  <span
+                    *ngIf="university.province">
+
+                    , {{ university.province }}
+
+                  </span>
+
+                </span>
+
+              </div>
+
+
+              <!-- DESCRIPTION -->
+
+              <p>
+                {{ university.description }}
+              </p>
+
+            </div>
+
+
+            <!-- CARD FOOTER -->
+
+            <div class="card-footer">
+
+              <span>
+                {{ university.universityType }}
+              </span>
+
+
+              <button
+                class="details-button"
+                [routerLink]="[
+                  '/university-details',
+                  university.universityID
+                ]">
+
+                View Details
+
+                <ion-icon
+                  name="chevron-forward-outline">
+                </ion-icon>
+
+              </button>
+
+            </div>
+
+
+          </article>
+
+        </div>
+
+
+        <!-- =========================
+             NO RESULTS
+        ========================== -->
+
+        <div
+          class="no-results"
+          *ngIf="
+            !loading &&
+            !errorMessage &&
+            filteredUniversities.length === 0
+          ">
+
+          <div class="no-results-icon">
+
+            <ion-icon
+              name="search-outline">
+            </ion-icon>
+
+          </div>
+
+
+          <h2>
+            No universities found
+          </h2>
+
+
+          <p>
+            Try changing your search or removing one
+            of the filters.
+          </p>
+
+
+          <button
+            class="reset-button"
+            (click)="clearFilters()">
+
+            Clear Filters
+
+          </button>
+
+        </div>
+
+
+      </main>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <app-footer></app-footer>
+
 </ion-content>

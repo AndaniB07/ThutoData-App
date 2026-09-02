@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IonContent, IonIcon } from '@ionic/angular';
 import { FooterComponent } from '../components/footer/footer.component';
+import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
+
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,8 @@ import { FooterComponent } from '../components/footer/footer.component';
     RouterLink,
     IonIcon,
     IonContent,
-    FooterComponent
+    FooterComponent,
+    AccessibilityControlsComponent
   ]
 })
 export class HomePage {
