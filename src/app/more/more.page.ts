@@ -17,7 +17,8 @@ import {
   logInOutline,
   personAddOutline,
   chevronForwardOutline,
-  personCircleOutline
+  personCircleOutline,
+  documentTextOutline
 } from 'ionicons/icons';
 
 addIcons({
@@ -26,7 +27,8 @@ addIcons({
   'log-in-outline': logInOutline,
   'person-add-outline': personAddOutline,
   'chevron-forward-outline': chevronForwardOutline,
-  'person-circle-outline': personCircleOutline
+  'person-circle-outline': personCircleOutline,
+  'document-text-outline' : documentTextOutline
 });
 
 @Component({
