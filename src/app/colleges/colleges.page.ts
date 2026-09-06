@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -98,7 +98,9 @@ export class CollegesPage implements OnInit {
   errorMessage = '';
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private cdr: ChangeDetectorRef
+  ) {
 
     addIcons({
       searchOutline,
@@ -159,6 +161,7 @@ export class CollegesPage implements OnInit {
 
         this.loading = false;
 
+        this.cdr.detectChanges();
       },
 
 

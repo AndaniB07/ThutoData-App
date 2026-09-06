@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -84,7 +84,7 @@ interface CourseOffering {
     RouterLink,
     IonContent,
     IonIcon,
-    FooterComponent
+    FooterComponent,
   ],
 
   templateUrl: './universities.page.html',
@@ -184,7 +184,8 @@ export class UniversitiesPage implements OnInit {
     private http: HttpClient,
     private auth: Auth,
     private savedService: SavedService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
 
     addIcons({
@@ -228,63 +229,30 @@ export class UniversitiesPage implements OnInit {
     ).subscribe({
 
       next: (data) => {
-
-        console.log(
-          '========== UNIVERSITIES API =========='
-        );
-
-        console.log(
-          'RAW DATA:',
-          data
-        );
-
-        console.log(
-          'IS ARRAY:',
-          Array.isArray(data)
-        );
-
-        console.log(
-          'LENGTH:',
-          data.length
-        );
-
+        console.log('========== UNIVERSITIES API ==========');
+        console.log('RAW DATA:',data);
+        console.log('IS ARRAY:',Array.isArray(data));
+        console.log('LENGTH:',data.length);
 
         // Load universities first.
 
         this.universities = data.filter(
           institution =>
-            institution.institutionType
-              ?.toLowerCase() === 'university'
+            institution.institutionType?.toLowerCase() === 'university'
         );
 
-
-        console.log(
-          'UNIVERSITIES AFTER FILTER:',
-          this.universities
-        );
-
-
-        console.log(
-          'UNIVERSITY COUNT:',
-          this.universities.length
-        );
-
+        console.log('UNIVERSITIES AFTER FILTER:', this.universities);
+        console.log('UNIVERSITY COUNT:', this.universities.length);
 
         this.updateUniversityTypes();
 
-
         // University cards can display immediately.
-
         this.loading = false;
 
-
-        // Load saved universities.
+        // Force Angular to refresh the template immediately
+        this.cdr.detectChanges();
 
         this.loadSavedUniversities();
-
-
-        // Load filter data separately.
-
         this.loadFaculties();
 
       },
@@ -412,17 +380,10 @@ export class UniversitiesPage implements OnInit {
             /*
              * The backend may return:
              *
-             * {
-             *   universityID: 1
-             * }
-             *
+             * { universityID: 1}
              * OR:
-             *
-             * {
-             *   UniversityID: 1
-             * }
-             *
-             * OR an embedded University object.
+             * { UniversityID: 1 }
+             OR an embedded University object.
              */
 
             const universityId =
