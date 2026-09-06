@@ -167,7 +167,7 @@ export class CollegesPage implements OnInit {
         console.error('College API error:', error);
 
         this.errorMessage =
-          'Unable to load colleges. Please make sure the backend is running.';
+          'Unable to load colleges. Please reload the page.';
 
         this.colleges = [];
 

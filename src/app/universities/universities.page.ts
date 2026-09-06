@@ -303,7 +303,7 @@ export class UniversitiesPage implements OnInit {
         this.loading = false;
 
         this.errorMessage =
-          'Unable to load universities. Please make sure the backend is running.';
+          'Unable to load universities. Please reload the page';
 
       }
 
