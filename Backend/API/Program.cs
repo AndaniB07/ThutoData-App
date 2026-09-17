@@ -31,7 +31,7 @@ builder.Services.AddCors(options =>
 // =========================
 
 builder.Services.AddDbContext<ThutoDataContext>(options =>
-    options.UseSqlServer(
+    options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
