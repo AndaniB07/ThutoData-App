@@ -485,6 +485,46 @@ ion-content {
   padding: 20px 20px 0;
 }
 
+.save-button {
+  margin-left: auto;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.save-button ion-icon {
+  font-size: 24px;
+}
+
+.save-button:hover {
+  background: rgba(0, 0, 0, 0.06);
+  transform: scale(1.05);
+}
+
+.save-button.saved ion-icon {
+  font-weight: bold;
+}
+
+.save-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .university-icon {
   width: 48px;
   height: 48px;

@@ -120,6 +120,19 @@ export const routes: Routes = [
         .then((m) => m.AboutUsPage),
   },
 
+  //Courses
+  {
+        path: 'courses',
+        loadComponent: () =>
+          import('../courses/courses.page').then(m => m.CoursesPage)
+      },
+      {
+        path: 'course-details/:id',
+        loadComponent: () =>
+          import('../details/course-details/course-details.page')
+            .then(m => m.CourseDetailsPage)
+      },
+
   {
     path: '',
     redirectTo: '/tabs/home',

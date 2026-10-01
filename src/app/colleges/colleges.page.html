@@ -316,22 +316,47 @@
 
             <div class="card-top">
 
-              <div class="university-icon">
+  <div class="university-icon">
 
-                <ion-icon
-                  name="school-outline">
-                </ion-icon>
+    <ion-icon
+      name="school-outline">
+    </ion-icon>
 
-              </div>
+  </div>
 
 
-              <span class="institution-badge">
+  <span class="institution-badge">
 
-                TVET College
+    TVET College
 
-              </span>
+  </span>
 
-            </div>
+
+  <!-- SAVE COLLEGE -->
+
+  <button
+    type="button"
+    class="save-button"
+    [class.saved]="isCollegeSaved(college.universityID)"
+    [disabled]="savingCollegeId === college.universityID"
+    (click)="toggleCollegeSave(college.universityID)"
+    [attr.aria-label]="
+      isCollegeSaved(college.universityID)
+        ? 'Remove college from saved items'
+        : 'Save college'
+    ">
+
+    <ion-icon
+      [name]="
+        isCollegeSaved(college.universityID)
+          ? 'star'
+          : 'star-outline'
+      ">
+    </ion-icon>
+
+  </button>
+
+</div>
 
 
             <!-- CARD CONTENT -->

@@ -1,0 +1,728 @@
+<ion-header>
+
+  <ion-toolbar class="details-toolbar">
+
+    <ion-buttons slot="start">
+
+      <ion-button
+        fill="clear"
+        (click)="goBack()"
+        class="back-button">
+
+        <ion-icon
+          slot="icon-only"
+          name="arrow-back-outline">
+        </ion-icon>
+
+      </ion-button>
+
+    </ion-buttons>
+
+    <ion-title>
+      Course Details
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+
+  <!-- =========================
+       LOADING
+  ========================== -->
+
+  <div
+    class="loading-container"
+    *ngIf="loading">
+
+    <ion-spinner
+      name="crescent">
+    </ion-spinner>
+
+    <h2>
+      Loading course...
+    </h2>
+
+    <p>
+      Please wait while we retrieve the course information.
+    </p>
+
+  </div>
+
+
+  <!-- =========================
+       ERROR
+  ========================== -->
+
+  <div
+    class="error-container"
+    *ngIf="!loading && error">
+
+    <div class="error-icon">
+      !
+    </div>
+
+    <h2>
+      Unable to load course
+    </h2>
+
+    <p>
+      We could not retrieve the course information.
+    </p>
+
+    <ion-button
+      expand="block"
+      (click)="retry()">
+
+      Try Again
+
+    </ion-button>
+
+  </div>
+
+
+  <!-- =========================
+       COURSE DETAILS
+  ========================== -->
+
+  <div
+    class="details-page"
+    *ngIf="!loading && course">
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="course-hero">
+
+      <div class="course-logo">
+
+        <ion-icon
+          name="book-outline">
+        </ion-icon>
+
+      </div>
+
+
+      <div class="hero-content">
+
+        <p class="course-label">
+          COURSE
+        </p>
+
+        <h1>
+          {{ course.courseName }}
+        </h1>
+
+        <p
+          class="course-code"
+          *ngIf="course.courseCode">
+
+          {{ course.courseCode }}
+
+        </p>
+
+      </div>
+
+
+      <!-- SAVE -->
+
+      <button
+        type="button"
+        class="save-button"
+        [class.saved]="saved"
+        [disabled]="saving"
+        (click)="toggleSave()">
+
+        <ion-icon
+          [name]="
+            saved
+              ? 'star'
+              : 'star-outline'
+          ">
+        </ion-icon>
+
+      </button>
+
+    </section>
+
+
+    <!-- =========================
+         QUICK INFORMATION
+    ========================== -->
+
+    <section class="quick-info">
+
+
+      <div class="quick-info-item">
+
+        <ion-icon
+          name="school-outline">
+        </ion-icon>
+
+        <div>
+
+          <span>
+            Qualification
+          </span>
+
+          <strong>
+            {{ course.qualificationType || 'Not available' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="quick-info-item">
+
+        <ion-icon
+          name="time-outline">
+        </ion-icon>
+
+        <div>
+
+          <span>
+            Duration
+          </span>
+
+          <strong>
+            {{
+              course.durationYears
+                ? course.durationYears + ' years'
+                : 'Not available'
+            }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="quick-info-item">
+
+        <ion-icon
+          name="school-outline">
+        </ion-icon>
+
+        <div>
+
+          <span>
+            Minimum APS
+          </span>
+
+          <strong>
+            {{
+              course.minimumAPS || 'Not available'
+            }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="quick-info-item">
+
+        <ion-icon
+          name="book-outline">
+        </ion-icon>
+
+        <div>
+
+          <span>
+            Study Level
+          </span>
+
+          <strong>
+            {{ course.studyLevel || 'Not available' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section class="details-card">
+
+      <div class="card-heading">
+
+        <div class="card-icon">
+
+          <ion-icon
+            name="information-circle-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            About the Course
+          </h2>
+
+          <p>
+            Course overview
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <p class="description">
+
+        {{
+          course.description ||
+          'No course description available.'
+        }}
+
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         ENTRY REQUIREMENTS
+    ========================== -->
+
+    <section class="details-card">
+
+      <div class="card-heading">
+
+        <div class="card-icon">
+
+          <ion-icon
+            name="school-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Entry Requirements
+          </h2>
+
+          <p>
+            Requirements for admission
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <p class="description">
+
+        {{
+          course.entryRequirements ||
+          'Entry requirements will be available soon.'
+        }}
+
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         CAREER OPPORTUNITIES
+    ========================== -->
+
+    <section class="details-card">
+
+      <div class="card-heading">
+
+        <div class="card-icon">
+
+          <ion-icon
+            name="briefcase-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Career Opportunities
+          </h2>
+
+          <p>
+            Possible career paths
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <p class="description">
+
+        {{
+          course.careerOpportunities ||
+          'Career information will be available soon.'
+        }}
+
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         OFFERED AT
+    ========================== -->
+
+    <section class="details-card">
+
+
+      <div class="card-heading">
+
+        <div class="card-icon">
+
+          <ion-icon
+            name="business-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Offered At
+          </h2>
+
+          <p>
+            Universities and colleges offering this course
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================
+           INSTITUTION COUNT
+      ====================================== -->
+
+      <div
+        class="institution-count"
+        *ngIf="
+          course.courseOfferings &&
+          course.courseOfferings.length > 0
+        ">
+
+        <strong>
+          {{ course.courseOfferings.length }}
+        </strong>
+
+        <span>
+
+          {{
+            course.courseOfferings.length === 1
+              ? 'institution offers this course'
+              : 'institutions offer this course'
+          }}
+
+        </span>
+
+      </div>
+
+
+      <!-- =====================================
+           ALL UNIVERSITIES / COLLEGES
+      ====================================== -->
+
+      <div
+        class="institution-list"
+        *ngIf="
+          course.courseOfferings &&
+          course.courseOfferings.length > 0
+        ">
+
+
+        <div
+          class="institution-item"
+          *ngFor="
+            let offering of course.courseOfferings
+          ">
+
+
+          <!-- ICON -->
+
+          <div class="institution-icon">
+
+            <ion-icon
+              name="business-outline">
+            </ion-icon>
+
+          </div>
+
+
+          <!-- INFORMATION -->
+
+          <div class="institution-information">
+
+
+            <!-- NAME -->
+
+            <strong>
+
+              {{ getUniversityName(offering) }}
+
+            </strong>
+
+
+            <!-- TYPE -->
+
+            <p>
+
+              {{ getInstitutionType(offering) }}
+
+            </p>
+
+
+            <!-- LOCATION -->
+
+            <p
+              *ngIf="
+                getUniversityLocation(offering)
+              ">
+
+              {{ getUniversityLocation(offering) }}
+
+            </p>
+
+
+            <!-- FACULTY -->
+
+            <p
+              *ngIf="
+                getFacultyName(offering)
+              ">
+
+              <strong>
+                Faculty:
+              </strong>
+
+              {{ getFacultyName(offering) }}
+
+            </p>
+
+
+            <!-- APS -->
+
+            <p
+              *ngIf="
+                offering.apsRequirement != null &&
+                offering.apsRequirement > 0
+              ">
+
+              <strong>
+                APS:
+              </strong>
+
+              {{ offering.apsRequirement }}
+
+            </p>
+
+
+          </div>
+
+
+          <!-- VIEW UNIVERSITY -->
+
+          <button
+            type="button"
+            class="institution-button"
+            (click)="viewUniversity(offering)"
+            [attr.aria-label]="
+              'View ' +
+              getUniversityName(offering)
+            ">
+
+            <ion-icon
+              name="chevron-forward-outline">
+            </ion-icon>
+
+          </button>
+
+
+        </div>
+
+
+      </div>
+
+
+      <!-- =====================================
+           NO INSTITUTIONS
+      ====================================== -->
+
+      <div
+        class="empty-state"
+        *ngIf="
+          !course.courseOfferings ||
+          course.courseOfferings.length === 0
+        ">
+
+        <ion-icon
+          name="business-outline">
+        </ion-icon>
+
+        <h3>
+          No institutions found
+        </h3>
+
+        <p>
+          We currently do not have institution
+          information for this course.
+        </p>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         APPLICATION INFORMATION
+    ========================== -->
+
+    <section
+      class="details-card"
+      *ngIf="
+        course.courseOfferings &&
+        course.courseOfferings.length > 0
+      ">
+
+
+      <div class="card-heading">
+
+        <div class="card-icon">
+
+          <ion-icon
+            name="school-outline">
+          </ion-icon>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Application Information
+          </h2>
+
+          <p>
+            Application information from institutions
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="application-list">
+
+
+        <!-- ONE ENTRY FOR EACH INSTITUTION -->
+
+        <div
+          class="application-item"
+          *ngFor="
+            let offering of course.courseOfferings
+          ">
+
+
+          <div>
+
+
+            <strong>
+              {{ getUniversityName(offering) }}
+            </strong>
+
+
+            <p
+              *ngIf="
+                getFacultyName(offering)
+              ">
+
+              {{ getFacultyName(offering) }}
+
+            </p>
+
+
+            <p>
+
+              {{
+                offering.applicationInformation ||
+                'Application information will be available soon.'
+              }}
+
+            </p>
+
+
+          </div>
+
+
+          <!-- APPLY -->
+
+          <ion-button
+            *ngIf="offering.applicationURL"
+            fill="outline"
+            (click)="openApplication(offering)">
+
+            Apply
+
+          </ion-button>
+
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         BACK BUTTON
+    ========================== -->
+
+    <div class="bottom-button">
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        (click)="goBack()">
+
+        <ion-icon
+          slot="start"
+          name="arrow-back-outline">
+        </ion-icon>
+
+        Back to Courses
+
+      </ion-button>
+
+    </div>
+
+
+  </div>
+
+    <!-- FOOTER -->
+
+  <app-footer></app-footer>
+
+</ion-content>

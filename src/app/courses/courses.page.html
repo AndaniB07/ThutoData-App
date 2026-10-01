@@ -1,0 +1,563 @@
+<ion-content [fullscreen]="true">
+
+  <!-- =========================
+       SEARCH HEADER
+  ========================== -->
+
+  <section class="search-section">
+
+    <div class="search-header">
+
+      <span class="eyebrow">
+        COURSES
+      </span>
+
+      <div>
+        <img
+          src="assets/icon/ThutoData_Logo_Transparent.png"
+          alt="ThutoData Logo"
+          class="hero-logo">
+      </div>
+
+      <h1>
+        Find Your Course
+      </h1>
+
+      <p>
+        Explore courses offered by universities and
+        TVET colleges across South Africa.
+      </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+      <ion-icon
+        name="search-outline">
+      </ion-icon>
+
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search courses, qualifications or institutions..."
+      />
+
+
+      <button
+        *ngIf="searchTerm"
+        type="button"
+        (click)="searchTerm = ''"
+        aria-label="Clear search">
+
+        <ion-icon
+          name="close-outline">
+        </ion-icon>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MAIN CONTENT
+  ========================== -->
+
+  <section class="courses-section">
+
+    <div class="page-layout">
+
+
+      <!-- =========================
+           FILTER SIDEBAR
+      ========================== -->
+
+      <aside class="filter-sidebar">
+
+        <div class="filter-heading">
+
+          <div>
+
+            <div class="filter-title">
+
+              <ion-icon
+                name="filter-outline">
+              </ion-icon>
+
+              <h2>
+                Filters
+              </h2>
+
+            </div>
+
+            <p>
+              Narrow your results
+            </p>
+
+          </div>
+
+
+          <button
+            *ngIf="hasActiveFilters"
+            class="clear-button"
+            type="button"
+            (click)="clearFilters()">
+
+            Clear
+
+          </button>
+
+        </div>
+
+
+        <!-- QUALIFICATION -->
+
+        <div class="filter-group">
+
+          <label>
+            Qualification
+          </label>
+
+          <select
+            [(ngModel)]="selectedQualification">
+
+            <option value="">
+              All qualifications
+            </option>
+
+            <option
+              *ngFor="
+                let qualification
+                of availableQualifications
+              "
+              [value]="qualification">
+
+              {{ qualification }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- STUDY LEVEL -->
+
+        <div class="filter-group">
+
+          <label>
+            Study Level
+          </label>
+
+          <select
+            [(ngModel)]="selectedStudyLevel">
+
+            <option value="">
+              All study levels
+            </option>
+
+            <option
+              *ngFor="
+                let level
+                of availableStudyLevels
+              "
+              [value]="level">
+
+              {{ level }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+      </aside>
+
+
+      <!-- =========================
+           RESULTS
+      ========================== -->
+
+      <main class="results-area">
+
+
+        <!-- RESULTS HEADER -->
+
+        <div class="results-header">
+
+          <div>
+
+            <h2>
+              Courses
+            </h2>
+
+            <p>
+
+              Showing
+
+              <strong>
+                {{ filteredCourses.length }}
+              </strong>
+
+              of
+
+              <strong>
+                {{ courses.length }}
+              </strong>
+
+              courses
+
+            </p>
+
+          </div>
+
+
+          <div class="result-count">
+
+            {{ filteredCourses.length }}
+
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+             LOADING
+        ========================== -->
+
+        <div
+          class="loading-message"
+          *ngIf="loading">
+
+          <ion-icon
+            name="school-outline">
+          </ion-icon>
+
+          <p>
+            Loading courses...
+          </p>
+
+        </div>
+
+
+        <!-- =========================
+             ERROR
+        ========================== -->
+
+        <div
+          class="error-message"
+          *ngIf="
+            !loading &&
+            errorMessage
+          ">
+
+          <ion-icon
+            name="close-outline">
+          </ion-icon>
+
+          <p>
+            {{ errorMessage }}
+          </p>
+
+          <button
+            type="button"
+            (click)="loadCourses()">
+
+            Try Again
+
+          </button>
+
+        </div>
+
+
+        <!-- =========================
+             COURSE GRID
+        ========================== -->
+
+        <div
+          class="courses-grid"
+          *ngIf="
+            !loading &&
+            !errorMessage &&
+            filteredCourses.length > 0
+          ">
+
+
+          <!-- =========================
+               COURSE CARD
+          ========================== -->
+
+          <article
+            class="course-card"
+            *ngFor="
+              let course
+              of filteredCourses
+            ">
+
+
+            <!-- CARD TOP -->
+
+            <div class="card-top">
+
+              <div class="course-icon">
+
+                <ion-icon
+                  name="school-outline">
+                </ion-icon>
+
+              </div>
+
+
+              <span class="qualification-badge">
+
+                {{ course.qualificationType }}
+
+              </span>
+
+
+              <!-- SAVE -->
+
+              <button
+                type="button"
+                class="save-button"
+                [class.saved]="
+                  isCourseSaved(course.courseID)
+                "
+                [disabled]="
+                  savingCourseId === course.courseID
+                "
+                (click)="
+                  toggleCourseSave(course.courseID)
+                "
+                [attr.aria-label]="
+                  isCourseSaved(course.courseID)
+                    ? 'Remove course from saved items'
+                    : 'Save course'
+                ">
+
+                <ion-icon
+                  [name]="
+                    isCourseSaved(course.courseID)
+                      ? 'star'
+                      : 'star-outline'
+                  ">
+                </ion-icon>
+
+              </button>
+
+            </div>
+
+
+            <!-- CARD CONTENT -->
+
+            <div class="card-content">
+
+              <h3>
+                {{ course.courseName }}
+              </h3>
+
+
+              <!-- COURSE CODE -->
+
+              <p
+                class="course-code"
+                *ngIf="course.courseCode">
+
+                {{ course.courseCode }}
+
+              </p>
+
+
+              <!-- DESCRIPTION -->
+
+              <p class="description">
+
+                {{ course.description }}
+
+              </p>
+
+
+              <!-- COURSE DETAILS -->
+
+              <div class="course-details">
+
+
+                <!-- DURATION -->
+
+                <div
+                  class="course-detail"
+                  *ngIf="course.durationYears">
+
+                  <ion-icon
+                    name="time-outline">
+                  </ion-icon>
+
+                  <span>
+
+                    {{ course.durationYears }}
+                    {{ course.durationYears === 1 ? 'year' : 'years' }}
+
+                  </span>
+
+                </div>
+
+
+                <!-- APS -->
+
+                <div
+                  class="course-detail"
+                  *ngIf="course.minimumAPS">
+
+                  <strong>
+                    APS
+                  </strong>
+
+                  <span>
+
+                    {{ course.minimumAPS }}
+
+                  </span>
+
+                </div>
+
+
+                <!-- STUDY LEVEL -->
+
+                <div
+                  class="course-detail"
+                  *ngIf="course.studyLevel">
+
+                  <span>
+
+                    {{ course.studyLevel }}
+
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <!-- INSTITUTIONS -->
+
+              <div class="institutions">
+
+  <div class="institution-heading">
+
+    <ion-icon
+      name="school-outline">
+    </ion-icon>
+
+    <strong>
+      Offered by
+    </strong>
+
+  </div>
+
+  <p>
+    {{ getInstitutionNames(course) }}
+  </p>
+
+</div>
+
+            </div>
+
+
+            <!-- CARD FOOTER -->
+
+            <div class="card-footer">
+
+              <span>
+                {{ getInstitutionCount(course) }}
+
+                {{
+                  getInstitutionCount(course) === 1
+                  ? 'institution'
+                  : 'institutions'
+                }}
+              </span>
+
+
+              <a
+                class="details-button"
+                [routerLink]="[
+                  '/course-details',
+                  course.courseID
+                ]">
+
+                View Details
+
+                <ion-icon
+                  name="chevron-forward-outline">
+                </ion-icon>
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+
+        <!-- =========================
+             NO RESULTS
+        ========================== -->
+
+        <div
+          class="no-results"
+          *ngIf="
+            !loading &&
+            !errorMessage &&
+            filteredCourses.length === 0
+          ">
+
+          <div class="no-results-icon">
+
+            <ion-icon
+              name="search-outline">
+            </ion-icon>
+
+          </div>
+
+
+          <h2>
+            No courses found
+          </h2>
+
+
+          <p>
+            Try changing your search or removing
+            one of the filters.
+          </p>
+
+
+          <button
+            class="reset-button"
+            type="button"
+            (click)="clearFilters()">
+
+            Clear Filters
+
+          </button>
+
+        </div>
+
+
+      </main>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <app-footer></app-footer>
+
+</ion-content>

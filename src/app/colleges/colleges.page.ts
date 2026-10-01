@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -16,10 +16,14 @@ import {
   locationOutline,
   schoolOutline,
   chevronForwardOutline,
-  closeOutline
+  closeOutline,
+  starOutline,
+  star
 } from 'ionicons/icons';
 
 import { FooterComponent } from '../components/footer/footer.component';
+import { Auth } from '../services/auth';
+import { SavedService } from '../services/saved.service';
 
 interface College {
   universityID: number;
@@ -43,7 +47,7 @@ interface College {
     RouterLink,
     IonContent,
     IonIcon,
-    FooterComponent
+    FooterComponent,
   ],
 
   templateUrl: './colleges.page.html',
@@ -97,9 +101,20 @@ export class CollegesPage implements OnInit {
 
   errorMessage = '';
 
+  // =========================
+  // SAVED COLLEGES
+  // =========================
 
-  constructor(private http: HttpClient,
-    private cdr: ChangeDetectorRef
+  savedCollegeIds = new Set<number>();
+
+  savingCollegeId: number | null = null;
+
+
+  constructor(
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef,
+    private auth: Auth,
+    private savedService: SavedService
   ) {
 
     addIcons({
@@ -108,7 +123,9 @@ export class CollegesPage implements OnInit {
       locationOutline,
       schoolOutline,
       chevronForwardOutline,
-      closeOutline
+      closeOutline,
+      starOutline,
+      star
     });
 
   }
@@ -121,6 +138,7 @@ export class CollegesPage implements OnInit {
   ngOnInit(): void {
 
     this.loadColleges();
+    this.loadSavedColleges();
 
   }
 
@@ -181,6 +199,177 @@ export class CollegesPage implements OnInit {
     });
 
   }
+
+  // =========================
+// LOAD SAVED COLLEGES
+// =========================
+
+loadSavedColleges(): void {
+
+  const user = this.auth.getUser();
+  const token = this.auth.getToken();
+
+  // User is not logged in
+  if (!user || !token) {
+
+    this.savedCollegeIds.clear();
+
+    return;
+
+  }
+
+  this.savedService.getSavedUniversities().subscribe({
+
+    next: (data) => {
+
+      this.savedCollegeIds.clear();
+
+      if (!Array.isArray(data)) {
+        return;
+      }
+
+      data.forEach(item => {
+
+        const collegeId =
+          item?.universityID ??
+          item?.UniversityID ??
+          item?.university?.universityID ??
+          item?.University?.universityID ??
+          item?.University?.UniversityID;
+
+        if (collegeId != null) {
+
+          this.savedCollegeIds.add(Number(collegeId));
+
+        }
+
+      });
+
+      this.cdr.detectChanges();
+
+    },
+
+    error: (error) => {
+
+      console.error(
+        'ERROR LOADING SAVED COLLEGES:',
+        error
+      );
+
+    }
+
+  });
+
+}
+
+// =========================
+// CHECK IF COLLEGE IS SAVED
+// =========================
+
+isCollegeSaved(collegeId: number): boolean {
+
+  return this.savedCollegeIds.has(Number(collegeId));
+
+}
+
+
+  // =========================
+// SAVE / REMOVE COLLEGE
+// =========================
+
+toggleCollegeSave(collegeId: number): void {
+
+  const user = this.auth.getUser();
+  const token = this.auth.getToken();
+
+  // User must be logged in
+  if (!user || !token) {
+
+    console.log('User is not logged in.');
+
+    return;
+
+  }
+
+  // Prevent double clicking
+  if (this.savingCollegeId !== null) {
+    return;
+  }
+
+  this.savingCollegeId = Number(collegeId);
+
+  // =========================
+  // REMOVE
+  // =========================
+
+  if (this.isCollegeSaved(collegeId)) {
+
+    this.savedService.removeUniversity(collegeId).subscribe({
+
+      next: () => {
+
+        this.savedCollegeIds.delete(Number(collegeId));
+
+        this.savingCollegeId = null;
+
+        this.cdr.detectChanges();
+
+      },
+
+      error: (error) => {
+
+        console.error(
+          'ERROR REMOVING COLLEGE:',
+          error
+        );
+
+        this.savingCollegeId = null;
+
+        this.cdr.detectChanges();
+
+      }
+
+    });
+
+    return;
+
+  }
+
+
+  // =========================
+  // SAVE
+  // =========================
+
+  this.savedService.saveUniversity(collegeId).subscribe({
+
+    next: () => {
+
+      this.savedCollegeIds.add(Number(collegeId));
+
+      this.savingCollegeId = null;
+
+      this.cdr.detectChanges();
+
+    },
+
+    error: (error) => {
+
+      console.error(
+        'ERROR SAVING COLLEGE:',
+        error
+      );
+
+      this.savingCollegeId = null;
+
+      this.cdr.detectChanges();
+
+    }
+
+  });
+
+}
+
+
 
 
   // =========================

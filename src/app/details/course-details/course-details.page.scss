@@ -1,0 +1,856 @@
+ion-content {
+  --background: #f8fafc;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.details-toolbar {
+  --background: #ffffff;
+  --border-color: #e5e7eb;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.details-toolbar ion-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.back-button {
+  --color: #374151;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading-container {
+  min-height: 70vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+
+  text-align: center;
+}
+
+.loading-container ion-spinner {
+  width: 42px;
+  height: 42px;
+
+  color: #2563eb;
+}
+
+.loading-container h2 {
+  margin: 20px 0 8px;
+
+  font-size: 21px;
+  font-weight: 750;
+
+  color: #111827;
+}
+
+.loading-container p {
+  margin: 0;
+
+  font-size: 14px;
+  color: #6b7280;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error-container {
+  max-width: 500px;
+
+  min-height: 60vh;
+
+  margin: 0 auto;
+
+  padding: 40px 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.error-icon {
+  width: 60px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 20px;
+
+  background: #fef2f2;
+
+  border: 1px solid #fecaca;
+
+  border-radius: 50%;
+
+  color: #dc2626;
+
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.error-container h2 {
+  margin: 0 0 10px;
+
+  font-size: 22px;
+  font-weight: 750;
+
+  color: #111827;
+}
+
+.error-container p {
+  margin: 0 0 20px;
+
+  color: #6b7280;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.error-container ion-button {
+  --background: #2563eb;
+  --border-radius: 8px;
+
+  max-width: 220px;
+}
+
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+.details-page {
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 35px 6% 70px;
+}
+
+
+/* =========================
+   COURSE HERO
+========================= */
+
+.course-hero {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 22px;
+
+  padding: 35px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 5px 20px rgba(15, 23, 42, 0.05);
+}
+
+.course-logo {
+  flex-shrink: 0;
+
+  width: 85px;
+  height: 85px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eff6ff;
+
+  border-radius: 18px;
+}
+
+.course-logo ion-icon {
+  font-size: 43px;
+
+  color: #2563eb;
+}
+
+.hero-content {
+  min-width: 0;
+
+  padding-right: 55px;
+}
+
+.course-label {
+  margin: 0 0 8px;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  color: #2563eb;
+}
+
+.hero-content h1 {
+  margin: 0;
+
+  font-size: clamp(27px, 4vw, 40px);
+
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  color: #111827;
+}
+
+.hero-content .course-code {
+  margin: 10px 0 0;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  color: #6b7280;
+}
+
+
+/* =========================
+   SAVE BUTTON
+========================= */
+
+.course-hero .save-button {
+  position: absolute;
+
+  top: 30px;
+  right: 30px;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #e5e7eb;
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  color: #9ca3af;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.course-hero .save-button ion-icon {
+  font-size: 25px;
+}
+
+.course-hero .save-button:hover {
+  background: #eff6ff;
+
+  border-color: #bfdbfe;
+
+  color: #2563eb;
+
+  transform: scale(1.05);
+}
+
+.course-hero .save-button.saved {
+  background: #eff6ff;
+
+  border-color: #bfdbfe;
+
+  color: #2563eb;
+}
+
+.course-hero .save-button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================
+   QUICK INFORMATION
+========================= */
+
+.quick-info {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 15px;
+
+  margin-top: 22px;
+}
+
+.quick-info-item {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  min-width: 0;
+
+  padding: 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+}
+
+.quick-info-item > ion-icon {
+  flex-shrink: 0;
+
+  font-size: 25px;
+
+  color: #2563eb;
+}
+
+.quick-info-item div {
+  min-width: 0;
+}
+
+.quick-info-item span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  color: #6b7280;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+}
+
+.quick-info-item strong {
+  display: block;
+
+  font-size: 14px;
+  line-height: 1.3;
+
+  color: #111827;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================
+   DETAIL CARDS
+========================= */
+
+.details-card {
+  margin-top: 22px;
+
+  padding: 28px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 4px 15px rgba(15, 23, 42, 0.035);
+}
+
+
+/* =========================
+   CARD HEADING
+========================= */
+
+.card-heading {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 22px;
+}
+
+.card-icon {
+  flex-shrink: 0;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eff6ff;
+
+  border-radius: 11px;
+}
+
+.card-icon ion-icon {
+  font-size: 22px;
+
+  color: #2563eb;
+}
+
+.card-heading h2 {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: 750;
+
+  color: #111827;
+}
+
+.card-heading p {
+  margin: 4px 0 0;
+
+  font-size: 13px;
+
+  color: #6b7280;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.description {
+  margin: 0;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+
+  color: #4b5563;
+
+  white-space: pre-line;
+}
+
+
+/* =========================
+   INSTITUTION LIST
+========================= */
+
+.institution-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.institution-item {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 15px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 11px;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.institution-item:hover {
+  background: #f1f5f9;
+
+  border-color: #d1d5db;
+}
+
+.institution-icon {
+  flex-shrink: 0;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 10px;
+}
+
+.institution-icon ion-icon {
+  font-size: 21px;
+
+  color: #2563eb;
+}
+
+.institution-information {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.institution-information strong {
+  display: block;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  color: #111827;
+}
+
+.institution-information p {
+  margin: 4px 0 0;
+
+  font-size: 12px;
+
+  color: #6b7280;
+}
+
+.institution-button {
+  flex-shrink: 0;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  color: #2563eb;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.institution-button:hover {
+  background: #eff6ff;
+
+  transform: translateX(2px);
+}
+
+.institution-button ion-icon {
+  font-size: 18px;
+}
+
+
+/* =========================
+   APPLICATION LIST
+========================= */
+
+.application-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.application-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 18px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 12px;
+}
+
+.application-item > div {
+  min-width: 0;
+}
+
+.application-item strong {
+  display: block;
+
+  font-size: 14px;
+
+  color: #111827;
+}
+
+.application-item p {
+  margin: 7px 0 0;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  color: #6b7280;
+
+  white-space: pre-line;
+}
+
+.application-item ion-button {
+  flex-shrink: 0;
+
+  --border-color: #2563eb;
+  --color: #2563eb;
+
+  --border-radius: 8px;
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+  min-height: 180px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: #f8fafc;
+
+  border: 1px dashed #d1d5db;
+
+  border-radius: 12px;
+
+  text-align: center;
+}
+
+.empty-state ion-icon {
+  margin-bottom: 12px;
+
+  font-size: 38px;
+
+  color: #9ca3af;
+}
+
+.empty-state p {
+  margin: 0;
+
+  font-size: 13px;
+
+  color: #6b7280;
+}
+
+
+/* =========================
+   BOTTOM BUTTON
+========================= */
+
+.bottom-button {
+  margin-top: 30px;
+
+  padding-bottom: 10px;
+}
+
+.bottom-button ion-button {
+  --border-color: #2563eb;
+  --color: #2563eb;
+
+  --border-radius: 10px;
+
+  height: 48px;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
+
+  .quick-info {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .details-page {
+    padding: 25px 5% 55px;
+  }
+
+  .course-hero {
+    align-items: flex-start;
+
+    padding: 25px;
+
+    gap: 16px;
+  }
+
+  .course-logo {
+    width: 65px;
+    height: 65px;
+
+    border-radius: 14px;
+  }
+
+  .course-logo ion-icon {
+    font-size: 33px;
+  }
+
+  .hero-content {
+    padding-right: 45px;
+  }
+
+  .hero-content h1 {
+    font-size: 27px;
+  }
+
+  .course-hero .save-button {
+    top: 22px;
+    right: 22px;
+
+    width: 42px;
+    height: 42px;
+  }
+
+  .course-hero .save-button ion-icon {
+    font-size: 22px;
+  }
+
+  .details-card {
+    padding: 22px;
+  }
+
+}
+
+
+@media (max-width: 550px) {
+
+  .quick-info {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-info-item {
+    padding: 15px;
+  }
+
+  .card-heading h2 {
+    font-size: 18px;
+  }
+
+  .card-heading p {
+    font-size: 12px;
+  }
+
+  .description {
+    font-size: 13px;
+
+    line-height: 1.7;
+  }
+
+  .institution-item {
+    padding: 12px;
+  }
+
+  .institution-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .institution-information strong {
+    font-size: 13px;
+  }
+
+  .application-item {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .application-item ion-button {
+    width: 100%;
+  }
+
+}
+
+
+@media (max-width: 400px) {
+
+  .details-page {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .course-hero {
+    padding: 20px;
+  }
+
+  .course-logo {
+    width: 55px;
+    height: 55px;
+  }
+
+  .course-logo ion-icon {
+    font-size: 28px;
+  }
+
+  .hero-content h1 {
+    font-size: 23px;
+  }
+
+  .course-hero .save-button {
+    top: 17px;
+    right: 17px;
+  }
+
+  .details-card {
+    padding: 18px;
+  }
+
+}

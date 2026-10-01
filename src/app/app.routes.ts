@@ -25,39 +25,26 @@ import { authGuard } from './guards/auth-guard';
 addIcons({
 
   'home-outline': homeOutline,
-
   'school-outline': schoolOutline,
-
   'business-outline': businessOutline,
-
   'cash-outline': cashOutline,
-
   'ellipsis-horizontal': menuOutline,
-
   'information-circle-outline':
     informationCircleOutline,
-
   'arrow-forward-outline':
     chevronForwardOutline,
-
   'log-in-outline':
     logInOutline,
-
   'person-add-outline':
     personAddOutline,
-
   'book-outline':
     bookOutline,
-
   'compass-outline':
     compassOutline,
-
   'bulb-outline':
     bulbOutline,
-
   'filter-outline':
     filterOutline,
-
   'search-outline':
     searchOutline
 
@@ -103,6 +90,23 @@ export const routes: Routes = [
       import('./pages/sign-up/sign-up.page')
         .then(m => m.SignUpPage)
   },
+
+
+  // =========================================
+  // COURSES
+  // =========================================
+  {
+    path: 'courses',
+    loadComponent: () => import('./courses/courses.page').then( m => m.CoursesPage)
+  },
+  {
+  path: 'course-details/:id',
+  loadComponent: () =>
+    import('./details/course-details/course-details.page')
+      .then(m => m.CourseDetailsPage)
+  },
+
+
 
 
 ];
