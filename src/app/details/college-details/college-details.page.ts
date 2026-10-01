@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -64,7 +64,8 @@ export class CollegeDetailsPage implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private changeDetector: ChangeDetectorRef
   ) {
 
     addIcons({
@@ -159,6 +160,8 @@ export class CollegeDetailsPage implements OnInit {
           this.loading = false;
           this.error = false;
 
+          this.refreshPage();
+
           console.log(
             'COLLEGE DISPLAY READY:',
             this.college.universityName
@@ -179,6 +182,20 @@ export class CollegeDetailsPage implements OnInit {
         }
 
       });
+
+  }
+
+    // =========================================
+  // FORCE PAGE REFRESH
+  // =========================================
+
+  private refreshPage(): void {
+
+    setTimeout(() => {
+
+      this.changeDetector.detectChanges();
+
+    });
 
   }
 

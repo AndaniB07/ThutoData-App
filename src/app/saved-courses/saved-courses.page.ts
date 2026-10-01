@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 import {
   IonContent,
-  IonIcon
+  IonIcon,
+  ViewWillEnter
 } from '@ionic/angular';
 
 import { addIcons } from 'ionicons';
@@ -29,11 +30,13 @@ import { SavedService } from '../services/saved.service';
     IonIcon
   ]
 })
-export class SavedCoursesPage implements OnInit {
+export class SavedCoursesPage implements OnInit, ViewWillEnter {
 
   savedCourses: any[] = [];
 
   loading = true;
+
+  hasLoaded = false;
 
   error = false;
 
@@ -41,7 +44,8 @@ export class SavedCoursesPage implements OnInit {
 
   constructor(
     private savedService: SavedService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
 
     addIcons({
@@ -60,6 +64,19 @@ export class SavedCoursesPage implements OnInit {
     );
 
     this.loadSavedCourses();
+
+  }
+
+  ionViewWillEnter(): void {
+
+    console.log(
+      '========== SAVED COURSES PAGE (VIEW WILL ENTER) =========='
+    );
+
+
+    if (this.hasLoaded) {
+      this.loadSavedCourses();
+    }
 
   }
 
@@ -98,6 +115,10 @@ export class SavedCoursesPage implements OnInit {
 
         this.loading = false;
 
+        this.hasLoaded = true;
+
+        this.refreshPage();
+
         console.log(
           'LOADING:',
           this.loading
@@ -118,11 +139,27 @@ export class SavedCoursesPage implements OnInit {
 
         this.error = true;
 
+        this.refreshPage();
+
       }
 
     });
 
   }
+
+  // =========================================
+// FORCE PAGE REFRESH
+// =========================================
+
+private refreshPage(): void {
+
+  setTimeout(() => {
+
+    this.cdr.detectChanges();
+
+  });
+
+}
 
   removeCourse(courseId: number): void {
 
@@ -159,6 +196,8 @@ export class SavedCoursesPage implements OnInit {
 
           this.removingCourseId =
             null;
+
+          this.refreshPage();
 
         },
 

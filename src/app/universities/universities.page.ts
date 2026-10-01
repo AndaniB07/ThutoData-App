@@ -6,7 +6,8 @@ import { Router, RouterLink } from '@angular/router';
 
 import {
   IonContent,
-  IonIcon
+  IonIcon, 
+  ViewWillEnter
 } from '@ionic/angular';
 
 import { addIcons } from 'ionicons';
@@ -90,7 +91,7 @@ interface CourseOffering {
   templateUrl: './universities.page.html',
   styleUrls: ['./universities.page.scss']
 })
-export class UniversitiesPage implements OnInit {
+export class UniversitiesPage implements OnInit, ViewWillEnter {
 
 
   /* =========================
@@ -211,6 +212,12 @@ export class UniversitiesPage implements OnInit {
     this.loadAllData();
 
   }
+
+  ionViewWillEnter(): void {
+
+  this.loadSavedUniversities();
+
+}
 
 
   /* =========================
@@ -564,6 +571,8 @@ export class UniversitiesPage implements OnInit {
 
             this.savingUniversityId = null;
 
+            this.cdr.detectChanges();
+
           },
 
 
@@ -617,6 +626,8 @@ export class UniversitiesPage implements OnInit {
 
 
           this.savingUniversityId = null;
+
+          this.cdr.detectChanges();
 
         },
 

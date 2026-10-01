@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 import {
   IonContent,
-  IonIcon
+  IonIcon, ViewWillEnter
 } from '@ionic/angular';
 
 import { addIcons } from 'ionicons';
@@ -30,11 +30,13 @@ import { SavedService } from '../services/saved.service';
     IonIcon
   ]
 })
-export class SavedUniversitiesPage implements OnInit {
+export class SavedUniversitiesPage implements OnInit, ViewWillEnter {
 
   savedUniversities: any[] = [];
 
   loading = true;
+
+  hasLoaded = false;
 
   error = false;
 
@@ -42,7 +44,8 @@ export class SavedUniversitiesPage implements OnInit {
 
   constructor(
     private savedService: SavedService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
 
     addIcons({
@@ -62,6 +65,18 @@ export class SavedUniversitiesPage implements OnInit {
     );
 
     this.loadSavedUniversities();
+
+  }
+
+  ionViewWillEnter(): void {
+
+    console.log(
+      '========== SAVED UNIVERSITIES PAGE (VIEW WILL ENTER) =========='
+    );
+
+    if (this.hasLoaded) {
+      this.loadSavedUniversities();
+    }
 
   }
 
@@ -101,6 +116,10 @@ export class SavedUniversitiesPage implements OnInit {
         // Data has finished loading
         this.loading = false;
 
+        this.hasLoaded = true;
+
+        this.refreshPage();
+
         console.log(
           'LOADING:',
           this.loading
@@ -120,6 +139,8 @@ export class SavedUniversitiesPage implements OnInit {
         this.loading = false;
 
         this.error = true;
+        
+        this.refreshPage();
 
       }
 
@@ -127,6 +148,19 @@ export class SavedUniversitiesPage implements OnInit {
 
   }
 
+  // =========================================
+// FORCE PAGE REFRESH
+// =========================================
+
+private refreshPage(): void {
+
+  setTimeout(() => {
+
+    this.cdr.detectChanges();
+
+  });
+
+}
   removeUniversity(
     universityId: number
   ): void {
@@ -166,6 +200,8 @@ export class SavedUniversitiesPage implements OnInit {
 
           this.removingUniversityId =
             null;
+
+          this.refreshPage();
 
         },
 

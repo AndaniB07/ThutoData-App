@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 import {
-  IonContent
+  IonContent,
+  ViewWillEnter
 } from '@ionic/angular';
 
 import {
@@ -27,7 +28,7 @@ import {
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss']
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage implements OnInit, ViewWillEnter {
 
   // =========================================
   // USER
@@ -59,7 +60,8 @@ export class ProfilePage implements OnInit {
   constructor(
     private auth: Auth,
     private savedService: SavedService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
 
@@ -74,6 +76,14 @@ export class ProfilePage implements OnInit {
     );
 
     this.loadUser();
+
+  }
+
+  ionViewWillEnter(): void {
+
+  if (this.user) {
+    this.loadSavedInformation();
+  }
 
   }
 
@@ -247,7 +257,11 @@ export class ProfilePage implements OnInit {
           this.loadingSavedInformation =
             false;
 
+          this.refreshPage();
+
         },
+
+        
 
         error: (error) => {
 
@@ -262,12 +276,28 @@ export class ProfilePage implements OnInit {
           this.loadingSavedInformation =
             false;
 
+          this.refreshPage();
+
         }
 
       });
 
   }
 
+
+    // =========================================
+  // FORCE PAGE REFRESH
+  // =========================================
+
+  private refreshPage(): void {
+
+    setTimeout(() => {
+
+      this.cdr.detectChanges();
+
+    });
+
+  }
 
   // =========================================
   // VIEW UNIVERSITIES
