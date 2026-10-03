@@ -3,57 +3,77 @@ ion-content {
 }
 
 
-/* =====================================================
-   HERO / SEARCH
-===================================================== */
+/* =========================================================
+   SEARCH HERO
+========================================================= */
 
 .search-section {
-  background: #ffffff;
-  padding: 55px 6% 45px;
-  border-bottom: 1px solid #e5e7eb;
+  background: linear-gradient(
+    135deg,
+    #102a43 0%,
+    #163d5c 50%,
+    #1f5875 100%
+  );
+
+  padding: 70px 7% 65px;
+  color: white;
 }
+
 
 .search-header {
   max-width: 850px;
-  margin: 0 auto 28px;
+  margin: 0 auto;
   text-align: center;
 }
 
+
 .eyebrow {
   display: inline-block;
-  margin-bottom: 12px;
 
-  color: #4338ca;
-
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 1px;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 18px;
+
+  opacity: 0.85;
 }
+
 
 .hero-logo {
-  width: 55px;
+  width: 110px;
   height: auto;
-  margin-bottom: 12px;
+
+  margin: 5px auto 18px;
+
+  display: block;
 }
+
 
 .search-header h1 {
-  margin: 0 0 12px;
+  margin: 0;
 
-  color: #111827;
+  font-size: clamp(32px, 5vw, 52px);
 
-  font-size: clamp(30px, 4vw, 44px);
-  font-weight: 750;
-  line-height: 1.15;
+  font-weight: 800;
+
+  line-height: 1.1;
+
+  letter-spacing: -1px;
 }
 
+
 .search-header p {
-  max-width: 650px;
-  margin: 0 auto;
+  max-width: 680px;
 
-  color: #6b7280;
+  margin: 20px auto 0;
 
-  font-size: 15px;
+  font-size: 17px;
+
   line-height: 1.7;
+
+  opacity: 0.9;
 }
 
 

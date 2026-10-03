@@ -108,6 +108,18 @@ export class GlossaryPage {
       category: 'University Applications',
       definition:
         'A provisional university admission based on information such as your Grade 11 results. Your final admission depends on meeting the required conditions using your final matric results.'
+    },
+    {
+      term: 'Undergraduate',
+      category: 'Qualifications',
+      definition: 
+        'A person who has finished high school and is studying for their first degree or diploma at a university or college.'
+    },
+    {
+      term: 'Postgraduate',
+      category: 'Qualifications',
+      definition:
+        'A person who has already completed an undergraduate degree and is studying for a higher-level qualification, such as a master\'s or doctoral degree.'
     }
 
   ];

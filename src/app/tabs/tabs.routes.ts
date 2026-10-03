@@ -96,13 +96,6 @@ export const routes: Routes = [
         .then((m) => m.UniversityDetailsPage),
   },
 
-  // BURSARY DETAILS
-  {
-    path: 'bursary-details',
-    loadComponent: () =>
-      import('../details/bursary-details/bursary-details.page')
-        .then((m) => m.BursaryDetailsPage),
-  },
 
   // GLOSSARY
   {

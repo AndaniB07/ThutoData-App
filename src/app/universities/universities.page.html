@@ -1,5 +1,12 @@
 <ion-content [fullscreen]="true">
 
+    <!-- =========================================
+       ACCESSIBILITY CONTROLS
+  ========================================= -->
+
+  <app-accessibility-controls></app-accessibility-controls>
+
+
   <!-- =========================
        SEARCH HEADER
   ========================== -->
@@ -247,34 +254,6 @@
 
             <option
               *ngFor="let type of qualificationTypes"
-              [value]="type">
-
-              {{ type }}
-
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <!-- UNIVERSITY TYPE -->
-
-        <div class="filter-group">
-
-          <label>
-            University Type
-          </label>
-
-          <select
-            [(ngModel)]="selectedUniversityType">
-
-            <option value="">
-              All university types
-            </option>
-
-            <option
-              *ngFor="let type of universityTypes"
               [value]="type">
 
               {{ type }}

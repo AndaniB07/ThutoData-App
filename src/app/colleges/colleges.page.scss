@@ -7,66 +7,79 @@ ion-content {
 }
 
 
-/* =========================================
-   SEARCH SECTION
-========================================= */
+/* =========================================================
+   SEARCH HERO
+========================================================= */
 
 .search-section {
-  width: 100%;
-  background: #ffffff;
-  padding: 55px 24px 45px;
-  box-sizing: border-box;
-  border-bottom: 1px solid #eeeeF2;
+  background: linear-gradient(
+    135deg,
+    #102a43 0%,
+    #163d5c 50%,
+    #1f5875 100%
+  );
+
+  padding: 70px 7% 65px;
+  color: white;
 }
 
+
 .search-header {
-  max-width: 900px;
+  max-width: 850px;
   margin: 0 auto;
   text-align: center;
 }
 
+
 .eyebrow {
-  display: block;
+  display: inline-block;
 
-  margin-bottom: 14px;
-
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 1.8px;
 
-  color: #6b4eff;
+  letter-spacing: 2px;
+
+  margin-bottom: 18px;
+
+  opacity: 0.85;
 }
+
 
 .hero-logo {
-  display: block;
-
-  width: 150px;
-  max-width: 100%;
+  width: 110px;
   height: auto;
 
-  margin: 0 auto 22px;
+  margin: 5px auto 18px;
+
+  display: block;
 }
+
 
 .search-header h1 {
-  margin: 0 0 14px;
+  margin: 0;
 
-  font-size: 38px;
-  line-height: 1.2;
-  font-weight: 750;
+  font-size: clamp(32px, 5vw, 52px);
 
-  color: #22222a;
+  font-weight: 800;
+
+  line-height: 1.1;
+
+  letter-spacing: -1px;
 }
+
 
 .search-header p {
-  max-width: 700px;
+  max-width: 680px;
 
-  margin: 0 auto;
+  margin: 20px auto 0;
 
-  font-size: 16px;
+  font-size: 17px;
+
   line-height: 1.7;
 
-  color: #70707c;
+  opacity: 0.9;
 }
+
 
 
 /* =========================================
@@ -483,46 +496,6 @@ ion-content {
   gap: 12px;
 
   padding: 20px 20px 0;
-}
-
-.save-button {
-  margin-left: auto;
-
-  width: 40px;
-  height: 40px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: none;
-  background: transparent;
-
-  border-radius: 50%;
-
-  cursor: pointer;
-
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.save-button ion-icon {
-  font-size: 24px;
-}
-
-.save-button:hover {
-  background: rgba(0, 0, 0, 0.06);
-  transform: scale(1.05);
-}
-
-.save-button.saved ion-icon {
-  font-weight: bold;
-}
-
-.save-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .university-icon {

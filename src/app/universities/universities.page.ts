@@ -26,6 +26,7 @@ import { FooterComponent } from '../components/footer/footer.component';
 
 import { Auth } from '../services/auth';
 import { SavedService } from '../services/saved.service';
+import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
 
 
 /* =========================
@@ -86,6 +87,7 @@ interface CourseOffering {
     IonContent,
     IonIcon,
     FooterComponent,
+    AccessibilityControlsComponent
   ],
 
   templateUrl: './universities.page.html',
@@ -123,13 +125,9 @@ export class UniversitiesPage implements OnInit, ViewWillEnter {
   ========================== */
 
   selectedProvince = '';
-
   selectedFaculty = '';
-
   selectedCourse = '';
-
   selectedQualification = '';
-
   selectedUniversityType = '';
 
 
@@ -151,7 +149,6 @@ export class UniversitiesPage implements OnInit, ViewWillEnter {
   ========================== */
 
   savedUniversityIds = new Set<number>();
-
   savingUniversityId: number | null = null;
 
 
@@ -160,11 +157,8 @@ export class UniversitiesPage implements OnInit, ViewWillEnter {
   ========================== */
 
   availableFaculties: Faculty[] = [];
-
   availableCourses: Course[] = [];
-
   qualificationTypes: string[] = [];
-
   universityTypes: string[] = [];
 
 

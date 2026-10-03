@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
 
 import { IonContent, IonIcon } from '@ionic/angular';
 
@@ -41,7 +40,6 @@ interface Funding {
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterLink,
     IonContent,
     IonIcon,
     FooterComponent
