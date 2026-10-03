@@ -14,7 +14,11 @@ import {
   compassOutline,
   bulbOutline,
   filterOutline,
-  searchOutline
+  searchOutline,
+  lockClosedOutline,
+eyeOutline,
+eyeOffOutline,
+arrowBackOutline
 } from 'ionicons/icons';
 
 import { addIcons } from 'ionicons';
@@ -46,7 +50,15 @@ addIcons({
   'filter-outline':
     filterOutline,
   'search-outline':
-    searchOutline
+    searchOutline,
+  'lock-closed-outline':
+    lockClosedOutline,
+  'eye-outline':
+    eyeOutline,
+  'eye-off-outline':
+    eyeOffOutline,
+  'arrow-back-outline':
+    arrowBackOutline
 
 });
 
@@ -105,6 +117,15 @@ export const routes: Routes = [
     import('./details/course-details/course-details.page')
       .then(m => m.CourseDetailsPage)
   },
+  {
+    path: 'forgot-password',
+    loadComponent: () => import('./pages/forgot-password/forgot-password.page').then( m => m.ForgotPasswordPage)
+  },
+  {
+    path: 'reset-password',
+    loadComponent: () => import('./pages/reset-password/reset-password.page').then( m => m.ResetPasswordPage)
+  },
+
 
 
 
