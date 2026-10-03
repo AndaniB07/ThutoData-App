@@ -1,9 +1,12 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Thuto.Data;
+using Thuto.Services;
+using Resend;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +27,26 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod();
   });
 });
+
+// =========================
+// EMAIL SERVICE
+// =========================
+
+builder.Services.AddOptions<ResendClientOptions>()
+    .Configure<IConfiguration>((options, configuration) =>
+    {
+      options.ApiToken =
+          configuration["Resend:ApiKey"];
+    });
+
+builder.Services.AddHttpClient<ResendClient>();
+
+builder.Services.AddTransient<IResend>(serviceProvider =>
+{
+  return serviceProvider.GetRequiredService<ResendClient>();
+});
+
+builder.Services.AddScoped<EmailService>();
 
 
 // =========================

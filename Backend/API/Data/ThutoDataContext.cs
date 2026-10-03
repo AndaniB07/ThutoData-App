@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Thuto.Models;
 
 namespace Thuto.Data
@@ -38,7 +38,9 @@ namespace Thuto.Data
 
         public DbSet<ImportantDate> ImportantDates { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public DbSet<PasswordResetToken> PasswordResetTokens { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 

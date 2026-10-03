@@ -1,11 +1,13 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using Thuto.Data;
 using Thuto.Models;
+using Thuto.Services;
 
 namespace Thuto.Contollers
 {
@@ -148,6 +150,206 @@ namespace Thuto.Contollers
       });
     }
 
+    // =========================
+    // FORGOT PASSWORD
+    // POST: api/auth/forgot-password
+    // =========================
+
+    [HttpPost("forgot-password")]
+    public async Task<IActionResult> ForgotPassword(
+        ForgotPasswordRequest request,
+        [FromServices] EmailService emailService)
+    {
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+
+      var user = await _context.Users
+          .FirstOrDefaultAsync(u =>
+              u.Email.ToLower() == request.Email.ToLower());
+
+      // Always return the same response.
+      // This prevents people from discovering
+      // which email addresses have accounts.
+      if (user == null)
+      {
+        return Ok(new
+        {
+          message =
+              "If an account exists for that email, a password reset link has been sent."
+        });
+      }
+
+      // Generate a secure random token
+      var randomBytes =
+          System.Security.Cryptography.RandomNumberGenerator
+              .GetBytes(32);
+
+      var rawToken =
+          Microsoft.AspNetCore.WebUtilities.WebEncoders
+              .Base64UrlEncode(randomBytes);
+
+      // Hash the token before storing it
+      using var sha256 =
+          System.Security.Cryptography.SHA256.Create();
+
+      var tokenHashBytes =
+          sha256.ComputeHash(
+              System.Text.Encoding.UTF8.GetBytes(rawToken)
+          );
+
+      var tokenHash =
+          Convert.ToBase64String(tokenHashBytes);
+
+      // Invalidate any previous unused tokens
+      var existingTokens =
+          await _context.PasswordResetTokens
+              .Where(t =>
+                  t.UserId == user.UserID &&
+                  !t.Used)
+              .ToListAsync();
+
+      foreach (var existingToken in existingTokens)
+      {
+        existingToken.Used = true;
+      }
+
+      // Create new reset token
+      var resetToken = new PasswordResetToken
+      {
+        UserId = user.UserID,
+        TokenHash = tokenHash,
+        ExpiresAt = DateTime.UtcNow.AddMinutes(30),
+        Used = false,
+        CreatedAt = DateTime.UtcNow
+      };
+
+      _context.PasswordResetTokens.Add(resetToken);
+
+      await _context.SaveChangesAsync();
+
+      // Frontend reset-password page
+      var frontendUrl =
+          _configuration["Frontend:Url"];
+
+      if (string.IsNullOrWhiteSpace(frontendUrl))
+      {
+        throw new InvalidOperationException(
+            "Frontend URL is not configured."
+        );
+      }
+
+      var resetLink =
+          $"{frontendUrl.TrimEnd('/')}/reset-password?token={Uri.EscapeDataString(rawToken)}&email={Uri.EscapeDataString(user.Email)}";
+
+      await emailService.SendPasswordResetEmailAsync(
+          user.Email,
+          user.Name,
+          resetLink
+      );
+
+      return Ok(new
+      {
+        message =
+            "If an account exists for that email, a password reset link has been sent."
+      });
+    }
+
+    // RESET PASSWORD
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPassword(
+        ResetPasswordRequest request)
+    {
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+
+      if (string.IsNullOrWhiteSpace(request.Email) ||
+          string.IsNullOrWhiteSpace(request.Token) ||
+          string.IsNullOrWhiteSpace(request.NewPassword))
+      {
+        return BadRequest(new
+        {
+          message = "Email, token and new password are required."
+        });
+      }
+
+      if (request.NewPassword.Length < 8)
+      {
+        return BadRequest(new
+        {
+          message = "Password must be at least 8 characters long."
+        });
+      }
+
+      var user = await _context.Users
+          .FirstOrDefaultAsync(u =>
+              u.Email.ToLower() == request.Email.ToLower());
+
+      if (user == null)
+      {
+        return BadRequest(new
+        {
+          message = "Invalid or expired password reset link."
+        });
+      }
+
+      using var sha256 =
+          System.Security.Cryptography.SHA256.Create();
+
+      var tokenHashBytes =
+          sha256.ComputeHash(
+              System.Text.Encoding.UTF8.GetBytes(request.Token)
+          );
+
+      var tokenHash =
+          Convert.ToBase64String(tokenHashBytes);
+
+      var resetToken =
+          await _context.PasswordResetTokens
+              .FirstOrDefaultAsync(t =>
+                  t.UserId == user.UserID &&
+                  t.TokenHash == tokenHash &&
+                  !t.Used);
+
+      if (resetToken == null)
+      {
+        return BadRequest(new
+        {
+          message = "Invalid or expired password reset link."
+        });
+      }
+
+      if (resetToken.ExpiresAt <= DateTime.UtcNow)
+      {
+        return BadRequest(new
+        {
+          message = "Invalid or expired password reset link."
+        });
+      }
+
+      // Hash the new password using the same BCrypt
+      // hashing system used during registration.
+      user.PasswordHash =
+          BCrypt.Net.BCrypt.HashPassword(
+              request.NewPassword
+          );
+
+      // Make the token one-time use.
+      resetToken.Used = true;
+
+      await _context.SaveChangesAsync();
+
+      return Ok(new
+      {
+        message = "Password reset successfully."
+      });
+    }
+
+
+
 
     // =========================
     // GENERATE TOKEN
@@ -245,4 +447,21 @@ namespace Thuto.Contollers
 
     public string Password { get; set; } = string.Empty;
   }
+
+  // =========================
+  // FORGOT PASSWORD REQUEST
+  // =========================
+
+  public class ForgotPasswordRequest
+  {
+    public string Email { get; set; } = string.Empty;
+  }
+
+  public class ResetPasswordRequest
+  {
+    public string Email { get; set; } = string.Empty;
+    public string Token { get; set; } = string.Empty;
+    public string NewPassword { get; set; } = string.Empty;
+  }
+
 }
