@@ -516,9 +516,9 @@ ion-content {
   font-size: 13px;
 
   line-height: 1.65;
-
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+  line-clamp: 4;
 
   overflow: hidden;
 }
@@ -959,6 +959,339 @@ ion-content {
 
   .details-button {
     padding-top: 3px;
+  }
+
+}
+
+/* =========================================
+   HIGH CONTRAST — BURSARIES
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  /* SEARCH HERO */
+  .search-section {
+    background: #000000;
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+  }
+
+  .eyebrow {
+    color: #ffff00;
+    opacity: 1;
+  }
+
+  .search-header h1 {
+    color: #ffff00;
+  }
+
+  .search-header p {
+    color: #ffffff;
+    opacity: 1;
+  }
+
+
+  /* SEARCH BOX */
+  .search-box {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .search-box > ion-icon {
+    color: #ffff00;
+  }
+
+  .search-box input {
+    background: #000000;
+    color: #ffffff;
+  }
+
+  .search-box input::placeholder {
+    color: #ffffff;
+  }
+
+  .search-box button {
+    background: #000000;
+    color: #ffff00;
+  }
+
+  .search-box button ion-icon {
+    color: #ffff00;
+  }
+
+
+  /* FILTER SIDEBAR */
+  .filter-sidebar {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .filter-title ion-icon {
+    color: #ffff00;
+  }
+
+  .filter-title h2 {
+    color: #ffff00;
+  }
+
+  .filter-heading p {
+    color: #ffffff;
+  }
+
+  .clear-button {
+    color: #00ffff;
+  }
+
+  .filter-group label {
+    color: #ffffff;
+  }
+
+  .filter-group select {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+  .filter-information {
+    background: #000000;
+    border: 1px solid #ffffff;
+  }
+
+  .filter-information ion-icon {
+    color: #ffff00;
+  }
+
+  .filter-information p {
+    color: #ffffff;
+  }
+
+
+  /* RESULTS HEADER */
+  .results-header h2 {
+    color: #ffff00;
+  }
+
+  .results-header p,
+  .results-header strong {
+    color: #ffffff;
+  }
+
+  .result-count {
+    background: #000000;
+    color: #ffff00;
+    border: 2px solid #ffff00;
+  }
+
+
+  /* BURSARY CARDS */
+  .bursary-card {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .bursary-card:hover {
+    background: #111111;
+    border-color: #ffff00;
+    box-shadow: none;
+  }
+
+  .bursary-icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .bursary-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .funding-badge {
+    background: #000000;
+    color: #ffff00;
+    border: 1px solid #ffff00;
+  }
+
+
+  /* CARD CONTENT */
+  .card-content h3 {
+    color: #ffff00;
+  }
+
+  .provider {
+    color: #ffffff;
+  }
+
+  .provider ion-icon {
+    color: #ffff00;
+  }
+
+  .description {
+    color: #ffffff;
+  }
+
+
+  /* DEADLINE */
+  .deadline {
+    background: #000000;
+    border: 1px solid #ffffff;
+  }
+
+  .deadline > ion-icon {
+    color: #ffff00;
+  }
+
+  .deadline-label {
+    color: #ffffff;
+  }
+
+  .deadline strong {
+    color: #ffff00;
+  }
+
+
+  /* EXPIRED DEADLINE */
+  .deadline.expired {
+    background: #000000;
+    border-color: #ff6666;
+  }
+
+  .deadline.expired ion-icon,
+  .deadline.expired strong {
+    color: #ff6666;
+  }
+
+
+  /* DEADLINE STATUS */
+  .deadline-status,
+  .deadline-status.soon,
+  .deadline-status.closed {
+    background: #000000;
+    border: 1px solid #ffffff;
+  }
+
+  .deadline-status {
+    color: #00ff00;
+  }
+
+  .deadline-status.soon {
+    color: #ffff00;
+  }
+
+  .deadline-status.closed {
+    color: #ff6666;
+  }
+
+
+  /* ELIGIBILITY */
+  .eligibility {
+    border-color: #ffffff;
+  }
+
+  .eligibility summary {
+    color: #00ffff;
+  }
+
+  .eligibility p {
+    color: #ffffff;
+  }
+
+
+  /* CARD FOOTER */
+  .card-footer {
+    border-color: #ffffff;
+    color: #ffffff;
+  }
+
+  .details-button {
+    color: #00ffff;
+  }
+
+  .no-link {
+    color: #ffffff;
+  }
+
+
+  /* LOADING */
+  .loading-message {
+    color: #ffffff;
+  }
+
+  .loading-message ion-icon {
+    color: #ffff00;
+  }
+
+  .loading-message p {
+    color: #ffffff;
+  }
+
+
+  /* ERROR */
+  .error-message {
+    background: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .error-message > ion-icon {
+    color: #ff6666;
+  }
+
+  .error-message h2 {
+    color: #ffff00;
+  }
+
+  .error-message p {
+    color: #ffffff;
+  }
+
+  .error-message button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+  }
+
+
+  /* NO RESULTS */
+  .no-results {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .no-results-icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .no-results-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .no-results h2 {
+    color: #ffff00;
+  }
+
+  .no-results p {
+    color: #ffffff;
+  }
+
+  .reset-button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+  }
+
+
+  /* KEYBOARD FOCUS */
+  .search-box input:focus-visible,
+  .search-box button:focus-visible,
+  .clear-button:focus-visible,
+  .filter-group select:focus-visible,
+  .details-button:focus-visible,
+  .error-message button:focus-visible,
+  .reset-button:focus-visible,
+  .eligibility summary:focus-visible {
+    outline: 4px solid #ffff00;
+    outline-offset: 3px;
   }
 
 }

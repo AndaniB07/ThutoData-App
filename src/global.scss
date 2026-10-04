@@ -1,9 +1,7 @@
 /*
-
-* App Global CSS
-* ---
-
-*/
+ * App Global CSS
+ * ---
+ */
 
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
@@ -25,4 +23,94 @@
 @import '@ionic/angular/css/palettes/dark.system.css';
 
 
+/* =========================================
+   GLOBAL HIGH CONTRAST MODE
+   ========================================= */
 
+ion-app.high-contrast {
+
+  /* Main page background */
+  ion-content {
+    --background: #000000;
+  }
+
+  /* General text */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #ffff00;
+  }
+
+  p,
+  li,
+  label {
+    color: #ffffff;
+  }
+
+  /* Links */
+  a {
+    color: #00ffff;
+    text-decoration: underline;
+  }
+
+  /* Common buttons */
+  button {
+    background: #000000;
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  button:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* Form inputs */
+  input,
+  textarea,
+  select {
+    background: #000000;
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #ffffff;
+  }
+
+  /* Keyboard focus */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 4px solid #ffff00;
+    outline-offset: 3px;
+  }
+}
+
+/* =========================================
+   HIGH CONTRAST CONTROL BUTTON
+   ========================================= */
+
+ion-app.high-contrast .contrast-button {
+  background: #000000;
+  color: #ffff00;
+  border: 2px solid #ffff00;
+  font-weight: 700;
+}
+
+ion-app.high-contrast .contrast-button:hover {
+  background: #ffff00;
+  color: #000000;
+}
+
+ion-app.high-contrast .contrast-button.active {
+  background: #000000;
+  color: #ffff00;
+  border: 2px solid #ffff00;
+}

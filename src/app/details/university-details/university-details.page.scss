@@ -710,3 +710,301 @@ text-align: left;
 .view-course-button ion-icon {
   font-size: 15px;
 }
+
+/* =========================================
+   HIGH CONTRAST — UNIVERSITY DETAILS
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  /* PAGE */
+  ion-content {
+    --background: #000000;
+  }
+
+  /* TOOLBAR */
+  .details-toolbar {
+    --background: #000000;
+    --color: #ffffff;
+    --border-color: #ffffff;
+  }
+
+  .back-button {
+    --color: #ffff00;
+  }
+
+  /* LOADING */
+  .loading-container {
+    background: #000000;
+  }
+
+  .loading-container h2 {
+    color: #ffff00;
+  }
+
+  .loading-container p {
+    color: #ffffff;
+  }
+
+  .loading-container ion-spinner {
+    --color: #ffff00;
+  }
+
+  /* ERROR */
+  .error-container {
+    background: #000000;
+  }
+
+  .error-icon {
+    background: #000000;
+    color: #ff6666;
+    border: 2px solid #ff6666;
+  }
+
+  .error-container h2 {
+    color: #ffff00;
+  }
+
+  .error-container p {
+    color: #ffffff;
+  }
+
+  /* HERO */
+  .university-hero {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .university-logo {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .university-logo ion-icon {
+    color: #ffff00;
+  }
+
+  .institution-label {
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  .university-hero h1 {
+    color: #ffff00;
+  }
+
+  .abbreviation {
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  /* QUICK INFO */
+  .quick-info-item {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .quick-info-item ion-icon {
+    color: #ffff00;
+  }
+
+  .quick-info-item span {
+    color: #ffffff;
+  }
+
+  .quick-info-item strong {
+    color: #ffff00;
+  }
+
+  /* MAIN CARDS */
+  .details-card {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .card-icon {
+    background: #000000;
+    color: #ffff00;
+    border: 2px solid #ffffff;
+  }
+
+  .card-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .card-heading h2 {
+    color: #ffff00;
+  }
+
+  .card-heading p {
+    color: #ffffff;
+  }
+
+  .description {
+    color: #ffffff;
+  }
+
+  /* INFORMATION */
+  .information-row {
+    border-color: #ffffff;
+  }
+
+  .information-row span {
+    color: #ffffff;
+  }
+
+  .information-row strong {
+    color: #ffff00;
+  }
+
+  /* COURSES */
+  .course-item {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .course-icon {
+    background: #000000;
+    color: #ffff00;
+    border: 2px solid #ffffff;
+  }
+
+  .course-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .course-information strong {
+    color: #ffff00;
+  }
+
+  .course-information p {
+    color: #ffffff;
+  }
+
+  /* SAVE COURSE BUTTON */
+  .course-save-button {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+  .course-save-button ion-icon {
+    color: #ffffff;
+  }
+
+  .course-save-button.saved {
+    background: #ffff00;
+    border-color: #ffff00;
+  }
+
+  .course-save-button.saved ion-icon {
+    color: #000000;
+  }
+
+  .course-save-button:hover {
+    background: #ffff00;
+    border-color: #ffff00;
+  }
+
+  .course-save-button:hover ion-icon {
+    color: #000000;
+  }
+
+  /* VIEW COURSE BUTTON */
+  .view-course-button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .view-course-button:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+  }
+
+  /* FUNDING */
+  .funding-item {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .funding-item ion-icon {
+    color: #ffff00;
+  }
+
+  /* DATES */
+  .date-item {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .date-icon {
+    background: #000000;
+    color: #ffff00;
+    border: 2px solid #ffffff;
+  }
+
+  .date-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .date-item strong {
+    color: #ffff00;
+  }
+
+  .date-item p {
+    color: #ffffff;
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    background: #000000;
+    border: 2px dashed #ffffff;
+  }
+
+  .empty-state ion-icon {
+    color: #ffff00;
+  }
+
+  .empty-state p {
+    color: #ffffff;
+  }
+
+  /* WEBSITE */
+  .website-card {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .website-icon {
+    background: #000000;
+    color: #ffff00;
+    border: 2px solid #ffffff;
+  }
+
+  .website-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .website-content h2 {
+    color: #ffff00;
+  }
+
+  .website-content p {
+    color: #ffffff;
+  }
+
+  /* FOCUS */
+  .back-button:focus-visible,
+  .course-save-button:focus-visible,
+  .view-course-button:focus-visible,
+  .bottom-button ion-button:focus-visible {
+    outline: 4px solid #ffff00;
+    outline-offset: 3px;
+  }
+}

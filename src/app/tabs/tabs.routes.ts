@@ -126,6 +126,14 @@ export const routes: Routes = [
             .then(m => m.CourseDetailsPage)
       },
 
+    // APS CALCULATOR
+    {
+      path: 'aps-calculator',
+      loadComponent: () =>
+        import('../pages/aps-calculator/aps-calculator.page')
+          .then((m) => m.ApsCalculatorPage),
+    },
+
   {
     path: '',
     redirectTo: '/tabs/home',

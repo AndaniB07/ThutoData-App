@@ -1,5 +1,11 @@
 <ion-content [fullscreen]="true">
 
+      <!-- =========================================
+       ACCESSIBILITY CONTROLS
+  ========================================= -->
+
+  <app-accessibility-controls></app-accessibility-controls>
+
   <!-- =========================
        SEARCH HEADER
   ========================== -->
@@ -114,66 +120,133 @@
         </div>
 
 
-        <!-- QUALIFICATION -->
+<!-- =========================
+     QUALIFICATION
+========================== -->
 
-        <div class="filter-group">
+<div class="filter-group">
 
-          <label>
-            Qualification
-          </label>
+  <label for="qualification">
+    Qualification
+  </label>
 
-          <select
-            [(ngModel)]="selectedQualification">
+  <select
+    id="qualification"
+    name="qualification"
+    [(ngModel)]="selectedQualification">
 
-            <option value="">
-              All qualifications
-            </option>
+    <option value="">
+      All qualifications
+    </option>
 
-            <option
-              *ngFor="
-                let qualification
-                of availableQualifications
-              "
-              [value]="qualification">
+    <option
+      *ngFor="let qualification of availableQualifications"
+      [value]="qualification">
 
-              {{ qualification }}
+      {{ qualification }}
 
-            </option>
+    </option>
 
-          </select>
+  </select>
 
-        </div>
+</div>
 
 
-        <!-- STUDY LEVEL -->
+<!-- =========================
+     PROVINCE
+========================== -->
 
-        <div class="filter-group">
+<div class="filter-group">
 
-          <label>
-            Study Level
-          </label>
+  <label for="province">
+    Province
+  </label>
 
-          <select
-            [(ngModel)]="selectedStudyLevel">
+  <select
+    id="province"
+    name="province"
+    [(ngModel)]="selectedProvince"
+    (ngModelChange)="onProvinceChange()">
 
-            <option value="">
-              All study levels
-            </option>
+    <option value="">
+      All provinces
+    </option>
 
-            <option
-              *ngFor="
-                let level
-                of availableStudyLevels
-              "
-              [value]="level">
+    <option
+      *ngFor="let province of availableProvinces"
+      [value]="province">
 
-              {{ level }}
+      {{ province }}
 
-            </option>
+    </option>
 
-          </select>
+  </select>
 
-        </div>
+</div>
+
+
+<!-- =========================
+     CITY
+========================== -->
+
+<div class="filter-group">
+
+  <label for="city">
+    City
+  </label>
+
+  <select
+    id="city"
+    name="city"
+    [(ngModel)]="selectedCity">
+
+    <option value="">
+      All cities
+    </option>
+
+    <option
+      *ngFor="let city of availableCities"
+      [value]="city">
+
+      {{ city }}
+
+    </option>
+
+  </select>
+
+</div>
+
+
+<!-- =========================
+     INSTITUTION TYPE
+========================== -->
+
+<div class="filter-group">
+
+  <label for="institutionType">
+    Institution Type
+  </label>
+
+  <select
+    id="institutionType"
+    name="institutionType"
+    [(ngModel)]="selectedInstitutionType">
+
+    <option value="">
+      All institutions
+    </option>
+
+    <option
+      *ngFor="let type of availableInstitutionTypes"
+      [value]="type">
+
+      {{ type }}
+
+    </option>
+
+  </select>
+
+</div>
 
       </aside>
 

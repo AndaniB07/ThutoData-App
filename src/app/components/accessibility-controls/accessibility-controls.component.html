@@ -54,14 +54,36 @@
 
   </div>
 
+
+  <!-- RESET TEXT SIZE -->
+
   <button
-  type="button"
-  class="reset-text-button"
-  (click)="resetTextSize()"
-  aria-label="Reset text size to normal">
+    type="button"
+    class="reset-text-button"
+    (click)="resetTextSize()"
+    aria-label="Reset text size to normal">
 
-  Reset
+    Reset
 
-</button>
+  </button>
+
+
+  <!-- HIGH CONTRAST -->
+
+  <button
+    type="button"
+    class="accessibility-button contrast-button"
+    [class.active]="highContrast"
+    (click)="toggleHighContrast()"
+    [attr.aria-pressed]="highContrast"
+    aria-label="Toggle high contrast mode">
+
+    <span class="icon">◐</span>
+
+    <span>
+      {{ highContrast ? 'Normal Contrast' : 'High Contrast' }}
+    </span>
+
+  </button>
 
 </div>

@@ -1,8 +1,16 @@
 <ion-content [fullscreen]="true">
 
-  <!-- =========================
+
+  <!-- =====================================================
+       ACCESSIBILITY CONTROLS
+  ====================================================== -->
+
+  <app-accessibility-controls></app-accessibility-controls>
+
+
+  <!-- =====================================================
        SEARCH HEADER
-  ========================== -->
+  ====================================================== -->
 
   <section class="search-section">
 
@@ -12,16 +20,21 @@
         TVET COLLEGES
       </span>
 
+
       <div>
+
         <img
           src="assets/icon/ThutoData_Logo_Transparent.png"
           alt="ThutoData Logo"
           class="hero-logo">
+
       </div>
+
 
       <h1>
         Find Your TVET College
       </h1>
+
 
       <p>
         Explore public TVET colleges across South Africa
@@ -31,7 +44,9 @@
     </div>
 
 
-    <!-- SEARCH -->
+    <!-- ===================================================
+         SEARCH
+    ==================================================== -->
 
     <div class="search-box">
 
@@ -39,14 +54,16 @@
         name="search-outline">
       </ion-icon>
 
+
       <input
         type="text"
         [(ngModel)]="searchTerm"
-        placeholder="Search colleges, cities or provinces..."
-      />
+        placeholder="Search colleges, cities or provinces...">
+
 
       <button
         *ngIf="searchTerm"
+        type="button"
         (click)="searchTerm = ''"
         aria-label="Clear search">
 
@@ -61,20 +78,23 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        MAIN CONTENT
-  ========================== -->
+  ====================================================== -->
 
   <section class="universities-section">
 
     <div class="page-layout">
 
 
-      <!-- =========================
+      <!-- =================================================
            FILTER SIDEBAR
-      ========================== -->
+      ================================================== -->
 
       <aside class="filter-sidebar">
+
+
+        <!-- FILTER HEADER -->
 
         <div class="filter-heading">
 
@@ -86,11 +106,13 @@
                 name="filter-outline">
               </ion-icon>
 
+
               <h2>
                 Filters
               </h2>
 
             </div>
+
 
             <p>
               Narrow your results
@@ -101,6 +123,7 @@
 
           <button
             *ngIf="hasActiveFilters"
+            type="button"
             class="clear-button"
             (click)="clearFilters()">
 
@@ -111,21 +134,27 @@
         </div>
 
 
-        <!-- PROVINCE -->
+        <!-- =================================================
+             PROVINCE
+        ================================================== -->
 
         <div class="filter-group">
 
-          <label>
+          <label for="province">
             Province
           </label>
 
+
           <select
+            id="province"
+            name="province"
             [(ngModel)]="selectedProvince"
             (ngModelChange)="onProvinceChange()">
 
             <option value="">
               All provinces
             </option>
+
 
             <option
               *ngFor="let province of availableProvinces"
@@ -140,20 +169,26 @@
         </div>
 
 
-        <!-- CITY -->
+        <!-- =================================================
+             CITY
+        ================================================== -->
 
         <div class="filter-group">
 
-          <label>
+          <label for="city">
             City
           </label>
 
+
           <select
+            id="city"
+            name="city"
             [(ngModel)]="selectedCity">
 
             <option value="">
               All cities
             </option>
+
 
             <option
               *ngFor="let city of availableCities"
@@ -167,40 +202,12 @@
 
         </div>
 
-
-        <!-- COLLEGE TYPE -->
-
-        <div class="filter-group">
-
-          <label>
-            College Type
-          </label>
-
-          <select
-            [(ngModel)]="selectedCollegeType">
-
-            <option value="">
-              All college types
-            </option>
-
-            <option
-              *ngFor="let type of availableCollegeTypes"
-              [value]="type">
-
-              {{ type }}
-
-            </option>
-
-          </select>
-
-        </div>
-
       </aside>
 
 
-      <!-- =========================
+      <!-- =================================================
            RESULTS
-      ========================== -->
+      ================================================== -->
 
       <main class="results-area">
 
@@ -214,6 +221,7 @@
             <h2>
               TVET Colleges
             </h2>
+
 
             <p>
 
@@ -245,9 +253,9 @@
         </div>
 
 
-        <!-- =========================
+        <!-- =================================================
              LOADING
-        ========================== -->
+        ================================================== -->
 
         <div
           class="loading-message"
@@ -257,6 +265,7 @@
             name="school-outline">
           </ion-icon>
 
+
           <p>
             Loading colleges...
           </p>
@@ -264,23 +273,29 @@
         </div>
 
 
-        <!-- =========================
+        <!-- =================================================
              ERROR
-        ========================== -->
+        ================================================== -->
 
         <div
           class="error-message"
-          *ngIf="!loading && errorMessage">
+          *ngIf="
+            !loading &&
+            errorMessage
+          ">
 
           <ion-icon
             name="close-outline">
           </ion-icon>
 
+
           <p>
             {{ errorMessage }}
           </p>
 
+
           <button
+            type="button"
             (click)="loadColleges()">
 
             Try Again
@@ -290,9 +305,9 @@
         </div>
 
 
-        <!-- =========================
+        <!-- =================================================
              COLLEGE GRID
-        ========================== -->
+        ================================================== -->
 
         <div
           class="universities-grid"
@@ -303,65 +318,86 @@
           ">
 
 
-          <!-- =========================
-               COLLEGE CARD
-          ========================== -->
-
           <article
             class="university-card"
-            *ngFor="let college of filteredColleges">
+            *ngFor="
+              let college of filteredColleges
+            ">
 
 
-            <!-- CARD TOP -->
+            <!-- =================================================
+                 CARD TOP
+            ================================================== -->
 
             <div class="card-top">
 
-  <div class="university-icon">
 
-    <ion-icon
-      name="school-outline">
-    </ion-icon>
+              <div class="university-icon">
 
-  </div>
+                <ion-icon
+                  name="school-outline">
+                </ion-icon>
 
-
-  <span class="institution-badge">
-
-    TVET College
-
-  </span>
+              </div>
 
 
-  <!-- SAVE COLLEGE -->
+              <span class="institution-badge">
 
-  <button
-    type="button"
-    class="save-button"
-    [class.saved]="isCollegeSaved(college.universityID)"
-    [disabled]="savingCollegeId === college.universityID"
-    (click)="toggleCollegeSave(college.universityID)"
-    [attr.aria-label]="
-      isCollegeSaved(college.universityID)
-        ? 'Remove college from saved items'
-        : 'Save college'
-    ">
+                TVET College
 
-    <ion-icon
-      [name]="
-        isCollegeSaved(college.universityID)
-          ? 'star'
-          : 'star-outline'
-      ">
-    </ion-icon>
-
-  </button>
-
-</div>
+              </span>
 
 
-            <!-- CARD CONTENT -->
+              <!-- SAVE COLLEGE -->
+
+              <button
+                type="button"
+                class="save-button"
+                [class.saved]="
+                  isCollegeSaved(
+                    college.universityID
+                  )
+                "
+                [disabled]="
+                  savingCollegeId ===
+                  college.universityID
+                "
+                (click)="
+                  toggleCollegeSave(
+                    college.universityID
+                  )
+                "
+                [attr.aria-label]="
+                  isCollegeSaved(
+                    college.universityID
+                  )
+                    ? 'Remove college from saved items'
+                    : 'Save college'
+                ">
+
+
+                <ion-icon
+                  [name]="
+                    isCollegeSaved(
+                      college.universityID
+                    )
+                      ? 'star'
+                      : 'star-outline'
+                  ">
+                </ion-icon>
+
+
+              </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 CARD CONTENT
+            ================================================== -->
 
             <div class="card-content">
+
 
               <h3>
                 {{ college.universityName }}
@@ -375,6 +411,7 @@
                 <ion-icon
                   name="location-outline">
                 </ion-icon>
+
 
                 <span>
 
@@ -401,9 +438,12 @@
             </div>
 
 
-            <!-- CARD FOOTER -->
+            <!-- =================================================
+                 CARD FOOTER
+            ================================================== -->
 
             <div class="card-footer">
+
 
               <span>
                 {{ college.universityType }}
@@ -413,21 +453,23 @@
               <!-- VIEW DETAILS -->
 
               <a
-  class="details-button"
-  [routerLink]="[
-    '/tabs/college-details',
-    college.universityID
-  ]">
+                class="details-button"
+                [routerLink]="[
+                  '/tabs/college-details',
+                  college.universityID
+                ]">
 
-  View Details
+                View Details
 
-  <ion-icon
-    name="chevron-forward-outline">
-  </ion-icon>
 
-</a>
+                <ion-icon
+                  name="chevron-forward-outline">
+                </ion-icon>
+
+              </a>
 
             </div>
+
 
           </article>
 
@@ -435,9 +477,9 @@
         </div>
 
 
-        <!-- =========================
+        <!-- =================================================
              NO RESULTS
-        ========================== -->
+        ================================================== -->
 
         <div
           class="no-results"
@@ -446,6 +488,7 @@
             !errorMessage &&
             filteredColleges.length === 0
           ">
+
 
           <div class="no-results-icon">
 
@@ -468,6 +511,7 @@
 
 
           <button
+            type="button"
             class="reset-button"
             (click)="clearFilters()">
 
@@ -485,8 +529,11 @@
   </section>
 
 
-  <!-- FOOTER -->
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
   <app-footer></app-footer>
+
 
 </ion-content>

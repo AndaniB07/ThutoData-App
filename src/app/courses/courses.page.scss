@@ -586,6 +586,7 @@ ion-content {
 
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  line-clamp: 3;
 
   overflow: hidden;
 }
@@ -1007,4 +1008,332 @@ ion-content {
     border-radius: 14px;
   }
 
+}
+
+/* =========================================
+   HIGH CONTRAST — COURSES
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  /* SEARCH HERO */
+  .search-section {
+    background: #000000;
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+  }
+
+  .eyebrow {
+    color: #ffff00;
+    opacity: 1;
+  }
+
+  .search-header h1 {
+    color: #ffff00;
+  }
+
+  .search-header p {
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  /* SEARCH BOX */
+  .search-box {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .search-box > ion-icon {
+    color: #ffff00;
+  }
+
+  .search-box input {
+    background: #000000;
+    color: #ffffff;
+  }
+
+  .search-box input::placeholder {
+    color: #ffffff;
+  }
+
+  .search-box button {
+    background: #000000;
+    color: #ffff00;
+    border: 1px solid #ffffff;
+  }
+
+  .search-box button:hover {
+    background: #ffff00;
+    color: #000000;
+  }
+
+  /* MAIN SECTION */
+  .courses-section {
+    background: #000000;
+  }
+
+  /* FILTER SIDEBAR */
+  .filter-sidebar {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .filter-title ion-icon {
+    color: #ffff00;
+  }
+
+  .filter-title h2 {
+    color: #ffff00;
+  }
+
+  .filter-heading p {
+    color: #ffffff;
+  }
+
+  .clear-button {
+    color: #00ffff;
+  }
+
+  .clear-button:hover {
+    color: #ffff00;
+    text-decoration: underline;
+  }
+
+  .filter-group label {
+    color: #ffffff;
+  }
+
+  .filter-group select {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+  /* RESULTS HEADER */
+  .results-header h2 {
+    color: #ffff00;
+  }
+
+  .results-header p {
+    color: #ffffff;
+  }
+
+  .results-header strong {
+    color: #ffffff;
+  }
+
+  .result-count {
+    background: #000000;
+    color: #ffff00;
+    border: 2px solid #ffff00;
+  }
+
+  /* COURSE CARDS */
+  .course-card {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .course-card:hover {
+    background: #111111;
+    border-color: #ffff00;
+    box-shadow: none;
+  }
+
+  /* CARD TOP */
+  .course-icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .course-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .qualification-badge {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+
+  /* SAVE BUTTON */
+  .save-button {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+  .save-button:hover {
+    background: #ffff00;
+    color: #000000;
+  }
+
+  .save-button.saved {
+    background: #ffff00;
+    color: #000000;
+  }
+
+  .save-button.saved:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* CARD CONTENT */
+  .card-content h3 {
+    color: #ffff00;
+  }
+
+  .course-code {
+    color: #00ffff;
+  }
+
+  .description {
+    color: #ffffff;
+  }
+
+  /* COURSE DETAILS */
+  .course-details {
+    color: #ffffff;
+  }
+
+  .course-detail {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+
+  .course-detail ion-icon {
+    color: #ffff00;
+  }
+
+  .course-detail strong {
+    color: #ffff00;
+  }
+
+  /* INSTITUTIONS */
+  .institutions {
+    border-color: #ffffff;
+  }
+
+  .institution-heading ion-icon {
+    color: #ffff00;
+  }
+
+  .institution-heading strong {
+    color: #ffff00;
+  }
+
+  .institutions p {
+    color: #ffffff;
+  }
+
+  /* CARD FOOTER */
+  .card-footer {
+    background: #000000;
+    border-color: #ffffff;
+  }
+
+  .card-footer > span {
+    color: #ffffff;
+  }
+
+  .details-button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .details-button:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* LOADING */
+  .loading-message {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .loading-message ion-icon {
+    color: #ffff00;
+  }
+
+  .loading-message p {
+    color: #ffffff;
+  }
+
+  /* ERROR */
+  .error-message {
+    background: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .error-message > ion-icon {
+    color: #ffff00;
+  }
+
+  .error-message p {
+    color: #ffffff;
+  }
+
+  .error-message button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .error-message button:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* NO RESULTS */
+  .no-results {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .no-results-icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .no-results-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .no-results h2 {
+    color: #ffff00;
+  }
+
+  .no-results p {
+    color: #ffffff;
+  }
+
+  .reset-button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .reset-button:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* KEYBOARD FOCUS */
+  .search-box input:focus-visible,
+  .search-box button:focus-visible,
+  .clear-button:focus-visible,
+  .filter-group select:focus-visible,
+  .save-button:focus-visible,
+  .details-button:focus-visible,
+  .error-message button:focus-visible,
+  .reset-button:focus-visible {
+    outline: 4px solid #ffff00;
+    outline-offset: 3px;
+  }
 }

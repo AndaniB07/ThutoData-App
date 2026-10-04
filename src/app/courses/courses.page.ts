@@ -24,6 +24,30 @@ import {
 import { FooterComponent } from '../components/footer/footer.component';
 import { Auth } from '../services/auth';
 import { SavedService } from '../services/saved.service';
+import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
+
+
+interface University {
+
+  universityID: number;
+
+  universityName: string;
+
+  abbreviation: string | null;
+
+  description?: string;
+
+  province: string;
+
+  city: string;
+
+  institutionType: string;
+
+  universityType: string;
+
+  websiteURL?: string;
+
+}
 
 
 interface CourseOffering {
@@ -46,19 +70,14 @@ interface CourseOffering {
 
   applicationURL: string;
 
-  university?: {
-    universityID: number;
-    universityName: string;
-    abbreviation: string | null;
-    province: string;
-    city: string;
-    institutionType: string;
-    universityType: string;
-  };
+  university?: University;
 
   faculty?: {
+
     facultyID: number;
+
     facultyName: string;
+
   };
 
 }
@@ -86,7 +105,7 @@ interface Course {
 
   careerOpportunities: string;
 
-  courseOfferings: CourseOffering[];
+  courseOfferings?: CourseOffering[];
 
 }
 
@@ -101,7 +120,8 @@ interface Course {
     RouterLink,
     IonContent,
     IonIcon,
-    FooterComponent
+    FooterComponent,
+    AccessibilityControlsComponent
   ],
 
   templateUrl: './courses.page.html',
@@ -112,8 +132,18 @@ interface Course {
 export class CoursesPage implements OnInit {
 
 
-  private readonly apiUrl =
+  // =========================
+  // API URLS
+  // =========================
+
+  private readonly coursesApi =
     'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Courses';
+
+  private readonly courseOfferingsApi =
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/CourseOfferings';
+
+  private readonly universitiesApi =
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Universities';
 
 
   // =========================
@@ -129,12 +159,24 @@ export class CoursesPage implements OnInit {
 
   selectedQualification = '';
 
-  selectedStudyLevel = '';
+  selectedProvince = '';
 
+  selectedCity = '';
+
+  selectedInstitutionType = '';
+
+
+  // =========================
+  // FILTER OPTIONS
+  // =========================
 
   availableQualifications: string[] = [];
 
-  availableStudyLevels: string[] = [];
+  availableProvinces: string[] = [];
+
+  availableCities: string[] = [];
+
+  availableInstitutionTypes: string[] = [];
 
 
   // =========================
@@ -142,6 +184,10 @@ export class CoursesPage implements OnInit {
   // =========================
 
   courses: Course[] = [];
+
+  courseOfferings: CourseOffering[] = [];
+
+  universities: University[] = [];
 
 
   // =========================
@@ -199,7 +245,7 @@ export class CoursesPage implements OnInit {
 
 
   // =========================
-  // LOAD COURSES
+  // LOAD ALL COURSE DATA
   // =========================
 
   loadCourses(): void {
@@ -209,32 +255,24 @@ export class CoursesPage implements OnInit {
     this.errorMessage = '';
 
 
-    this.http.get<Course[]>(this.apiUrl).subscribe({
+    this.http.get<Course[]>(this.coursesApi).subscribe({
 
-      next: (data) => {
+      next: (coursesData) => {
 
-        console.log('========== COURSES API ==========');
+        console.log('========== COURSES ==========');
 
-        console.log('RAW DATA:', data);
-
-        console.log(
-          'TOTAL COURSES:',
-          Array.isArray(data) ? data.length : 0
-        );
+        console.log('Courses:', coursesData);
 
 
-        this.courses = Array.isArray(data)
-          ? data
+        this.courses = Array.isArray(coursesData)
+          ? coursesData
           : [];
 
 
-        this.buildFilterOptions();
+        // Load the information needed for
+        // location and institution filters.
 
-
-        this.loading = false;
-
-
-        this.cdr.detectChanges();
+        this.loadCourseOfferings();
 
       },
 
@@ -250,15 +288,161 @@ export class CoursesPage implements OnInit {
         this.errorMessage =
           'Unable to load courses. Please reload the page.';
 
-
         this.courses = [];
 
         this.loading = false;
 
+        this.cdr.detectChanges();
+
+      }
+
+    });
+
+  }
+
+
+  // =========================
+  // LOAD COURSE OFFERINGS
+  // =========================
+
+  loadCourseOfferings(): void {
+
+    this.http.get<CourseOffering[]>(
+      this.courseOfferingsApi
+    ).subscribe({
+
+      next: (data) => {
+
+        console.log('========== COURSE OFFERINGS ==========');
+
+        console.log('Course Offerings:', data);
+
+
+        this.courseOfferings = Array.isArray(data)
+          ? data
+          : [];
+
+
+        this.loadUniversities();
+
+      },
+
+
+      error: (error) => {
+
+        console.error(
+          'Course Offerings API error:',
+          error
+        );
+
+
+        this.courseOfferings = [];
+
+        this.loadUniversities();
+
+      }
+
+    });
+
+  }
+
+
+  // =========================
+  // LOAD UNIVERSITIES
+  // =========================
+
+  loadUniversities(): void {
+
+    this.http.get<University[]>(
+      this.universitiesApi
+    ).subscribe({
+
+      next: (data) => {
+
+        console.log('========== UNIVERSITIES ==========');
+
+        console.log('Universities:', data);
+
+
+        this.universities = Array.isArray(data)
+          ? data
+          : [];
+
+
+        this.buildFilterOptions();
+
+        this.attachCourseOfferings();
+
+
+        this.loading = false;
+
+        this.cdr.detectChanges();
+
+      },
+
+
+      error: (error) => {
+
+        console.error(
+          'Universities API error:',
+          error
+        );
+
+
+        this.universities = [];
+
+        this.buildFilterOptions();
+
+        this.attachCourseOfferings();
+
+
+        this.loading = false;
 
         this.cdr.detectChanges();
 
       }
+
+    });
+
+  }
+
+
+  // =========================
+  // ATTACH COURSE OFFERINGS
+  // =========================
+
+  attachCourseOfferings(): void {
+
+    this.courses.forEach(course => {
+
+      const offerings =
+        this.courseOfferings.filter(
+          offering =>
+            Number(offering.courseID) ===
+            Number(course.courseID)
+        );
+
+
+      offerings.forEach(offering => {
+
+        const university =
+          this.universities.find(
+            university =>
+              Number(university.universityID) ===
+              Number(offering.universityID)
+          );
+
+
+        if (university) {
+
+          offering.university = university;
+
+        }
+
+      });
+
+
+      course.courseOfferings = offerings;
 
     });
 
@@ -272,17 +456,23 @@ export class CoursesPage implements OnInit {
   buildFilterOptions(): void {
 
 
+    // =========================
+    // QUALIFICATIONS
+    // =========================
+
     this.availableQualifications = [
 
       ...new Set(
 
         this.courses
 
-          .map(course => course.qualificationType)
+          .map(course =>
+            course.qualificationType
+          )
 
           .filter(
             (qualification): qualification is string =>
-              !!qualification
+              !!qualification?.trim()
           )
 
       )
@@ -290,22 +480,137 @@ export class CoursesPage implements OnInit {
     ].sort();
 
 
-    this.availableStudyLevels = [
+    // =========================
+    // PROVINCES
+    // =========================
+
+    this.availableProvinces = [
 
       ...new Set(
 
-        this.courses
+        this.universities
 
-          .map(course => course.studyLevel)
+          .map(university =>
+            university.province
+          )
 
           .filter(
-            (level): level is string =>
-              !!level
+            (province): province is string =>
+              !!province?.trim()
           )
 
       )
 
     ].sort();
+
+
+    // =========================
+    // CITIES
+    // =========================
+
+    this.updateAvailableCities();
+
+
+    // =========================
+    // INSTITUTION TYPES
+    // =========================
+
+    this.availableInstitutionTypes = [
+
+      ...new Set(
+
+        this.universities
+
+          .map(university =>
+            university.institutionType
+          )
+
+          .filter(
+            (type): type is string =>
+              !!type?.trim()
+          )
+
+      )
+
+    ].sort();
+
+  }
+
+
+  // =========================
+  // UPDATE CITIES
+  // =========================
+
+  updateAvailableCities(): void {
+
+    let universitiesForCities =
+      this.universities;
+
+
+    // If a province has been selected,
+    // only show cities from that province.
+
+    if (this.selectedProvince) {
+
+      universitiesForCities =
+        this.universities.filter(
+          university =>
+            university.province ===
+            this.selectedProvince
+        );
+
+    }
+
+
+    this.availableCities = [
+
+      ...new Set(
+
+        universitiesForCities
+
+          .map(university =>
+            university.city
+          )
+
+          .filter(
+            (city): city is string =>
+              !!city?.trim()
+          )
+
+      )
+
+    ].sort();
+
+
+    // If the selected city is no longer
+    // available, clear it.
+
+    if (
+
+      this.selectedCity &&
+
+      !this.availableCities.includes(
+        this.selectedCity
+      )
+
+    ) {
+
+      this.selectedCity = '';
+
+    }
+
+  }
+
+
+  // =========================
+  // PROVINCE CHANGE
+  // =========================
+
+  onProvinceChange(): void {
+
+    this.selectedCity = '';
+
+    this.updateAvailableCities();
 
   }
 
@@ -345,15 +650,34 @@ export class CoursesPage implements OnInit {
           ?.toLowerCase()
           .includes(search) ||
 
-        course.studyLevel
-          ?.toLowerCase()
-          .includes(search) ||
-
         course.courseOfferings?.some(
-          offering =>
-            offering.university?.universityName
-              ?.toLowerCase()
-              .includes(search)
+          offering => {
+
+            const university =
+              offering.university;
+
+            return (
+
+              university?.universityName
+                ?.toLowerCase()
+                .includes(search) ||
+
+              university?.city
+                ?.toLowerCase()
+                .includes(search) ||
+
+              university?.province
+                ?.toLowerCase()
+                .includes(search) ||
+
+              university?.abbreviation
+                ?.toLowerCase()
+                .includes(search)
+
+            );
+
+          }
+
         );
 
 
@@ -366,20 +690,85 @@ export class CoursesPage implements OnInit {
         !this.selectedQualification ||
 
         course.qualificationType ===
-          this.selectedQualification;
+        this.selectedQualification;
 
 
       // =========================
-      // STUDY LEVEL
+      // LOCATION
       // =========================
 
-      const matchesStudyLevel =
+      const matchesLocation =
 
-        !this.selectedStudyLevel ||
+        (!this.selectedProvince &&
+         !this.selectedCity)
 
-        course.studyLevel ===
-          this.selectedStudyLevel;
+        ||
 
+        !!course.courseOfferings?.some(
+          offering => {
+
+            const university =
+              offering.university;
+
+            if (!university) {
+
+              return false;
+
+            }
+
+
+            const matchesProvince =
+
+              !this.selectedProvince ||
+
+              university.province ===
+              this.selectedProvince;
+
+
+            const matchesCity =
+
+              !this.selectedCity ||
+
+              university.city ===
+              this.selectedCity;
+
+
+            return (
+
+              matchesProvince &&
+
+              matchesCity
+
+            );
+
+          }
+
+        );
+
+
+      // =========================
+      // INSTITUTION TYPE
+      // =========================
+
+      const matchesInstitutionType =
+
+        !this.selectedInstitutionType
+
+        ||
+
+        !!course.courseOfferings?.some(
+          offering =>
+
+            offering.university
+              ?.institutionType ===
+            this.selectedInstitutionType
+
+        );
+
+
+      // =========================
+      // FINAL RESULT
+      // =========================
 
       return (
 
@@ -387,7 +776,9 @@ export class CoursesPage implements OnInit {
 
         matchesQualification &&
 
-        matchesStudyLevel
+        matchesLocation &&
+
+        matchesInstitutionType
 
       );
 
@@ -541,9 +932,7 @@ export class CoursesPage implements OnInit {
               Number(courseId)
             );
 
-
             this.savingCourseId = null;
-
 
             this.cdr.detectChanges();
 
@@ -557,9 +946,7 @@ export class CoursesPage implements OnInit {
               error
             );
 
-
             this.savingCourseId = null;
-
 
             this.cdr.detectChanges();
 
@@ -587,9 +974,7 @@ export class CoursesPage implements OnInit {
             Number(courseId)
           );
 
-
           this.savingCourseId = null;
-
 
           this.cdr.detectChanges();
 
@@ -603,9 +988,7 @@ export class CoursesPage implements OnInit {
             error
           );
 
-
           this.savingCourseId = null;
-
 
           this.cdr.detectChanges();
 
@@ -626,7 +1009,14 @@ export class CoursesPage implements OnInit {
 
     this.selectedQualification = '';
 
-    this.selectedStudyLevel = '';
+    this.selectedProvince = '';
+
+    this.selectedCity = '';
+
+    this.selectedInstitutionType = '';
+
+
+    this.updateAvailableCities();
 
   }
 
@@ -643,7 +1033,11 @@ export class CoursesPage implements OnInit {
 
       this.selectedQualification ||
 
-      this.selectedStudyLevel
+      this.selectedProvince ||
+
+      this.selectedCity ||
+
+      this.selectedInstitutionType
 
     );
 
@@ -656,31 +1050,49 @@ export class CoursesPage implements OnInit {
 
   getInstitutionCount(course: Course): number {
 
-  if (!course.courseOfferings?.length) {
-    return 0;
-  }
+    if (!course.courseOfferings?.length) {
 
-  const uniqueUniversities = new Set<number>();
+      return 0;
 
-  course.courseOfferings.forEach((offering: any) => {
-
-    const universityId =
-      offering?.universityID ??
-      offering?.UniversityID ??
-      offering?.university?.universityID ??
-      offering?.university?.UniversityID ??
-      offering?.University?.universityID ??
-      offering?.University?.UniversityID;
-
-    if (universityId != null) {
-      uniqueUniversities.add(
-        Number(universityId)
-      );
     }
 
-  });
 
-  return uniqueUniversities.size;
+    const uniqueUniversities =
+      new Set<number>();
+
+
+    course.courseOfferings.forEach(
+      (offering: any) => {
+
+        const universityId =
+
+          offering?.universityID ??
+
+          offering?.UniversityID ??
+
+          offering?.university?.universityID ??
+
+          offering?.university?.UniversityID ??
+
+          offering?.University?.universityID ??
+
+          offering?.University?.UniversityID;
+
+
+        if (universityId != null) {
+
+          uniqueUniversities.add(
+            Number(universityId)
+          );
+
+        }
+
+      }
+    );
+
+
+    return uniqueUniversities.size;
+
   }
 
 
@@ -690,40 +1102,63 @@ export class CoursesPage implements OnInit {
 
   getInstitutionNames(course: Course): string {
 
-  if (!course.courseOfferings?.length) {
-    return 'Institution information unavailable';
-  }
+    if (!course.courseOfferings?.length) {
 
-  const names: string[] = [];
+      return 'Institution information unavailable';
 
-  course.courseOfferings.forEach((offering: any) => {
-
-    const name =
-      offering?.university?.universityName ??
-      offering?.university?.UniversityName ??
-      offering?.universityName ??
-      offering?.UniversityName ??
-      offering?.University?.universityName ??
-      offering?.University?.UniversityName;
-
-    if (
-      name &&
-      !names.includes(name)
-    ) {
-      names.push(name);
     }
 
-  });
 
-  if (!names.length) {
-    return 'Institution information unavailable';
+    const names: string[] = [];
+
+
+    course.courseOfferings.forEach(
+      (offering: any) => {
+
+        const name =
+
+          offering?.university?.universityName ??
+
+          offering?.university?.UniversityName ??
+
+          offering?.universityName ??
+
+          offering?.UniversityName ??
+
+          offering?.University?.universityName ??
+
+          offering?.University?.UniversityName;
+
+
+        if (
+          name &&
+          !names.includes(name)
+        ) {
+
+          names.push(name);
+
+        }
+
+      }
+    );
+
+
+    if (!names.length) {
+
+      return 'Institution information unavailable';
+
+    }
+
+
+    if (names.length <= 2) {
+
+      return names.join(', ');
+
+    }
+
+
+    return `${names[0]}, ${names[1]} +${names.length - 2} more`;
+
   }
-
-  if (names.length <= 2) {
-    return names.join(', ');
-  }
-
-  return `${names[0]}, ${names[1]} +${names.length - 2} more`;
-}
 
 }

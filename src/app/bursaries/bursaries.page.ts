@@ -19,6 +19,7 @@ import {
 } from 'ionicons/icons';
 
 import { FooterComponent } from '../components/footer/footer.component';
+import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
 
 interface Funding {
   fundingID: number;
@@ -42,7 +43,8 @@ interface Funding {
     HttpClientModule,
     IonContent,
     IonIcon,
-    FooterComponent
+    FooterComponent,
+    AccessibilityControlsComponent
   ],
 
   templateUrl: './bursaries.page.html',

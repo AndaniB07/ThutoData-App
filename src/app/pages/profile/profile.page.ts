@@ -16,13 +16,16 @@ import {
   SavedService
 } from '../../services/saved.service';
 
+import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
+
 @Component({
   selector: 'app-profile',
   standalone: true,
 
   imports: [
     CommonModule,
-    IonContent
+    IonContent,
+    AccessibilityControlsComponent
   ],
 
   templateUrl: './profile.page.html',

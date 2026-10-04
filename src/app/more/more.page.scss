@@ -130,3 +130,67 @@ ion-content {
   }
 
 }
+
+/* =========================================
+   HIGH CONTRAST — MORE PAGE
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  ion-content {
+    --background: #000000;
+  }
+
+  /* PAGE HEADER */
+  .page-header h1 {
+    color: #ffff00;
+  }
+
+  .page-header p {
+    color: #ffffff;
+  }
+
+  /* OPTIONS */
+  .option {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .option:hover {
+    background: #111111;
+    border-color: #ffff00;
+    box-shadow: none;
+    transform: translateY(-2px);
+  }
+
+  /* ICONS */
+  .icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .icon ion-icon {
+    color: #ffff00;
+  }
+
+  /* OPTION TEXT */
+  .option-text h2 {
+    color: #ffff00;
+  }
+
+  .option-text p {
+    color: #ffffff;
+  }
+
+  /* ARROW */
+  .arrow {
+    color: #00ffff;
+  }
+
+  /* KEYBOARD FOCUS */
+  .option:focus-visible {
+    outline: 4px solid #ffff00;
+    outline-offset: 3px;
+  }
+}

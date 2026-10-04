@@ -639,3 +639,253 @@ ion-content {
     justify-content: center;
   }
 }
+
+/* =========================================
+   HIGH CONTRAST — COLLEGE DETAILS
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  /* PAGE */
+  ion-content {
+    --background: #000000 !important;
+  }
+
+  .details-page {
+    background: #000000 !important;
+  }
+
+  /* TOP BAR */
+  .details-topbar {
+    background: #000000 !important;
+    border-bottom: 2px solid #ffffff !important;
+  }
+
+  .back-button {
+    background: transparent !important;
+    color: #ffff00 !important;
+  }
+
+  .back-button ion-icon {
+    color: #ffff00 !important;
+  }
+
+  /* HERO */
+  .college-hero {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .hero-icon {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .hero-icon ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .institution-badge {
+    background: #000000 !important;
+    color: #ffff00 !important;
+    border: 1px solid #ffff00 !important;
+  }
+
+  .hero-content h1 {
+    color: #ffff00 !important;
+  }
+
+  .hero-location {
+    color: #ffffff !important;
+  }
+
+  .hero-location ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .hero-description {
+    color: #ffffff !important;
+  }
+
+  /* QUICK INFORMATION */
+  .info-card {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .info-icon {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .info-icon ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .info-label {
+    color: #ffffff !important;
+  }
+
+  .info-card strong {
+    color: #ffff00 !important;
+  }
+
+  .info-card small {
+    color: #ffffff !important;
+  }
+
+  /* CONTENT CARDS */
+  .content-card {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .section-icon {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .section-icon ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .section-heading h2 {
+    color: #ffff00 !important;
+  }
+
+  .section-heading p {
+    color: #ffffff !important;
+  }
+
+  .section-text {
+    color: #ffffff !important;
+  }
+
+  /* EMPTY INFORMATION */
+  .empty-information {
+    background: #000000 !important;
+    border: 2px dashed #ffffff !important;
+  }
+
+  .empty-information > ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .empty-information h3 {
+    color: #ffff00 !important;
+  }
+
+  .empty-information p {
+    color: #ffffff !important;
+  }
+
+  /* WEBSITE */
+  .website-card {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .website-content {
+    color: #ffffff !important;
+  }
+
+  .website-icon {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .website-icon ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .website-card h2 {
+    color: #ffff00 !important;
+  }
+
+  .website-card p {
+    color: #ffffff !important;
+  }
+
+  .website-button {
+    background: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffff00 !important;
+  }
+
+  .website-button:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+  }
+
+  .website-button ion-icon {
+    color: inherit !important;
+  }
+
+  /* BOTTOM ACTION */
+  .secondary-button {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+    color: #ffff00 !important;
+  }
+
+  .secondary-button:hover {
+    background: #ffff00 !important;
+    color: #000000 !important;
+    border-color: #ffff00 !important;
+  }
+
+  .secondary-button ion-icon {
+    color: inherit !important;
+  }
+
+  /* LOADING / ERROR */
+  .state-container {
+    background: #000000 !important;
+  }
+
+  .state-container ion-spinner {
+    --color: #ffff00 !important;
+    color: #ffff00 !important;
+  }
+
+  .state-container p {
+    color: #ffffff !important;
+  }
+
+  .state-icon {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .state-icon ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .state-container h2 {
+    color: #ffff00 !important;
+  }
+
+  .primary-button {
+    background: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffff00 !important;
+  }
+
+  .primary-button:hover {
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+  }
+
+  /* KEYBOARD FOCUS */
+  .back-button:focus-visible,
+  .website-button:focus-visible,
+  .secondary-button:focus-visible,
+  .primary-button:focus-visible {
+    outline: 4px solid #ffff00 !important;
+    outline-offset: 3px;
+  }
+}

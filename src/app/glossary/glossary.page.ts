@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonIcon } from '@ionic/angular';
 import { FooterComponent } from '../components/footer/footer.component';
+import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
 
 interface GlossaryTerm {
   term: string;
@@ -21,7 +22,8 @@ interface GlossaryTerm {
     FormsModule,
     IonContent,
     IonIcon,
-    FooterComponent
+    FooterComponent,
+    AccessibilityControlsComponent
   ]
 })
 export class GlossaryPage {

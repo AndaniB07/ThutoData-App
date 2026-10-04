@@ -9,6 +9,7 @@ import {
 } from '@ionic/angular';
 
 import { Auth } from '../../services/auth';
+import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,8 @@ import { Auth } from '../../services/auth';
     FormsModule,
     IonContent,
     IonIcon,
-    RouterLink
+    RouterLink,
+    AccessibilityControlsComponent
   ],
 
   templateUrl: './sign-up.page.html',
@@ -30,6 +32,7 @@ export class SignUpPage {
   firstName = '';
   lastName = '';
   email = '';
+  grade: number | null = null;
   password = '';
   confirmPassword = '';
 
@@ -62,6 +65,7 @@ export class SignUpPage {
       !this.firstName.trim() ||
       !this.lastName.trim() ||
       !this.email.trim() ||
+      !this.grade ||
       !this.password ||
       !this.confirmPassword
     ) {
@@ -109,7 +113,7 @@ export class SignUpPage {
       fullName,
       this.email,
       this.password,
-      null
+      this.grade
     )
     .subscribe({
 

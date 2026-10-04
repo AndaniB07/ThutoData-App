@@ -20,6 +20,8 @@ import {
   personCircleOutline,
   documentTextOutline
 } from 'ionicons/icons';
+import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
+import { FooterComponent } from '../components/footer/footer.component';
 
 addIcons({
   'book-outline': bookOutline,
@@ -38,7 +40,9 @@ addIcons({
     CommonModule,
     RouterLink,
     IonContent,
-    IonIcon
+    IonIcon,
+    AccessibilityControlsComponent,
+    FooterComponent
   ],
   templateUrl: './more.page.html',
   styleUrls: ['./more.page.scss']

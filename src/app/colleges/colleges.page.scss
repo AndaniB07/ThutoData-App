@@ -591,6 +591,7 @@ ion-content {
 
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
 
   overflow: hidden;
 
@@ -1071,4 +1072,285 @@ input:focus-visible {
     box-sizing: border-box;
   }
 
+}
+
+/* =========================================
+   HIGH CONTRAST — COLLEGES
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  /* SEARCH HERO */
+  .search-section {
+    background: #000000;
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+  }
+
+  .eyebrow {
+    color: #ffff00;
+    opacity: 1;
+  }
+
+  .search-header h1 {
+    color: #ffff00;
+  }
+
+  .search-header p {
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  /* SEARCH BOX */
+  .search-box {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .search-box > ion-icon {
+    color: #ffff00;
+  }
+
+  .search-box input {
+    background: #000000;
+    color: #ffffff;
+  }
+
+  .search-box input::placeholder {
+    color: #ffffff;
+  }
+
+  .search-box button {
+    background: #000000;
+    color: #ffff00;
+    border: 1px solid #ffffff;
+  }
+
+  .search-box button:hover {
+    background: #ffff00;
+    color: #000000;
+  }
+
+  .search-box button ion-icon {
+    color: inherit;
+  }
+
+  /* MAIN CONTENT */
+  .universities-section {
+    background: #000000;
+  }
+
+  /* FILTER SIDEBAR */
+  .filter-sidebar {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .filter-heading {
+    border-color: #ffffff;
+  }
+
+  .filter-title ion-icon {
+    color: #ffff00;
+  }
+
+  .filter-title h2 {
+    color: #ffff00;
+  }
+
+  .filter-heading p {
+    color: #ffffff;
+  }
+
+  .clear-button {
+    color: #00ffff;
+  }
+
+  .clear-button:hover {
+    background: #111111;
+  }
+
+  .filter-group label {
+    color: #ffffff;
+  }
+
+  .filter-group select {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+  /* RESULTS HEADER */
+  .results-header h2 {
+    color: #ffff00;
+  }
+
+  .results-header p {
+    color: #ffffff;
+  }
+
+  .results-header strong {
+    color: #ffffff;
+  }
+
+  .result-count {
+    background: #000000;
+    color: #ffff00;
+    border: 2px solid #ffff00;
+  }
+
+  /* COLLEGE CARDS */
+  .university-card {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .university-card:hover {
+    background: #111111;
+    border-color: #ffff00;
+    box-shadow: none;
+  }
+
+  /* CARD TOP */
+  .university-icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .university-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .institution-badge {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+
+  /* CARD CONTENT */
+  .card-content h3 {
+    color: #ffff00;
+  }
+
+  .location {
+    color: #ffffff;
+  }
+
+  .location ion-icon {
+    color: #ffff00;
+  }
+
+  .card-content > p {
+    color: #ffffff;
+  }
+
+  /* CARD FOOTER */
+  .card-footer {
+    background: #000000;
+    border-color: #ffffff;
+  }
+
+  .card-footer > span {
+    color: #ffffff;
+  }
+
+  .details-button {
+    background: #000000;
+    color: #00ffff;
+    border: 1px solid #ffffff;
+    text-decoration: underline;
+  }
+
+  .details-button:hover {
+    background: #ffff00;
+    color: #000000;
+    border-color: #ffff00;
+  }
+
+  /* LOADING */
+  .loading-message {
+    color: #ffffff;
+  }
+
+  .loading-message ion-icon {
+    color: #ffff00;
+  }
+
+  .loading-message p {
+    color: #ffffff;
+  }
+
+  /* ERROR */
+  .error-message {
+    background: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .error-message > ion-icon {
+    color: #ffff00;
+  }
+
+  .error-message p {
+    color: #ffffff;
+  }
+
+  .error-message button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .error-message button:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* NO RESULTS */
+  .no-results {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .no-results-icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .no-results-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .no-results h2 {
+    color: #ffff00;
+  }
+
+  .no-results p {
+    color: #ffffff;
+  }
+
+  .reset-button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .reset-button:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* KEYBOARD FOCUS */
+  .search-box input:focus-visible,
+  .search-box button:focus-visible,
+  .clear-button:focus-visible,
+  .filter-group select:focus-visible,
+  .details-button:focus-visible,
+  .error-message button:focus-visible,
+  .reset-button:focus-visible {
+    outline: 4px solid #ffff00;
+    outline-offset: 3px;
+  }
 }

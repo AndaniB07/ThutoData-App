@@ -554,3 +554,192 @@ ion-content {
   }
 
 }
+
+/* =========================================
+   HIGH CONTRAST — ABOUT PAGE
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  /* PAGE */
+  ion-content {
+    --background: #000000 !important;
+  }
+
+  .about-page {
+    background: #000000 !important;
+  }
+
+  /* HERO */
+  .hero-section {
+    background: #000000 !important;
+    border-bottom: 2px solid #ffffff !important;
+  }
+
+  .eyebrow,
+  .section-label {
+    color: #ffff00 !important;
+  }
+
+  .hero-content h1 {
+    color: #ffff00 !important;
+  }
+
+  .hero-content p {
+    color: #ffffff !important;
+  }
+
+  /* GENERAL CONTENT */
+  .content-section {
+    background: #000000 !important;
+  }
+
+  .section-icon {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .section-icon ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .section-content h2 {
+    color: #ffff00 !important;
+  }
+
+  .section-content p {
+    color: #ffffff !important;
+  }
+
+  /* MISSION */
+  .mission-section {
+    background: #000000 !important;
+  }
+
+  .mission-card {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .mission-icon {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .mission-icon ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .mission-card h2 {
+    color: #ffff00 !important;
+  }
+
+  .mission-card p {
+    color: #ffffff !important;
+  }
+
+  /* WHO WE ARE */
+  .section-heading h2 {
+    color: #ffff00 !important;
+  }
+
+  .section-heading p {
+    color: #ffffff !important;
+  }
+
+  /* DETAIL CARDS */
+  .detail-card {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .detail-card:hover {
+    border-color: #ffff00 !important;
+  }
+
+  .detail-icon {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .detail-icon ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .detail-card h3 {
+    color: #ffff00 !important;
+  }
+
+  .detail-card p {
+    color: #ffffff !important;
+  }
+
+  /* WHY SECTION */
+  .why-section {
+    background: #000000 !important;
+  }
+
+  .why-heading h2 {
+    color: #ffff00 !important;
+  }
+
+  .why-text p {
+    color: #ffffff !important;
+  }
+
+  /* GOAL */
+  .goal-section {
+    background: #000000 !important;
+  }
+
+  .goal-icon {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .goal-icon ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .goal-card h2 {
+    color: #ffff00 !important;
+  }
+
+  .goal-card p {
+    color: #ffffff !important;
+  }
+
+  .home-button {
+    background: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffff00 !important;
+  }
+
+  .home-button:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+  }
+
+  /* BACK */
+  .back-section {
+    background: #000000 !important;
+  }
+
+  .back-section a {
+    color: #00ffff !important;
+    text-decoration: underline !important;
+  }
+
+  .back-section a:hover {
+    color: #ffff00 !important;
+  }
+
+  /* KEYBOARD FOCUS */
+  .home-button:focus-visible,
+  .back-section a:focus-visible {
+    outline: 4px solid #ffff00 !important;
+    outline-offset: 3px;
+  }
+}

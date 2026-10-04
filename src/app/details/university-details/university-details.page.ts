@@ -35,6 +35,7 @@ import {
 } from 'ionicons/icons';
 import { Auth } from '../../services/auth';
 import { SavedService } from '../../services/saved.service';
+import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
 
 interface University {
   universityID: number;
@@ -70,7 +71,8 @@ interface University {
     IonButtons,
     IonButton,
     IonIcon,
-    IonSpinner
+    IonSpinner,
+    AccessibilityControlsComponent
   ]
 
 })

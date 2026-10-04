@@ -640,3 +640,214 @@
   }
 
 }
+
+/* =========================================
+   HIGH CONTRAST — GLOSSARY
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  /* HERO */
+  .glossary-hero {
+    background: #000000;
+    border-bottom: 2px solid #ffffff;
+  }
+
+  .section-label {
+    color: #ffffff;
+  }
+
+  .glossary-hero h1 {
+    color: #ffff00;
+  }
+
+  .glossary-hero h1 span {
+    color: #ffff00;
+  }
+
+  .glossary-hero p {
+    color: #ffffff;
+  }
+
+  /* SEARCH */
+  .search-section {
+    background: #000000;
+  }
+
+  .search-box {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .search-box > ion-icon {
+    color: #ffff00;
+  }
+
+  .search-box input {
+    background: #000000;
+    color: #ffffff;
+  }
+
+  .search-box input::placeholder {
+    color: #ffffff;
+  }
+
+  .clear-button {
+    background: #000000;
+    color: #ffff00;
+    border: 1px solid #ffffff;
+  }
+
+  .clear-button:hover {
+    background: #ffff00;
+    color: #000000;
+  }
+
+  /* CATEGORY FILTER */
+  .category-section {
+    background: #000000;
+  }
+
+  .category-button {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+  .category-button:hover {
+    background: #111111;
+    color: #ffff00;
+    border-color: #ffff00;
+  }
+
+  .category-button.active {
+    background: #ffff00;
+    color: #000000;
+    border-color: #ffff00;
+  }
+
+  /* TERMS SECTION */
+  .terms-section {
+    background: #000000;
+  }
+
+  .results-header .section-label {
+    color: #ffffff;
+  }
+
+  .results-header h2 {
+    color: #ffff00;
+  }
+
+  .term-count {
+    background: #000000;
+    color: #ffff00;
+    border: 2px solid #ffff00;
+  }
+
+  /* TERM CARDS */
+  .term-card {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .term-card:hover {
+    background: #111111;
+    border-color: #ffff00;
+    box-shadow: none;
+  }
+
+  .term-category {
+    color: #ffff00;
+  }
+
+  .term-card h3 {
+    color: #ffff00;
+  }
+
+  .abbreviation {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+
+  .term-definition {
+    border-color: #ffffff;
+  }
+
+  .term-definition p {
+    color: #ffffff;
+  }
+
+  /* NO RESULTS */
+  .no-results {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .no-results-icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .no-results-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .no-results h3 {
+    color: #ffff00;
+  }
+
+  .no-results p {
+    color: #ffffff;
+  }
+
+  .reset-button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .reset-button:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* LEARNING TIP */
+  .tip-section {
+    background: #000000;
+  }
+
+  .tip-container {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .tip-icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .tip-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .tip-content h2 {
+    color: #ffff00;
+  }
+
+  .tip-content p {
+    color: #ffffff;
+  }
+
+  /* KEYBOARD FOCUS */
+  .search-box input:focus-visible,
+  .clear-button:focus-visible,
+  .category-button:focus-visible,
+  .reset-button:focus-visible {
+    outline: 4px solid #ffff00;
+    outline-offset: 3px;
+  }
+}

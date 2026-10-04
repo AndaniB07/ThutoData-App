@@ -20,6 +20,7 @@ import {
   calendarOutline,
   chevronForwardOutline
 } from 'ionicons/icons';
+import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
 
 interface College {
   universityID: number;
@@ -45,7 +46,8 @@ interface College {
   imports: [
     CommonModule,
     IonContent,
-    IonIcon
+    IonIcon,
+    AccessibilityControlsComponent
   ]
 })
 export class CollegeDetailsPage implements OnInit {

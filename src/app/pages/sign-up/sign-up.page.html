@@ -1,5 +1,12 @@
 <ion-content [fullscreen]="true">
 
+      <!-- =========================================
+       ACCESSIBILITY CONTROLS
+  ========================================= -->
+
+  <app-accessibility-controls></app-accessibility-controls>
+
+
   <div class="register-page">
 
     <div class="register-card">
@@ -73,6 +80,44 @@
 
         </div>
 
+        <div class="form-group">
+
+          <label for="grade">
+            Grade
+          </label>
+
+          <select
+            id="grade"
+            name="grade"
+            [(ngModel)]="grade"
+            required>
+
+                        <option [ngValue]="null" disabled>
+              Select your grade
+            </option>
+
+            <option [ngValue]="8">
+              Grade 8
+            </option>
+
+            <option [ngValue]="9">
+              Grade 9
+            </option>
+
+            <option [ngValue]="10">
+              Grade 10
+            </option>
+
+            <option [ngValue]="11">
+              Grade 11
+            </option>
+
+            <option [ngValue]="12">
+              Grade 12
+            </option>
+
+          </select>
+        </div>
 
         <!-- EMAIL -->
 
@@ -204,6 +249,26 @@
 
         </div>
 
+        <!-- ERROR MESSAGE -->
+
+        <div
+          class="login-error"
+          *ngIf="errorMessage">
+
+          {{ errorMessage }}
+
+        </div>
+
+
+        <!-- SUCCESS MESSAGE -->
+
+        <div
+          class="success-message"
+          *ngIf="successMessage">
+
+        {{ successMessage }}
+
+        </div>
 
         <!-- REGISTER BUTTON -->
 

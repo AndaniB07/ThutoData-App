@@ -14,6 +14,8 @@ import {
   IonCardContent
 } from '@ionic/angular';
 
+import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
+
 @Component({
   selector: 'app-application-process',
   templateUrl: './application-process.page.html',
@@ -29,7 +31,8 @@ import {
     IonCardContent,
     CommonModule,
     FormsModule,
-    FooterComponent
+    FooterComponent,
+    AccessibilityControlsComponent
   ]
 })
 export class ApplicationProcessPage implements OnInit {

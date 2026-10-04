@@ -9,6 +9,7 @@ import {
 } from '@ionic/angular';
 
 import { Auth } from '../../services/auth';
+import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ import { Auth } from '../../services/auth';
     RouterLink,
     IonContent,
     IonIcon,
-    CommonModule
+    CommonModule,
+    AccessibilityControlsComponent 
   ],
 
   templateUrl: './login.page.html',

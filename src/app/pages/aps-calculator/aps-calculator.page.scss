@@ -1,0 +1,614 @@
+ion-content {
+  --background: #f7f8fc;
+}
+
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 24px 50px;
+  box-sizing: border-box;
+}
+
+/* =========================
+   PAGE HEADER
+========================= */
+
+.page-header {
+  margin-bottom: 25px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.page-header p {
+  margin: 0;
+  max-width: 750px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #667085;
+}
+
+/* =========================
+   RESULT CARD
+========================= */
+
+.result-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 22px;
+  text-align: center;
+  border: 1px solid #e6e9f0;
+  box-shadow: 0 4px 14px rgba(16, 24, 40, 0.06);
+}
+
+.result-label {
+  margin: 0 0 5px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #667085;
+}
+
+.aps-score {
+  margin: 4px 0 8px;
+  font-size: 52px;
+  line-height: 1;
+  font-weight: 800;
+  color: #3f51b5;
+}
+
+.aps-max {
+  font-size: 24px;
+  font-weight: 600;
+  color: #98a2b3;
+}
+
+.result-message {
+  max-width: 650px;
+  margin: 12px auto 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #667085;
+}
+
+/* =========================
+   CALCULATOR CARD
+========================= */
+
+.calculator-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  border: 1px solid #e6e9f0;
+  box-shadow: 0 4px 14px rgba(16, 24, 40, 0.05);
+}
+
+.calculator-card h2,
+.info-card h2 {
+  margin: 0 0 8px;
+  font-size: 21px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.instructions {
+  margin: 0 0 25px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #667085;
+}
+
+/* =========================
+   SUBJECT LIST
+========================= */
+
+.subject-list {
+  width: 100%;
+}
+
+.subject-row {
+  display: grid;
+  grid-template-columns: 1fr 130px 80px;
+  align-items: center;
+  gap: 20px;
+  padding: 17px 0;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.subject-row:first-child {
+  padding-top: 5px;
+}
+
+.subject-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subject-info label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #172033;
+}
+
+.excluded-label {
+  font-size: 12px;
+  color: #98a2b3;
+}
+
+/* =========================
+   MARK INPUT
+========================= */
+
+.mark-input input {
+  width: 100%;
+  height: 45px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  border: 1px solid #d9dde7;
+  border-radius: 9px;
+  outline: none;
+  background: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  color: #172033;
+  text-align: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mark-input input:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+}
+
+.mark-input input::placeholder {
+  color: #98a2b3;
+}
+
+/* Remove number input arrows */
+
+.mark-input input::-webkit-outer-spin-button,
+.mark-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.mark-input input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* =========================
+   APS POINTS
+========================= */
+
+.aps-points {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #3f51b5;
+}
+
+.aps-points .dash {
+  color: #98a2b3;
+  font-weight: 400;
+}
+
+/* =========================
+   APS SCALE
+========================= */
+
+.aps-scale {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f8f9fc;
+  border: 1px solid #edf0f5;
+}
+
+.aps-scale h3 {
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.scale-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 13px;
+  color: #667085;
+  border-bottom: 1px solid #e7eaf0;
+}
+
+.scale-row:last-child {
+  border-bottom: none;
+}
+
+.scale-row strong {
+  color: #172033;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.button-container {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.calculate-button,
+.clear-button {
+  height: 46px;
+  padding: 0 24px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.calculate-button {
+  border: none;
+  background: #3f51b5;
+  color: #ffffff;
+}
+
+.calculate-button:hover {
+  background: #34439a;
+}
+
+.clear-button {
+  border: 1px solid #d9dde7;
+  background: #ffffff;
+  color: #475467;
+}
+
+.clear-button:hover {
+  background: #f8f9fc;
+}
+
+/* =========================
+   INFORMATION CARD
+========================= */
+
+.info-card {
+  margin-top: 22px;
+  padding: 25px 30px;
+  background: #ffffff;
+  border: 1px solid #e6e9f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(16, 24, 40, 0.04);
+}
+
+.info-card ul {
+  margin: 15px 0 0;
+  padding-left: 20px;
+}
+
+.info-card li {
+  margin-bottom: 9px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #667085;
+}
+
+.info-card li:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================
+   DISCLAIMER
+========================= */
+
+.disclaimer {
+  margin-top: 18px;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: #f8f9fc;
+  border: 1px solid #e6e9f0;
+}
+
+.disclaimer strong {
+  font-size: 13px;
+  color: #172033;
+}
+
+.disclaimer p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #667085;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 768px) {
+
+  .page-container {
+    padding: 25px 18px 40px;
+  }
+
+  .page-header h1 {
+    font-size: 27px;
+  }
+
+  .calculator-card {
+    padding: 22px 18px;
+  }
+
+  .result-card {
+    padding: 24px 18px;
+  }
+
+  .aps-score {
+    font-size: 46px;
+  }
+
+  .subject-row {
+    grid-template-columns: 1fr 100px 55px;
+    gap: 12px;
+  }
+
+  .subject-info label {
+    font-size: 13px;
+  }
+
+  .mark-input input {
+    height: 43px;
+  }
+
+  .info-card {
+    padding: 22px 18px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 520px) {
+
+  .page-container {
+    padding: 20px 14px 35px;
+  }
+
+  .page-header h1 {
+    font-size: 25px;
+  }
+
+  .page-header p {
+    font-size: 14px;
+  }
+
+  .calculator-card {
+    padding: 20px 15px;
+    border-radius: 13px;
+  }
+
+  .result-card {
+    border-radius: 13px;
+  }
+
+  .aps-score {
+    font-size: 42px;
+  }
+
+  .aps-max {
+    font-size: 20px;
+  }
+
+  .subject-row {
+    grid-template-columns: minmax(0, 1fr) 75px 40px;
+    gap: 8px;
+    padding: 14px 0;
+  }
+
+  .subject-info label {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .excluded-label {
+    font-size: 10px;
+  }
+
+  .mark-input input {
+    height: 40px;
+    padding: 0 5px;
+    font-size: 13px;
+  }
+
+  .aps-points {
+    font-size: 16px;
+  }
+
+  .aps-scale {
+    padding: 16px;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  .calculate-button,
+  .clear-button {
+    width: 100%;
+  }
+
+  .info-card {
+    padding: 20px 17px;
+    border-radius: 13px;
+  }
+
+  .info-card h2 {
+    font-size: 19px;
+  }
+
+  .disclaimer {
+    padding: 16px;
+  }
+}
+
+.subject-headings {
+  display: grid;
+  grid-template-columns: 1fr 130px 80px;
+  gap: 20px;
+  padding: 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #98a2b3;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.subject-headings span:nth-child(2),
+.subject-headings span:nth-child(3) {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .subject-headings {
+    grid-template-columns: 1fr 100px 55px;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .subject-headings {
+    grid-template-columns: minmax(0, 1fr) 75px 40px;
+    gap: 8px;
+    font-size: 10px;
+  }
+}
+
+/* =========================================
+   HIGH CONTRAST MODE
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  ion-content {
+    --background: #000000;
+  }
+
+  /* PAGE HEADER */
+  .page-header h1,
+  .calculator-card h2,
+  .info-card h2,
+  .aps-scale h3 {
+    color: #ffff00;
+  }
+
+  .page-header p,
+  .instructions,
+  .result-label,
+  .result-message,
+  .info-card li,
+  .disclaimer p,
+  .scale-row {
+    color: #ffffff;
+  }
+
+
+  /* CARDS */
+  .calculator-card,
+  .result-card,
+  .info-card,
+  .disclaimer,
+  .aps-scale {
+    background: #000000;
+    border-color: #ffffff;
+    box-shadow: none;
+  }
+
+
+  /* RESULT */
+  .result-card {
+    border: 3px solid #ffff00;
+  }
+
+  .aps-score,
+  .aps-points {
+    color: #ffff00;
+  }
+
+  .aps-max,
+  .excluded-label,
+  .aps-points .dash {
+    color: #ffffff;
+  }
+
+
+  /* SUBJECT ROWS */
+  .subject-row,
+  .scale-row {
+    border-color: #ffffff;
+  }
+
+  .subject-headings {
+    color: #ffff00;
+  }
+
+  .subject-info label {
+    color: #ffffff;
+  }
+
+
+  /* MARK INPUT */
+  .mark-input input {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+  .mark-input input::placeholder {
+    color: #ffffff;
+  }
+
+
+  /* BUTTONS */
+  .calculate-button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .clear-button {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+
+  /* IMPORTANT INFORMATION */
+  .disclaimer {
+    border-color: #ffff00;
+  }
+
+  .disclaimer strong,
+  .scale-row strong {
+    color: #ffff00;
+  }
+
+
+  /* KEYBOARD FOCUS */
+  button:focus-visible,
+  input:focus-visible {
+    outline: 4px solid #ffff00;
+    outline-offset: 3px;
+  }
+
+}

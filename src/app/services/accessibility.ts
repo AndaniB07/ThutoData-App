@@ -82,46 +82,70 @@ export class Accessibility {
   // TEXT SIZE
   // ================================
 
-setTextSize(size: number): void {
+  setTextSize(size: number): void {
 
-  size = Math.max(80, Math.min(200, size));
+    size = Math.max(80, Math.min(200, size));
 
-  const app = document.querySelector('ion-app');
+    const app = document.querySelector('ion-app');
 
-  if (app) {
-    (app as HTMLElement).style.zoom = `${size}%`;
+    if (app) {
+      (app as HTMLElement).style.zoom = `${size}%`;
+    }
+
+    localStorage.setItem(
+      'thutodata-text-size',
+      size.toString()
+    );
   }
-
-  localStorage.setItem(
-    'thutodata-text-size',
-    size.toString()
-  );
-}
 
   getTextSize(): number {
 
-  const savedSize =
-    localStorage.getItem('thutodata-text-size');
+    const savedSize =
+      localStorage.getItem('thutodata-text-size');
 
-  return savedSize
-    ? Number(savedSize)
-    : 100;
-}
-
-
-resetTextSize(): void {
-
-  const app = document.querySelector('ion-app');
-
-  if (app) {
-    (app as HTMLElement).style.zoom = '100%';
+    return savedSize
+      ? Number(savedSize)
+      : 100;
   }
 
-  localStorage.setItem(
-    'thutodata-text-size',
-    '100'
-  );
-}
+  resetTextSize(): void {
+
+    const app = document.querySelector('ion-app');
+
+    if (app) {
+      (app as HTMLElement).style.zoom = '100%';
+    }
+
+    localStorage.setItem(
+      'thutodata-text-size',
+      '100'
+    );
+  }
+
+  // ================================
+  // HIGH CONTRAST
+  // ================================
+
+  setHighContrast(enabled: boolean): void {
+
+    const app = document.querySelector('ion-app');
+
+    if (app) {
+      app.classList.toggle('high-contrast', enabled);
+    }
+
+    localStorage.setItem(
+      'thutodata-high-contrast',
+      enabled.toString()
+    );
+  }
+
+  getHighContrast(): boolean {
+
+    return localStorage.getItem(
+      'thutodata-high-contrast'
+    ) === 'true';
+  }
 
   // ================================
   // LOAD SETTINGS
@@ -129,12 +153,16 @@ resetTextSize(): void {
 
   private loadSettings(): void {
 
-  const savedSize = this.getTextSize();
+    const savedSize = this.getTextSize();
+    const savedContrast = this.getHighContrast();
 
-  setTimeout(() => {
-    this.setTextSize(savedSize);
-  }, 300);
-}
+    setTimeout(() => {
+
+      this.setTextSize(savedSize);
+      this.setHighContrast(savedContrast);
+
+    }, 300);
+  }
 
   // ================================
   // CHECK READING STATUS
@@ -146,4 +174,3 @@ resetTextSize(): void {
   }
 
 }
-

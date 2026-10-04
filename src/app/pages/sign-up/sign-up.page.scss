@@ -146,6 +146,42 @@ ion-content {
   border-color: #3f51b5;
 }
 
+.form-group select {
+
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+
+  padding: 0 13px;
+
+  border: 1px solid #d9dde7;
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  color: #172033;
+
+  cursor: pointer;
+
+}
+
+.form-group select:focus {
+
+  border-color: #3f51b5;
+
+}
+
+.form-group select:invalid {
+
+  color: #98a2b3;
+
+}
+
 .form-group input::placeholder {
   color: #98a2b3;
 }
@@ -321,6 +357,28 @@ ion-content {
   text-decoration: none;
 }
 
+.login-error {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fef3f2;
+  color: #b42318;
+  border: 1px solid #fecdca;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.success-message {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #ecfdf3;
+  color: #027a48;
+  border: 1px solid #abefc6;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 
 /* =========================================
    BACK
@@ -368,6 +426,195 @@ ion-content {
 
   .register-header h1 {
     font-size: 26px;
+  }
+
+}
+
+/* =========================================
+   HIGH CONTRAST — REGISTER PAGE
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  /* PAGE */
+  ion-content {
+    --background: #000000 !important;
+  }
+
+  .register-page {
+    background: #000000 !important;
+  }
+
+  /* REGISTER CARD */
+  .register-card {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  /* BRAND */
+  .brand {
+    color: #ffff00 !important;
+  }
+
+  .brand strong {
+    color: #ffff00 !important;
+  }
+
+  /* HEADER */
+  .register-header h1 {
+    color: #ffff00 !important;
+  }
+
+  .register-header p {
+    color: #ffffff !important;
+  }
+
+  /* FORM */
+  .form-group label {
+    color: #ffffff !important;
+  }
+
+  .form-group input {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .form-group input::placeholder {
+    color: #ffffff !important;
+  }
+
+  .form-group input:focus {
+    border-color: #ffff00 !important;
+    outline: 3px solid #ffff00 !important;
+    outline-offset: 2px;
+  }
+
+  .form-group select {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .form-group select:invalid {
+    color: #ffffff !important;
+  }
+
+  .form-group select:focus {
+    border-color: #ffff00 !important;
+    outline: 3px solid #ffff00 !important;
+    outline-offset: 2px;
+  }
+
+  /* INPUT WITH ICON */
+  .input-wrapper {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .input-wrapper:focus-within {
+    border-color: #ffff00 !important;
+    outline: 3px solid #ffff00 !important;
+    outline-offset: 2px;
+  }
+
+  .input-wrapper ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .input-wrapper input {
+    background: transparent !important;
+    color: #ffffff !important;
+  }
+
+  .input-wrapper input::placeholder {
+    color: #ffffff !important;
+  }
+
+  .password-toggle {
+    background: #000000 !important;
+    color: #ffff00 !important;
+  }
+
+  /* ACCOUNT NOTICE */
+  .account-notice {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .account-notice ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .account-notice p {
+    color: #ffffff !important;
+  }
+
+  /* REGISTER BUTTON */
+  .register-button {
+    background: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffff00 !important;
+  }
+
+  .register-button:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+  }
+
+  .register-button:disabled {
+    background: #666666 !important;
+    color: #ffffff !important;
+    border-color: #666666 !important;
+  }
+
+  /* LOGIN */
+  .login-section {
+    color: #ffffff !important;
+  }
+
+  .login-section a {
+    color: #00ffff !important;
+    text-decoration: underline !important;
+  }
+
+  .login-section a:hover {
+    color: #ffff00 !important;
+  }
+
+  /* ERROR MESSAGE */
+  .login-error {
+    background: #000000 !important;
+    color: #ff6666 !important;
+    border: 2px solid #ff6666 !important;
+  }
+
+  /* SUCCESS MESSAGE */
+  .success-message {
+    background: #000000 !important;
+    color: #00ff00 !important;
+    border: 2px solid #00ff00 !important;
+  }
+
+  /* BACK HOME */
+  .back-home a {
+    color: #00ffff !important;
+    text-decoration: underline !important;
+  }
+
+  .back-home a:hover {
+    color: #ffff00 !important;
+  }
+
+  /* KEYBOARD FOCUS */
+  .password-toggle:focus-visible,
+  .register-button:focus-visible,
+  .login-section a:focus-visible,
+  .back-home a:focus-visible {
+    outline: 4px solid #ffff00 !important;
+    outline-offset: 3px;
   }
 
 }

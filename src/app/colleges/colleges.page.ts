@@ -10,6 +10,7 @@ import {
 } from '@ionic/angular';
 
 import { addIcons } from 'ionicons';
+
 import {
   searchOutline,
   filterOutline,
@@ -24,49 +25,94 @@ import {
 import { FooterComponent } from '../components/footer/footer.component';
 import { Auth } from '../services/auth';
 import { SavedService } from '../services/saved.service';
+import {
+  AccessibilityControlsComponent
+} from '../components/accessibility-controls/accessibility-controls.component';
+
+
+/* =========================================================
+   COLLEGE INTERFACE
+========================================================= */
 
 interface College {
+
   universityID: number;
+
   universityName: string;
+
   abbreviation: string | null;
+
   description: string;
+
   province: string;
+
   city: string;
+
   institutionType: string;
+
   universityType: string;
+
   websiteURL: string;
+
 }
 
+
+/* =========================================================
+   COMPONENT
+========================================================= */
+
 @Component({
+
   selector: 'app-colleges',
+
   standalone: true,
 
   imports: [
+
     CommonModule,
+
     FormsModule,
+
     RouterLink,
+
     IonContent,
+
     IonIcon,
+
     FooterComponent,
+
+    AccessibilityControlsComponent
+
   ],
 
   templateUrl: './colleges.page.html',
+
   styleUrls: ['./colleges.page.scss']
+
 })
+
+
 export class CollegesPage implements OnInit {
 
-  private apiUrl = 'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Universities';
 
-  // =========================
-  // SEARCH
-  // =========================
+  /* =========================================================
+     API
+  ========================================================= */
+
+  private apiUrl =
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Universities';
+
+
+  /* =========================================================
+     SEARCH
+  ========================================================= */
 
   searchTerm = '';
 
 
-  // =========================
-  // FILTERS
-  // =========================
+  /* =========================================================
+     FILTERS
+  ========================================================= */
 
   selectedProvince = '';
 
@@ -75,16 +121,16 @@ export class CollegesPage implements OnInit {
   selectedCollegeType = '';
 
 
-  // =========================
-  // COLLEGE DATA
-  // =========================
+  /* =========================================================
+     COLLEGE DATA
+  ========================================================= */
 
   colleges: College[] = [];
 
 
-  // =========================
-  // FILTER OPTIONS
-  // =========================
+  /* =========================================================
+     FILTER OPTIONS
+  ========================================================= */
 
   availableProvinces: string[] = [];
 
@@ -93,59 +139,79 @@ export class CollegesPage implements OnInit {
   availableCollegeTypes: string[] = [];
 
 
-  // =========================
-  // STATE
-  // =========================
+  /* =========================================================
+     STATE
+  ========================================================= */
 
   loading = true;
 
   errorMessage = '';
 
-  // =========================
-  // SAVED COLLEGES
-  // =========================
+
+  /* =========================================================
+     SAVED COLLEGES
+  ========================================================= */
 
   savedCollegeIds = new Set<number>();
 
   savingCollegeId: number | null = null;
 
 
+  /* =========================================================
+     CONSTRUCTOR
+  ========================================================= */
+
   constructor(
+
     private http: HttpClient,
+
     private cdr: ChangeDetectorRef,
+
     private auth: Auth,
+
     private savedService: SavedService
+
   ) {
 
     addIcons({
+
       searchOutline,
+
       filterOutline,
+
       locationOutline,
+
       schoolOutline,
+
       chevronForwardOutline,
+
       closeOutline,
+
       starOutline,
+
       star
+
     });
 
   }
 
 
-  // =========================
-  // PAGE LOAD
-  // =========================
+  /* =========================================================
+     PAGE LOAD
+  ========================================================= */
 
   ngOnInit(): void {
 
     this.loadColleges();
+
     this.loadSavedColleges();
 
   }
 
 
-  // =========================
-  // LOAD COLLEGES
-  // =========================
+  /* =========================================================
+     LOAD COLLEGES
+  ========================================================= */
 
   loadColleges(): void {
 
@@ -153,339 +219,671 @@ export class CollegesPage implements OnInit {
 
     this.errorMessage = '';
 
-    this.http.get<College[]>(this.apiUrl).subscribe({
 
-      next: (data) => {
+    this.http
+      .get<College[]>(this.apiUrl)
+      .subscribe({
 
-        console.log('========== COLLEGES API ==========');
-        console.log('RAW DATA:', data);
-        console.log('IS ARRAY:', Array.isArray(data));
-        console.log('TOTAL RECORDS:', data?.length);
+        next: (data) => {
 
+          console.log(
+            '========== COLLEGES API =========='
+          );
 
-        // Only keep colleges
-        this.colleges = data.filter(
-          institution =>
-            institution.institutionType?.toLowerCase() === 'college'
-        );
+          console.log(
+            'RAW DATA:',
+            data
+          );
 
+          console.log(
+            'IS ARRAY:',
+            Array.isArray(data)
+          );
 
-        console.log('TOTAL COLLEGES:', this.colleges.length);
-
-
-        // Build filter options from actual API data
-        this.buildFilterOptions();
-
-
-        this.loading = false;
-
-        this.cdr.detectChanges();
-      },
+          console.log(
+            'TOTAL RECORDS:',
+            data?.length
+          );
 
 
-      error: (error) => {
+          /* -----------------------------------------
+             ONLY KEEP COLLEGES
+          ----------------------------------------- */
 
-        console.error('College API error:', error);
+          this.colleges =
+            (data || []).filter(
 
-        this.errorMessage =
-          'Unable to load colleges. Please reload the page.';
+              institution =>
+                institution.institutionType
+                  ?.toLowerCase() === 'college'
 
-        this.colleges = [];
+            );
 
-        this.loading = false;
 
-      }
+          console.log(
+            'TOTAL COLLEGES:',
+            this.colleges.length
+          );
 
-    });
 
-  }
+          /* -----------------------------------------
+             BUILD FILTER OPTIONS
+          ----------------------------------------- */
 
-  // =========================
-// LOAD SAVED COLLEGES
-// =========================
+          this.buildFilterOptions();
 
-loadSavedColleges(): void {
 
-  const user = this.auth.getUser();
-  const token = this.auth.getToken();
+          /* -----------------------------------------
+             FINISHED LOADING
+          ----------------------------------------- */
 
-  // User is not logged in
-  if (!user || !token) {
+          this.loading = false;
 
-    this.savedCollegeIds.clear();
+          this.cdr.detectChanges();
 
-    return;
+        },
 
-  }
 
-  this.savedService.getSavedUniversities().subscribe({
+        error: (error) => {
 
-    next: (data) => {
+          console.error(
+            'College API error:',
+            error
+          );
 
-      this.savedCollegeIds.clear();
 
-      if (!Array.isArray(data)) {
-        return;
-      }
+          this.errorMessage =
+            'Unable to load colleges. Please reload the page.';
 
-      data.forEach(item => {
+          this.colleges = [];
 
-        const collegeId =
-          item?.universityID ??
-          item?.UniversityID ??
-          item?.university?.universityID ??
-          item?.University?.universityID ??
-          item?.University?.UniversityID;
+          this.loading = false;
 
-        if (collegeId != null) {
-
-          this.savedCollegeIds.add(Number(collegeId));
+          this.cdr.detectChanges();
 
         }
 
       });
 
+  }
+
+
+  /* =========================================================
+     LOAD SAVED COLLEGES
+  ========================================================= */
+
+  loadSavedColleges(): void {
+
+    const user =
+      this.auth.getUser();
+
+    const token =
+      this.auth.getToken();
+
+
+    /* -----------------------------------------
+       USER NOT LOGGED IN
+    ----------------------------------------- */
+
+    if (!user || !token) {
+
+      this.savedCollegeIds.clear();
+
       this.cdr.detectChanges();
 
-    },
-
-    error: (error) => {
-
-      console.error(
-        'ERROR LOADING SAVED COLLEGES:',
-        error
-      );
+      return;
 
     }
 
-  });
 
-}
+    /* -----------------------------------------
+       LOAD SAVED ITEMS
+    ----------------------------------------- */
 
-// =========================
-// CHECK IF COLLEGE IS SAVED
-// =========================
+    this.savedService
+      .getSavedUniversities()
+      .subscribe({
 
-isCollegeSaved(collegeId: number): boolean {
+        next: (data) => {
 
-  return this.savedCollegeIds.has(Number(collegeId));
-
-}
+          this.savedCollegeIds.clear();
 
 
-  // =========================
-// SAVE / REMOVE COLLEGE
-// =========================
+          if (!Array.isArray(data)) {
 
-toggleCollegeSave(collegeId: number): void {
+            this.cdr.detectChanges();
 
-  const user = this.auth.getUser();
-  const token = this.auth.getToken();
+            return;
 
-  // User must be logged in
-  if (!user || !token) {
+          }
 
-    console.log('User is not logged in.');
 
-    return;
+          data.forEach((item: any) => {
 
-  }
+            const collegeId =
 
-  // Prevent double clicking
-  if (this.savingCollegeId !== null) {
-    return;
-  }
+              item?.universityID ??
 
-  this.savingCollegeId = Number(collegeId);
+              item?.UniversityID ??
 
-  // =========================
-  // REMOVE
-  // =========================
+              item?.university?.universityID ??
 
-  if (this.isCollegeSaved(collegeId)) {
+              item?.University?.universityID ??
 
-    this.savedService.removeUniversity(collegeId).subscribe({
+              item?.University?.UniversityID;
 
-      next: () => {
 
-        this.savedCollegeIds.delete(Number(collegeId));
+            if (collegeId != null) {
 
-        this.savingCollegeId = null;
+              this.savedCollegeIds.add(
+                Number(collegeId)
+              );
 
-        this.cdr.detectChanges();
+            }
 
-      },
+          });
 
-      error: (error) => {
 
-        console.error(
-          'ERROR REMOVING COLLEGE:',
-          error
-        );
+          this.cdr.detectChanges();
 
-        this.savingCollegeId = null;
+        },
 
-        this.cdr.detectChanges();
 
-      }
+        error: (error) => {
 
-    });
+          console.error(
+            'ERROR LOADING SAVED COLLEGES:',
+            error
+          );
 
-    return;
+        }
+
+      });
 
   }
 
 
-  // =========================
-  // SAVE
-  // =========================
+  /* =========================================================
+     CHECK IF COLLEGE IS SAVED
+  ========================================================= */
 
-  this.savedService.saveUniversity(collegeId).subscribe({
+  isCollegeSaved(
+    collegeId: number
+  ): boolean {
 
-    next: () => {
+    return this.savedCollegeIds.has(
+      Number(collegeId)
+    );
 
-      this.savedCollegeIds.add(Number(collegeId));
+  }
 
-      this.savingCollegeId = null;
 
-      this.cdr.detectChanges();
+  /* =========================================================
+     SAVE / REMOVE COLLEGE
+  ========================================================= */
 
-    },
+  toggleCollegeSave(
+    collegeId: number
+  ): void {
 
-    error: (error) => {
+    const user =
+      this.auth.getUser();
 
-      console.error(
-        'ERROR SAVING COLLEGE:',
-        error
+    const token =
+      this.auth.getToken();
+
+
+    /* -----------------------------------------
+       USER NOT LOGGED IN
+    ----------------------------------------- */
+
+    if (!user || !token) {
+
+      console.log(
+        'User is not logged in.'
       );
 
-      this.savingCollegeId = null;
-
-      this.cdr.detectChanges();
+      return;
 
     }
 
-  });
 
-}
+    /* -----------------------------------------
+       PREVENT DOUBLE CLICK
+    ----------------------------------------- */
+
+    if (
+      this.savingCollegeId !== null
+    ) {
+
+      return;
+
+    }
 
 
+    this.savingCollegeId =
+      Number(collegeId);
 
 
-  // =========================
-  // BUILD FILTER OPTIONS
-  // =========================
+    /* =====================================================
+       REMOVE COLLEGE
+    ===================================================== */
+
+    if (
+      this.isCollegeSaved(
+        collegeId
+      )
+    ) {
+
+      this.savedService
+        .removeUniversity(
+          collegeId
+        )
+        .subscribe({
+
+          next: () => {
+
+            this.savedCollegeIds.delete(
+              Number(collegeId)
+            );
+
+
+            this.savingCollegeId = null;
+
+            this.cdr.detectChanges();
+
+          },
+
+
+          error: (error) => {
+
+            console.error(
+              'ERROR REMOVING COLLEGE:',
+              error
+            );
+
+
+            this.savingCollegeId = null;
+
+            this.cdr.detectChanges();
+
+          }
+
+        });
+
+
+      return;
+
+    }
+
+
+    /* =====================================================
+       SAVE COLLEGE
+    ===================================================== */
+
+    this.savedService
+      .saveUniversity(
+        collegeId
+      )
+      .subscribe({
+
+        next: () => {
+
+          this.savedCollegeIds.add(
+            Number(collegeId)
+          );
+
+
+          this.savingCollegeId = null;
+
+          this.cdr.detectChanges();
+
+        },
+
+
+        error: (error) => {
+
+          console.error(
+            'ERROR SAVING COLLEGE:',
+            error
+          );
+
+
+          this.savingCollegeId = null;
+
+          this.cdr.detectChanges();
+
+        }
+
+      });
+
+  }
+
+
+  /* =========================================================
+     BUILD FILTER OPTIONS
+  ========================================================= */
 
   buildFilterOptions(): void {
 
-    // Provinces
+    /* -----------------------------------------
+       PROVINCES
+    ----------------------------------------- */
+
     this.availableProvinces = [
+
       ...new Set(
+
         this.colleges
-          .map(college => college.province)
+
+          .map(
+            college =>
+              college.province
+          )
+
           .filter(
             (province): province is string =>
               !!province
           )
+
+          .map(
+            province =>
+              province.trim()
+          )
+
+          .filter(
+            province =>
+              province.length > 0
+          )
+
       )
+
     ].sort();
 
 
-    // Cities
+    /* -----------------------------------------
+       CITIES
+    ----------------------------------------- */
+
     this.availableCities = [
+
       ...new Set(
+
         this.colleges
-          .map(college => college.city)
+
+          .map(
+            college =>
+              college.city
+          )
+
           .filter(
             (city): city is string =>
               !!city
           )
+
+          .map(
+            city =>
+              city.trim()
+          )
+
+          .filter(
+            city =>
+              city.length > 0
+          )
+
       )
+
     ].sort();
 
 
-    // College types
+    /* -----------------------------------------
+       COLLEGE TYPES
+    ----------------------------------------- */
+
     this.availableCollegeTypes = [
+
       ...new Set(
+
         this.colleges
-          .map(college => college.universityType)
+
+          .map(
+            college =>
+              college.universityType
+          )
+
           .filter(
             (type): type is string =>
               !!type
           )
+
+          .map(
+            type =>
+              type.trim()
+          )
+
+          .filter(
+            type =>
+              type.length > 0
+          )
+
       )
+
     ].sort();
 
   }
 
 
-  // =========================
-  // FILTERED COLLEGES
-  // =========================
+  /* =========================================================
+     FILTERED COLLEGES
+  ========================================================= */
 
   get filteredColleges(): College[] {
 
-    const search = this.searchTerm
-      .toLowerCase()
-      .trim();
+    const search =
+      this.searchTerm
+        .toLowerCase()
+        .trim();
 
 
-    return this.colleges.filter(college => {
-
-      // SEARCH
-      const matchesSearch =
-        !search ||
-
-        college.universityName
-          ?.toLowerCase()
-          .includes(search) ||
-
-        college.city
-          ?.toLowerCase()
-          .includes(search) ||
-
-        college.province
-          ?.toLowerCase()
-          .includes(search) ||
-
-        college.abbreviation
-          ?.toLowerCase()
-          .includes(search);
+    return this.colleges.filter(
+      college => {
 
 
-      // PROVINCE
-      const matchesProvince =
-        !this.selectedProvince ||
-        college.province === this.selectedProvince;
+        /* -----------------------------------------
+           SEARCH
+        ----------------------------------------- */
+
+        const matchesSearch =
+
+          !search ||
+
+          college.universityName
+            ?.toLowerCase()
+            .includes(search) ||
+
+          college.abbreviation
+            ?.toLowerCase()
+            .includes(search) ||
+
+          college.city
+            ?.toLowerCase()
+            .includes(search) ||
+
+          college.province
+            ?.toLowerCase()
+            .includes(search);
 
 
-      // CITY
-      const matchesCity =
-        !this.selectedCity ||
-        college.city === this.selectedCity;
+        /* -----------------------------------------
+           PROVINCE
+        ----------------------------------------- */
+
+        const matchesProvince =
+
+          !this.selectedProvince ||
+
+          college.province
+            ?.toLowerCase() ===
+          this.selectedProvince
+            .toLowerCase();
 
 
-      // COLLEGE TYPE
-      const matchesCollegeType =
-        !this.selectedCollegeType ||
-        college.universityType === this.selectedCollegeType;
+        /* -----------------------------------------
+           CITY
+        ----------------------------------------- */
+
+        const matchesCity =
+
+          !this.selectedCity ||
+
+          college.city
+            ?.toLowerCase() ===
+          this.selectedCity
+            .toLowerCase();
 
 
-      return (
-        matchesSearch &&
-        matchesProvince &&
-        matchesCity &&
-        matchesCollegeType
-      );
+        /* -----------------------------------------
+           COLLEGE TYPE
+        ----------------------------------------- */
 
-    });
+        const matchesCollegeType =
+
+          !this.selectedCollegeType ||
+
+          college.universityType
+            ?.toLowerCase() ===
+          this.selectedCollegeType
+            .toLowerCase();
+
+
+        /* -----------------------------------------
+           ALL FILTERS
+        ----------------------------------------- */
+
+        return (
+
+          matchesSearch &&
+
+          matchesProvince &&
+
+          matchesCity &&
+
+          matchesCollegeType
+
+        );
+
+      }
+
+    );
 
   }
 
 
-  // =========================
-  // CLEAR FILTERS
-  // =========================
+  /* =========================================================
+     PROVINCE CHANGE
+  ========================================================= */
+
+  onProvinceChange(): void {
+
+    /*
+     * When a province is selected,
+     * only show cities belonging to
+     * that province.
+     */
+
+    if (this.selectedProvince) {
+
+      this.availableCities = [
+
+        ...new Set(
+
+          this.colleges
+
+            .filter(
+              college =>
+                college.province
+                  ?.toLowerCase() ===
+                this.selectedProvince
+                  .toLowerCase()
+            )
+
+            .map(
+              college =>
+                college.city
+            )
+
+            .filter(
+              (city): city is string =>
+                !!city
+            )
+
+            .map(
+              city =>
+                city.trim()
+            )
+
+            .filter(
+              city =>
+                city.length > 0
+            )
+
+        )
+
+      ].sort();
+
+    } else {
+
+      /*
+       * No province selected:
+       * show all cities.
+       */
+
+      this.availableCities = [
+
+        ...new Set(
+
+          this.colleges
+
+            .map(
+              college =>
+                college.city
+            )
+
+            .filter(
+              (city): city is string =>
+                !!city
+            )
+
+            .map(
+              city =>
+                city.trim()
+            )
+
+            .filter(
+              city =>
+                city.length > 0
+            )
+
+        )
+
+      ].sort();
+
+    }
+
+
+    /*
+     * Clear the selected city because
+     * the province has changed.
+     */
+
+    this.selectedCity = '';
+
+  }
+
+
+  /* =========================================================
+     CLEAR FILTERS
+  ========================================================= */
 
   clearFilters(): void {
 
@@ -497,70 +895,47 @@ toggleCollegeSave(collegeId: number): void {
 
     this.selectedCollegeType = '';
 
+
+    /*
+     * Restore all filter options.
+     */
+
+    this.buildFilterOptions();
+
+
+    this.cdr.detectChanges();
+
   }
 
 
-  // =========================
-  // ACTIVE FILTER CHECK
-  // =========================
+  /* =========================================================
+     ACTIVE FILTER CHECK
+  ========================================================= */
 
   get hasActiveFilters(): boolean {
 
     return !!(
+
       this.searchTerm ||
+
       this.selectedProvince ||
+
       this.selectedCity ||
+
       this.selectedCollegeType
+
     );
 
   }
 
 
-  // =========================
-  // PROVINCE CHANGE
-  // =========================
+  /* =========================================================
+     RETRY
+  ========================================================= */
 
-  onProvinceChange(): void {
+  retry(): void {
 
-    // If a province is selected,
-    // only show cities from that province.
-
-    if (this.selectedProvince) {
-
-      this.availableCities = [
-        ...new Set(
-          this.colleges
-            .filter(
-              college =>
-                college.province === this.selectedProvince
-            )
-            .map(college => college.city)
-            .filter(
-              (city): city is string =>
-                !!city
-            )
-        )
-      ].sort();
-
-    } else {
-
-      // Show all cities again
-      this.availableCities = [
-        ...new Set(
-          this.colleges
-            .map(college => college.city)
-            .filter(
-              (city): city is string =>
-                !!city
-            )
-        )
-      ].sort();
-
-    }
-
-
-    // Reset city when province changes
-    this.selectedCity = '';
+    this.loadColleges();
 
   }
 

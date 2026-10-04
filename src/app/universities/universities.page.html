@@ -1,15 +1,16 @@
 <ion-content [fullscreen]="true">
 
-    <!-- =========================================
+
+  <!-- =====================================================
        ACCESSIBILITY CONTROLS
-  ========================================= -->
+  ====================================================== -->
 
   <app-accessibility-controls></app-accessibility-controls>
 
 
-  <!-- =========================
+  <!-- =====================================================
        SEARCH HEADER
-  ========================== -->
+  ====================================================== -->
 
   <section class="search-section">
 
@@ -19,16 +20,21 @@
         UNIVERSITIES
       </span>
 
+
       <div>
+
         <img
           src="assets/icon/ThutoData_Logo_Transparent.png"
           alt="ThutoData Logo"
           class="hero-logo">
+
       </div>
+
 
       <h1>
         Find Your University
       </h1>
+
 
       <p>
         Explore universities across South Africa and find
@@ -38,9 +44,9 @@
     </div>
 
 
-    <!-- =========================
+    <!-- ===================================================
          SEARCH
-    ========================== -->
+    ==================================================== -->
 
     <div class="search-box">
 
@@ -48,13 +54,16 @@
         name="search-outline">
       </ion-icon>
 
+
       <input
         type="text"
         [(ngModel)]="searchTerm"
         placeholder="Search universities, cities or provinces...">
 
+
       <button
         *ngIf="searchTerm"
+        type="button"
         (click)="searchTerm = ''"
         aria-label="Clear search">
 
@@ -69,20 +78,23 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        MAIN CONTENT
-  ========================== -->
+  ====================================================== -->
 
   <section class="universities-section">
 
     <div class="page-layout">
 
 
-      <!-- =========================
+      <!-- =================================================
            FILTER SIDEBAR
-      ========================== -->
+      ================================================== -->
 
       <aside class="filter-sidebar">
+
+
+        <!-- FILTER HEADER -->
 
         <div class="filter-heading">
 
@@ -94,11 +106,13 @@
                 name="filter-outline">
               </ion-icon>
 
+
               <h2>
                 Filters
               </h2>
 
             </div>
+
 
             <p>
               Narrow your results
@@ -109,6 +123,7 @@
 
           <button
             *ngIf="hasActiveFilters"
+            type="button"
             class="clear-button"
             (click)="clearFilters()">
 
@@ -119,52 +134,67 @@
         </div>
 
 
-        <!-- PROVINCE -->
+        <!-- =================================================
+             PROVINCE
+        ================================================== -->
 
         <div class="filter-group">
 
-          <label>
+          <label for="province">
             Province
           </label>
 
+
           <select
-            [(ngModel)]="selectedProvince">
+            id="province"
+            name="province"
+            [(ngModel)]="selectedProvince"
+            (ngModelChange)="onProvinceChange()">
 
             <option value="">
               All provinces
             </option>
 
+
             <option value="Eastern Cape">
               Eastern Cape
             </option>
+
 
             <option value="Free State">
               Free State
             </option>
 
+
             <option value="Gauteng">
               Gauteng
             </option>
+
 
             <option value="KwaZulu-Natal">
               KwaZulu-Natal
             </option>
 
+
             <option value="Limpopo">
               Limpopo
             </option>
+
 
             <option value="Mpumalanga">
               Mpumalanga
             </option>
 
+
             <option value="Northern Cape">
               Northern Cape
             </option>
 
+
             <option value="North West">
               North West
             </option>
+
 
             <option value="Western Cape">
               Western Cape
@@ -175,21 +205,62 @@
         </div>
 
 
-        <!-- FACULTY -->
+        <!-- =================================================
+             CITY
+        ================================================== -->
 
         <div class="filter-group">
 
-          <label>
+          <label for="city">
+            City
+          </label>
+
+
+          <select
+            id="city"
+            name="city"
+            [(ngModel)]="selectedCity"
+            (ngModelChange)="onCityChange()">
+
+            <option value="">
+              All cities
+            </option>
+
+
+            <option
+              *ngFor="let city of availableCities"
+              [value]="city">
+
+              {{ city }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- =================================================
+             FACULTY
+        ================================================== -->
+
+        <div class="filter-group">
+
+          <label for="faculty">
             Faculty
           </label>
 
+
           <select
+            id="faculty"
+            name="faculty"
             [(ngModel)]="selectedFaculty"
             (ngModelChange)="onFacultyChange()">
 
             <option value="">
               All faculties
             </option>
+
 
             <option
               *ngFor="let faculty of availableFaculties"
@@ -204,15 +275,20 @@
         </div>
 
 
-        <!-- COURSE -->
+        <!-- =================================================
+             COURSE
+        ================================================== -->
 
         <div class="filter-group">
 
-          <label>
+          <label for="course">
             Course
           </label>
 
+
           <select
+            id="course"
+            name="course"
             [(ngModel)]="selectedCourse"
             (ngModelChange)="onCourseChange()">
 
@@ -220,15 +296,19 @@
               All courses
             </option>
 
+
             <option
               *ngFor="let course of availableCourses"
               [value]="course.courseID">
 
               {{ course.courseName }}
 
-              <span *ngIf="course.courseCode">
+              <ng-container
+                *ngIf="course.courseCode">
+
                 ({{ course.courseCode }})
-              </span>
+
+              </ng-container>
 
             </option>
 
@@ -237,20 +317,27 @@
         </div>
 
 
-        <!-- QUALIFICATION TYPE -->
+        <!-- =================================================
+             QUALIFICATION TYPE
+        ================================================== -->
 
         <div class="filter-group">
 
-          <label>
+          <label for="qualification">
             Qualification Type
           </label>
 
+
           <select
-            [(ngModel)]="selectedQualification">
+            id="qualification"
+            name="qualification"
+            [(ngModel)]="selectedQualification"
+            (ngModelChange)="onQualificationChange()">
 
             <option value="">
               All qualification types
             </option>
+
 
             <option
               *ngFor="let type of qualificationTypes"
@@ -260,7 +347,7 @@
 
             </option>
 
-          </select>
+          </select>   
 
         </div>
 
@@ -268,9 +355,9 @@
       </aside>
 
 
-      <!-- =========================
-           RESULTS
-      ========================== -->
+      <!-- =================================================
+           RESULTS AREA
+      ================================================== -->
 
       <main class="results-area">
 
@@ -284,6 +371,7 @@
             <h2>
               Universities
             </h2>
+
 
             <p>
 
@@ -315,7 +403,9 @@
         </div>
 
 
-        <!-- LOADING -->
+        <!-- =================================================
+             LOADING
+        ================================================== -->
 
         <div
           class="loading-message"
@@ -325,6 +415,7 @@
             name="school-outline">
           </ion-icon>
 
+
           <p>
             Loading universities...
           </p>
@@ -332,21 +423,29 @@
         </div>
 
 
-        <!-- ERROR -->
+        <!-- =================================================
+             ERROR
+        ================================================== -->
 
         <div
           class="error-message"
-          *ngIf="!loading && errorMessage">
+          *ngIf="
+            !loading &&
+            errorMessage
+          ">
 
           <ion-icon
             name="close-outline">
           </ion-icon>
 
+
           <p>
             {{ errorMessage }}
           </p>
 
+
           <button
+            type="button"
             (click)="loadAllData()">
 
             Try Again
@@ -356,9 +455,9 @@
         </div>
 
 
-        <!-- =========================
+        <!-- =================================================
              UNIVERSITY GRID
-        ========================== -->
+        ================================================== -->
 
         <div
           class="universities-grid"
@@ -368,14 +467,18 @@
             filteredUniversities.length > 0
           ">
 
+
           <article
             class="university-card"
-            *ngFor="let university of filteredUniversities">
+            *ngFor="
+              let university of filteredUniversities
+            ">
 
 
             <!-- CARD TOP -->
 
             <div class="card-top">
+
 
               <div class="university-icon">
 
@@ -385,7 +488,9 @@
 
               </div>
 
+
               <div class="card-top-actions">
+
 
                 <span class="institution-badge">
                   University
@@ -419,6 +524,7 @@
                     : 'Save university'
                   ">
 
+
                   <ion-icon
                     [name]="
                       isUniversitySaved(
@@ -428,6 +534,7 @@
                       : 'star-outline'
                     ">
                   </ion-icon>
+
 
                 </button>
 
@@ -439,6 +546,7 @@
             <!-- CARD CONTENT -->
 
             <div class="card-content">
+
 
               <h3>
                 {{ university.universityName }}
@@ -463,6 +571,7 @@
                 <ion-icon
                   name="location-outline">
                 </ion-icon>
+
 
                 <span>
 
@@ -493,12 +602,14 @@
 
             <div class="card-footer">
 
+
               <span>
                 {{ university.universityType }}
               </span>
 
 
               <button
+                type="button"
                 class="details-button"
                 [routerLink]="[
                   '/tabs/university-details',
@@ -506,6 +617,7 @@
                 ]">
 
                 View Details
+
 
                 <ion-icon
                   name="chevron-forward-outline">
@@ -518,12 +630,13 @@
 
           </article>
 
+
         </div>
 
 
-        <!-- =========================
+        <!-- =================================================
              NO RESULTS
-        ========================== -->
+        ================================================== -->
 
         <div
           class="no-results"
@@ -532,6 +645,7 @@
             !errorMessage &&
             filteredUniversities.length === 0
           ">
+
 
           <div class="no-results-icon">
 
@@ -554,6 +668,7 @@
 
 
           <button
+            type="button"
             class="reset-button"
             (click)="clearFilters()">
 
@@ -571,10 +686,11 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        FOOTER
-  ========================== -->
+  ====================================================== -->
 
   <app-footer></app-footer>
+
 
 </ion-content>

@@ -10,6 +10,7 @@ import {
 
 import { HttpClient } from '@angular/common/http';
 import { timeout } from 'rxjs/operators';
+import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -20,7 +21,8 @@ import { timeout } from 'rxjs/operators';
     RouterLink,
     IonContent,
     IonIcon,
-    CommonModule
+    CommonModule,
+    AccessibilityControlsComponent
   ],
 
   templateUrl: './forgot-password.page.html',

@@ -6,6 +6,7 @@ import {
   IonIcon
 } from '@ionic/angular';
 import { FooterComponent } from '../components/footer/footer.component';
+import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
 
 @Component({
   selector: 'app-about-us',
@@ -15,7 +16,8 @@ import { FooterComponent } from '../components/footer/footer.component';
     RouterLink,
     IonContent,
     IonIcon,
-    FooterComponent
+    FooterComponent,
+    AccessibilityControlsComponent
   ],
   templateUrl: './about-us.page.html',
   styleUrls: ['./about-us.page.scss']

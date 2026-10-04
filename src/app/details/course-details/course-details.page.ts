@@ -42,6 +42,7 @@ import {
 import {FooterComponent} from "../../components/footer/footer.component";
 import { Auth } from '../../services/auth';
 import { SavedService } from '../../services/saved.service';
+import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
 
 
 // =========================================
@@ -130,7 +131,8 @@ interface Course {
     IonButton,
     IonIcon,
     IonSpinner,
-    FooterComponent
+    FooterComponent,
+    AccessibilityControlsComponent
 
   ]
 

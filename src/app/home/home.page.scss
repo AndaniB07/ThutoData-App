@@ -679,3 +679,218 @@ ion-content {
   }
 
 }
+
+/* =========================================
+   HIGH CONTRAST MODE
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  ion-content {
+    --background: #000000;
+  }
+
+  /* HERO */
+  .hero {
+    background: #000000;
+  }
+
+  .hero-label,
+  .section-label {
+    color: #ffffff;
+  }
+
+  .hero h1 {
+    color: #ffffff;
+  }
+
+  .hero h1 span {
+    color: #ffff00;
+  }
+
+  .hero-tagline {
+    color: #ffffff;
+  }
+
+  .hero-description {
+    color: #ffffff;
+  }
+
+
+  /* BUTTONS */
+  .primary-button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+  }
+
+  .primary-button:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .secondary-button {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+  .secondary-button:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+  }
+
+
+  /* QUICK ACCESS */
+  .quick-section {
+    background: #000000;
+  }
+
+  .section-heading h2 {
+    color: #ffff00;
+  }
+
+  .section-heading p {
+    color: #ffffff;
+  }
+
+
+  /* QUICK CARDS */
+  .quick-card {
+    background: #000000;
+    border: 3px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .quick-card:hover {
+    background: #111111;
+    border-color: #ffff00;
+    box-shadow: none;
+  }
+
+  .quick-icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .quick-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .quick-card h3 {
+    color: #ffffff;
+  }
+
+  .quick-card p {
+    color: #ffffff;
+  }
+
+  .card-link {
+    color: #00ffff;
+    text-decoration: underline;
+  }
+
+
+  /* WHY SECTION */
+  .why-section {
+    background: #000000;
+  }
+
+  .why-content h2 {
+    color: #ffff00;
+  }
+
+  .why-content p {
+    color: #ffffff;
+  }
+
+  .text-button {
+    color: #00ffff;
+    text-decoration: underline;
+  }
+
+
+  /* WHY CARDS */
+  .why-card {
+    background: #000000;
+    border: 3px solid #ffffff;
+  }
+
+  .why-card-icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .why-card-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .why-card h3 {
+    color: #ffffff;
+  }
+
+  .why-card p {
+    color: #ffffff;
+  }
+
+
+  /* DIGITAL LITERACY */
+  .literacy-section {
+    background: #000000;
+  }
+
+  .literacy-container {
+    background: #000000;
+    border: 3px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .literacy-icon {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .literacy-icon ion-icon {
+    color: #ffff00;
+  }
+
+  .literacy-content h2 {
+    color: #ffff00;
+  }
+
+  .literacy-content p {
+    color: #ffffff;
+  }
+
+
+  /* CTA */
+  .cta-section {
+    background: #000000;
+  }
+
+  .cta-container h2 {
+    color: #ffff00;
+  }
+
+  .cta-container p {
+    color: #ffffff;
+  }
+
+  .cta-link {
+    color: #00ffff;
+    text-decoration: underline;
+  }
+
+
+  /* KEYBOARD FOCUS */
+  .primary-button:focus-visible,
+  .secondary-button:focus-visible,
+  .text-button:focus-visible,
+  .cta-link:focus-visible,
+  .quick-card:focus-visible {
+    outline: 4px solid #ffff00;
+    outline-offset: 4px;
+  }
+
+}

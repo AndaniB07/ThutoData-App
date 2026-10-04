@@ -9,6 +9,7 @@ import {
 } from '@ionic/angular';
 
 import { HttpClient } from '@angular/common/http';
+import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
 
 @Component({
   selector: 'app-reset-password',
@@ -19,7 +20,8 @@ import { HttpClient } from '@angular/common/http';
     RouterLink,
     IonContent,
     IonIcon,
-    CommonModule
+    CommonModule,
+    AccessibilityControlsComponent
   ],
 
   templateUrl: './reset-password.page.html',

@@ -463,3 +463,102 @@ ion-card-content strong {
   }
 
 }
+
+/* =========================================================
+   HIGH CONTRAST — APPLICATION PROCESS
+   ========================================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  /* PAGE BACKGROUND */
+  ion-content {
+    --background: #000000;
+  }
+
+  /* HERO */
+  .hero-section h1 {
+    color: #ffff00;
+  }
+
+  .hero-section p {
+    color: #ffffff;
+  }
+
+  /* STEP CARDS */
+  .step-card {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .step-card:hover {
+    background: #111111;
+    border-color: #ffff00;
+    box-shadow: none;
+  }
+
+  /* CARD HEADER */
+  ion-card-header {
+    background: #000000;
+  }
+
+  /* STEP NUMBER */
+  .step-number {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffff00;
+    box-shadow: none;
+  }
+
+  /* CARD TITLE */
+  ion-card-title {
+    color: #ffff00;
+  }
+
+  /* CARD CONTENT */
+  ion-card-content {
+    color: #ffffff;
+  }
+
+  ion-card-content p,
+  ion-card-content li {
+    color: #ffffff;
+  }
+
+  /* SUBHEADINGS */
+  ion-card-content h3 {
+    color: #ffff00;
+  }
+
+  /* STRONG TEXT */
+  ion-card-content strong {
+    color: #ffff00;
+  }
+
+  /* TIP BOX */
+  .tip-box {
+    background: #000000;
+    border: 2px solid #ffff00;
+    border-left: 5px solid #ffff00;
+    color: #ffffff;
+  }
+
+  .tip-box strong {
+    color: #ffff00;
+  }
+
+  /* FINAL SECTION */
+  .final-section h2 {
+    color: #ffff00;
+  }
+
+  .final-section p {
+    color: #ffffff;
+  }
+
+  /* KEYBOARD FOCUS */
+  :is(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 4px solid #ffff00;
+    outline-offset: 3px;
+  }
+}
