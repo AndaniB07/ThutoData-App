@@ -142,9 +142,11 @@
                 Current Grade
               </span>
 
-              <strong>
-                {{ currentUser.grade ?? 'Not specified' }}
-              </strong>
+            <strong>
+              {{ currentUser.grade === 13
+              ? 'Post-school / Other'
+              : currentUser.grade ?? 'Not specified' }}
+            </strong>
 
             </div>
 
@@ -382,32 +384,6 @@
 
 
           <!-- SETTINGS -->
-
-          <button
-            type="button"
-            (click)="openSettings()">
-
-            <span>
-              ⚙️
-            </span>
-
-            <div>
-
-              <strong>
-                Settings
-              </strong>
-
-              <small>
-                Manage your account preferences
-              </small>
-
-            </div>
-
-            <span class="arrow">
-              ›
-            </span>
-
-          </button>
 
 
           <!-- LOGOUT -->

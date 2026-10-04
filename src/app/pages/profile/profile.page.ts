@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {
   IonContent,
@@ -67,7 +67,8 @@ export class ProfilePage implements OnInit, ViewWillEnter {
     private auth: Auth,
     private savedService: SavedService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute
   ) {}
 
 
@@ -75,13 +76,26 @@ export class ProfilePage implements OnInit, ViewWillEnter {
   // INITIALISE
   // =========================================
 
-  ngOnInit(): void {
+ ngOnInit(): void {
+
+  console.log(
+    '========== PROFILE PAGE INITIALISED =========='
+  );
+
+  this.auth.user$.subscribe(user => {
 
     console.log(
-      '========== PROFILE PAGE INITIALISED =========='
+      'PROFILE: User changed:',
+      user
     );
 
-  }
+    this.user = user;
+
+    this.cdr.detectChanges();
+
+  });
+
+}
 
 
   // =========================================
@@ -90,15 +104,34 @@ export class ProfilePage implements OnInit, ViewWillEnter {
 
   ionViewWillEnter(): void {
 
+  console.log(
+    '========== PROFILE PAGE ENTERED =========='
+  );
+
+  const navigation =
+    this.router.getCurrentNavigation();
+
+  const updatedUser =
+    navigation?.extras?.state?.['updatedUser'];
+
+  if (updatedUser) {
+
     console.log(
-      '========== PROFILE PAGE ENTERED =========='
+      'PROFILE: Received updated user:',
+      updatedUser
     );
 
-    // Always reload the logged-in user when
-    // Ionic enters the Profile tab.
-    this.loadUser();
+    this.user = updatedUser;
 
+    this.cdr.detectChanges();
+
+    this.loadSavedInformation();
+
+    return;
   }
+
+  this.loadUser();
+}
 
 
   // =========================================

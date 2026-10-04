@@ -72,93 +72,88 @@ export class EditProfilePage implements OnInit {
   // SAVE PROFILE
   // =========================================
 
-  saveProfile(): void {
+saveProfile(): void {
 
-    this.errorMessage = '';
-    this.successMessage = '';
+  this.errorMessage = '';
+  this.successMessage = '';
 
-    // Basic validation
-    if (!this.name.trim()) {
-
-      this.errorMessage =
-        'Please enter your full name.';
-
-      return;
-    }
-
-    if (!this.email.trim()) {
-
-      this.errorMessage =
-        'Please enter your email address.';
-
-      return;
-    }
-
-    if (!this.user) {
-
-      this.errorMessage =
-        'Your account could not be found.';
-
-      return;
-    }
-
-    this.saving = true;
-
-    this.auth
-      .updateProfile(
-        this.user.userID,
-        this.name,
-        this.email,
-        this.grade
-      )
-      .subscribe({
-
-        next: (response) => {
-
-          console.log(
-            'Profile successfully updated:',
-            response
-          );
-
-          this.successMessage =
-            'Your profile has been updated successfully.';
-
-          this.saving = false;
-
-          // Update local user object
-          this.user =
-            response.user;
-
-          this.name =
-            response.user.name;
-
-          this.email =
-            response.user.email;
-
-          this.grade =
-            response.user.grade;
-
-        },
-
-        error: (error) => {
-
-          console.error(
-            'Profile update failed:',
-            error
-          );
-
-          this.saving = false;
-
-          this.errorMessage =
-            error?.error?.message ??
-            'Unable to update your profile. Please try again.';
-
-        }
-
-      });
-
+  // Basic validation
+  if (!this.name.trim()) {
+    this.errorMessage =
+      'Please enter your full name.';
+    return;
   }
 
+  if (!this.email.trim()) {
+    this.errorMessage =
+      'Please enter your email address.';
+    return;
+  }
+
+  if (!this.user) {
+    this.errorMessage =
+      'Your account could not be found.';
+    return;
+  }
+
+  this.saving = true;
+
+  this.auth
+    .updateProfile(
+      this.user.userID,
+      this.name,
+      this.email,
+      this.grade
+    )
+    .subscribe({
+
+      next: (response) => {
+
+        console.log(
+          'Profile successfully updated:',
+          response
+        );
+
+        // Update the saved user information
+        this.user = response.user;
+
+        this.name = response.user.name;
+        this.email = response.user.email;
+        this.grade = response.user.grade;
+
+        this.successMessage =
+          'Your profile has been updated successfully.';
+
+        this.saving = false;
+
+        // Give the success message a moment to appear,
+        // then return to the Profile page.
+
+        setTimeout(() => {
+
+  this.router.navigate([
+    '/tabs/profile'
+  ]);
+
+}, 1000);
+      },
+
+      error: (error) => {
+
+        console.error(
+          'Profile update failed:',
+          error
+        );
+
+        this.saving = false;
+
+        this.errorMessage =
+          error?.error?.message ??
+          'Unable to update your profile. Please try again.';
+      }
+
+    });
+}
 
   // =========================================
   // CANCEL

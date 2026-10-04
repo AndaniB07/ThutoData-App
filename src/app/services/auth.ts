@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, BehaviorSubject } from 'rxjs';
 
 interface RegisterRequest {
   name: string;
@@ -41,6 +41,14 @@ export class Auth {
   private readonly userKey =
     'thutodata-user';
 
+
+    private userSubject =
+  new BehaviorSubject<User | null>(
+    this.getUser()
+  );
+
+user$ =
+  this.userSubject.asObservable();
 
   constructor(
     private http: HttpClient
@@ -108,34 +116,30 @@ export class Auth {
 
         tap(response => {
 
-          console.log(
-            'Login successful:',
-            response.user
-          );
+  console.log(
+    'Login successful:',
+    response.user
+  );
 
+  localStorage.setItem(
+    this.tokenKey,
+    response.token
+  );
 
-          // Save JWT token first
+  localStorage.setItem(
+    this.userKey,
+    JSON.stringify(response.user)
+  );
 
-          localStorage.setItem(
-            this.tokenKey,
-            response.token
-          );
+  this.userSubject.next(
+    response.user
+  );
 
+  console.log(
+    'User saved to localStorage'
+  );
 
-          // Save user information
-
-          localStorage.setItem(
-            this.userKey,
-            JSON.stringify(response.user)
-          );
-
-
-          console.log(
-            'User saved to localStorage'
-          );
-
-        })
-
+})
       );
 
   }
@@ -145,17 +149,18 @@ export class Auth {
   // LOGOUT
   // =========================================
 
-  logout(): void {
+logout(): void {
 
-    localStorage.removeItem(
-      this.tokenKey
-    );
+  localStorage.removeItem(
+    this.tokenKey
+  );
 
-    localStorage.removeItem(
-      this.userKey
-    );
+  localStorage.removeItem(
+    this.userKey
+  );
 
-  }
+  this.userSubject.next(null);
+}
 
 
   // =========================================
@@ -259,18 +264,21 @@ updateProfile(
 
       tap((response: any) => {
 
-        console.log(
-          'Profile updated:',
-          response.user
-        );
+  console.log(
+    'Profile updated:',
+    response.user
+  );
 
-        // Update the locally stored user
-        localStorage.setItem(
-          this.userKey,
-          JSON.stringify(response.user)
-        );
+  localStorage.setItem(
+    this.userKey,
+    JSON.stringify(response.user)
+  );
 
-      })
+  this.userSubject.next(
+    response.user
+  );
+
+})
 
     );
 }
