@@ -16,7 +16,10 @@ import {
   SavedService
 } from '../../services/saved.service';
 
-import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
+import {
+  AccessibilityControlsComponent
+} from '../../components/accessibility-controls/accessibility-controls.component';
+
 
 @Component({
   selector: 'app-profile',
@@ -75,18 +78,25 @@ export class ProfilePage implements OnInit, ViewWillEnter {
   ngOnInit(): void {
 
     console.log(
-      '========== PROFILE PAGE =========='
+      '========== PROFILE PAGE INITIALISED =========='
     );
 
-    this.loadUser();
-
   }
+
+
+  // =========================================
+  // PAGE ENTER
+  // =========================================
 
   ionViewWillEnter(): void {
 
-  if (this.user) {
-    this.loadSavedInformation();
-  }
+    console.log(
+      '========== PROFILE PAGE ENTERED =========='
+    );
+
+    // Always reload the logged-in user when
+    // Ionic enters the Profile tab.
+    this.loadUser();
 
   }
 
@@ -98,23 +108,26 @@ export class ProfilePage implements OnInit, ViewWillEnter {
   loadUser(): void {
 
     console.log(
-      'Loading logged-in user...'
+      'PROFILE: Loading logged-in user...'
     );
+
 
     const loggedInUser =
       this.auth.getUser();
+
 
     const token =
       this.auth.getToken();
 
 
     console.log(
-      'USER:',
+      'PROFILE: USER:',
       loggedInUser
     );
 
+
     console.log(
-      'TOKEN EXISTS:',
+      'PROFILE: TOKEN EXISTS:',
       !!token
     );
 
@@ -126,14 +139,20 @@ export class ProfilePage implements OnInit, ViewWillEnter {
     if (!loggedInUser || !token) {
 
       console.log(
-        'No logged-in user found.'
+        'PROFILE: No logged-in user found.'
       );
+
+
+      this.user = null;
+
 
       this.router.navigate([
         '/login'
       ]);
 
+
       return;
+
     }
 
 
@@ -146,11 +165,17 @@ export class ProfilePage implements OnInit, ViewWillEnter {
 
 
     console.log(
-      'Logged-in user:',
+      'PROFILE: User loaded successfully:',
       this.user
     );
 
 
+    // Force Angular to update the profile
+    // immediately after assigning the user.
+    this.cdr.detectChanges();
+
+
+    // Load saved information separately.
     this.loadSavedInformation();
 
   }
@@ -163,7 +188,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
   loadSavedInformation(): void {
 
     console.log(
-      'Loading saved universities and courses...'
+      'PROFILE: Loading saved universities and courses...'
     );
 
 
@@ -182,7 +207,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
         next: (data) => {
 
           console.log(
-            'SAVED UNIVERSITIES:',
+            'PROFILE: SAVED UNIVERSITIES:',
             data
           );
 
@@ -201,21 +226,29 @@ export class ProfilePage implements OnInit, ViewWillEnter {
 
 
           console.log(
-            'SAVED UNIVERSITY COUNT:',
+            'PROFILE: SAVED UNIVERSITY COUNT:',
             this.savedUniversities
           );
 
+
+          this.refreshPage();
+
         },
+
 
         error: (error) => {
 
           console.error(
-            'Error loading saved universities:',
+            'PROFILE: Error loading saved universities:',
             error
           );
 
+
           this.savedUniversities =
             0;
+
+
+          this.refreshPage();
 
         }
 
@@ -233,7 +266,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
         next: (data) => {
 
           console.log(
-            'SAVED COURSES:',
+            'PROFILE: SAVED COURSES:',
             data
           );
 
@@ -252,7 +285,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
 
 
           console.log(
-            'SAVED COURSE COUNT:',
+            'PROFILE: SAVED COURSE COUNT:',
             this.savedCourses
           );
 
@@ -260,24 +293,27 @@ export class ProfilePage implements OnInit, ViewWillEnter {
           this.loadingSavedInformation =
             false;
 
+
           this.refreshPage();
 
         },
 
-        
 
         error: (error) => {
 
           console.error(
-            'Error loading saved courses:',
+            'PROFILE: Error loading saved courses:',
             error
           );
+
 
           this.savedCourses =
             0;
 
+
           this.loadingSavedInformation =
             false;
+
 
           this.refreshPage();
 
@@ -288,7 +324,7 @@ export class ProfilePage implements OnInit, ViewWillEnter {
   }
 
 
-    // =========================================
+  // =========================================
   // FORCE PAGE REFRESH
   // =========================================
 
@@ -302,17 +338,23 @@ export class ProfilePage implements OnInit, ViewWillEnter {
 
   }
 
+
   // =========================================
   // VIEW UNIVERSITIES
   // =========================================
 
   viewUniversities(): void {
-  console.log('Opening saved universities...');
 
-  this.router.navigate([
-    '/tabs/saved-universities'
-  ]);
-}
+    console.log(
+      'Opening saved universities...'
+    );
+
+
+    this.router.navigate([
+      '/tabs/saved-universities'
+    ]);
+
+  }
 
 
   // =========================================
@@ -320,12 +362,17 @@ export class ProfilePage implements OnInit, ViewWillEnter {
   // =========================================
 
   viewCourses(): void {
-  console.log('Opening saved courses...');
 
-  this.router.navigate([
-    '/tabs/saved-courses'
-  ]);
-}
+    console.log(
+      'Opening saved courses...'
+    );
+
+
+    this.router.navigate([
+      '/tabs/saved-courses'
+    ]);
+
+  }
 
 
   // =========================================
@@ -335,14 +382,13 @@ export class ProfilePage implements OnInit, ViewWillEnter {
   editProfile(): void {
 
     console.log(
-      'Edit profile clicked.'
+      'Opening edit profile...'
     );
 
-    /*
-     * We will build the Edit Profile
-     * page after the main logged-in
-     * experience is working.
-     */
+
+    this.router.navigate([
+      '/edit-profile'
+    ]);
 
   }
 
@@ -356,10 +402,6 @@ export class ProfilePage implements OnInit, ViewWillEnter {
     console.log(
       'Settings clicked.'
     );
-
-    /*
-     * Settings page can be added later.
-     */
 
   }
 

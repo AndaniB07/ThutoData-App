@@ -228,4 +228,51 @@ export class Auth {
 
   }
 
+  // =========================================
+// UPDATE PROFILE
+// =========================================
+
+updateProfile(
+  userID: number,
+  name: string,
+  email: string,
+  grade: number | null
+): Observable<any> {
+
+  const request = {
+
+    name: name.trim(),
+
+    email:
+      email.trim().toLowerCase(),
+
+    grade: grade
+
+  };
+
+  return this.http
+    .put(
+      `${this.apiUrl}/profile/${userID}`,
+      request
+    )
+    .pipe(
+
+      tap((response: any) => {
+
+        console.log(
+          'Profile updated:',
+          response.user
+        );
+
+        // Update the locally stored user
+        localStorage.setItem(
+          this.userKey,
+          JSON.stringify(response.user)
+        );
+
+      })
+
+    );
+}
+
 }

@@ -128,6 +128,10 @@ export const routes: Routes = [
     path: 'aps-calculator',
     loadComponent: () => import('./pages/aps-calculator/aps-calculator.page').then( m => m.ApsCalculatorPage)
   },
+  {
+    path: 'edit-profile',
+    loadComponent: () => import('./pages/edit-profile/edit-profile.page').then( m => m.EditProfilePage)
+  },
 
 
 

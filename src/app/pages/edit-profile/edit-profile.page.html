@@ -1,0 +1,169 @@
+<ion-content [fullscreen]="true">
+
+  <!-- ACCESSIBILITY -->
+
+  <app-accessibility-controls></app-accessibility-controls>
+
+
+  <div class="edit-profile-page">
+
+    <!-- HEADER -->
+
+    <section class="page-header">
+
+      <button
+        type="button"
+        class="back-button"
+        (click)="cancel()">
+
+        ← Back to Profile
+
+      </button>
+
+      <span class="eyebrow">
+        MY THUTODATA
+      </span>
+
+      <h1>
+        Edit Profile
+      </h1>
+
+      <p>
+        Update your personal information.
+      </p>
+
+    </section>
+
+
+    <!-- FORM -->
+
+    <section class="profile-card">
+
+      <div class="form-group">
+
+        <label for="name">
+          Full Name
+        </label>
+
+        <input
+          id="name"
+          type="text"
+          [(ngModel)]="name"
+          placeholder="Enter your full name"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="email">
+          Email Address
+        </label>
+
+        <input
+          id="email"
+          type="email"
+          [(ngModel)]="email"
+          placeholder="Enter your email address"
+        />
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="grade">
+          Current Grade
+        </label>
+
+        <select
+          id="grade"
+          [(ngModel)]="grade">
+
+          <option [ngValue]="null">
+            Not specified
+          </option>
+
+          <option [ngValue]="8">
+            Grade 8
+          </option>
+
+          <option [ngValue]="9">
+            Grade 9
+          </option>
+
+          <option [ngValue]="10">
+            Grade 10
+          </option>
+
+          <option [ngValue]="11">
+            Grade 11
+          </option>
+
+          <option [ngValue]="12">
+            Grade 12
+          </option>
+
+          <option [ngValue]="13">
+            Post-school / Other
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- ERROR -->
+
+      <div
+        class="message error-message"
+        *ngIf="errorMessage">
+
+        {{ errorMessage }}
+
+      </div>
+
+
+      <!-- SUCCESS -->
+
+      <div
+        class="message success-message"
+        *ngIf="successMessage">
+
+        {{ successMessage }}
+
+      </div>
+
+
+      <!-- ACTIONS -->
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="cancel-button"
+          (click)="cancel()"
+          [disabled]="saving">
+
+          Cancel
+
+        </button>
+
+        <button
+          type="button"
+          class="save-button"
+          (click)="saveProfile()"
+          [disabled]="saving">
+
+          {{ saving ? 'Saving...' : 'Save Changes' }}
+
+        </button>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</ion-content>

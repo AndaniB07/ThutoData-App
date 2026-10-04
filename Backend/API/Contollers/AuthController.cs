@@ -151,6 +151,68 @@ namespace Thuto.Contollers
     }
 
     // =========================
+    // UPDATE PROFILE
+    // PUT: api/auth/profile/{id}
+    // =========================
+
+    [HttpPut("profile/{id}")]
+    public async Task<IActionResult> UpdateProfile(
+        int id,
+        UpdateProfileRequest request)
+    {
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+
+      // Find the user
+      var user = await _context.Users
+          .FirstOrDefaultAsync(u => u.UserID == id);
+
+      if (user == null)
+      {
+        return NotFound(new
+        {
+          message = "User not found."
+        });
+      }
+
+      // Check whether the new email belongs
+      // to another account
+      var existingUser = await _context.Users
+          .FirstOrDefaultAsync(u =>
+              u.Email.ToLower() == request.Email.ToLower() &&
+              u.UserID != id);
+
+      if (existingUser != null)
+      {
+        return BadRequest(new
+        {
+          message = "An account with this email already exists."
+        });
+      }
+
+      // Update profile information
+      user.Name = request.Name.Trim();
+      user.Email = request.Email.Trim().ToLower();
+      user.Grade = request.Grade;
+
+      await _context.SaveChangesAsync();
+
+      return Ok(new
+      {
+        message = "Profile updated successfully.",
+        user = new
+        {
+          user.UserID,
+          user.Name,
+          user.Email,
+          user.Grade
+        }
+      });
+    }
+
+    // =========================
     // FORGOT PASSWORD
     // POST: api/auth/forgot-password
     // =========================
@@ -462,6 +524,19 @@ namespace Thuto.Contollers
     public string Email { get; set; } = string.Empty;
     public string Token { get; set; } = string.Empty;
     public string NewPassword { get; set; } = string.Empty;
+  }
+
+  // =========================
+  // UPDATE PROFILE REQUEST
+  // =========================
+
+  public class UpdateProfileRequest
+  {
+    public string Name { get; set; } = string.Empty;
+
+    public string Email { get; set; } = string.Empty;
+
+    public int? Grade { get; set; }
   }
 
 }
