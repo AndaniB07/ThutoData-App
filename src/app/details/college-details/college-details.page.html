@@ -7,7 +7,7 @@
 
   <app-accessibility-controls></app-accessibility-controls>
 
-  
+
   <!-- =========================================
        TOP BAR
   ========================================== -->
@@ -310,55 +310,194 @@
 
 
 
-    <!-- =======================================
-         COURSES
-    ======================================== -->
+<!-- COURSES & PROGRAMMES -->
+<section class="content-card">
 
-    <section class="content-card">
+  <div class="section-heading">
 
-      <div class="section-heading">
+    <div class="section-icon">
+      <ion-icon name="book-outline"></ion-icon>
+    </div>
 
-        <div class="section-icon">
+    <div>
+      <h2>Courses & Programmes</h2>
+      <p>
+        Courses and programmes available at this college
+      </p>
+    </div>
 
-          <ion-icon
-            name="book-outline">
-          </ion-icon>
-
-        </div>
-
-        <div>
-
-          <h2>
-            Courses & Programmes
-          </h2>
-
-          <p>
-            Study opportunities available at this college
-          </p>
-
-        </div>
-
-      </div>
+  </div>
 
 
-      <div class="empty-information">
+  <!-- LOADING -->
+  <div
+    class="empty-information"
+    *ngIf="coursesLoading">
+
+    <ion-icon name="book-outline"></ion-icon>
+
+    <h3>Loading courses...</h3>
+
+    <p>
+      Please wait while we load the courses
+      available at this college.
+    </p>
+
+  </div>
+
+
+  <!-- ERROR -->
+  <div
+    class="empty-information"
+    *ngIf="
+      !coursesLoading &&
+      coursesError
+    ">
+
+    <ion-icon name="book-outline"></ion-icon>
+
+    <h3>Unable to load courses</h3>
+
+    <p>
+      We could not load the courses for this
+      college right now.
+    </p>
+
+    <button
+      type="button"
+      class="course-details-button"
+      (click)="loadCourses()">
+
+      Try Again
+
+    </button>
+
+  </div>
+
+
+  <!-- NO COURSES -->
+  <div
+    class="empty-information"
+    *ngIf="
+      !coursesLoading &&
+      !coursesError &&
+      courses.length === 0
+    ">
+
+    <ion-icon name="book-outline"></ion-icon>
+
+    <h3>No courses available</h3>
+
+    <p>
+      Course information for this college
+      is not currently available on ThutoData.
+    </p>
+
+  </div>
+
+
+  <!-- COURSES -->
+  <div
+    class="college-course-list"
+    *ngIf="
+      !coursesLoading &&
+      !coursesError &&
+      courses.length > 0
+    ">
+
+    <div
+      class="college-course-card"
+      *ngFor="let course of courses">
+
+      <!-- Course icon -->
+      <div class="course-icon">
 
         <ion-icon
           name="book-outline">
         </ion-icon>
 
+      </div>
+
+
+      <!-- Course information -->
+      <div class="course-information">
+
         <h3>
-          Course information coming soon
+          {{ course.courseName }}
         </h3>
 
-        <p>
-          Course and programme information for this
-          college will be added to ThutoData.
+
+        <p
+          class="course-code"
+          *ngIf="course.courseCode">
+
+          {{ course.courseCode }}
+
         </p>
+
+
+        <p
+          class="course-qualification"
+          *ngIf="course.qualificationType">
+
+          {{ course.qualificationType }}
+
+        </p>
+
+
+        <div class="course-meta">
+
+          <span
+            *ngIf="course.durationYears">
+
+            {{ course.durationYears }}
+            {{ course.durationYears === 1 ? 'year' : 'years' }}
+
+          </span>
+
+
+          <span
+            *ngIf="course.studyLevel">
+
+            {{ course.studyLevel }}
+
+          </span>
+
+
+          <span
+            *ngIf="course.offering?.apsRequirement !== null &&
+                   course.offering?.apsRequirement !== undefined">
+
+            APS {{ course.offering.apsRequirement }}
+
+          </span>
+
+        </div>
+
+
+        <!-- View course -->
+        <button
+          type="button"
+          class="course-details-button"
+          (click)="viewCourse(course.courseID)">
+
+          <span>
+            View Course Details
+          </span>
+
+          <ion-icon
+            name="chevron-forward-outline">
+          </ion-icon>
+
+        </button>
 
       </div>
 
-    </section>
+    </div>
+
+  </div>
+
+</section>
 
 
 

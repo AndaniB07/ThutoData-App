@@ -106,12 +106,21 @@ namespace Thuto.Contollers
               .ToList(),
 
         universityFundings = university.UniversityFundings?
-              .Select(uf => new
+      .Select(uf => new
+      {
+        fundingID = uf.FundingID,
+        universityID = uf.UniversityID,
+
+        funding = uf.Funding == null
+              ? null
+              : new
               {
-                fundingID = uf.FundingID,
-                universityID = uf.UniversityID
-              })
-              .ToList(),
+                fundingID = uf.Funding.FundingID,
+                fundingName = uf.Funding.FundingName,
+                description = uf.Funding.Description
+              }
+      })
+      .ToList(),
 
         importantDates = university.ImportantDates?
               .Select(d => new

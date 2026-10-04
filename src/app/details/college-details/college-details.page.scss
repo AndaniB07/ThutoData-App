@@ -889,3 +889,125 @@ ion-content {
     outline-offset: 3px;
   }
 }
+
+/* ================================
+   COLLEGE COURSES
+================================ */
+
+.college-course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.college-course-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.course-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #eef4ff;
+}
+
+.course-icon ion-icon {
+  font-size: 24px;
+}
+
+.course-information {
+  flex: 1;
+  min-width: 0;
+}
+
+.course-information h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.course-code {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.course-qualification {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.course-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.course-meta span {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #f1f5f9;
+}
+
+.course-details-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.course-details-button ion-icon {
+  font-size: 18px;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+  .college-course-card {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .course-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .course-icon ion-icon {
+    font-size: 20px;
+  }
+
+  .course-information h3 {
+    font-size: 16px;
+  }
+
+  .course-details-button {
+    width: 100%;
+  }
+
+}

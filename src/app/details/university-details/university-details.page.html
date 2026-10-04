@@ -1,11 +1,11 @@
 <ion-header>
 
-      <!-- =========================================
+  <!-- =========================================
        ACCESSIBILITY CONTROLS
   ========================================= -->
 
   <app-accessibility-controls></app-accessibility-controls>
-  
+
   <ion-toolbar class="details-toolbar">
 
     <ion-buttons slot="start">
@@ -24,7 +24,6 @@
 
     </ion-buttons>
 
-
     <ion-title>
       University Details
     </ion-title>
@@ -35,7 +34,6 @@
 
 
 <ion-content [fullscreen]="true">
-
 
   <!-- =========================
        LOADING
@@ -144,7 +142,6 @@
 
     <section class="quick-info">
 
-
       <div class="quick-info-item">
 
         <ion-icon
@@ -206,7 +203,6 @@
         </div>
 
       </div>
-
 
     </section>
 
@@ -287,7 +283,6 @@
 
       <div class="information-list">
 
-
         <div class="information-row">
 
           <span>
@@ -312,7 +307,6 @@
           </strong>
 
         </div>
-
 
       </div>
 
@@ -352,7 +346,6 @@
 
       <div class="information-list">
 
-
         <div class="information-row">
 
           <span>
@@ -377,7 +370,6 @@
           </strong>
 
         </div>
-
 
       </div>
 
@@ -424,7 +416,6 @@
           university.courseOfferings.length > 0
         ">
 
-
         <div
           class="course-item"
           *ngFor="
@@ -460,8 +451,13 @@
             </strong>
 
 
+            <!-- APS -->
+
             <p
-              *ngIf="course.apsRequirement">
+              *ngIf="
+                course.apsRequirement !== null &&
+                course.apsRequirement !== undefined
+              ">
 
               APS Requirement:
               {{ course.apsRequirement }}
@@ -490,18 +486,20 @@
 
             </p>
 
-            <button 
+
+            <!-- VIEW COURSE -->
+
+            <button
               type="button"
               class="view-course-button"
-              (click)="
-                viewCourseDetails(course)">
-              
+              (click)="viewCourseDetails(course)">
+
               View Course Details
 
               <ion-icon
                 name="chevron-forward-outline">
               </ion-icon>
-            
+
             </button>
 
           </div>
@@ -532,7 +530,6 @@
               : 'Save course'
             ">
 
-
             <ion-icon
               [name]="
                 isCourseSaved(course)
@@ -541,12 +538,9 @@
               ">
             </ion-icon>
 
-
           </button>
 
-
         </div>
-
 
       </div>
 
@@ -569,7 +563,6 @@
         </p>
 
       </div>
-
 
     </section>
 
@@ -597,7 +590,8 @@
           </h2>
 
           <p>
-            Funding opportunities
+            Funding opportunities available
+            through this university
           </p>
 
         </div>
@@ -605,13 +599,14 @@
       </div>
 
 
+      <!-- FUNDING LIST -->
+
       <div
         class="funding-list"
         *ngIf="
           university.universityFundings &&
           university.universityFundings.length > 0
         ">
-
 
         <div
           class="funding-item"
@@ -623,21 +618,46 @@
             name="school-outline">
           </ion-icon>
 
-          <strong>
+          <div>
 
-            {{
-              funding.funding?.fundingName ||
-              funding.fundingName ||
-              'Funding opportunity'
-            }}
+            <strong>
 
-          </strong>
+              {{
+                funding.funding?.fundingName ||
+                funding.fundingName ||
+                funding.Funding?.fundingName ||
+                funding.Funding?.FundingName ||
+                'Funding opportunity'
+              }}
+
+            </strong>
+
+
+            <p
+              *ngIf="
+                funding.funding?.description ||
+                funding.description ||
+                funding.Funding?.description ||
+                funding.Funding?.Description
+              ">
+
+              {{
+                funding.funding?.description ||
+                funding.description ||
+                funding.Funding?.description ||
+                funding.Funding?.Description
+              }}
+
+            </p>
+
+          </div>
 
         </div>
 
-
       </div>
 
+
+      <!-- NO FUNDING -->
 
       <div
         class="empty-state"
@@ -655,7 +675,6 @@
         </p>
 
       </div>
-
 
     </section>
 
@@ -691,6 +710,8 @@
       </div>
 
 
+      <!-- DATES LIST -->
+
       <div
         class="dates-list"
         *ngIf="
@@ -698,13 +719,11 @@
           university.importantDates.length > 0
         ">
 
-
         <div
           class="date-item"
           *ngFor="
             let date of university.importantDates
           ">
-
 
           <div class="date-icon">
 
@@ -738,12 +757,12 @@
 
           </div>
 
-
         </div>
-
 
       </div>
 
+
+      <!-- NO DATES -->
 
       <div
         class="empty-state"
@@ -762,7 +781,6 @@
 
       </div>
 
-
     </section>
 
 
@@ -773,7 +791,6 @@
     <section
       class="website-card"
       *ngIf="university.websiteURL">
-
 
       <div class="website-icon">
 
@@ -806,7 +823,6 @@
 
       </ion-button>
 
-
     </section>
 
 
@@ -834,6 +850,5 @@
 
 
   </div>
-
 
 </ion-content>

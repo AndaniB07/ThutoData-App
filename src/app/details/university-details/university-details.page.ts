@@ -86,6 +86,7 @@ export class UniversityDetailsPage implements OnInit {
   loading = true;
   error = false;
 
+
   /*
    * Stores the IDs of courses that
    * the logged-in user has saved.
@@ -314,7 +315,6 @@ export class UniversityDetailsPage implements OnInit {
 
           this.error =
             false;
-
 
           console.log(
             'UNIVERSITY DISPLAY READY:',
