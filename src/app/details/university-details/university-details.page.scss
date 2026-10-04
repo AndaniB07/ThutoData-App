@@ -392,16 +392,23 @@ font-size: 12px;
 }
 
 /* ================================
+
 FUNDING
+
 ================================ */
 
 .funding-list {
+
 display: flex;
+
 flex-direction: column;
+
 gap: 10px;
+
 }
 
 .funding-item {
+
 display: flex;
 
 align-items: center;
@@ -415,11 +422,39 @@ background: #f8fafc;
 border-radius: 11px;
 
 border: 1px solid #edf0f4;
+
+color: #172033;
+
 }
 
 .funding-item ion-icon {
+
 font-size: 21px;
+
 color: #2563a8;
+
+}
+
+.funding-item strong {
+
+display: block;
+
+color: #172033;
+
+font-size: 14px;
+
+}
+
+.funding-item p {
+
+margin: 5px 0 0;
+
+color: #6b7280;
+
+font-size: 12px;
+
+line-height: 1.5;
+
 }
 
 /* ================================
@@ -926,15 +961,35 @@ text-align: left;
     border-color: #ffffff;
   }
 
-  /* FUNDING */
-  .funding-item {
-    background: #000000;
-    border: 2px solid #ffffff;
-  }
+/* FUNDING */
 
-  .funding-item ion-icon {
-    color: #ffff00;
-  }
+.funding-item {
+
+background: #000000;
+
+border: 2px solid #ffffff;
+
+color: #ffffff;
+
+}
+
+.funding-item strong {
+
+color: #ffff00;
+
+}
+
+.funding-item p {
+
+color: #ffffff;
+
+}
+
+.funding-item ion-icon {
+
+color: #ffff00;
+
+}
 
   /* DATES */
   .date-item {
