@@ -894,3 +894,137 @@ ion-content {
   }
 
 }
+
+/* =========================================
+   HOW TO USE THUTODATA
+========================================= */
+
+.guide-section {
+  padding: 30px 16px;
+}
+
+.guide-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 18px;
+  background: #eaf2fb;
+  border: 1px solid #d7e5f5;
+}
+
+.guide-content {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.guide-content h2 {
+  margin: 6px 0 10px;
+  font-size: 24px;
+  color: #172033;
+}
+
+.guide-content p {
+  margin: 0 auto 18px;
+  max-width: 650px;
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.guide-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 11px 18px;
+
+  border-radius: 10px;
+
+  background: #2563a8;
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.guide-button:hover {
+  background: #183b70;
+  transform: translateY(-1px);
+}
+
+.guide-button ion-icon {
+  font-size: 20px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .guide-section {
+    padding: 20px 12px;
+  }
+
+  .guide-container {
+    padding: 22px 18px;
+  }
+
+  .guide-content {
+    max-width: none;
+  }
+
+  .guide-content h2 {
+    font-size: 21px;
+  }
+
+  .guide-content p {
+    font-size: 13px;
+  }
+
+  .guide-button {
+    width: 100%;
+  }
+
+}
+
+/* =========================================
+   HIGH CONTRAST
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  .guide-container {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .guide-content h2 {
+    color: #ffffff;
+  }
+
+  .guide-content p {
+    color: #ffffff;
+  }
+
+  .guide-button {
+    background: #ffff00;
+    color: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .guide-button:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+}
