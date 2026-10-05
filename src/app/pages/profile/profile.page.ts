@@ -2,9 +2,15 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 import {
   IonContent,
-  ViewWillEnter
+  ViewWillEnter,
+    IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonTitle
 } from '@ionic/angular';
 
 import {
@@ -28,6 +34,11 @@ import {
   imports: [
     CommonModule,
     IonContent,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    IonTitle,
     AccessibilityControlsComponent
   ],
 
