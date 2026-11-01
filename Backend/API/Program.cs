@@ -22,9 +22,11 @@ builder.Services.AddCors(options =>
     policy
         .WithOrigins(
     "http://localhost:8100",
-    "https://thutodata-web-hafzhxd8gmbggsfs.centralindia-01.azurewebsites.net")
-        .AllowAnyHeader()
-        .AllowAnyMethod();
+    "http://localhost:8101",
+    "https://thutodata-web-hafzhxd8gmbggsfs.centralindia-01.azurewebsites.net"
+)
+.AllowAnyHeader()
+.AllowAnyMethod();
   });
 });
 
