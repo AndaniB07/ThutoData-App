@@ -78,6 +78,7 @@ export class Accessibility {
     this.isSpeaking = false;
   }
 
+  
   // ================================
   // TEXT SIZE
   // ================================
@@ -86,11 +87,14 @@ export class Accessibility {
 
     size = Math.max(80, Math.min(200, size));
 
-    const app = document.querySelector('ion-app');
+    // Convert percentage to a scaling factor.
+    const scale = size / 100;
 
-    if (app) {
-      (app as HTMLElement).style.zoom = `${size}%`;
-    }
+    // Apply scaling to the root HTML element.
+    document.documentElement.style.setProperty(
+      '--app-text-scale',
+      scale.toString()
+    );
 
     localStorage.setItem(
       'thutodata-text-size',
@@ -110,11 +114,10 @@ export class Accessibility {
 
   resetTextSize(): void {
 
-    const app = document.querySelector('ion-app');
-
-    if (app) {
-      (app as HTMLElement).style.zoom = '100%';
-    }
+    document.documentElement.style.setProperty(
+      '--app-text-scale',
+      '1'
+    );
 
     localStorage.setItem(
       'thutodata-text-size',

@@ -165,60 +165,53 @@
       </a>
 
 
-      <!-- SIGN IN -->
+      <!-- SIGN IN AND CREATE ACCOUNT -->
 
-      <a
-        routerLink="/login"
-        class="option">
+<ng-container *ngIf="!currentUser">
 
-        <div class="icon">
-          <ion-icon name="log-in-outline"></ion-icon>
-        </div>
+  <!-- SIGN IN -->
+  <a
+    routerLink="/login"
+    class="option">
 
-        <div class="option-text">
+    <div class="icon">
+      <ion-icon name="log-in-outline"></ion-icon>
+    </div>
 
-          <h2>Sign In</h2>
+    <div class="option-text">
+      <h2>Sign In</h2>
+      <p>Sign in to your ThutoData account.</p>
+    </div>
 
-          <p>
-            Sign in to your ThutoData account.
-          </p>
+    <ion-icon
+      name="chevron-forward-outline"
+      class="arrow">
+    </ion-icon>
 
-        </div>
+  </a>
 
-        <ion-icon
-          name="chevron-forward-outline"
-          class="arrow">
-        </ion-icon>
+  <!-- CREATE ACCOUNT -->
+  <a
+    routerLink="/sign-up"
+    class="option">
 
-      </a>
+    <div class="icon">
+      <ion-icon name="person-add-outline"></ion-icon>
+    </div>
 
+    <div class="option-text">
+      <h2>Create Account</h2>
+      <p>Create a ThutoData student account.</p>
+    </div>
 
-      <!-- CREATE ACCOUNT -->
+    <ion-icon
+      name="chevron-forward-outline"
+      class="arrow">
+    </ion-icon>
 
-      <a
-        routerLink="/sign-up"
-        class="option">
+  </a>
 
-        <div class="icon">
-          <ion-icon name="person-add-outline"></ion-icon>
-        </div>
-
-        <div class="option-text">
-
-          <h2>Create Account</h2>
-
-          <p>
-            Create a ThutoData student account.
-          </p>
-
-        </div>
-
-        <ion-icon
-          name="chevron-forward-outline"
-          class="arrow">
-        </ion-icon>
-
-      </a>
+</ng-container>
 
 
     </div>

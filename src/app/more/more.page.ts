@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import {
   IonContent,
   IonIcon
 } from '@ionic/angular';
 
-import {
-  addIcons
-} from 'ionicons';
+import { addIcons } from 'ionicons';
 
 import {
   bookOutline,
@@ -20,8 +20,10 @@ import {
   personCircleOutline,
   documentTextOutline
 } from 'ionicons/icons';
+
 import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
 import { FooterComponent } from '../components/footer/footer.component';
+import { Auth, User } from '../services/auth';
 
 addIcons({
   'book-outline': bookOutline,
@@ -30,7 +32,7 @@ addIcons({
   'person-add-outline': personAddOutline,
   'chevron-forward-outline': chevronForwardOutline,
   'person-circle-outline': personCircleOutline,
-  'document-text-outline' : documentTextOutline
+  'document-text-outline': documentTextOutline
 });
 
 @Component({
@@ -47,4 +49,28 @@ addIcons({
   templateUrl: './more.page.html',
   styleUrls: ['./more.page.scss']
 })
-export class MorePage {}
+export class MorePage implements OnInit, OnDestroy {
+
+  currentUser: User | null = null;
+
+  private userSubscription?: Subscription;
+
+  constructor(
+    private auth: Auth
+  ) {}
+
+  ngOnInit(): void {
+
+    this.userSubscription = this.auth.user$.subscribe(user => {
+      this.currentUser = user;
+    });
+
+  }
+
+  ngOnDestroy(): void {
+
+    this.userSubscription?.unsubscribe();
+
+  }
+
+}

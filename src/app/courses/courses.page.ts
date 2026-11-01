@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,10 +7,12 @@ import { RouterLink } from '@angular/router';
 
 import {
   IonContent,
-  IonIcon
+  IonIcon,
+  ToastController
 } from '@ionic/angular';
 
 import { addIcons } from 'ionicons';
+
 import {
   searchOutline,
   filterOutline,
@@ -208,11 +211,16 @@ export class CoursesPage implements OnInit {
   errorMessage = '';
 
 
+  // =========================
+  // CONSTRUCTOR
+  // =========================
+
   constructor(
     private http: HttpClient,
     private cdr: ChangeDetectorRef,
     private auth: Auth,
-    private savedService: SavedService
+    private savedService: SavedService,
+    private toastController: ToastController
   ) {
 
     addIcons({
@@ -240,6 +248,39 @@ export class CoursesPage implements OnInit {
     this.loadCourses();
 
     this.loadSavedCourses();
+
+  }
+
+
+  // =========================
+  // TOAST NOTIFICATION
+  // =========================
+
+  async showToast(
+    message: string,
+    color: string = 'success'
+  ): Promise<void> {
+
+    const toast = await this.toastController.create({
+
+      message: message,
+
+      duration: 2500,
+
+      position: 'bottom',
+
+      color: color,
+
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel'
+        }
+      ]
+
+    });
+
+    await toast.present();
 
   }
 
@@ -900,6 +941,11 @@ export class CoursesPage implements OnInit {
         'User must be logged in to save a course.'
       );
 
+      this.showToast(
+        'Please log in to save courses.',
+        'warning'
+      );
+
       return;
 
     }
@@ -936,6 +982,10 @@ export class CoursesPage implements OnInit {
 
             this.cdr.detectChanges();
 
+            this.showToast(
+              'Course removed from your saved courses.'
+            );
+
           },
 
 
@@ -949,6 +999,11 @@ export class CoursesPage implements OnInit {
             this.savingCourseId = null;
 
             this.cdr.detectChanges();
+
+            this.showToast(
+              'Unable to remove course. Please try again.',
+              'danger'
+            );
 
           }
 
@@ -978,6 +1033,10 @@ export class CoursesPage implements OnInit {
 
           this.cdr.detectChanges();
 
+          this.showToast(
+            'Course saved successfully!'
+          );
+
         },
 
 
@@ -991,6 +1050,11 @@ export class CoursesPage implements OnInit {
           this.savingCourseId = null;
 
           this.cdr.detectChanges();
+
+          this.showToast(
+            'Unable to save course. Please try again.',
+            'danger'
+          );
 
         }
 
