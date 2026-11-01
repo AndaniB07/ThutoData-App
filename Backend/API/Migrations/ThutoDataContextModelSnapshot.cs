@@ -70,6 +70,9 @@ namespace Thuto.Migrations
                     b.Property<string>("EntryRequirements")
                         .HasColumnType("text");
 
+                    b.Property<string>("AcademicField")
+                        .HasColumnType("text");
+
                     b.Property<int?>("MinimumAPS")
                         .HasColumnType("integer");
 

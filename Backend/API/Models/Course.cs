@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Thuto.Models
 {
@@ -14,6 +14,7 @@ namespace Thuto.Models
 
         public string? QualificationType { get; set; }
 
+        public string? AcademicField { get; set; }
         public string? Description { get; set; }
 
         public int? DurationYears { get; set; }
