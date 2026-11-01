@@ -1,3 +1,4 @@
+
 <ion-header>
   <ion-toolbar>
 
@@ -15,31 +16,17 @@
 
 <ion-content [fullscreen]="true">
 
-      <!-- =========================================
-       ACCESSIBILITY CONTROLS
-  ========================================= -->
-
   <app-accessibility-controls></app-accessibility-controls>
-
 
   <div class="profile-page">
 
-
-    <!-- =========================================
-         LOGGED-IN USER
-    ========================================== -->
-
     <ng-container *ngIf="user as currentUser">
 
-
-      <!-- =======================================
-           WELCOME
-      ======================================== -->
-
+      <!-- WELCOME -->
       <section class="welcome-section">
 
         <div class="profile-avatar">
-          <span>👤</span>
+          <ion-icon name="person-circle-outline"></ion-icon>
         </div>
 
         <div class="welcome-text">
@@ -62,24 +49,14 @@
       </section>
 
 
-      <!-- =======================================
-           PROFILE INFORMATION
-      ======================================== -->
-
+      <!-- PROFILE INFORMATION -->
       <section class="section">
 
         <div class="section-heading">
 
           <div>
-
-            <h2>
-              Profile Information
-            </h2>
-
-            <p>
-              Your account information
-            </p>
-
+            <h2>Profile Information</h2>
+            <p>Your account information</p>
           </div>
 
           <button
@@ -87,7 +64,8 @@
             type="button"
             (click)="editProfile()">
 
-             Edit
+            <ion-icon name="create-outline"></ion-icon>
+            Edit
 
           </button>
 
@@ -96,72 +74,51 @@
 
         <div class="profile-card">
 
-
           <!-- NAME -->
-
           <div class="profile-row">
 
             <div class="profile-icon">
-              👤
+              <ion-icon name="person-outline"></ion-icon>
             </div>
 
             <div>
-
-              <span class="label">
-                Full Name
-              </span>
-
-              <strong>
-                {{ currentUser.name }}
-              </strong>
-
+              <span class="label">Full Name</span>
+              <strong>{{ currentUser.name }}</strong>
             </div>
 
           </div>
 
 
           <!-- EMAIL -->
-
           <div class="profile-row">
 
             <div class="profile-icon">
-              📧
+              <ion-icon name="mail-outline"></ion-icon>
             </div>
 
             <div>
-
-              <span class="label">
-                Email
-              </span>
-
-              <strong>
-                {{ currentUser.email }}
-              </strong>
-
+              <span class="label">Email</span>
+              <strong>{{ currentUser.email }}</strong>
             </div>
 
           </div>
 
 
           <!-- GRADE -->
-
           <div class="profile-row">
 
             <div class="profile-icon">
-              🎓
+              <ion-icon name="school-outline"></ion-icon>
             </div>
 
             <div>
+              <span class="label">Current Grade</span>
 
-              <span class="label">
-                Current Grade
-              </span>
-
-            <strong>
-              {{ currentUser.grade === 13
-              ? 'Post-school / Other'
-              : currentUser.grade ?? 'Not specified' }}
-            </strong>
+              <strong>
+                {{ currentUser.grade === 13
+                  ? 'Post-school / Other'
+                  : currentUser.grade ?? 'Not specified' }}
+              </strong>
 
             </div>
 
@@ -172,24 +129,14 @@
       </section>
 
 
-      <!-- =======================================
-           SAVED INFORMATION
-      ======================================== -->
-
+      <!-- SAVED INFORMATION -->
       <section class="section">
 
         <div class="section-heading">
 
           <div>
-
-            <h2>
-              My Saved Information
-            </h2>
-
-            <p>
-              Keep important information for later
-            </p>
-
+            <h2>My Saved Information</h2>
+            <p>Keep important information for later</p>
           </div>
 
         </div>
@@ -197,28 +144,21 @@
 
         <div class="quick-grid">
 
-
-          <!-- ===================================
-               SAVED UNIVERSITIES
-          ==================================== -->
-
+          <!-- SAVED UNIVERSITIES -->
           <button
             class="quick-card"
             type="button"
             (click)="viewUniversities()">
 
             <span class="quick-icon">
-              🏫
+              <ion-icon name="business-outline"></ion-icon>
             </span>
 
             <div>
 
-              <strong>
-                Saved Universities & Colleges
-              </strong>
+              <strong>Saved Universities & Colleges</strong>
 
-              <small
-                *ngIf="!loadingSavedInformation">
+              <small *ngIf="!loadingSavedInformation">
 
                 {{ savedUniversities }}
                 {{ savedUniversities === 1
@@ -228,63 +168,49 @@
 
               </small>
 
-              <small
-                *ngIf="loadingSavedInformation">
-
+              <small *ngIf="loadingSavedInformation">
                 Loading...
-
               </small>
 
             </div>
 
             <span class="arrow">
-              ›
+              <ion-icon name="chevron-forward-outline"></ion-icon>
             </span>
 
           </button>
 
 
-          <!-- ===================================
-               SAVED COURSES
-          ==================================== -->
-
+          <!-- SAVED COURSES -->
           <button
             class="quick-card"
             type="button"
             (click)="viewCourses()">
 
             <span class="quick-icon">
-              📚
+              <ion-icon name="book-outline"></ion-icon>
             </span>
 
             <div>
 
-              <strong>
-                Saved Courses
-              </strong>
+              <strong>Saved Courses</strong>
 
-              <small
-                *ngIf="!loadingSavedInformation">
+              <small *ngIf="!loadingSavedInformation">
 
                 {{ savedCourses }}
-                {{ savedCourses === 1
-                  ? 'course'
-                  : 'courses' }}
+                {{ savedCourses === 1 ? 'course' : 'courses' }}
                 saved
 
               </small>
 
-              <small
-                *ngIf="loadingSavedInformation">
-
+              <small *ngIf="loadingSavedInformation">
                 Loading...
-
               </small>
 
             </div>
 
             <span class="arrow">
-              ›
+              <ion-icon name="chevron-forward-outline"></ion-icon>
             </span>
 
           </button>
@@ -294,24 +220,109 @@
       </section>
 
 
-      <!-- =======================================
-           APPLICATION JOURNEY
-      ======================================== -->
-
+      <!-- MY UNIVERSITY JOURNEY -->
       <section class="section">
 
         <div class="section-heading">
 
           <div>
+            <h2>My University Journey</h2>
+            <p>Plan your path towards higher education</p>
+          </div>
 
-            <h2>
-              My Application Journey
-            </h2>
+        </div>
+
+
+        <button
+          class="journey-card"
+          type="button"
+          (click)="viewUniversityJourney()">
+
+          <div class="journey-icon">
+            <ion-icon name="map-outline"></ion-icon>
+          </div>
+
+          <div class="journey-content">
+
+            <h3>Explore Your University Journey</h3>
 
             <p>
-              Track your university application journey
+              Follow a step-by-step guide to explore
+              universities, find courses, understand
+              admission requirements and discover funding
+              opportunities.
             </p>
 
+            <span class="journey-link">
+              Start exploring
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </span>
+
+          </div>
+
+          <span class="arrow">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </span>
+
+        </button>
+
+      </section>
+
+      
+<!-- ACADEMIC CALENDAR -->
+<section class="section">
+
+  <div class="section-heading">
+
+    <div>
+      <h2>Academic Calendar</h2>
+      <p>Keep track of important dates and deadlines</p>
+    </div>
+
+  </div>
+
+  <button
+    class="journey-card"
+    type="button"
+    (click)="viewAcademicCalendar()">
+
+    <div class="journey-icon">
+      <ion-icon name="calendar-outline"></ion-icon>
+    </div>
+
+    <div class="journey-content">
+
+      <h3>View Academic Calendar</h3>
+
+      <p>
+        Stay informed about university application deadlines,
+        important academic dates and upcoming opportunities.
+      </p>
+
+      <span class="journey-link">
+        View calendar
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </span>
+
+    </div>
+
+    <span class="arrow">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </span>
+
+  </button>
+
+</section>
+
+
+      <!-- MY APPLICATION JOURNEY -->
+      <section class="section">
+
+        <div class="section-heading">
+
+          <div>
+            <h2>My Application Journey</h2>
+            <p>Track your university application journey</p>
           </div>
 
         </div>
@@ -320,14 +331,12 @@
         <div class="coming-soon-card">
 
           <div class="coming-soon-icon">
-            📋
+            <ion-icon name="clipboard-outline"></ion-icon>
           </div>
 
           <div>
 
-            <h3>
-              Application tracking coming soon
-            </h3>
+            <h3>Application tracking coming soon</h3>
 
             <p>
               In a future version, you will be able
@@ -343,24 +352,14 @@
       </section>
 
 
-      <!-- =======================================
-           ACCOUNT
-      ======================================== -->
-
+      <!-- ACCOUNT -->
       <section class="section">
 
         <div class="section-heading">
 
           <div>
-
-            <h2>
-              Account
-            </h2>
-
-            <p>
-              Manage your ThutoData account
-            </p>
-
+            <h2>Account</h2>
+            <p>Manage your ThutoData account</p>
           </div>
 
         </div>
@@ -368,64 +367,44 @@
 
         <div class="account-card">
 
-
           <!-- EDIT PROFILE -->
-
           <button
             type="button"
             (click)="editProfile()">
 
             <span>
-              👤
+              <ion-icon name="person-outline"></ion-icon>
             </span>
 
             <div>
-
-              <strong>
-                Edit Profile
-              </strong>
-
-              <small>
-                Update your personal information
-              </small>
-
+              <strong>Edit Profile</strong>
+              <small>Update your personal information</small>
             </div>
 
             <span class="arrow">
-              ›
+              <ion-icon name="chevron-forward-outline"></ion-icon>
             </span>
 
           </button>
 
 
-          <!-- SETTINGS -->
-
-
           <!-- LOGOUT -->
-
           <button
             type="button"
             class="logout-button"
             (click)="logout()">
 
             <span>
-              🚪
+              <ion-icon name="log-out-outline"></ion-icon>
             </span>
 
             <div>
-
-              <strong>
-                Log Out
-              </strong>
-
-              <small>
-                Sign out of your account
-              </small>
-
+              <strong>Log Out</strong>
+              <small>Sign out of your account</small>
             </div>
 
             <span class="arrow">
-              ›
+              <ion-icon name="chevron-forward-outline"></ion-icon>
             </span>
 
           </button>
@@ -434,24 +413,17 @@
 
       </section>
 
-
     </ng-container>
 
 
-    <!-- =========================================
-         NO USER
-    ========================================== -->
-
+    <!-- NO USER -->
     <div
       class="error-message"
       *ngIf="!user">
 
-      <p>
-        Loading your profile...
-      </p>
+      <p>Loading your profile...</p>
 
     </div>
-
 
   </div>
 

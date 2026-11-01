@@ -1028,3 +1028,221 @@ ion-content {
   }
 
 }
+
+
+/* ================================
+   UPCOMING IMPORTANT DATES
+================================ */
+
+.upcoming-dates-section {
+  background: #f7f9fc;
+  padding: 80px 7%;
+  text-align: center;
+}
+
+.upcoming-dates-section .section-heading {
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+.upcoming-dates-section .section-label {
+  display: inline-block;
+  color: #3f51b5;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.upcoming-dates-section h2 {
+  color: #202b45;
+  font-size: 34px;
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+
+.upcoming-dates-section .section-heading p {
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.dates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1150px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.date-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid #e5eaf2;
+  border-radius: 16px;
+  padding: 25px 22px;
+  box-shadow: 0 4px 14px rgba(20, 35, 70, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.date-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 24px rgba(20, 35, 70, 0.09);
+}
+
+.date-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: #eef0ff;
+  color: #3f51b5;
+  font-size: 23px;
+}
+
+.date-card-content {
+  min-width: 0;
+}
+
+.date-type {
+  display: inline-block;
+  color: #3f51b5;
+  background: #eef0ff;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.date-card h3 {
+  color: #202b45;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 0 10px;
+}
+
+.date-card p {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.date-value {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #3f51b5;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.date-value ion-icon {
+  font-size: 17px;
+}
+
+.dates-message {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 25px;
+  color: #64748b;
+}
+
+.dates-message button {
+  background: #3f51b5;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.dates-footer {
+  margin-top: 35px;
+}
+
+.dates-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #3f51b5;
+  font-weight: 700;
+  text-decoration: none;
+  transition: gap 0.2s ease;
+}
+
+.dates-footer a:hover {
+  gap: 13px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .dates-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .upcoming-dates-section {
+    padding: 60px 6%;
+  }
+
+  .upcoming-dates-section h2 {
+    font-size: 27px;
+  }
+
+  .dates-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .date-card {
+    padding: 20px 17px;
+  }
+}
+
+/* High contrast accessibility */
+:host-context(ion-app.high-contrast) .upcoming-dates-section {
+  background: #000000;
+}
+
+:host-context(ion-app.high-contrast) .upcoming-dates-section h2,
+:host-context(ion-app.high-contrast) .upcoming-dates-section .section-heading p,
+:host-context(ion-app.high-contrast) .date-card h3,
+:host-context(ion-app.high-contrast) .date-card p,
+:host-context(ion-app.high-contrast) .dates-message {
+  color: #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .date-card {
+  background: #000000;
+  border: 2px solid #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .date-card-icon,
+:host-context(ion-app.high-contrast) .date-type {
+  background: #000000;
+  color: #00ffff;
+  border: 1px solid #00ffff;
+}
+
+:host-context(ion-app.high-contrast) .date-value,
+:host-context(ion-app.high-contrast) .dates-footer a,
+:host-context(ion-app.high-contrast) .upcoming-dates-section .section-label {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .dates-message button {
+  background: #ffff00;
+  color: #000000;
+}

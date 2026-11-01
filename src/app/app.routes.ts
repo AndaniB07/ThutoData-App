@@ -132,6 +132,14 @@ export const routes: Routes = [
     path: 'edit-profile',
     loadComponent: () => import('./pages/edit-profile/edit-profile.page').then( m => m.EditProfilePage)
   },
+  {
+    path: 'university-journey',
+    loadComponent: () => import('./pages/university-journey/university-journey.page').then( m => m.UniversityJourneyPage)
+  },
+  {
+    path: 'academic-calendar',
+    loadComponent: () => import('./pages/academic-calendar/academic-calendar.page').then( m => m.AcademicCalendarPage)
+  },
 
 
 

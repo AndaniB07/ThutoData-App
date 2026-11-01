@@ -1,0 +1,320 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Academic Calendar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <!-- =====================================================
+       ACCESSIBILITY CONTROLS
+  ====================================================== -->
+
+  <app-accessibility-controls></app-accessibility-controls>
+
+  <div class="page-container">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+
+      <div class="hero-icon">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </div>
+
+      <h1>Academic & Application Calendar</h1>
+
+      <p>
+        Keep track of important academic dates, application deadlines
+        and opportunities throughout the year.
+      </p>
+
+    </section>
+
+
+    <!-- CALENDAR CARD -->
+    <ion-card class="calendar-card">
+
+      <ion-card-content>
+
+        <!-- CALENDAR HEADER -->
+        <div class="calendar-header">
+
+          <div>
+            <h2>{{ monthYear }}</h2>
+            <p>View important dates throughout the month.</p>
+          </div>
+
+          <ion-button
+            fill="clear"
+            class="today-button"
+            (click)="goToToday()">
+
+            Today
+
+          </ion-button>
+
+        </div>
+
+
+        <!-- MONTH NAVIGATION -->
+        <div class="month-navigation">
+
+          <ion-button
+            fill="clear"
+            class="navigation-button"
+            (click)="previousMonth()">
+
+            <ion-icon
+              slot="icon-only"
+              name="chevron-back-outline">
+            </ion-icon>
+
+          </ion-button>
+
+          <span>{{ monthYear }}</span>
+
+          <ion-button
+            fill="clear"
+            class="navigation-button"
+            (click)="nextMonth()">
+
+            <ion-icon
+              slot="icon-only"
+              name="chevron-forward-outline">
+            </ion-icon>
+
+          </ion-button>
+
+        </div>
+
+
+        <!-- WEEKDAY HEADINGS -->
+        <div class="calendar-grid weekday-grid">
+
+          <div
+            class="weekday"
+            *ngFor="let day of weekDays">
+
+            {{ day }}
+
+          </div>
+
+        </div>
+
+
+        <!-- CALENDAR DAYS -->
+        <div class="calendar-grid">
+
+          <ng-container *ngFor="let date of calendarDays">
+
+            <div
+              class="calendar-day empty-day"
+              *ngIf="!date">
+            </div>
+
+           
+<button
+  type="button"
+  class="calendar-day"
+  *ngIf="date"
+  [class.selected-day]="isSelected(date)"
+  [class.today]="isToday(date)"
+  [attr.aria-label]="date | date:'EEEE, d MMMM yyyy'"
+  (click)="selectDate(date)">
+
+  <span>{{ date.getDate() }}</span>
+
+  <span
+    class="event-indicator"
+    *ngIf="hasEvents(date)">
+  </span>
+
+</button>
+
+
+          </ng-container>
+
+        </div>
+
+
+        <!-- CALENDAR LEGEND -->
+        <div class="calendar-legend">
+
+          <div class="legend-item">
+
+            <span class="legend-dot today-dot"></span>
+
+            <span>Today</span>
+
+          </div>
+
+          <div class="legend-item">
+
+            <span class="legend-dot selected-dot"></span>
+
+            <span>Selected date</span>
+
+          </div>
+
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <!-- SELECTED DATE SECTION -->
+    
+<section class="selected-date-section">
+  <div class="section-heading">
+    <div>
+      <h2>Selected Date</h2>
+      <p>{{ selectedDate | date:'EEEE, d MMMM yyyy' }}</p>
+    </div>
+  </div>
+
+  <ion-card class="event-card">
+    <ion-card-content>
+
+      <!-- Loading -->
+      <div class="empty-events" *ngIf="isLoading">
+        <p>Loading important dates...</p>
+      </div>
+
+      <!-- Error -->
+      <div class="empty-events" *ngIf="!isLoading && errorMessage">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <h3>Unable to load dates</h3>
+        <p>{{ errorMessage }}</p>
+        <ion-button fill="outline" (click)="loadImportantDates()">
+          Try Again
+        </ion-button>
+      </div>
+
+      <!-- Events for selected date -->
+      <div *ngIf="!isLoading && !errorMessage">
+
+        <div
+          class="event-item"
+          *ngFor="let event of getSelectedDateEvents()">
+
+          <div class="event-date-icon">
+            <ion-icon name="calendar-outline"></ion-icon>
+          </div>
+
+          <div class="event-details">
+            <h3>{{ event.title }}</h3>
+
+            <p *ngIf="event.description">
+              {{ event.description }}
+            </p>
+
+            <span class="event-type" *ngIf="event.dateType">
+              {{ event.dateType }}
+            </span>
+
+            <a
+              *ngIf="event.url"
+              [href]="event.url"
+              target="_blank"
+              rel="noopener noreferrer">
+              More information
+            </a>
+          </div>
+
+        </div>
+
+        <!-- No events -->
+        <div
+          class="empty-events"
+          *ngIf="getSelectedDateEvents().length === 0">
+
+          <ion-icon name="calendar-outline"></ion-icon>
+          <h3>No events available</h3>
+          <p>There are currently no important dates recorded for this day.</p>
+
+        </div>
+
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+</section>
+
+
+
+    <!-- UPCOMING DATES -->
+    
+<section class="upcoming-section">
+
+  <div class="section-heading">
+    <div>
+      <h2>Upcoming Important Dates</h2>
+      <p>Stay prepared for important deadlines and opportunities.</p>
+    </div>
+  </div>
+
+  <ion-card class="event-card">
+    <ion-card-content>
+
+      <div class="empty-events" *ngIf="isLoading">
+        <p>Loading upcoming dates...</p>
+      </div>
+
+      <div class="empty-events" *ngIf="!isLoading && errorMessage">
+        <p>{{ errorMessage }}</p>
+      </div>
+
+      <div *ngIf="!isLoading && !errorMessage">
+
+        <div
+          class="upcoming-event"
+          *ngFor="let event of getUpcomingDates()">
+
+          <div class="upcoming-date">
+            <span class="upcoming-day">
+              {{ event.date | date:'dd' }}
+            </span>
+            <span class="upcoming-month">
+              {{ event.date | date:'MMM' }}
+            </span>
+          </div>
+
+          <div class="upcoming-details">
+            <h3>{{ event.title }}</h3>
+
+            <p *ngIf="event.description">
+              {{ event.description }}
+            </p>
+
+            <span class="event-type" *ngIf="event.dateType">
+              {{ event.dateType }}
+            </span>
+          </div>
+
+        </div>
+
+        <div
+          class="empty-events"
+          *ngIf="getUpcomingDates().length === 0">
+
+          <ion-icon name="time-outline"></ion-icon>
+          <h3>No upcoming dates</h3>
+          <p>There are currently no upcoming important dates recorded.</p>
+
+        </div>
+
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+</section>
+
+
+  </div>
+
+  <app-footer></app-footer>
+
+</ion-content>

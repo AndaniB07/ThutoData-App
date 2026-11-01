@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { homeOutline, schoolOutline, businessOutline, cashOutline, menuOutline  } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { authGuard } from '../guards/auth-guard';
 
 addIcons({
   'home-outline': homeOutline,
@@ -61,6 +62,7 @@ export const routes: Routes = [
 
   {
     path: 'profile',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('../pages/profile/profile.page')
         .then((m) => m.ProfilePage),
@@ -68,6 +70,7 @@ export const routes: Routes = [
 
   {
     path: 'saved-universities',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('../saved-universities/saved-universities.page')
         .then((m) => m.SavedUniversitiesPage),
@@ -75,6 +78,7 @@ export const routes: Routes = [
 
   {
     path: 'saved-courses',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('../saved-courses/saved-courses.page')
         .then((m) => m.SavedCoursesPage),
@@ -87,6 +91,23 @@ export const routes: Routes = [
       import('../pages/application-process/application-process.page')
         .then((m) => m.ApplicationProcessPage),
   },
+
+  // ACADEMIC CALENDAR
+{
+  path: 'academic-calendar',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('../pages/academic-calendar/academic-calendar.page')
+      .then((m) => m.AcademicCalendarPage),
+},
+  // MY UNIVERSITY JOURNEY
+{
+  path: 'university-journey',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('../pages/university-journey/university-journey.page')
+      .then((m) => m.UniversityJourneyPage),
+},
 
   // UNIVERSITY DETAILS
   {

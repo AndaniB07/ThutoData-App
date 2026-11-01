@@ -1,0 +1,218 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>My University Journey</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <!-- =====================================================
+       ACCESSIBILITY CONTROLS
+  ====================================================== -->
+
+  <app-accessibility-controls></app-accessibility-controls>
+
+  <div class="journey-container">
+
+    <!-- WELCOME SECTION -->
+    <section class="welcome-section">
+      <div class="welcome-content">
+        <span class="welcome-label">YOUR FUTURE STARTS HERE</span>
+
+        <h1>My University Journey</h1>
+
+        <p>
+          Taking the next step towards higher education can feel overwhelming.
+          ThutoData is here to guide you through the process, one step at a time.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- PROGRESS SECTION -->
+    <ion-card class="progress-card">
+      <ion-card-content>
+
+        <div class="progress-heading">
+          <div>
+            <h2>Your Progress</h2>
+            <p>Keep moving towards your educational goals.</p>
+          </div>
+
+          <div class="progress-count">
+            {{ completedSteps }}/{{ totalSteps }}
+          </div>
+        </div>
+
+        <ion-progress-bar
+          [value]="progressPercentage"
+          color="success">
+        </ion-progress-bar>
+
+        <div class="progress-footer">
+          <span>{{ completedSteps }} steps completed</span>
+          <span>{{ progressPercentage * 100 | number:'1.0-0' }}%</span>
+        </div>
+
+        <p class="completion-message" *ngIf="completedSteps === totalSteps">
+          Congratulations! You have completed your university journey checklist.
+        </p>
+
+      </ion-card-content>
+    </ion-card>
+
+
+    <!-- JOURNEY INTRODUCTION -->
+    <div class="section-heading">
+      <div>
+        <h2>Your Journey, Step by Step</h2>
+        <p>Complete each step at your own pace.</p>
+      </div>
+    </div>
+
+
+    <!-- JOURNEY STEPS -->
+    <div class="journey-steps">
+
+      <ion-card
+        class="journey-card"
+        *ngFor="let step of journeySteps"
+        [class.completed-card]="step.completed">
+
+        <ion-card-content>
+
+          <div class="step-top">
+
+            <div class="step-number"
+                 [class.completed-number]="step.completed">
+              <ion-icon
+                *ngIf="step.completed"
+                name="checkmark-outline">
+              </ion-icon>
+
+              <span *ngIf="!step.completed">
+                {{ step.id }}
+              </span>
+            </div>
+
+            <div class="step-status"
+                 [class.completed-status]="step.completed">
+
+              {{ step.completed ? 'Completed' : 'To do' }}
+
+            </div>
+
+          </div>
+
+
+          <h3>{{ step.title }}</h3>
+
+          <p class="step-description">
+            {{ step.description }}
+          </p>
+
+
+          <div class="step-actions">
+
+  <!-- STEP 1: UNIVERSITIES AND COLLEGES -->
+  <ng-container *ngIf="step.id === 1; else defaultStepButton">
+
+    <ion-button
+      expand="block"
+      (click)="openUniversities()">
+
+      Explore Universities
+
+      <ion-icon
+        slot="end"
+        name="arrow-forward-outline">
+      </ion-icon>
+
+    </ion-button>
+
+    <br/>
+
+    <ion-button
+      expand="block"
+      fill="outline"
+      (click)="openColleges()">
+
+      Explore Colleges
+
+      <ion-icon
+        slot="end"
+        name="arrow-forward-outline">
+      </ion-icon>
+
+    </ion-button>
+
+  </ng-container>
+
+  <!-- ALL OTHER STEPS -->
+  <ng-template #defaultStepButton>
+
+    <ion-button
+      expand="block"
+      (click)="openStep(step)">
+
+      {{ step.buttonText }}
+
+      <ion-icon
+        slot="end"
+        name="arrow-forward-outline">
+      </ion-icon>
+
+    </ion-button>
+
+  </ng-template>
+
+            <div class="completion-control">
+
+              <ion-checkbox
+                [checked]="step.completed"
+                (ionChange)="toggleStep(step)"
+                labelPlacement="end">
+
+                Mark as completed
+
+              </ion-checkbox>
+
+            </div>
+
+          </div>
+
+        </ion-card-content>
+
+      </ion-card>
+
+    </div>
+
+
+    <!-- RESET PROGRESS -->
+    <div class="reset-section">
+
+      <ion-button
+        fill="clear"
+        color="medium"
+        (click)="resetProgress()">
+
+        <ion-icon
+          slot="start"
+          name="refresh-outline">
+        </ion-icon>
+
+        Reset my progress
+
+      </ion-button>
+
+    </div>
+
+  </div>
+
+
+        <!-- FOOTER -->
+
+  <app-footer></app-footer>
+
+</ion-content>

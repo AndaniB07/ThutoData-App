@@ -18,6 +18,7 @@ import {
 } from 'ionicons/icons';
 
 import { SavedService } from '../services/saved.service';
+import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
 
 @Component({
   selector: 'app-saved-courses',
@@ -27,7 +28,8 @@ import { SavedService } from '../services/saved.service';
   imports: [
     CommonModule,
     IonContent,
-    IonIcon
+    IonIcon,
+    AccessibilityControlsComponent
   ]
 })
 export class SavedCoursesPage implements OnInit, ViewWillEnter {

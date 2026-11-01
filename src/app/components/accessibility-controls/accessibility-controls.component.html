@@ -1,41 +1,37 @@
 <div class="accessibility-controls">
 
   <!-- READ ALOUD -->
-
   <button
     type="button"
     class="accessibility-button"
     (click)="readPage()"
     aria-label="Read this page aloud">
 
-    <span class="icon">🔊</span>
+    <ion-icon name="volume-high-outline"></ion-icon>
     <span>Read Aloud</span>
 
   </button>
 
 
   <!-- STOP -->
-
   <button
     type="button"
     class="accessibility-button stop-button"
     (click)="stopReading()"
     aria-label="Stop reading">
 
-    <span class="icon">⏹</span>
+    <ion-icon name="stop-circle-outline"></ion-icon>
     <span>Stop</span>
 
   </button>
 
 
   <!-- TEXT SIZE -->
-
   <div class="text-size-control">
 
     <label for="text-size">
-      <span class="small-a">A</span>
+      <ion-icon name="text-outline"></ion-icon>
       Text Size
-      <span class="large-a">A</span>
     </label>
 
     <input
@@ -55,21 +51,20 @@
   </div>
 
 
-  <!-- RESET TEXT SIZE -->
+ <!-- RESET ALL ACCESSIBILITY SETTINGS -->
+<button
+  type="button"
+  class="reset-text-button"
+  (click)="resetAccessibility()"
+  aria-label="Reset all accessibility settings">
 
-  <button
-    type="button"
-    class="reset-text-button"
-    (click)="resetTextSize()"
-    aria-label="Reset text size to normal">
+  <ion-icon name="refresh-outline"></ion-icon>
+  Reset All
 
-    Reset
-
-  </button>
+</button>
 
 
   <!-- HIGH CONTRAST -->
-
   <button
     type="button"
     class="accessibility-button contrast-button"
@@ -78,7 +73,7 @@
     [attr.aria-pressed]="highContrast"
     aria-label="Toggle high contrast mode">
 
-    <span class="icon">◐</span>
+    <ion-icon name="contrast-outline"></ion-icon>
 
     <span>
       {{ highContrast ? 'Normal Contrast' : 'High Contrast' }}
