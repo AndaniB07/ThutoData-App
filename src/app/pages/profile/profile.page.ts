@@ -10,8 +10,27 @@ import {
   IonToolbar,
   IonButtons,
   IonBackButton,
-  IonTitle
+  IonTitle, 
+  IonIcon
 } from '@ionic/angular';
+
+import { addIcons } from 'ionicons';
+
+import {
+  personCircleOutline,
+  personOutline,
+  mailOutline,
+  schoolOutline,
+  businessOutline,
+  bookOutline,
+  chevronForwardOutline,
+  mapOutline,
+  arrowForwardOutline,
+  clipboardOutline,
+  createOutline,
+  logOutOutline,
+  calendarOutline
+} from 'ionicons/icons';
 
 import {
   Auth,
@@ -27,6 +46,22 @@ import {
 } from '../../components/accessibility-controls/accessibility-controls.component';
 
 
+addIcons({
+  'person-circle-outline': personCircleOutline,
+  'person-outline': personOutline,
+  'mail-outline': mailOutline,
+  'school-outline': schoolOutline,
+  'business-outline': businessOutline,
+  'book-outline': bookOutline,
+  'chevron-forward-outline': chevronForwardOutline,
+  'map-outline': mapOutline,
+  'arrow-forward-outline': arrowForwardOutline,
+  'clipboard-outline': clipboardOutline,
+  'create-outline': createOutline,
+  'log-out-outline': logOutOutline,
+  'calendar-outline': calendarOutline
+});
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -39,6 +74,7 @@ import {
     IonButtons,
     IonBackButton,
     IonTitle,
+    IonIcon,
     AccessibilityControlsComponent
   ],
 
@@ -399,6 +435,39 @@ export class ProfilePage implements OnInit, ViewWillEnter {
     ]);
 
   }
+
+
+  // =========================================
+// VIEW UNIVERSITY JOURNEY
+// =========================================
+
+viewUniversityJourney(): void {
+
+  console.log(
+    'Opening My University Journey...'
+  );
+
+  this.router.navigate([
+    '/tabs/university-journey'
+  ]);
+
+}
+
+// =========================================
+// VIEW ACADEMIC CALENDAR
+// =========================================
+
+viewAcademicCalendar(): void {
+
+  console.log(
+    'Opening Academic Calendar...'
+  );
+
+  this.router.navigate([
+    '/tabs/academic-calendar'
+  ]);
+
+}
 
 
   // =========================================

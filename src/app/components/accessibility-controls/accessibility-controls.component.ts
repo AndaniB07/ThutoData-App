@@ -1,11 +1,22 @@
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Accessibility } from '../../services/accessibility';
+import { IonIcon } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+
+import {
+  volumeHighOutline,
+  stopCircleOutline,
+  textOutline,
+  refreshOutline,
+  contrastOutline
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-accessibility-controls',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, IonIcon],
   templateUrl: './accessibility-controls.component.html',
   styleUrl: './accessibility-controls.component.scss'
 })
@@ -15,6 +26,16 @@ export class AccessibilityControlsComponent {
   highContrast = false;
 
   constructor(private accessibility: Accessibility) {
+
+    // Register accessibility icons
+    addIcons({
+      'volume-high-outline': volumeHighOutline,
+      'stop-circle-outline': stopCircleOutline,
+      'text-outline': textOutline,
+      'refresh-outline': refreshOutline,
+      'contrast-outline': contrastOutline
+    });
+
     this.syncSettings();
   }
 
@@ -69,10 +90,20 @@ export class AccessibilityControlsComponent {
     this.accessibility.setTextSize(this.textSize);
   }
 
-  resetTextSize(): void {
-    this.textSize = 100;
-    this.accessibility.resetTextSize();
-  }
+  resetAccessibility(): void {
+
+  // Stop any ongoing read-aloud
+  this.accessibility.stopReading();
+
+  // Reset text size
+  this.textSize = 100;
+  this.accessibility.resetTextSize();
+
+  // Disable high contrast
+  this.highContrast = false;
+  this.accessibility.setHighContrast(false);
+
+}
 
   toggleHighContrast(): void {
     this.highContrast = !this.highContrast;

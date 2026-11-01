@@ -122,6 +122,24 @@ export class GlossaryPage {
       category: 'Qualifications',
       definition:
         'A person who has already completed an undergraduate degree and is studying for a higher-level qualification, such as a master\'s or doctoral degree.'
+    },
+    {
+      term: 'National Certificate Vocational ',
+      abbreviation: 'NCV',
+      category: 'Qualifications',
+      definition: 
+        'A practical qualification offered at TVET colleges that teaches students skills for a specific career. It usually takes 3 years to complete, from Level 2 to Level 4.'
+    },
+    {
+      term: 'Report 191 (NATED)',
+      category: 'Qualifications',
+      definition: 
+        'A vocational qualification that focuses on theoretical and practical knowledge in a specific field.It is divided into levels (N1-N6), with each level usually taking 6 months to complete.'
+    },
+    {
+      term: 'N-Level (N1-N6)',
+      category: 'Qualification',
+      definition: 'A qualification level within the NATED vocational education programme offered at South African TVET colleges. N1–N3 generally focus on introductory technical knowledge, while N4–N6 provide more advanced theoretical training. Completing N4–N6, together with the required practical workplace experience, can lead to a National N Diploma.'
     }
 
   ];

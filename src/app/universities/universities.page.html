@@ -1,5 +1,5 @@
-<ion-content [fullscreen]="true">
 
+<ion-content [fullscreen]="true">
 
   <!-- =====================================================
        ACCESSIBILITY CONTROLS
@@ -20,21 +20,16 @@
         UNIVERSITIES
       </span>
 
-
       <div>
-
         <img
           src="assets/icon/ThutoData_Logo_Transparent.png"
           alt="ThutoData Logo"
           class="hero-logo">
-
       </div>
-
 
       <h1>
         Find Your University
       </h1>
-
 
       <p>
         Explore universities across South Africa and find
@@ -44,22 +39,16 @@
     </div>
 
 
-    <!-- ===================================================
-         SEARCH
-    ==================================================== -->
+    <!-- SEARCH -->
 
     <div class="search-box">
 
-      <ion-icon
-        name="search-outline">
-      </ion-icon>
-
+      <ion-icon name="search-outline"></ion-icon>
 
       <input
         type="text"
         [(ngModel)]="searchTerm"
         placeholder="Search universities, cities or provinces...">
-
 
       <button
         *ngIf="searchTerm"
@@ -67,9 +56,7 @@
         (click)="searchTerm = ''"
         aria-label="Clear search">
 
-        <ion-icon
-          name="close-outline">
-        </ion-icon>
+        <ion-icon name="close-outline"></ion-icon>
 
       </button>
 
@@ -102,10 +89,7 @@
 
             <div class="filter-title">
 
-              <ion-icon
-                name="filter-outline">
-              </ion-icon>
-
+              <ion-icon name="filter-outline"></ion-icon>
 
               <h2>
                 Filters
@@ -113,13 +97,11 @@
 
             </div>
 
-
             <p>
               Narrow your results
             </p>
 
           </div>
-
 
           <button
             *ngIf="hasActiveFilters"
@@ -144,7 +126,6 @@
             Province
           </label>
 
-
           <select
             id="province"
             name="province"
@@ -155,46 +136,37 @@
               All provinces
             </option>
 
-
             <option value="Eastern Cape">
               Eastern Cape
             </option>
-
 
             <option value="Free State">
               Free State
             </option>
 
-
             <option value="Gauteng">
               Gauteng
             </option>
-
 
             <option value="KwaZulu-Natal">
               KwaZulu-Natal
             </option>
 
-
             <option value="Limpopo">
               Limpopo
             </option>
-
 
             <option value="Mpumalanga">
               Mpumalanga
             </option>
 
-
             <option value="Northern Cape">
               Northern Cape
             </option>
 
-
             <option value="North West">
               North West
             </option>
-
 
             <option value="Western Cape">
               Western Cape
@@ -215,7 +187,6 @@
             City
           </label>
 
-
           <select
             id="city"
             name="city"
@@ -225,7 +196,6 @@
             <option value="">
               All cities
             </option>
-
 
             <option
               *ngFor="let city of availableCities"
@@ -241,32 +211,30 @@
 
 
         <!-- =================================================
-             FACULTY
+             ACADEMIC FIELD
         ================================================== -->
 
         <div class="filter-group">
 
-          <label for="faculty">
-            Faculty
+          <label for="academicField">
+            Academic Field
           </label>
 
-
           <select
-            id="faculty"
-            name="faculty"
-            [(ngModel)]="selectedFaculty"
-            (ngModelChange)="onFacultyChange()">
+            id="academicField"
+            name="academicField"
+            [(ngModel)]="selectedAcademicField"
+            (ngModelChange)="onAcademicFieldChange()">
 
             <option value="">
-              All faculties
+              All academic fields
             </option>
 
-
             <option
-              *ngFor="let faculty of availableFaculties"
-              [value]="faculty.facultyID">
+              *ngFor="let field of academicFields"
+              [value]="field">
 
-              {{ faculty.facultyName }}
+              {{ field }}
 
             </option>
 
@@ -285,7 +253,6 @@
             Course
           </label>
 
-
           <select
             id="course"
             name="course"
@@ -296,18 +263,14 @@
               All courses
             </option>
 
-
             <option
               *ngFor="let course of availableCourses"
               [value]="course.courseID">
 
               {{ course.courseName }}
 
-              <ng-container
-                *ngIf="course.courseCode">
-
+              <ng-container *ngIf="course.courseCode">
                 ({{ course.courseCode }})
-
               </ng-container>
 
             </option>
@@ -327,7 +290,6 @@
             Qualification Type
           </label>
 
-
           <select
             id="qualification"
             name="qualification"
@@ -338,7 +300,6 @@
               All qualification types
             </option>
 
-
             <option
               *ngFor="let type of qualificationTypes"
               [value]="type">
@@ -347,7 +308,7 @@
 
             </option>
 
-          </select>   
+          </select>
 
         </div>
 
@@ -372,7 +333,6 @@
               Universities
             </h2>
 
-
             <p>
 
               Showing
@@ -393,7 +353,6 @@
 
           </div>
 
-
           <div class="result-count">
 
             {{ filteredUniversities.length }}
@@ -411,10 +370,7 @@
           class="loading-message"
           *ngIf="loading">
 
-          <ion-icon
-            name="school-outline">
-          </ion-icon>
-
+          <ion-icon name="school-outline"></ion-icon>
 
           <p>
             Loading universities...
@@ -429,20 +385,13 @@
 
         <div
           class="error-message"
-          *ngIf="
-            !loading &&
-            errorMessage
-          ">
+          *ngIf="!loading && errorMessage">
 
-          <ion-icon
-            name="close-outline">
-          </ion-icon>
-
+          <ion-icon name="close-outline"></ion-icon>
 
           <p>
             {{ errorMessage }}
           </p>
-
 
           <button
             type="button"
@@ -467,30 +416,22 @@
             filteredUniversities.length > 0
           ">
 
-
           <article
             class="university-card"
-            *ngFor="
-              let university of filteredUniversities
-            ">
+            *ngFor="let university of filteredUniversities">
 
 
             <!-- CARD TOP -->
 
             <div class="card-top">
 
-
               <div class="university-icon">
 
-                <ion-icon
-                  name="school-outline">
-                </ion-icon>
+                <ion-icon name="school-outline"></ion-icon>
 
               </div>
 
-
               <div class="card-top-actions">
-
 
                 <span class="institution-badge">
                   University
@@ -502,39 +443,22 @@
                 <button
                   type="button"
                   class="save-button"
-                  [class.saved]="
-                    isUniversitySaved(
-                      university.universityID
-                    )
-                  "
-                  [disabled]="
-                    savingUniversityId ===
-                    university.universityID
-                  "
-                  (click)="
-                    toggleUniversitySave(
-                      university.universityID
-                    )
-                  "
+                  [class.saved]="isUniversitySaved(university.universityID)"
+                  [disabled]="savingUniversityId === university.universityID"
+                  (click)="toggleUniversitySave(university.universityID)"
                   [attr.aria-label]="
-                    isUniversitySaved(
-                      university.universityID
-                    )
-                    ? 'Remove university from saved items'
-                    : 'Save university'
+                    isUniversitySaved(university.universityID)
+                      ? 'Remove university from saved items'
+                      : 'Save university'
                   ">
-
 
                   <ion-icon
                     [name]="
-                      isUniversitySaved(
-                        university.universityID
-                      )
-                      ? 'star'
-                      : 'star-outline'
+                      isUniversitySaved(university.universityID)
+                        ? 'star'
+                        : 'star-outline'
                     ">
                   </ion-icon>
-
 
                 </button>
 
@@ -546,7 +470,6 @@
             <!-- CARD CONTENT -->
 
             <div class="card-content">
-
 
               <h3>
                 {{ university.universityName }}
@@ -568,20 +491,14 @@
 
               <div class="location">
 
-                <ion-icon
-                  name="location-outline">
-                </ion-icon>
-
+                <ion-icon name="location-outline"></ion-icon>
 
                 <span>
 
                   {{ university.city }}
 
-                  <span
-                    *ngIf="university.province">
-
+                  <span *ngIf="university.province">
                     , {{ university.province }}
-
                   </span>
 
                 </span>
@@ -602,11 +519,9 @@
 
             <div class="card-footer">
 
-
               <span>
                 {{ university.universityType }}
               </span>
-
 
               <button
                 type="button"
@@ -618,18 +533,13 @@
 
                 View Details
 
-
-                <ion-icon
-                  name="chevron-forward-outline">
-                </ion-icon>
+                <ion-icon name="chevron-forward-outline"></ion-icon>
 
               </button>
 
             </div>
 
-
           </article>
-
 
         </div>
 
@@ -646,26 +556,20 @@
             filteredUniversities.length === 0
           ">
 
-
           <div class="no-results-icon">
 
-            <ion-icon
-              name="search-outline">
-            </ion-icon>
+            <ion-icon name="search-outline"></ion-icon>
 
           </div>
-
 
           <h2>
             No universities found
           </h2>
 
-
           <p>
             Try changing your search or removing one
             of the filters.
           </p>
-
 
           <button
             type="button"
@@ -691,6 +595,5 @@
   ====================================================== -->
 
   <app-footer></app-footer>
-
 
 </ion-content>

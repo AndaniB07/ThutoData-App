@@ -1,7 +1,7 @@
+
 ion-content {
   --background: #f7f8fa;
 }
-
 
 /* ================================
    TOP BAR
@@ -18,14 +18,11 @@ ion-content {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-
   background: transparent;
   border: none;
-
   color: #374151;
   font-size: 14px;
   font-weight: 600;
-
   cursor: pointer;
   padding: 6px 0;
 }
@@ -33,7 +30,6 @@ ion-content {
 .back-button ion-icon {
   font-size: 20px;
 }
-
 
 /* ================================
    PAGE
@@ -45,7 +41,6 @@ ion-content {
   padding: 35px 0 60px;
 }
 
-
 /* ================================
    HERO
 ================================ */
@@ -54,31 +49,22 @@ ion-content {
   display: flex;
   align-items: center;
   gap: 28px;
-
   background: #ffffff;
   border-radius: 20px;
-
   padding: 40px;
-
   border: 1px solid #e5e7eb;
-
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-
   margin-bottom: 24px;
 }
 
 .hero-icon {
   flex-shrink: 0;
-
   width: 90px;
   height: 90px;
-
   border-radius: 20px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: #eef2ff;
 }
 
@@ -93,31 +79,21 @@ ion-content {
 
 .institution-badge {
   display: inline-block;
-
   padding: 6px 12px;
-
   border-radius: 20px;
-
   background: #eef2ff;
   color: #4338ca;
-
   font-size: 11px;
   font-weight: 700;
-
   letter-spacing: 0.7px;
-
   margin-bottom: 10px;
 }
 
 .hero-content h1 {
   margin: 0 0 10px;
-
   font-size: clamp(28px, 4vw, 42px);
-
   line-height: 1.15;
-
   color: #111827;
-
   font-weight: 750;
 }
 
@@ -125,11 +101,8 @@ ion-content {
   display: flex;
   align-items: center;
   gap: 7px;
-
   margin: 0 0 14px;
-
   color: #6b7280;
-
   font-size: 15px;
 }
 
@@ -140,16 +113,11 @@ ion-content {
 
 .hero-description {
   max-width: 800px;
-
   margin: 0;
-
   color: #6b7280;
-
   font-size: 15px;
-
   line-height: 1.7;
 }
-
 
 /* ================================
    QUICK INFO
@@ -157,43 +125,30 @@ ion-content {
 
 .info-grid {
   display: grid;
-
   grid-template-columns: repeat(3, 1fr);
-
   gap: 18px;
-
   margin-bottom: 24px;
 }
 
 .info-card {
   display: flex;
   align-items: center;
-
   gap: 15px;
-
   background: #ffffff;
-
   border: 1px solid #e5e7eb;
-
   border-radius: 16px;
-
   padding: 22px;
-
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.035);
 }
 
 .info-icon {
   flex-shrink: 0;
-
   width: 45px;
   height: 45px;
-
   border-radius: 12px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: #f3f4f6;
 }
 
@@ -209,34 +164,24 @@ ion-content {
 
 .info-label {
   color: #9ca3af;
-
   font-size: 11px;
-
   text-transform: uppercase;
-
   letter-spacing: 0.6px;
-
   font-weight: 700;
-
   margin-bottom: 4px;
 }
 
 .info-card strong {
   color: #1f2937;
-
   font-size: 15px;
-
   font-weight: 650;
 }
 
 .info-card small {
   color: #6b7280;
-
   font-size: 12px;
-
   margin-top: 2px;
 }
-
 
 /* ================================
    CONTENT CARDS
@@ -244,37 +189,26 @@ ion-content {
 
 .content-card {
   background: #ffffff;
-
   border: 1px solid #e5e7eb;
-
   border-radius: 18px;
-
   padding: 30px;
-
   margin-bottom: 20px;
-
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.035);
 }
 
 .section-heading {
   display: flex;
   align-items: center;
-
   gap: 14px;
-
   margin-bottom: 22px;
 }
 
 .section-icon {
   width: 44px;
   height: 44px;
-
   flex-shrink: 0;
-
   border-radius: 12px;
-
   background: #eef2ff;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -287,32 +221,23 @@ ion-content {
 
 .section-heading h2 {
   margin: 0;
-
   color: #111827;
-
   font-size: 20px;
-
   font-weight: 700;
 }
 
 .section-heading p {
   margin: 4px 0 0;
-
   color: #9ca3af;
-
   font-size: 13px;
 }
 
 .section-text {
   margin: 0;
-
   color: #4b5563;
-
   font-size: 15px;
-
   line-height: 1.8;
 }
-
 
 /* ================================
    EMPTY INFORMATION
@@ -320,44 +245,31 @@ ion-content {
 
 .empty-information {
   text-align: center;
-
   padding: 25px 20px;
-
   background: #f9fafb;
-
   border-radius: 14px;
-
   border: 1px dashed #d1d5db;
 }
 
 .empty-information > ion-icon {
   font-size: 34px;
-
   color: #9ca3af;
-
   margin-bottom: 8px;
 }
 
 .empty-information h3 {
   margin: 0 0 7px;
-
   color: #374151;
-
   font-size: 15px;
 }
 
 .empty-information p {
   max-width: 550px;
-
   margin: 0 auto;
-
   color: #9ca3af;
-
   font-size: 13px;
-
   line-height: 1.6;
 }
-
 
 /* ================================
    WEBSITE
@@ -365,91 +277,62 @@ ion-content {
 
 .website-card {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
-
   gap: 25px;
-
   background: #111827;
-
   border-radius: 18px;
-
   padding: 28px 30px;
-
   margin-top: 25px;
 }
 
 .website-content {
   display: flex;
-
   align-items: center;
-
   gap: 15px;
 }
 
 .website-icon {
   width: 48px;
   height: 48px;
-
   border-radius: 12px;
-
   background: rgba(255, 255, 255, 0.1);
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   flex-shrink: 0;
 }
 
 .website-icon ion-icon {
   font-size: 24px;
-
   color: #ffffff;
 }
 
 .website-card h2 {
   margin: 0 0 5px;
-
   color: #ffffff;
-
   font-size: 17px;
 }
 
 .website-card p {
   margin: 0;
-
   color: #d1d5db;
-
   font-size: 13px;
-
   line-height: 1.5;
 }
 
 .website-button {
   display: inline-flex;
-
   align-items: center;
-
   gap: 8px;
-
   padding: 12px 18px;
-
   border: none;
-
   border-radius: 10px;
-
   background: #ffffff;
-
   color: #111827;
-
   font-size: 13px;
-
   font-weight: 700;
-
   cursor: pointer;
-
   white-space: nowrap;
 }
 
@@ -457,40 +340,27 @@ ion-content {
   font-size: 17px;
 }
 
-
 /* ================================
    BOTTOM ACTION
 ================================ */
 
 .bottom-action {
   display: flex;
-
   justify-content: center;
-
   margin-top: 30px;
 }
 
 .secondary-button {
   display: inline-flex;
-
   align-items: center;
-
   gap: 8px;
-
   background: #ffffff;
-
   border: 1px solid #d1d5db;
-
   border-radius: 10px;
-
   padding: 12px 20px;
-
   color: #374151;
-
   font-size: 14px;
-
   font-weight: 600;
-
   cursor: pointer;
 }
 
@@ -498,52 +368,39 @@ ion-content {
   font-size: 18px;
 }
 
-
 /* ================================
    LOADING / ERROR
 ================================ */
 
 .state-container {
   min-height: 70vh;
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-
   text-align: center;
-
   padding: 30px;
 }
 
 .state-container ion-spinner {
   width: 40px;
   height: 40px;
-
   margin-bottom: 15px;
 }
 
 .state-container p {
   color: #6b7280;
-
   font-size: 14px;
 }
 
 .state-icon {
   width: 70px;
   height: 70px;
-
   border-radius: 50%;
-
   background: #f3f4f6;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin-bottom: 15px;
 }
 
@@ -554,28 +411,116 @@ ion-content {
 
 .state-container h2 {
   margin: 0 0 8px;
-
   color: #111827;
 }
 
 .primary-button {
   border: none;
-
   border-radius: 10px;
-
   padding: 12px 22px;
-
   background: #4338ca;
-
   color: #ffffff;
-
   font-weight: 600;
-
   cursor: pointer;
-
   margin-top: 10px;
 }
 
+/* ================================
+   COLLEGE COURSES
+================================ */
+
+.college-course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.college-course-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.course-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #eef4ff;
+}
+
+.course-icon ion-icon {
+  font-size: 24px;
+  color: #4338ca;
+}
+
+.course-information {
+  flex: 1;
+  min-width: 0;
+}
+
+.course-information h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.course-code {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.course-qualification {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.course-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.course-meta span {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #f1f5f9;
+  color: #374151;
+}
+
+.course-details-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  background: #4338ca;
+  color: #ffffff;
+}
+
+.course-details-button ion-icon {
+  font-size: 18px;
+}
 
 /* ================================
    MOBILE
@@ -594,11 +539,8 @@ ion-content {
 
   .college-hero {
     flex-direction: column;
-
     align-items: flex-start;
-
     padding: 28px 22px;
-
     gap: 18px;
   }
 
@@ -617,7 +559,6 @@ ion-content {
 
   .info-grid {
     grid-template-columns: 1fr;
-
     gap: 12px;
   }
 
@@ -627,16 +568,39 @@ ion-content {
 
   .website-card {
     flex-direction: column;
-
     align-items: flex-start;
-
     padding: 24px 20px;
   }
 
   .website-button {
     width: 100%;
-
     justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .college-course-card {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .course-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .course-icon ion-icon {
+    font-size: 20px;
+  }
+
+  .course-information h3 {
+    font-size: 16px;
+  }
+
+  .course-details-button {
+    width: 100%;
   }
 }
 
@@ -647,6 +611,7 @@ ion-content {
 :host-context(ion-app.high-contrast) {
 
   /* PAGE */
+
   ion-content {
     --background: #000000 !important;
   }
@@ -656,6 +621,7 @@ ion-content {
   }
 
   /* TOP BAR */
+
   .details-topbar {
     background: #000000 !important;
     border-bottom: 2px solid #ffffff !important;
@@ -671,6 +637,7 @@ ion-content {
   }
 
   /* HERO */
+
   .college-hero {
     background: #000000 !important;
     border: 2px solid #ffffff !important;
@@ -709,6 +676,7 @@ ion-content {
   }
 
   /* QUICK INFORMATION */
+
   .info-card {
     background: #000000 !important;
     border: 2px solid #ffffff !important;
@@ -737,6 +705,7 @@ ion-content {
   }
 
   /* CONTENT CARDS */
+
   .content-card {
     background: #000000 !important;
     border: 2px solid #ffffff !important;
@@ -764,7 +733,8 @@ ion-content {
     color: #ffffff !important;
   }
 
-  /* EMPTY INFORMATION */
+  /* EMPTY INFORMATION - FUNDING AND DATES */
+
   .empty-information {
     background: #000000 !important;
     border: 2px dashed #ffffff !important;
@@ -782,7 +752,58 @@ ion-content {
     color: #ffffff !important;
   }
 
+  /* COLLEGE COURSES */
+
+  .college-course-list {
+    background: #000000 !important;
+  }
+
+  .college-course-card {
+    background: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  .course-icon {
+    background: #000000 !important;
+    border: 1px solid #ffffff !important;
+  }
+
+  .course-icon ion-icon {
+    color: #ffff00 !important;
+  }
+
+  .course-information h3 {
+    color: #ffff00 !important;
+  }
+
+  .course-code,
+  .course-qualification {
+    color: #ffffff !important;
+  }
+
+  .course-meta span {
+    background: #000000 !important;
+    border: 1px solid #ffffff !important;
+    color: #ffffff !important;
+  }
+
+  .course-details-button {
+    background: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffff00 !important;
+  }
+
+  .course-details-button ion-icon {
+    color: #000000 !important;
+  }
+
+  .course-details-button:hover {
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+  }
+
   /* WEBSITE */
+
   .website-card {
     background: #000000 !important;
     border: 2px solid #ffffff !important;
@@ -826,6 +847,7 @@ ion-content {
   }
 
   /* BOTTOM ACTION */
+
   .secondary-button {
     background: #000000 !important;
     border: 2px solid #ffffff !important;
@@ -843,6 +865,7 @@ ion-content {
   }
 
   /* LOADING / ERROR */
+
   .state-container {
     background: #000000 !important;
   }
@@ -881,133 +904,13 @@ ion-content {
   }
 
   /* KEYBOARD FOCUS */
+
   .back-button:focus-visible,
   .website-button:focus-visible,
   .secondary-button:focus-visible,
-  .primary-button:focus-visible {
+  .primary-button:focus-visible,
+  .course-details-button:focus-visible {
     outline: 4px solid #ffff00 !important;
     outline-offset: 3px;
   }
-}
-
-/* ================================
-   COLLEGE COURSES
-================================ */
-
-.college-course-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 20px;
-}
-
-.college-course-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 20px;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  background: #ffffff;
-}
-
-.course-icon {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  background: #eef4ff;
-}
-
-.course-icon ion-icon {
-  font-size: 24px;
-}
-
-.course-information {
-  flex: 1;
-  min-width: 0;
-}
-
-.course-information h3 {
-  margin: 0 0 6px;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.course-code {
-  margin: 0 0 6px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.course-qualification {
-  margin: 0 0 12px;
-  font-size: 14px;
-}
-
-.course-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.course-meta span {
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  background: #f1f5f9;
-}
-
-.course-details-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.course-details-button ion-icon {
-  font-size: 18px;
-}
-
-
-/* ================================
-   MOBILE
-================================ */
-
-@media (max-width: 600px) {
-
-  .college-course-card {
-    padding: 16px;
-    gap: 12px;
-  }
-
-  .course-icon {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-  }
-
-  .course-icon ion-icon {
-    font-size: 20px;
-  }
-
-  .course-information h3 {
-    font-size: 16px;
-  }
-
-  .course-details-button {
-    width: 100%;
-  }
-
 }

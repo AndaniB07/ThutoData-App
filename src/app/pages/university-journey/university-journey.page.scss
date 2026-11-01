@@ -1,0 +1,386 @@
+
+/* =========================================
+   PAGE
+========================================= */
+
+ion-content {
+  --background: #f7f9fc;
+}
+
+.journey-container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 28px 24px 45px;
+}
+
+
+/* =========================================
+   WELCOME
+========================================= */
+
+.welcome-section {
+  background: #eaf2fb;
+  border: 1px solid #d7e5f5;
+  border-radius: 18px;
+  padding: 35px;
+  margin-bottom: 24px;
+}
+
+.welcome-content {
+  max-width: 700px;
+}
+
+.welcome-label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #3f51b5;
+}
+
+.welcome-section h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 12px 0;
+  color: #172033;
+}
+
+.welcome-section p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #4b5563;
+  margin: 0;
+}
+
+
+/* =========================================
+   PROGRESS
+========================================= */
+
+.progress-card {
+  margin: 0 0 35px;
+  background: #ffffff;
+  border: 1px solid #e7eaf0;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(16, 24, 40, 0.05);
+}
+
+.progress-card ion-card-content {
+  padding: 25px;
+}
+
+.progress-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.progress-heading h2 {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: #172033;
+}
+
+.progress-heading p {
+  font-size: 13px;
+  color: #667085;
+  margin: 0;
+}
+
+.progress-count {
+  font-size: 24px;
+  font-weight: 700;
+  color: #3f51b5;
+}
+
+ion-progress-bar {
+  height: 9px;
+  border-radius: 10px;
+  --background: #f1f3f7;
+  --progress-background: #3f51b5;
+}
+
+.progress-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 11px;
+  font-size: 12px;
+  color: #667085;
+}
+
+.completion-message {
+  color: #3f51b5;
+  font-weight: 600;
+  font-size: 13px;
+  margin: 15px 0 0;
+}
+
+
+/* =========================================
+   SECTION HEADING
+========================================= */
+
+.section-heading {
+  margin-bottom: 17px;
+}
+
+.section-heading h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #172033;
+  margin: 0 0 6px;
+}
+
+.section-heading p {
+  font-size: 14px;
+  color: #667085;
+  margin: 0;
+}
+
+
+/* =========================================
+   JOURNEY CARDS
+========================================= */
+
+.journey-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.journey-card {
+  margin: 0;
+  background: #ffffff;
+  border: 1px solid #e7eaf0;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(16, 24, 40, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.journey-card:hover {
+  transform: translateY(-3px);
+  border-color: #d9dde7;
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.09);
+}
+
+.journey-card.completed-card {
+  border-color: #3f51b5;
+}
+
+.journey-card ion-card-content {
+  padding: 25px;
+}
+
+.step-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.step-number {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: #f1f3f7;
+  color: #3f51b5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.completed-number {
+  background: #eaf2fb;
+  color: #3f51b5;
+}
+
+.completed-number ion-icon {
+  font-size: 21px;
+}
+
+.step-status {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 11px;
+  border-radius: 20px;
+  background: #f1f3f7;
+  color: #667085;
+}
+
+.completed-status {
+  background: #eaf2fb;
+  color: #3f51b5;
+}
+
+.journey-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #172033;
+  margin: 0 0 10px;
+}
+
+.step-description {
+  font-size: 14px;
+  color: #667085;
+  line-height: 1.7;
+  min-height: 65px;
+  margin: 0 0 19px;
+}
+
+.step-actions ion-button {
+  --background: #3f51b5;
+  --background-hover: #303f9f;
+  --border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+  margin: 0;
+}
+
+.completion-control {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 17px;
+}
+
+.completion-control ion-checkbox {
+  --size: 18px;
+  --checkbox-background-checked: #3f51b5;
+  --border-color-checked: #3f51b5;
+  font-size: 12px;
+  color: #667085;
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+.reset-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.reset-section ion-button {
+  font-size: 13px;
+  text-transform: none;
+  --color: #667085;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .journey-container {
+    padding: 18px 14px 30px;
+  }
+
+  .welcome-section {
+    padding: 25px 20px;
+  }
+
+  .welcome-section h1 {
+    font-size: 25px;
+  }
+
+  .welcome-section p {
+    font-size: 13px;
+  }
+
+  .journey-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .step-description {
+    min-height: auto;
+  }
+
+  .progress-card ion-card-content {
+    padding: 19px;
+  }
+
+  .section-heading h2 {
+    font-size: 20px;
+  }
+}
+
+
+/* =========================================
+   HIGH CONTRAST
+========================================= */
+
+:host-context(ion-app.high-contrast) {
+
+  ion-content {
+    --background: #000000;
+  }
+
+  .welcome-section,
+  .progress-card,
+  .journey-card {
+    background: #000000;
+    border: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  .welcome-label,
+  .welcome-section h1,
+  .welcome-section p,
+  .progress-heading h2,
+  .progress-heading p,
+  .progress-count,
+  .progress-footer,
+  .section-heading h2,
+  .section-heading p,
+  .journey-card h3,
+  .step-description {
+    color: #ffffff;
+  }
+
+  .step-number,
+  .step-status {
+    background: #000000;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+  }
+
+  .completed-number,
+  .completed-status {
+    color: #ffff00;
+    border-color: #ffff00;
+  }
+
+  .completion-message {
+    color: #ffff00;
+  }
+
+  ion-progress-bar {
+    --background: #333333;
+    --progress-background: #ffff00;
+  }
+
+  .step-actions ion-button {
+    --background: #ffff00;
+    --color: #000000;
+  }
+
+  .completion-control ion-checkbox {
+    --checkbox-background-checked: #ffff00;
+    --border-color-checked: #ffff00;
+    --checkmark-color: #000000;
+    color: #ffffff;
+  }
+
+  .journey-card:hover {
+    border-color: #ffff00;
+  }
+}
