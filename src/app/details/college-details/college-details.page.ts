@@ -681,20 +681,19 @@ goBack(): void {
      OPEN COURSE
   ========================================================= */
 
-  viewCourse(courseId: number): void {
+viewCourse(courseId: number): void {
 
-    console.log(
-      'Opening course:',
-      courseId
-    );
+  console.log(
+    'Opening course:',
+    courseId
+  );
 
+  this.router.navigate([
+    '/course-details',
+    courseId
+  ]);
 
-    this.router.navigate([
-      '/tabs/course-details',
-      courseId
-    ]);
-
-  }
+}
 
 
   /* =========================================================

@@ -12,7 +12,9 @@ import {
   IonCheckbox,
   IonProgressBar,
   IonCard,
-  IonCardContent
+  IonCardContent,
+  IonBackButton, 
+  IonButtons
 } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -41,6 +43,8 @@ interface JourneyStep {
     IonToolbar,
     IonIcon,
     IonButton,
+    IonButtons,
+    IonBackButton,
     IonCheckbox,
     IonProgressBar,
     IonCard,

@@ -1,10 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import {
   IonContent,
   IonIcon,
+  IonSpinner,
   ViewWillEnter
 } from '@ionic/angular';
 
@@ -12,13 +14,22 @@ import { addIcons } from 'ionicons';
 
 import {
   arrowBackOutline,
+  bookmarkOutline,
+  bookOutline,
   schoolOutline,
+  businessOutline,
+  chevronForwardOutline,
   trashOutline,
-  chevronForwardOutline
+  searchOutline,
+  alertCircleOutline
 } from 'ionicons/icons';
+
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { SavedService } from '../services/saved.service';
 import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
+import { FooterComponent } from '../components/footer/footer.component';
 
 @Component({
   selector: 'app-saved-courses',
@@ -29,10 +40,21 @@ import { AccessibilityControlsComponent } from '../components/accessibility-cont
     CommonModule,
     IonContent,
     IonIcon,
-    AccessibilityControlsComponent
+    IonSpinner,
+    AccessibilityControlsComponent,
+    FooterComponent
   ]
 })
 export class SavedCoursesPage implements OnInit, ViewWillEnter {
+
+  private readonly courseOfferingsApi =
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/CourseOfferings';
+
+  private readonly universitiesApi =
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Universities';
+
+  private readonly facultiesApi =
+    'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Faculties';
 
   savedCourses: any[] = [];
 
@@ -47,23 +69,27 @@ export class SavedCoursesPage implements OnInit, ViewWillEnter {
   constructor(
     private savedService: SavedService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private http: HttpClient
   ) {
 
     addIcons({
-      'arrow-back-outline': arrowBackOutline,
-      'school-outline': schoolOutline,
-      'trash-outline': trashOutline,
-      'chevron-forward-outline': chevronForwardOutline
+      arrowBackOutline,
+      bookmarkOutline,
+      bookOutline,
+      schoolOutline,
+      businessOutline,
+      chevronForwardOutline,
+      trashOutline,
+      searchOutline,
+      alertCircleOutline
     });
 
   }
 
   ngOnInit(): void {
 
-    console.log(
-      '========== SAVED COURSES PAGE =========='
-    );
+    console.log('========== SAVED COURSES PAGE ==========');
 
     this.loadSavedCourses();
 
@@ -71,10 +97,7 @@ export class SavedCoursesPage implements OnInit, ViewWillEnter {
 
   ionViewWillEnter(): void {
 
-    console.log(
-      '========== SAVED COURSES PAGE (VIEW WILL ENTER) =========='
-    );
-
+    console.log('========== SAVED COURSES PAGE (VIEW WILL ENTER) ==========');
 
     if (this.hasLoaded) {
       this.loadSavedCourses();
@@ -82,11 +105,13 @@ export class SavedCoursesPage implements OnInit, ViewWillEnter {
 
   }
 
+  // =========================================
+  // LOAD SAVED COURSES
+  // =========================================
+
   loadSavedCourses(): void {
 
-    console.log(
-      'Loading saved courses...'
-    );
+    console.log('Loading saved courses...');
 
     this.loading = true;
     this.error = false;
@@ -97,17 +122,13 @@ export class SavedCoursesPage implements OnInit, ViewWillEnter {
 
         console.log(
           'SAVED COURSES:',
-          data
+          JSON.stringify(data, null, 2)
         );
 
         if (Array.isArray(data)) {
-
           this.savedCourses = data;
-
         } else {
-
           this.savedCourses = [];
-
         }
 
         console.log(
@@ -115,30 +136,18 @@ export class SavedCoursesPage implements OnInit, ViewWillEnter {
           this.savedCourses.length
         );
 
-        this.loading = false;
-
-        this.hasLoaded = true;
-
-        this.refreshPage();
-
-        console.log(
-          'LOADING:',
-          this.loading
-        );
+        // Fetch institution and faculty information.
+        this.loadCourseInformation();
 
       },
 
       error: (error) => {
 
-        console.error(
-          'ERROR LOADING SAVED COURSES:',
-          error
-        );
+        console.error('ERROR LOADING SAVED COURSES:', error);
 
         this.savedCourses = [];
 
         this.loading = false;
-
         this.error = true;
 
         this.refreshPage();
@@ -150,34 +159,203 @@ export class SavedCoursesPage implements OnInit, ViewWillEnter {
   }
 
   // =========================================
-// FORCE PAGE REFRESH
-// =========================================
+  // LOAD INSTITUTIONS AND FACULTIES
+  // =========================================
 
-private refreshPage(): void {
+  private loadCourseInformation(): void {
 
-  setTimeout(() => {
+    forkJoin({
 
-    this.cdr.detectChanges();
+      offerings: this.http.get<any>(this.courseOfferingsApi).pipe(
+        catchError(error => {
+          console.error('ERROR LOADING COURSE OFFERINGS:', error);
+          return of([]);
+        })
+      ),
 
-  });
+      universities: this.http.get<any>(this.universitiesApi).pipe(
+        catchError(error => {
+          console.error('ERROR LOADING UNIVERSITIES:', error);
+          return of([]);
+        })
+      ),
 
-}
+      faculties: this.http.get<any>(this.facultiesApi).pipe(
+        catchError(error => {
+          console.error('ERROR LOADING FACULTIES:', error);
+          return of([]);
+        })
+      )
+
+    }).subscribe({
+
+      next: (data) => {
+
+        const offerings = this.getArray(data.offerings);
+        const universities = this.getArray(data.universities);
+        const faculties = this.getArray(data.faculties);
+
+        console.log('COURSE OFFERINGS:', offerings);
+        console.log('UNIVERSITIES:', universities);
+        console.log('FACULTIES:', faculties);
+
+        // Enrich each saved course with its institution information.
+        this.savedCourses = this.savedCourses.map(course => {
+
+          const courseId = this.getCourseId(course);
+
+          const matchingOfferings = offerings.filter(
+            offering =>
+              Number(
+                offering?.courseID ??
+                offering?.CourseID
+              ) === courseId
+          );
+
+          const institutions = matchingOfferings.map(offering => {
+
+            const universityId =
+              offering?.universityID ??
+              offering?.UniversityID;
+
+            const facultyId =
+              offering?.facultyID ??
+              offering?.FacultyID;
+
+            const university = universities.find(
+              item =>
+                Number(
+                  item?.universityID ??
+                  item?.UniversityID
+                ) === Number(universityId)
+            );
+
+            const faculty = faculties.find(
+              item =>
+                Number(
+                  item?.facultyID ??
+                  item?.FacultyID
+                ) === Number(facultyId)
+            );
+
+            return {
+              universityName:
+                university?.universityName ??
+                university?.UniversityName ??
+                university?.name ??
+                university?.Name ??
+                offering?.university?.universityName ??
+                offering?.University?.UniversityName ??
+                '',
+
+              facultyName:
+                faculty?.facultyName ??
+                faculty?.FacultyName ??
+                faculty?.name ??
+                faculty?.Name ??
+                offering?.faculty?.facultyName ??
+                offering?.Faculty?.FacultyName ??
+                ''
+            };
+
+          });
+
+          // Remove duplicate institution and faculty names.
+          const universityNames = [
+            ...new Set(
+              institutions
+                .map(item => item.universityName)
+                .filter(name => name)
+            )
+          ];
+
+          const facultyNames = [
+            ...new Set(
+              institutions
+                .map(item => item.facultyName)
+                .filter(name => name)
+            )
+          ];
+
+          return {
+            ...course,
+            _institutionNames: universityNames,
+            _facultyNames: facultyNames
+          };
+
+        });
+
+        console.log(
+          'ENRICHED SAVED COURSES:',
+          this.savedCourses
+        );
+
+        this.loading = false;
+        this.hasLoaded = true;
+
+        this.refreshPage();
+
+      },
+
+      error: (error) => {
+
+        console.error('ERROR ENRICHING SAVED COURSES:', error);
+
+        this.loading = false;
+        this.hasLoaded = true;
+
+        this.refreshPage();
+
+      }
+
+    });
+
+  }
+
+  // Handles both normal arrays and common API response wrappers.
+  private getArray(data: any): any[] {
+
+    if (Array.isArray(data)) {
+      return data;
+    }
+
+    if (Array.isArray(data?.$values)) {
+      return data.$values;
+    }
+
+    if (Array.isArray(data?.data)) {
+      return data.data;
+    }
+
+    return [];
+
+  }
+
+  // =========================================
+  // FORCE PAGE REFRESH
+  // =========================================
+
+  private refreshPage(): void {
+
+    setTimeout(() => {
+      this.cdr.detectChanges();
+    });
+
+  }
+
+  // =========================================
+  // REMOVE SAVED COURSE
+  // =========================================
 
   removeCourse(courseId: number): void {
 
-    if (
-      this.removingCourseId !== null
-    ) {
+    if (this.removingCourseId !== null) {
       return;
     }
 
-    console.log(
-      'Removing saved course:',
-      courseId
-    );
+    console.log('Removing saved course:', courseId);
 
-    this.removingCourseId =
-      courseId;
+    this.removingCourseId = courseId;
 
     this.savedService
       .removeCourse(courseId)
@@ -185,19 +363,13 @@ private refreshPage(): void {
 
         next: () => {
 
-          console.log(
-            'Course removed successfully:',
-            courseId
+          console.log('Course removed successfully:', courseId);
+
+          this.savedCourses = this.savedCourses.filter(
+            course => this.getCourseId(course) !== courseId
           );
 
-          this.savedCourses =
-            this.savedCourses.filter(
-              course =>
-                this.getCourseId(course) !== courseId
-            );
-
-          this.removingCourseId =
-            null;
+          this.removingCourseId = null;
 
           this.refreshPage();
 
@@ -205,13 +377,9 @@ private refreshPage(): void {
 
         error: (error) => {
 
-          console.error(
-            'ERROR REMOVING COURSE:',
-            error
-          );
+          console.error('ERROR REMOVING COURSE:', error);
 
-          this.removingCourseId =
-            null;
+          this.removingCourseId = null;
 
         }
 
@@ -219,24 +387,20 @@ private refreshPage(): void {
 
   }
 
+  // =========================================
+  // COURSE INFORMATION HELPERS
+  // =========================================
+
   getCourseId(course: any): number {
 
     return Number(
-
       course?.courseID ??
-
       course?.CourseID ??
-
       course?.courseId ??
-
       course?.CourseId ??
-
       course?.course?.courseID ??
-
       course?.Course?.courseID ??
-
       course?.Course?.CourseID
-
     );
 
   }
@@ -244,23 +408,14 @@ private refreshPage(): void {
   getCourseName(course: any): string {
 
     return (
-
       course?.courseName ??
-
       course?.CourseName ??
-
       course?.name ??
-
       course?.Name ??
-
       course?.course?.courseName ??
-
       course?.Course?.courseName ??
-
       course?.Course?.Name ??
-
       'Course'
-
     );
 
   }
@@ -268,73 +423,102 @@ private refreshPage(): void {
   getQualification(course: any): string {
 
     return (
-
+      course?.qualificationType ??
+      course?.QualificationType ??
       course?.qualification ??
-
       course?.Qualification ??
-
-      course?.course?.qualification ??
-
-      course?.Course?.qualification ??
-
-      course?.Course?.Qualification ??
-
+      course?.course?.qualificationType ??
       ''
+    );
 
+  }
+
+  getAcademicField(course: any): string {
+
+    return (
+      course?.academicField ??
+      course?.AcademicField ??
+      course?.course?.academicField ??
+      course?.course?.AcademicField ??
+      'Not specified'
     );
 
   }
 
   getUniversityName(course: any): string {
 
+    const names = course?._institutionNames ?? [];
+
+    if (names.length > 0) {
+      return names.join(', ');
+    }
+
     return (
-
       course?.universityName ??
-
       course?.UniversityName ??
-
       course?.university?.universityName ??
-
       course?.University?.universityName ??
-
       course?.University?.Name ??
-
       ''
-
     );
 
   }
 
+  getFacultyName(course: any): string {
+
+    const names = course?._facultyNames ?? [];
+
+    if (names.length > 0) {
+      return names.join(', ');
+    }
+
+    return (
+      course?.facultyName ??
+      course?.FacultyName ??
+      course?.faculty?.facultyName ??
+      course?.faculty?.FacultyName ??
+      course?.offering?.faculty?.facultyName ??
+      course?.offering?.faculty?.FacultyName ??
+      ''
+    );
+
+  }
+
+  getDuration(course: any): string {
+
+    const duration =
+      course?.durationYears ??
+      course?.DurationYears;
+
+    if (duration == null) {
+      return '';
+    }
+
+    return `${duration} years`;
+
+  }
+
+  // =========================================
+  // NAVIGATION
+  // =========================================
+
   openCourse(course: any): void {
 
-    const courseId =
-      this.getCourseId(course);
+    const courseId = this.getCourseId(course);
 
-    if (!courseId) {
+    if (!courseId || isNaN(Number(courseId))) {
 
-      console.error(
-        'Could not determine course ID.'
-      );
+      console.error('INVALID COURSE ID:', course);
 
       return;
 
     }
 
-    console.log(
-      'Opening course:',
-      courseId
-    );
-
-    /*
-     * We have not created a dedicated
-     * course-details page yet.
-     *
-     * For now, take the user back
-     * to the universities/courses area.
-     */
+    console.log('OPENING SAVED COURSE:', courseId);
 
     this.router.navigate([
-      '/tabs/universities'
+      '/course-details',
+      courseId
     ]);
 
   }

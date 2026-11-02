@@ -1,53 +1,32 @@
-<ion-content [fullscreen]="true">
-
-    <!-- =========================================
-       ACCESSIBILITY CONTROLS
-  ========================================= -->
+<ion-content>
 
   <app-accessibility-controls></app-accessibility-controls>
 
-  
   <div class="saved-page">
 
-    <!-- HEADER -->
+    <!-- PAGE HEADER -->
 
     <div class="page-header">
 
-      <button
-        class="back-button"
-        type="button"
-        (click)="goBack()">
-
+      <button class="back-button" (click)="goBack()">
         <ion-icon name="arrow-back-outline"></ion-icon>
-
         <span>Back to Profile</span>
-
       </button>
-
 
       <div class="title-row">
 
         <div class="title-icon">
-
           <ion-icon name="school-outline"></ion-icon>
-
         </div>
 
-
         <div>
+          <span class="eyebrow">MY THUTODATA</span>
 
-          <span class="eyebrow">
-            MY THUTODATA
-          </span>
-
-          <h1>
-            Saved Universities & Colleges
-          </h1>
+          <h1>Saved Institutions</h1>
 
           <p>
-            Universities & Colleges you have saved for later.
+            Keep track of the universities and colleges you are interested in.
           </p>
-
         </div>
 
       </div>
@@ -55,258 +34,223 @@
     </div>
 
 
-    <!-- LOADING -->
+    <!-- SAVED INSTITUTIONS SECTION -->
 
-    <div
-      class="state-card"
-      *ngIf="loading === true">
+    <div class="section-heading">
 
-      <div class="loading-icon">
-        ⏳
+      <div>
+        <h2>My Saved Universities & Colleges</h2>
+
+        <p>
+          You have saved {{ savedUniversities.length }}
+          {{ savedUniversities.length === 1 ? 'institution' : 'institutions' }}.
+        </p>
       </div>
 
-      <h2>
-        Loading your saved universities & colleges...
-      </h2>
+    </div>
+
+
+    <!-- LOADING STATE -->
+
+    <div class="state-card" *ngIf="loading">
+
+      <div class="loading-icon">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+
+      <h2>Loading saved institutions</h2>
 
       <p>
-        Please wait while we retrieve your saved information.
+        Please wait while we retrieve your saved universities and colleges.
       </p>
 
     </div>
 
 
-    <!-- CONTENT -->
+    <!-- ERROR STATE -->
+
+    <div class="state-card" *ngIf="!loading && error">
+
+      <div class="loading-icon error-icon">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+      </div>
+
+      <h2>Something went wrong</h2>
+
+      <p>
+        We could not load your saved institutions. Please try again.
+      </p>
+
+      <button class="retry-button" (click)="loadSavedUniversities()">
+        Try Again
+      </button>
+
+    </div>
+
+
+    <!-- EMPTY STATE -->
 
     <div
-      *ngIf="loading === false">
+      class="state-card"
+      *ngIf="!loading && !error && savedUniversities.length === 0">
 
-      <!-- ERROR -->
-
-      <div
-        class="state-card"
-        *ngIf="error === true">
-
-        <div class="loading-icon">
-          ⚠️
-        </div>
-
-        <h2>
-          Unable to load saved universities & colleges
-        </h2>
-
-        <p>
-          Something went wrong while retrieving your saved universities & colleges.
-        </p>
-
-        <button
-          class="retry-button"
-          type="button"
-          (click)="loadSavedUniversities()">
-
-          Try Again
-
-        </button>
-
+      <div class="loading-icon">
+        <ion-icon name="bookmark-outline"></ion-icon>
       </div>
 
+      <h2>No saved institutions yet</h2>
 
-      <!-- EMPTY -->
+      <p>
+        You have not saved any universities or colleges.
+        Browse institutions and save the ones you are interested in.
+      </p>
 
-      <div
-        class="state-card"
-        *ngIf="
-          error === false &&
-          savedUniversities.length === 0
-        ">
+      <button class="browse-button" (click)="goToUniversities()">
+        Browse Institutions
+      </button>
 
-        <div class="loading-icon">
-          🏫
-        </div>
-
-        <h2>
-          No saved universities & colleges yet
-        </h2>
-
-        <p>
-          When you find a university or college you like,
-          tap the star to save it here.
-        </p>
-
-        <button
-          class="browse-button"
-          type="button"
-          (click)="goToUniversities()">
-
-          Browse Universities & Colleges
-
-        </button>
-
-      </div>
+    </div>
 
 
-      <!-- SAVED UNIVERSITIES -->
+    <!-- SAVED INSTITUTIONS LIST -->
+
+    <div
+      class="university-list"
+      *ngIf="!loading && !error && savedUniversities.length > 0">
 
       <div
-        class="universities-section"
-        *ngIf="
-          error === false &&
-          savedUniversities.length > 0
-        ">
+        class="university-card"
+        *ngFor="let university of savedUniversities">
 
-        <div class="section-heading">
+        <!-- INSTITUTION INFORMATION -->
 
-          <div>
+        <div class="university-main">
 
-            <h2>
-              Your Universities & Colleges
-            </h2>
+          <!-- ICON -->
 
-            <p>
-
-              {{ savedUniversities.length }}
-
-              {{
-                savedUniversities.length === 1
-                  ? 'university'
-                  : 'universities & colleges'
-              }}
-
-              saved
-
-            </p>
-
+          <div class="university-icon">
+            <ion-icon name="school-outline"></ion-icon>
           </div>
 
-        </div>
+
+          <!-- DETAILS -->
+
+          <div class="university-info">
+
+            <!-- NAME -->
+
+            <h3>
+              {{ getUniversityName(university) }}
+            </h3>
 
 
-        <div class="university-list">
+            <!-- INSTITUTION CLASSIFICATIONS -->
 
-          <div
-            class="university-card"
-            *ngFor="
-              let university of savedUniversities
-            ">
+            <div class="institution-labels">
 
-            <button
-              class="university-main"
-              type="button"
-              (click)="openUniversity(university)">
+              <span class="institution-type">
+                {{ getInstitutionType(university) }}
+              </span>
 
-              <div class="university-icon">
+              <span
+                class="university-type"
+                *ngIf="getUniversityType(university)">
 
-                <ion-icon
-                  name="school-outline">
-                </ion-icon>
-
-              </div>
-
-
-              <div class="university-info">
-
-                <h3>
-                  {{ getUniversityName(university) }}
-                </h3>
-
-
-                <div
-                  class="location"
-                  *ngIf="
-                    getCity(university) ||
-                    getProvince(university)
-                  ">
-
-                  <ion-icon
-                    name="location-outline">
-                  </ion-icon>
-
-
-                  <span>
-
-                    <ng-container
-                      *ngIf="getCity(university)">
-
-                      {{ getCity(university) }}
-
-                    </ng-container>
-
-
-                    <ng-container
-                      *ngIf="
-                        getCity(university) &&
-                        getProvince(university)
-                      ">
-
-                      ,
-
-                    </ng-container>
-
-
-                    <ng-container
-                      *ngIf="getProvince(university)">
-
-                      {{ getProvince(university) }}
-
-                    </ng-container>
-
-                  </span>
-
-                </div>
-
-              </div>
-
-
-              <ion-icon
-                name="chevron-forward-outline"
-                class="arrow">
-              </ion-icon>
-
-            </button>
-
-
-            <button
-              class="remove-button"
-              type="button"
-              [disabled]="
-                removingUniversityId ===
-                getUniversityId(university)
-              "
-              (click)="
-                removeUniversity(
-                  getUniversityId(university)
-                );
-                $event.stopPropagation()
-              ">
-
-              <ion-icon
-                name="trash-outline">
-              </ion-icon>
-
-
-              <span>
-
-                {{
-                  removingUniversityId ===
-                  getUniversityId(university)
-
-                    ? 'Removing...'
-
-                    : 'Remove'
-                }}
+                {{ getUniversityType(university) }}
 
               </span>
 
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <p class="institution-description">
+              {{ getDescription(university) }}
+            </p>
+
+
+            <!-- LOCATION -->
+
+            <div
+              class="location"
+              *ngIf="getCity(university) || getProvince(university)">
+
+              <ion-icon name="location-outline"></ion-icon>
+
+              <span>
+
+                <ng-container *ngIf="getCity(university)">
+                  {{ getCity(university) }}
+                </ng-container>
+
+                <ng-container
+                  *ngIf="getCity(university) && getProvince(university)">
+                  ,
+                </ng-container>
+
+                <ng-container *ngIf="getProvince(university)">
+                  {{ getProvince(university) }}
+                </ng-container>
+
+              </span>
+
+            </div>
+
+
+            <!-- VIEW DETAILS -->
+
+            <button
+              class="view-details"
+              (click)="openUniversity(university)">
+
+              <span>View institution details</span>
+
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+
             </button>
 
           </div>
 
         </div>
+
+
+        <!-- REMOVE BUTTON -->
+
+        <button
+          class="remove-button"
+          [disabled]="removingUniversityId === getUniversityId(university)"
+          (click)="removeUniversity(getUniversityId(university))">
+
+          <ion-spinner
+            *ngIf="removingUniversityId === getUniversityId(university)"
+            name="crescent">
+          </ion-spinner>
+
+          <ion-icon
+            *ngIf="removingUniversityId !== getUniversityId(university)"
+            name="trash-outline">
+          </ion-icon>
+
+          <span>
+            {{
+              removingUniversityId === getUniversityId(university)
+                ? 'Removing...'
+                : 'Remove from saved'
+            }}
+          </span>
+
+        </button>
 
       </div>
 
     </div>
 
   </div>
+
+
+  <!-- FOOTER -->
+
+  <app-footer></app-footer>
 
 </ion-content>

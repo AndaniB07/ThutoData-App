@@ -1,15 +1,12 @@
+
 <ion-content [fullscreen]="true">
 
-    <!-- =====================================================
-       ACCESSIBILITY CONTROLS
-  ====================================================== -->
-
+  <!-- ACCESSIBILITY CONTROLS -->
   <app-accessibility-controls></app-accessibility-controls>
 
   <div class="saved-page">
 
-    <!-- HEADER -->
-
+    <!-- PAGE HEADER -->
     <div class="page-header">
 
       <button
@@ -18,261 +15,239 @@
         (click)="goBack()">
 
         <ion-icon name="arrow-back-outline"></ion-icon>
-
         <span>Back to Profile</span>
 
       </button>
 
+      <div class="header-content">
 
-      <div class="title-row">
-
-        <div class="title-icon">
-
-          <ion-icon name="school-outline"></ion-icon>
-
+        <div class="header-icon">
+          <ion-icon name="bookmark-outline"></ion-icon>
         </div>
-
 
         <div>
-
-          <span class="eyebrow">
-            MY THUTODATA
-          </span>
-
-          <h1>
-            Saved Courses
-          </h1>
-
-          <p>
-            Courses you have saved for later.
-          </p>
-
+          <h1>Saved Courses</h1>
+          <p>Keep track of the courses you're interested in.</p>
         </div>
+
+      </div>
+
+      <!-- SAVED COURSE COUNT -->
+      <div
+        class="saved-count"
+        *ngIf="!loading && !error && savedCourses.length > 0">
+
+        <ion-icon name="book-outline"></ion-icon>
+
+        <span>
+          {{ savedCourses.length }}
+          saved course{{ savedCourses.length === 1 ? '' : 's' }}
+        </span>
 
       </div>
 
     </div>
 
+    <!-- LOADING STATE -->
+    <div class="state-container" *ngIf="loading">
 
-    <!-- LOADING -->
+      <ion-spinner name="crescent"></ion-spinner>
 
+      <h3>Loading your saved courses...</h3>
+
+      <p>Please wait while we retrieve your courses.</p>
+
+    </div>
+
+    <!-- ERROR STATE -->
     <div
-      class="state-card"
-      *ngIf="loading === true">
+      class="state-container error-state"
+      *ngIf="!loading && error">
 
-      <div class="loading-icon">
-        ⏳
-      </div>
+      <ion-icon name="alert-circle-outline"></ion-icon>
 
-      <h2>
-        Loading your saved courses...
-      </h2>
+      <h3>Unable to load saved courses</h3>
 
       <p>
-        Please wait while we retrieve your saved information.
+        Something went wrong while retrieving your saved courses.
       </p>
+
+      <button
+        type="button"
+        class="primary-button"
+        (click)="loadSavedCourses()">
+
+        Try Again
+
+      </button>
 
     </div>
 
-
-    <!-- CONTENT -->
-
+    <!-- EMPTY STATE -->
     <div
-      *ngIf="loading === false">
+      class="state-container empty-state"
+      *ngIf="!loading && !error && savedCourses.length === 0">
 
+      <div class="empty-icon">
+        <ion-icon name="bookmark-outline"></ion-icon>
+      </div>
 
-      <!-- ERROR -->
+      <h3>No saved courses yet</h3>
 
-      <div
-        class="state-card"
-        *ngIf="error === true">
+      <p>
+        When you find a course that interests you, save it here
+        so you can easily find it later.
+      </p>
 
-        <div class="loading-icon">
-          ⚠️
+      <button
+        type="button"
+        class="primary-button"
+        (click)="goToCourses()">
+
+        <ion-icon name="search-outline"></ion-icon>
+        Explore Courses
+
+      </button>
+
+    </div>
+
+    <!-- SAVED COURSES LIST -->
+    <div
+      class="courses-container"
+      *ngIf="!loading && !error && savedCourses.length > 0">
+
+      <!-- SECTION HEADING -->
+      <div class="section-heading">
+
+        <div>
+          <h2>Your Course Collection</h2>
+          <p>Select a course to view its full details.</p>
         </div>
-
-        <h2>
-          Unable to load saved courses
-        </h2>
-
-        <p>
-          Something went wrong while retrieving your saved courses.
-        </p>
-
-        <button
-          class="retry-button"
-          type="button"
-          (click)="loadSavedCourses()">
-
-          Try Again
-
-        </button>
 
       </div>
 
+      <!-- COURSE CARDS -->
+      <div class="course-list">
 
-      <!-- EMPTY -->
+        <div
+          class="course-card"
+          *ngFor="let course of savedCourses">
 
-      <div
-        class="state-card"
-        *ngIf="
-          error === false &&
-          savedCourses.length === 0
-        ">
+          <!-- COURSE INFORMATION -->
+          <button
+            type="button"
+            class="course-main"
+            (click)="openCourse(course)">
 
-        <div class="loading-icon">
-          📚
-        </div>
+            <div class="course-information">
 
-        <h2>
-          No saved courses yet
-        </h2>
-
-        <p>
-          When you find a course you like,
-          save it to find it easily later.
-        </p>
-
-        <button
-          class="browse-button"
-          type="button"
-          (click)="goToCourses()">
-
-          Browse Courses
-
-        </button>
-
-      </div>
-
-
-      <!-- SAVED COURSES -->
-
-      <div
-        class="courses-section"
-        *ngIf="
-          error === false &&
-          savedCourses.length > 0
-        ">
-
-        <div class="section-heading">
-
-          <div>
-
-            <h2>
-              Your Courses
-            </h2>
-
-            <p>
-
-              {{ savedCourses.length }}
-
-              {{
-                savedCourses.length === 1
-                  ? 'course'
-                  : 'courses'
-              }}
-
-              saved
-
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="course-list">
-
-          <div
-            class="course-card"
-            *ngFor="
-              let course of savedCourses
-            ">
-
-            <button
-              class="course-main"
-              type="button"
-              (click)="openCourse(course)">
-
-              <div class="course-icon">
-
-                <ion-icon
-                  name="school-outline">
-                </ion-icon>
-
-              </div>
-
-
-              <div class="course-info">
+              <!-- COURSE NAME AND SAVED BADGE -->
+              <div class="course-title-row">
 
                 <h3>
                   {{ getCourseName(course) }}
                 </h3>
 
-
-                <p
-                  class="qualification"
-                  *ngIf="getQualification(course)">
-
-                  {{ getQualification(course) }}
-
-                </p>
-
-
-                <p
-                  class="university"
-                  *ngIf="getUniversityName(course)">
-
-                  {{ getUniversityName(course) }}
-
-                </p>
+                <span class="saved-badge">
+                  <ion-icon name="bookmark-outline"></ion-icon>
+                  Saved
+                </span>
 
               </div>
 
+              <!-- QUALIFICATION TYPE -->
+              <p
+                class="qualification"
+                *ngIf="getQualification(course)">
 
-              <ion-icon
-                name="chevron-forward-outline"
-                class="arrow">
-              </ion-icon>
+                {{ getQualification(course) }}
 
-            </button>
+              </p>
 
+              <!-- ACADEMIC FIELD -->
+              <div
+                class="course-detail academic-field"
+                *ngIf="getAcademicField(course)">
 
-            <button
-              class="remove-button"
-              type="button"
-              [disabled]="
-                removingCourseId ===
-                getCourseId(course)
-              "
-              (click)="
-                removeCourse(
-                  getCourseId(course)
-                );
-                $event.stopPropagation()
-              ">
+                <ion-icon name="book-outline"></ion-icon>
 
-              <ion-icon
-                name="trash-outline">
-              </ion-icon>
+                <span>
+                  {{ getAcademicField(course) }}
+                </span>
 
+              </div>
 
-              <span>
+              <!-- INSTITUTION -->
+              <div
+                class="course-detail"
+                *ngIf="getUniversityName(course)">
 
-                {{
-                  removingCourseId ===
-                  getCourseId(course)
+                <ion-icon name="school-outline"></ion-icon>
 
-                    ? 'Removing...'
+                <span>
+                  {{ getUniversityName(course) }}
+                </span>
 
-                    : 'Remove'
-                }}
+              </div>
 
-              </span>
+              <!-- FACULTY -->
+              <div
+                class="course-detail"
+                *ngIf="getFacultyName(course)">
 
-            </button>
+                <ion-icon name="business-outline"></ion-icon>
 
-          </div>
+                <span>
+                  {{ getFacultyName(course) }}
+                </span>
+
+              </div>
+
+              <!-- DURATION -->
+              <div
+                class="course-detail"
+                *ngIf="getDuration(course)">
+
+                <ion-icon name="time-outline"></ion-icon>
+
+                <span>
+                  Duration: {{ getDuration(course) }}
+                </span>
+
+              </div>
+
+              <!-- VIEW DETAILS -->
+              <div class="view-details">
+
+                <span>View full course information</span>
+
+                <ion-icon name="chevron-forward-outline"></ion-icon>
+
+              </div>
+
+            </div>
+
+          </button>
+
+          <!-- REMOVE BUTTON -->
+          <button
+            type="button"
+            class="remove-button"
+            aria-label="Remove saved course"
+            [disabled]="removingCourseId === getCourseId(course)"
+            (click)="removeCourse(getCourseId(course))">
+
+            <ion-spinner
+              *ngIf="removingCourseId === getCourseId(course)"
+              name="crescent">
+            </ion-spinner>
+
+            <ion-icon
+              *ngIf="removingCourseId !== getCourseId(course)"
+              name="trash-outline">
+            </ion-icon>
+
+          </button>
 
         </div>
 
@@ -281,5 +256,8 @@
     </div>
 
   </div>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
 
 </ion-content>

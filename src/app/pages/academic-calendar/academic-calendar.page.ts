@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -13,6 +13,8 @@ import {
   IonCard,
   IonCardContent,
   IonButton,
+  IonBackButton,
+  IonButtons,
   IonIcon
 } from '@ionic/angular';
 
@@ -42,6 +44,8 @@ import { AccessibilityControlsComponent } from '../../components/accessibility-c
     IonCard,
     IonCardContent,
     IonButton,
+    IonButtons,
+    IonBackButton,
     IonIcon,
     FooterComponent,
     AccessibilityControlsComponent
@@ -79,7 +83,10 @@ importantDates: ImportantDate[] = [];
 isLoading = false;
 errorMessage = '';
 
-  constructor( private importantDatesService: ImportantDatesService) {
+  constructor( 
+    private importantDatesService: ImportantDatesService,
+    private cdr: ChangeDetectorRef
+  ) {
 
     addIcons({
       'chevron-back-outline': chevronBackOutline,
@@ -110,7 +117,18 @@ loadImportantDates(): void {
     next: (dates) => {
 
       this.importantDates = dates;
+
+      // Keep today's date selected when the calendar loads.
+      this.selectedDate = new Date(
+        this.today.getFullYear(),
+        this.today.getMonth(),
+        this.today.getDate()
+      );
+
       this.isLoading = false;
+
+      // Refresh the calendar after receiving the API response.
+      this.cdr.detectChanges();
 
     },
 
@@ -118,8 +136,12 @@ loadImportantDates(): void {
 
       console.error('Error loading important dates:', error);
 
-      this.errorMessage = 'Unable to load important dates. Please try again later.';
+      this.errorMessage =
+        'Unable to load important dates. Please try again later.';
+
       this.isLoading = false;
+
+      this.cdr.detectChanges();
 
     }
 

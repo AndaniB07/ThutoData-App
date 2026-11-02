@@ -4,8 +4,11 @@ import { Router } from '@angular/router';
 
 import {
   IonContent,
-  IonIcon, ViewWillEnter
+  IonIcon,
+  IonSpinner
 } from '@ionic/angular';
+
+import { ViewWillEnter } from '@ionic/angular';
 
 import { addIcons } from 'ionicons';
 
@@ -14,22 +17,27 @@ import {
   schoolOutline,
   locationOutline,
   trashOutline,
-  chevronForwardOutline
+  chevronForwardOutline,
+  bookmarkOutline,
+  alertCircleOutline
 } from 'ionicons/icons';
 
 import { SavedService } from '../services/saved.service';
 import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
+import { FooterComponent } from '../components/footer/footer.component';
 
 @Component({
   selector: 'app-saved-universities',
-  standalone: true,
   templateUrl: './saved-universities.page.html',
   styleUrls: ['./saved-universities.page.scss'],
+  standalone: true,
   imports: [
     CommonModule,
     IonContent,
     IonIcon,
-    AccessibilityControlsComponent
+    IonSpinner,
+    AccessibilityControlsComponent,
+    FooterComponent
   ]
 })
 export class SavedUniversitiesPage implements OnInit, ViewWillEnter {
@@ -37,9 +45,7 @@ export class SavedUniversitiesPage implements OnInit, ViewWillEnter {
   savedUniversities: any[] = [];
 
   loading = true;
-
   hasLoaded = false;
-
   error = false;
 
   removingUniversityId: number | null = null;
@@ -49,317 +55,199 @@ export class SavedUniversitiesPage implements OnInit, ViewWillEnter {
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {
-
     addIcons({
-      'arrow-back-outline': arrowBackOutline,
-      'school-outline': schoolOutline,
-      'location-outline': locationOutline,
-      'trash-outline': trashOutline,
-      'chevron-forward-outline': chevronForwardOutline
+      arrowBackOutline,
+      schoolOutline,
+      locationOutline,
+      trashOutline,
+      chevronForwardOutline,
+      bookmarkOutline,
+      alertCircleOutline
     });
-
   }
 
   ngOnInit(): void {
-
-    console.log(
-      '========== SAVED UNIVERSITIES PAGE =========='
-    );
-
     this.loadSavedUniversities();
-
   }
 
   ionViewWillEnter(): void {
-
-    console.log(
-      '========== SAVED UNIVERSITIES PAGE (VIEW WILL ENTER) =========='
-    );
-
     if (this.hasLoaded) {
       this.loadSavedUniversities();
     }
-
   }
 
+  // LOAD SAVED UNIVERSITIES AND COLLEGES
+
   loadSavedUniversities(): void {
-
-    console.log(
-      'Loading saved universities...'
-    );
-
     this.loading = true;
     this.error = false;
 
     this.savedService.getSavedUniversities().subscribe({
+      next: (response: any) => {
 
-      next: (data) => {
+        this.savedUniversities = Array.isArray(response)
+          ? response
+          : [];
 
-        console.log(
-          'SAVED UNIVERSITIES:',
-          data
-        );
-
-        if (Array.isArray(data)) {
-
-          this.savedUniversities = data;
-
-        } else {
-
-          this.savedUniversities = [];
-
-        }
-
-        console.log(
-          'NUMBER OF SAVED UNIVERSITIES:',
-          this.savedUniversities.length
-        );
-
-        // Data has finished loading
         this.loading = false;
-
         this.hasLoaded = true;
 
         this.refreshPage();
-
-        console.log(
-          'LOADING:',
-          this.loading
-        );
-
       },
 
-      error: (error) => {
-
-        console.error(
-          'ERROR LOADING SAVED UNIVERSITIES:',
-          error
-        );
+      error: (err: any) => {
+        console.error('Error loading saved institutions:', err);
 
         this.savedUniversities = [];
-
         this.loading = false;
-
         this.error = true;
-        
+        this.hasLoaded = true;
+
         this.refreshPage();
-
       }
-
     });
-
   }
 
-  // =========================================
-// FORCE PAGE REFRESH
-// =========================================
+  // GET UNIVERSITY ID
 
-private refreshPage(): void {
-
-  setTimeout(() => {
-
-    this.cdr.detectChanges();
-
-  });
-
-}
-  removeUniversity(
-    universityId: number
-  ): void {
-
-    if (
-      this.removingUniversityId !== null
-    ) {
-      return;
-    }
-
-    console.log(
-      'Removing saved university:',
-      universityId
-    );
-
-    this.removingUniversityId =
-      universityId;
-
-    this.savedService
-      .removeUniversity(universityId)
-      .subscribe({
-
-        next: () => {
-
-          console.log(
-            'University removed successfully:',
-            universityId
-          );
-
-          this.savedUniversities =
-            this.savedUniversities.filter(
-              university =>
-                this.getUniversityId(
-                  university
-                ) !== universityId
-            );
-
-          this.removingUniversityId =
-            null;
-
-          this.refreshPage();
-
-        },
-
-        error: (error) => {
-
-          console.error(
-            'ERROR REMOVING UNIVERSITY:',
-            error
-          );
-
-          this.removingUniversityId =
-            null;
-
-        }
-
-      });
-
-  }
-
-  getUniversityId(
-    university: any
-  ): number {
-
-    return Number(
-
+  getUniversityId(university: any): number {
+    return (
       university?.universityID ??
-
       university?.UniversityID ??
-
-      university?.university
-        ?.universityID ??
-
-      university?.University
-        ?.universityID ??
-
-      university?.University
-        ?.UniversityID
-
+      university?.university?.universityID ??
+      university?.University?.UniversityID ??
+      0
     );
-
   }
 
-  getUniversityName(
-    university: any
-  ): string {
+  // GET UNIVERSITY NAME
 
+  getUniversityName(university: any): string {
     return (
-
       university?.universityName ??
-
       university?.UniversityName ??
-
-      university?.university
-        ?.universityName ??
-
-      university?.University
-        ?.universityName ??
-
-      university?.University
-        ?.Name ??
-
-      'University'
-
+      university?.name ??
+      university?.Name ??
+      university?.university?.universityName ??
+      university?.University?.UniversityName ??
+      'Institution name unavailable'
     );
-
   }
 
-  getProvince(
-    university: any
-  ): string {
+  // GET INSTITUTION TYPE (UNIVERSITY OR COLLEGE)
 
+  getInstitutionType(university: any): string {
     return (
+      university?.institutionType ??
+      university?.InstitutionType ??
+      university?.university?.institutionType ??
+      university?.University?.InstitutionType ??
+      'Institution'
+    );
+  }
 
+  // GET UNIVERSITY TYPE (PUBLIC OR PRIVATE)
+
+  getUniversityType(university: any): string {
+    return (
+      university?.universityType ??
+      university?.UniversityType ??
+      university?.university?.universityType ??
+      university?.University?.UniversityType ??
+      ''
+    );
+  }
+
+  // GET DESCRIPTION
+
+  getDescription(university: any): string {
+    return (
+      university?.description ??
+      university?.Description ??
+      university?.university?.description ??
+      university?.University?.Description ??
+      'No description available.'
+    );
+  }
+
+  // GET PROVINCE
+
+  getProvince(university: any): string {
+    return (
       university?.province ??
-
       university?.Province ??
-
-      university?.university
-        ?.province ??
-
-      university?.University
-        ?.Province ??
-
+      university?.university?.province ??
+      university?.University?.Province ??
       ''
-
     );
-
   }
 
-  getCity(
-    university: any
-  ): string {
+  // GET CITY
 
+  getCity(university: any): string {
     return (
-
       university?.city ??
-
       university?.City ??
-
-      university?.university
-        ?.city ??
-
-      university?.University
-        ?.City ??
-
+      university?.university?.city ??
+      university?.University?.City ??
       ''
-
     );
-
   }
 
-  openUniversity(
-    university: any
-  ): void {
+  // OPEN INSTITUTION DETAILS
 
-    const universityId =
-      this.getUniversityId(
-        university
-      );
+  openUniversity(university: any): void {
+    const id = this.getUniversityId(university);
 
-    if (!universityId) {
+    if (id) {
+      this.router.navigate(['/tabs/university-details', id]);
+    }
+  }
 
-      console.error(
-        'Could not determine university ID.'
-      );
+  // REMOVE SAVED INSTITUTION
 
+  removeUniversity(id: number): void {
+    if (!id || this.removingUniversityId !== null) {
       return;
-
     }
 
-    console.log(
-      'Opening university:',
-      universityId
-    );
+    this.removingUniversityId = id;
 
-    this.router.navigate([
-      '/tabs/university-details',
-      universityId
-    ]);
+    this.savedService.removeUniversity(id).subscribe({
+      next: () => {
 
+        this.savedUniversities = this.savedUniversities.filter(
+          university => this.getUniversityId(university) !== id
+        );
+
+        this.removingUniversityId = null;
+
+        this.refreshPage();
+      },
+
+      error: (err: any) => {
+        console.error('Error removing saved institution:', err);
+
+        this.removingUniversityId = null;
+
+        this.refreshPage();
+      }
+    });
   }
+
+  // NAVIGATION
 
   goBack(): void {
-
-    this.router.navigate([
-      '/tabs/profile'
-    ]);
-
+    this.router.navigate(['/tabs/profile']);
   }
 
   goToUniversities(): void {
-
-    this.router.navigate([
-      '/tabs/universities'
-    ]);
-
+    this.router.navigate(['/tabs/universities']);
   }
 
+  // REFRESH VIEW
+
+  private refreshPage(): void {
+    this.cdr.detectChanges();
+  }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
+
 import {
   IonContent,
   ViewWillEnter,
@@ -44,6 +45,7 @@ import {
 import {
   AccessibilityControlsComponent
 } from '../../components/accessibility-controls/accessibility-controls.component';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 
 addIcons({
@@ -75,7 +77,8 @@ addIcons({
     IonBackButton,
     IonTitle,
     IonIcon,
-    AccessibilityControlsComponent
+    AccessibilityControlsComponent,
+    FooterComponent
   ],
 
   templateUrl: './profile.page.html',

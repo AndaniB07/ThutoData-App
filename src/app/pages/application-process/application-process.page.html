@@ -1,17 +1,18 @@
 <ion-header [translucent]="true">
+
+
+
   <ion-toolbar>
+
+      <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/tabs/more"
+        text="Back to More">
+      </ion-back-button>
+    </ion-buttons>
     <ion-title>
       How To Apply
-
-    <!-- =========================================
-       ACCESSIBILITY CONTROLS
-  ========================================= -->
-  <app-accessibility-controls></app-accessibility-controls>
-
     </ion-title>
-
-
-
   </ion-toolbar>
 </ion-header>
 
@@ -19,6 +20,11 @@
 
 <ion-content [fullscreen]="true">
 
+      <!-- =========================================
+       ACCESSIBILITY CONTROLS
+  ========================================= -->
+  <app-accessibility-controls></app-accessibility-controls>
+  
   <div class="page-container">
 
     <!-- Hero Section -->

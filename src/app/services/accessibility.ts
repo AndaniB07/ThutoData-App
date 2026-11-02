@@ -80,51 +80,39 @@ export class Accessibility {
 
   
   // ================================
-  // TEXT SIZE
-  // ================================
+// TEXT SIZE
+// ================================
 
-  setTextSize(size: number): void {
+setTextSize(size: number): void {
+  size = Math.max(80, Math.min(200, size));
 
-    size = Math.max(80, Math.min(200, size));
+  const app = document.querySelector('ion-app');
 
-    // Convert percentage to a scaling factor.
-    const scale = size / 100;
-
-    // Apply scaling to the root HTML element.
-    document.documentElement.style.setProperty(
-      '--app-text-scale',
-      scale.toString()
-    );
-
-    localStorage.setItem(
-      'thutodata-text-size',
-      size.toString()
-    );
+  if (app) {
+    (app as HTMLElement).style.zoom = `${size}%`;
   }
 
-  getTextSize(): number {
+  localStorage.setItem(
+    'thutodata-text-size',
+    size.toString()
+  );
+}
 
-    const savedSize =
-      localStorage.getItem('thutodata-text-size');
+getTextSize(): number {
+  const savedSize = localStorage.getItem('thutodata-text-size');
 
-    return savedSize
-      ? Number(savedSize)
-      : 100;
+  return savedSize ? Number(savedSize) : 100;
+}
+
+resetTextSize(): void {
+  const app = document.querySelector('ion-app');
+
+  if (app) {
+    (app as HTMLElement).style.zoom = '100%';
   }
 
-  resetTextSize(): void {
-
-    document.documentElement.style.setProperty(
-      '--app-text-scale',
-      '1'
-    );
-
-    localStorage.setItem(
-      'thutodata-text-size',
-      '100'
-    );
-  }
-
+  localStorage.setItem('thutodata-text-size', '100');
+}
   // ================================
   // HIGH CONTRAST
   // ================================

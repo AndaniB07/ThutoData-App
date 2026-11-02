@@ -1,3 +1,5 @@
+/* PAGE BACKGROUND */
+
 ion-content {
   --background: #f7f9fc;
 }
@@ -7,6 +9,7 @@ ion-content {
   margin: 0 auto;
   padding: 30px 24px 80px;
 }
+
 
 /* HEADER */
 
@@ -48,7 +51,6 @@ ion-content {
   height: 58px;
 
   border-radius: 14px;
-
   background: #e8eefc;
 
   display: flex;
@@ -65,14 +67,12 @@ ion-content {
 
 .eyebrow {
   display: inline-block;
-
   margin-bottom: 6px;
 
   color: #3157d5;
 
   font-size: 12px;
   font-weight: 700;
-
   letter-spacing: 1px;
 }
 
@@ -91,12 +91,17 @@ ion-content {
   color: #667085;
 
   font-size: 15px;
+  line-height: 1.6;
 }
 
 
-/* SECTION */
+/* SECTION HEADING */
 
 .section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   margin-bottom: 18px;
 }
 
@@ -123,47 +128,48 @@ ion-content {
 .university-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
+
+
+/* INSTITUTION CARD */
 
 .university-card {
   background: #ffffff;
 
   border: 1px solid #e5e7eb;
-
   border-radius: 16px;
 
   overflow: hidden;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.university-card:hover {
+  border-color: #cbd5f0;
+  box-shadow: 0 5px 16px rgba(23, 32, 51, 0.05);
 }
 
 .university-main {
   width: 100%;
 
-  border: none;
-  background: transparent;
-
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  gap: 18px;
 
-  gap: 16px;
-
-  padding: 20px 22px;
+  padding: 22px;
 
   text-align: left;
-
-  cursor: pointer;
 }
 
-.university-main:hover {
-  background: #fafbfc;
-}
+
+/* INSTITUTION ICON */
 
 .university-icon {
-  width: 50px;
-  height: 50px;
+  width: 52px;
+  height: 52px;
 
-  border-radius: 12px;
-
+  border-radius: 13px;
   background: #f1f4fa;
 
   display: flex;
@@ -174,9 +180,12 @@ ion-content {
 }
 
 .university-icon ion-icon {
-  font-size: 25px;
+  font-size: 26px;
   color: #3157d5;
 }
+
+
+/* INSTITUTION INFORMATION */
 
 .university-info {
   flex: 1;
@@ -184,34 +193,117 @@ ion-content {
 }
 
 .university-info h3 {
-  margin: 0 0 7px;
+  margin: 0 0 10px;
 
   color: #172033;
 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
 }
+
+
+/* INSTITUTION LABELS */
+
+.institution-labels {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-bottom: 12px;
+}
+
+.institution-type,
+.university-type {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.institution-type {
+  background: #e8eefc;
+  color: #3157d5;
+}
+
+.university-type {
+  background: #e9f7ef;
+  color: #237a48;
+}
+
+
+/* DESCRIPTION */
+
+.institution-description {
+  color: #475467;
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  margin: 0 0 13px;
+
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+
+/* LOCATION */
 
 .location {
   display: flex;
-  align-items: center;
-
-  gap: 5px;
+  align-items: flex-start;
+  gap: 6px;
 
   color: #667085;
 
   font-size: 13px;
+  line-height: 1.5;
+
+  margin-bottom: 14px;
 }
 
 .location ion-icon {
-  font-size: 16px;
-}
-
-.arrow {
-  font-size: 21px;
-  color: #98a2b3;
+  font-size: 17px;
+  color: #667085;
 
   flex-shrink: 0;
+}
+
+
+/* VIEW DETAILS */
+
+.view-details {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #3157d5;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.view-details ion-icon {
+  font-size: 17px;
+}
+
+.view-details:hover {
+  color: #1d3da8;
 }
 
 
@@ -220,19 +312,17 @@ ion-content {
 .remove-button {
   width: 100%;
 
-  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 
+  border: none;
   border-top: 1px solid #edf0f4;
 
   background: #ffffff;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 7px;
-
-  padding: 11px;
+  padding: 12px;
 
   color: #d92d20;
 
@@ -250,19 +340,25 @@ ion-content {
   font-size: 17px;
 }
 
+.remove-button ion-spinner {
+  width: 16px;
+  height: 16px;
+
+  color: #d92d20;
+}
+
 .remove-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
 
-/* EMPTY / ERROR / LOADING */
+/* EMPTY / ERROR / LOADING STATES */
 
 .state-card {
   background: #ffffff;
 
   border: 1px solid #e5e7eb;
-
   border-radius: 16px;
 
   padding: 45px 25px;
@@ -277,14 +373,31 @@ ion-content {
   margin: 0 auto 18px;
 
   border-radius: 50%;
-
   background: #f1f4fa;
 
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-  font-size: 26px;
+.loading-icon ion-icon {
+  font-size: 27px;
+  color: #3157d5;
+}
+
+.loading-icon ion-spinner {
+  width: 28px;
+  height: 28px;
+
+  color: #3157d5;
+}
+
+.error-icon {
+  background: #fff1f0;
+}
+
+.error-icon ion-icon {
+  color: #d92d20;
 }
 
 .state-card h2 {
@@ -293,6 +406,7 @@ ion-content {
   color: #172033;
 
   font-size: 20px;
+  font-weight: 700;
 }
 
 .state-card p {
@@ -303,8 +417,7 @@ ion-content {
   color: #667085;
 
   font-size: 14px;
-
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 
@@ -315,7 +428,6 @@ ion-content {
   border: none;
 
   background: #3157d5;
-
   color: #ffffff;
 
   border-radius: 9px;
@@ -330,11 +442,11 @@ ion-content {
 
 .browse-button:hover,
 .retry-button:hover {
-  opacity: 0.9;
+  background: #2445b5;
 }
 
 
-/* MOBILE */
+/* TABLET AND MOBILE */
 
 @media (max-width: 700px) {
 
@@ -344,6 +456,7 @@ ion-content {
 
   .title-row {
     align-items: flex-start;
+    gap: 13px;
   }
 
   .title-icon {
@@ -363,14 +476,64 @@ ion-content {
     font-size: 14px;
   }
 
+  .section-heading h2 {
+    font-size: 19px;
+  }
+
   .university-main {
-    padding: 17px;
-    gap: 12px;
+    padding: 18px;
+    gap: 13px;
   }
 
   .university-icon {
     width: 44px;
     height: 44px;
+  }
+
+  .university-icon ion-icon {
+    font-size: 23px;
+  }
+
+  .university-info h3 {
+    font-size: 16px;
+  }
+
+  .institution-description {
+    font-size: 13px;
+  }
+
+}
+
+
+/* SMALL MOBILE SCREENS */
+
+@media (max-width: 420px) {
+
+  .saved-page {
+    padding: 20px 14px 50px;
+  }
+
+  .university-main {
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .university-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .university-icon ion-icon {
+    font-size: 21px;
+  }
+
+  .university-info h3 {
+    font-size: 15px;
+  }
+
+  .institution-description {
+    font-size: 13px;
+    line-height: 1.6;
   }
 
 }
