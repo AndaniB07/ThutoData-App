@@ -402,7 +402,13 @@ export class UniversitiesPage implements OnInit, ViewWillEnter {
     const user = this.auth.getUser();
     const token = this.auth.getToken();
 
+    // Check whether the user is logged in
     if (!user || !token) {
+
+      this.showNotification(
+        'Please log in to save universities.',
+        'warning'
+      );
 
       this.router.navigate(['/login']);
 
@@ -419,6 +425,7 @@ export class UniversitiesPage implements OnInit, ViewWillEnter {
     const id = Number(universityId);
 
     this.savingUniversityId = id;
+
 
     /* -----------------------------------------
        REMOVE UNIVERSITY
@@ -1096,15 +1103,15 @@ export class UniversitiesPage implements OnInit, ViewWillEnter {
      ACADEMIC FIELD CHANGE
   ========================================================= */
 
- onAcademicFieldChange(): void {
+  onAcademicFieldChange(): void {
 
-  // Reset the selected course when the academic field changes.
-  this.selectedCourse = '';
+    // Reset the selected course when the academic field changes.
+    this.selectedCourse = '';
 
-  // Update the courses based on the selected academic field.
-  this.updateAvailableCourses();
+    // Update the courses based on the selected academic field.
+    this.updateAvailableCourses();
 
-}
+  }
 
 
   /* =========================================================

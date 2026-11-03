@@ -64,21 +64,23 @@
 </button>
 
 
-  <!-- HIGH CONTRAST -->
-  <button
-    type="button"
-    class="accessibility-button contrast-button"
-    [class.active]="highContrast"
-    (click)="toggleHighContrast()"
-    [attr.aria-pressed]="highContrast"
-    aria-label="Toggle high contrast mode">
 
-    <ion-icon name="contrast-outline"></ion-icon>
+<!-- HIGH CONTRAST -->
+<button
+  type="button"
+  class="accessibility-button contrast-button"
+  [class.active]="highContrast()"
+  (click)="toggleHighContrast()"
+  [attr.aria-pressed]="highContrast()"
+  aria-label="Toggle high contrast mode">
 
-    <span>
-      {{ highContrast ? 'Normal Contrast' : 'High Contrast' }}
-    </span>
+  <ion-icon name="contrast-outline"></ion-icon>
 
-  </button>
+  <span>
+    {{ highContrast() ? 'Normal Contrast' : 'High Contrast' }}
+  </span>
+
+</button>
+
 
 </div>

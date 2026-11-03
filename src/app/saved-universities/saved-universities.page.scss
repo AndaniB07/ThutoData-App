@@ -537,3 +537,193 @@ ion-content {
   }
 
 }
+
+
+/* =========================================
+   HIGH CONTRAST MODE
+========================================= */
+
+:host-context(ion-app.high-contrast) ion-content {
+  --background: #000000;
+}
+
+:host-context(ion-app.high-contrast) .saved-page {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* PAGE HEADER */
+
+:host-context(ion-app.high-contrast) .back-button {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .title-icon {
+  background: #000000;
+  border: 1px solid #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .title-icon ion-icon {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .eyebrow {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .title-row h1,
+:host-context(ion-app.high-contrast) .section-heading h2 {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .title-row p,
+:host-context(ion-app.high-contrast) .section-heading p {
+  color: #ffffff;
+}
+
+/* INSTITUTION CARDS */
+
+:host-context(ion-app.high-contrast) .university-card {
+  background: #000000;
+  border: 1px solid #ffffff;
+  box-shadow: none;
+}
+
+:host-context(ion-app.high-contrast) .university-card:hover {
+  border-color: #ffff00;
+  box-shadow: none;
+}
+
+:host-context(ion-app.high-contrast) .university-main {
+  background: #000000;
+}
+
+/* INSTITUTION ICON */
+
+:host-context(ion-app.high-contrast) .university-icon {
+  background: #000000;
+  border: 1px solid #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .university-icon ion-icon {
+  color: #ffff00;
+}
+
+/* INSTITUTION INFORMATION */
+
+:host-context(ion-app.high-contrast) .university-info h3 {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .institution-description {
+  color: #ffffff;
+}
+
+/* INSTITUTION LABELS */
+
+:host-context(ion-app.high-contrast) .institution-type,
+:host-context(ion-app.high-contrast) .university-type {
+  background: #000000;
+  color: #ffff00;
+  border: 1px solid #ffff00;
+}
+
+/* LOCATION */
+
+:host-context(ion-app.high-contrast) .location {
+  color: #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .location ion-icon {
+  color: #ffff00;
+}
+
+/* VIEW DETAILS */
+
+:host-context(ion-app.high-contrast) .view-details {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .view-details:hover {
+  color: #ffffff;
+}
+
+/* REMOVE BUTTON */
+
+:host-context(ion-app.high-contrast) .remove-button {
+  background: #000000;
+  color: #ffff00;
+  border-top: 1px solid #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .remove-button:hover {
+  background: #222222;
+}
+
+:host-context(ion-app.high-contrast) .remove-button ion-icon,
+:host-context(ion-app.high-contrast) .remove-button ion-spinner {
+  color: #ffff00;
+}
+
+/* LOADING, EMPTY AND ERROR CARDS */
+
+:host-context(ion-app.high-contrast) .state-card {
+  background: #000000;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .loading-icon {
+  background: #000000;
+  border: 1px solid #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .loading-icon ion-icon,
+:host-context(ion-app.high-contrast) .loading-icon ion-spinner {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .error-icon {
+  background: #000000;
+  border-color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .error-icon ion-icon {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .state-card h2 {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .state-card p {
+  color: #ffffff;
+}
+
+/* ACTION BUTTONS */
+
+:host-context(ion-app.high-contrast) .browse-button,
+:host-context(ion-app.high-contrast) .retry-button {
+  background: #ffff00;
+  color: #000000;
+  border: 1px solid #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .browse-button:hover,
+:host-context(ion-app.high-contrast) .retry-button:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* KEYBOARD FOCUS */
+
+:host-context(ion-app.high-contrast) button:focus-visible {
+  outline: 3px solid #ffff00;
+  outline-offset: 4px;
+}
+
+/* DISABLED BUTTON */
+
+:host-context(ion-app.high-contrast) .remove-button:disabled {
+  opacity: 0.6;
+}

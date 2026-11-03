@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +10,8 @@ import {
 } from '@ionic/angular';
 
 import { Auth } from '../../services/auth';
+import { ToastService } from '../../services/toast.service';
+
 import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
 
 @Component({
@@ -43,10 +46,10 @@ export class SignUpPage {
   successMessage = '';
   loading = false;
 
-
   constructor(
     private auth: Auth,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
 
@@ -58,7 +61,6 @@ export class SignUpPage {
 
     this.errorMessage = '';
     this.successMessage = '';
-
 
     // Check required fields
     if (
@@ -73,6 +75,8 @@ export class SignUpPage {
       this.errorMessage =
         'Please complete all fields.';
 
+      this.toastService.error(this.errorMessage);
+
       return;
     }
 
@@ -86,6 +90,8 @@ export class SignUpPage {
       this.errorMessage =
         'Passwords do not match.';
 
+      this.toastService.error(this.errorMessage);
+
       return;
     }
 
@@ -95,6 +101,8 @@ export class SignUpPage {
 
       this.errorMessage =
         'Password must be at least 6 characters long.';
+
+      this.toastService.error(this.errorMessage);
 
       return;
     }
@@ -129,6 +137,10 @@ export class SignUpPage {
         this.successMessage =
           'Account created successfully! Redirecting to login...';
 
+        this.toastService.success(
+          this.successMessage
+        );
+
 
         // Give user a moment to see success message
         setTimeout(() => {
@@ -150,9 +162,7 @@ export class SignUpPage {
         this.loading = false;
 
 
-        if (
-          error?.error?.message
-        ) {
+        if (error?.error?.message) {
 
           this.errorMessage =
             error.error.message;
@@ -163,6 +173,8 @@ export class SignUpPage {
             'Unable to create your account. Please try again.';
 
         }
+
+        this.toastService.error(this.errorMessage);
 
       }
 

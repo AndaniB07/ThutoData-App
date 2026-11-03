@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -5,10 +6,9 @@ import { Router } from '@angular/router';
 import {
   IonContent,
   IonIcon,
-  IonSpinner
+  IonSpinner,
+  ViewWillEnter
 } from '@ionic/angular';
-
-import { ViewWillEnter } from '@ionic/angular';
 
 import { addIcons } from 'ionicons';
 
@@ -23,6 +23,7 @@ import {
 } from 'ionicons/icons';
 
 import { SavedService } from '../services/saved.service';
+import { ToastService } from '../services/toast.service';
 import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
 import { FooterComponent } from '../components/footer/footer.component';
 
@@ -53,7 +54,8 @@ export class SavedUniversitiesPage implements OnInit, ViewWillEnter {
   constructor(
     private savedService: SavedService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toastService: ToastService
   ) {
     addIcons({
       arrowBackOutline,
@@ -222,6 +224,10 @@ export class SavedUniversitiesPage implements OnInit, ViewWillEnter {
 
         this.removingUniversityId = null;
 
+        this.toastService.success(
+          'Institution removed from your saved institutions.'
+        );
+
         this.refreshPage();
       },
 
@@ -229,6 +235,10 @@ export class SavedUniversitiesPage implements OnInit, ViewWillEnter {
         console.error('Error removing saved institution:', err);
 
         this.removingUniversityId = null;
+
+        this.toastService.error(
+          'Unable to remove this institution. Please try again.'
+        );
 
         this.refreshPage();
       }

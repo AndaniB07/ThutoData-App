@@ -39,9 +39,10 @@ import {
   star
 } from 'ionicons/icons';
 
-import {FooterComponent} from "../../components/footer/footer.component";
+import { FooterComponent } from "../../components/footer/footer.component";
 import { Auth } from '../../services/auth';
 import { SavedService } from '../../services/saved.service';
+import { ToastService } from '../../services/toast.service';
 import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
 
 
@@ -133,7 +134,6 @@ interface Course {
     IonSpinner,
     FooterComponent,
     AccessibilityControlsComponent
-
   ]
 
 })
@@ -194,6 +194,8 @@ export class CourseDetailsPage
     private auth: Auth,
 
     private savedService: SavedService,
+
+    private toastService: ToastService,
 
     private changeDetector: ChangeDetectorRef
 
@@ -925,6 +927,10 @@ export class CourseDetailsPage
 
     if (!user || !token) {
 
+      this.toastService.info(
+        'Please log in to save courses.'
+      );
+
       this.router.navigate([
         '/login'
       ]);
@@ -965,6 +971,11 @@ export class CourseDetailsPage
             this.saving = false;
 
 
+            this.toastService.success(
+              'Course removed from your saved courses.'
+            );
+
+
             this.refreshPage();
 
           },
@@ -980,6 +991,11 @@ export class CourseDetailsPage
 
 
             this.saving = false;
+
+
+            this.toastService.error(
+              'Unable to remove this course. Please try again.'
+            );
 
 
             this.refreshPage();
@@ -1012,6 +1028,11 @@ export class CourseDetailsPage
           this.saving = false;
 
 
+          this.toastService.success(
+            'Course added to your saved courses.'
+          );
+
+
           this.refreshPage();
 
         },
@@ -1027,6 +1048,11 @@ export class CourseDetailsPage
 
 
           this.saving = false;
+
+
+          this.toastService.error(
+            'Unable to save this course. Please try again.'
+          );
 
 
           this.refreshPage();

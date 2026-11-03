@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -28,6 +29,7 @@ import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { SavedService } from '../services/saved.service';
+import { ToastService } from '../services/toast.service';
 import { AccessibilityControlsComponent } from '../components/accessibility-controls/accessibility-controls.component';
 import { FooterComponent } from '../components/footer/footer.component';
 
@@ -70,7 +72,8 @@ export class SavedCoursesPage implements OnInit, ViewWillEnter {
     private savedService: SavedService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private http: HttpClient
+    private http: HttpClient,
+    private toastService: ToastService
   ) {
 
     addIcons({
@@ -371,6 +374,10 @@ export class SavedCoursesPage implements OnInit, ViewWillEnter {
 
           this.removingCourseId = null;
 
+          this.toastService.success(
+            'Course removed from your saved courses.'
+          );
+
           this.refreshPage();
 
         },
@@ -380,6 +387,12 @@ export class SavedCoursesPage implements OnInit, ViewWillEnter {
           console.error('ERROR REMOVING COURSE:', error);
 
           this.removingCourseId = null;
+
+          this.toastService.error(
+            'Unable to remove this course. Please try again.'
+          );
+
+          this.refreshPage();
 
         }
 

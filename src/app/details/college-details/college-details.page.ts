@@ -111,6 +111,47 @@ interface Course {
 
 }
 
+/* =========================================================
+   IMPORTANT DATE
+========================================================= */
+
+interface ImportantDate {
+  importantDateID: number;
+  universityID: number;
+  title: string;
+  description?: string | null;
+  date: string;
+}
+
+
+/* =========================================================
+   COLLEGE
+========================================================= */
+
+interface College {
+
+  universityID: number;
+
+  universityName: string;
+
+  abbreviation?: string | null;
+
+  description?: string | null;
+
+  province?: string | null;
+
+  city?: string | null;
+
+  institutionType?: string | null;
+
+  universityType?: string | null;
+
+  websiteURL?: string | null;
+
+  importantDates?: ImportantDate[];
+
+}
+
 
 /* =========================================================
    COMPONENT
@@ -127,15 +168,10 @@ interface Course {
   standalone: true,
 
   imports: [
-
     CommonModule,
-
     IonContent,
-
     IonIcon,
-
     AccessibilityControlsComponent
-
   ]
 
 })
@@ -144,35 +180,27 @@ interface Course {
 export class CollegeDetailsPage
   implements OnInit {
 
-
   /* =========================================================
      COLLEGE
   ========================================================= */
 
   college!: College;
-
   collegeId: number | null = null;
-
+  importantDates: ImportantDate[] = [];
 
   /* =========================================================
      COURSES
   ========================================================= */
-
   courses: Course[] = [];
-
   courseOfferings: CourseOffering[] = [];
-
   coursesLoading = true;
-
   coursesError = false;
-
 
   /* =========================================================
      PAGE STATE
   ========================================================= */
 
   loading = true;
-
   error = false;
 
 
@@ -184,16 +212,13 @@ export class CollegeDetailsPage
 
     'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Universities';
 
-
   private readonly coursesApi =
 
     'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/Courses';
 
-
   private readonly courseOfferingsApi =
 
     'https://thutodata-api-bmghhyhabag6f7an.centralindia-01.azurewebsites.net/api/CourseOfferings';
-
 
   /* =========================================================
      CONSTRUCTOR
@@ -202,11 +227,8 @@ export class CollegeDetailsPage
   constructor(
 
     private http: HttpClient,
-
     private route: ActivatedRoute,
-
     private router: Router,
-
     private changeDetector: ChangeDetectorRef
 
   ) {
@@ -214,25 +236,16 @@ export class CollegeDetailsPage
     addIcons({
 
       arrowBackOutline,
-
       locationOutline,
-
       schoolOutline,
-
       globeOutline,
-
       businessOutline,
-
       bookOutline,
-
       calendarOutline,
-
       chevronForwardOutline
-
     });
 
   }
-
 
   /* =========================================================
      INITIALISE
@@ -341,7 +354,12 @@ export class CollegeDetailsPage
 
 
           this.college = data;
+          this.importantDates = data.importantDates ?? [];
 
+console.log(
+  'IMPORTANT DATES FOR COLLEGE:',
+  this.importantDates
+);
 
           this.loading = false;
 

@@ -81,9 +81,12 @@
   color: #667085;
 }
 
-/* ================================
-   HIGH CONTRAST BUTTON
-   ================================ */
+/* HIGH CONTRAST BUTTON */
+
+.contrast-button {
+  background: #ffffff;
+  color: #172033;
+}
 
 .contrast-button.active {
   background: #000000;

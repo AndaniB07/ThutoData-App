@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -10,6 +11,7 @@ import {
 
 import { Auth } from '../../services/auth';
 import { AccessibilityControlsComponent } from '../../components/accessibility-controls/accessibility-controls.component';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,7 @@ import { AccessibilityControlsComponent } from '../../components/accessibility-c
     IonContent,
     IonIcon,
     CommonModule,
-    AccessibilityControlsComponent 
+    AccessibilityControlsComponent
   ],
 
   templateUrl: './login.page.html',
@@ -42,7 +44,8 @@ export class LoginPage {
 
   constructor(
     private auth: Auth,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
 
@@ -64,6 +67,8 @@ export class LoginPage {
 
       this.errorMessage =
         'Please enter your email and password.';
+
+      this.toastService.error(this.errorMessage);
 
       return;
 
@@ -106,6 +111,10 @@ export class LoginPage {
 
 
           this.loading = false;
+
+          this.toastService.success(
+            'Welcome back! You have logged in successfully.'
+          );
 
 
           // Navigate ONLY after the user
@@ -155,6 +164,8 @@ export class LoginPage {
               'Something went wrong. Please try again.';
 
           }
+
+          this.toastService.error(this.errorMessage);
 
         }
 

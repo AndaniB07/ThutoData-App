@@ -23,7 +23,9 @@ import {
 export class AccessibilityControlsComponent {
 
   textSize = 100;
-  highContrast = false;
+
+  // Read the shared Signal from the Accessibility service
+  highContrast = this.accessibility.highContrast;
 
   constructor(private accessibility: Accessibility) {
 
@@ -36,13 +38,12 @@ export class AccessibilityControlsComponent {
       'contrast-outline': contrastOutline
     });
 
-    this.syncSettings();
+    this.textSize = this.accessibility.getTextSize();
   }
 
-  private syncSettings(): void {
-    this.textSize = this.accessibility.getTextSize();
-    this.highContrast = this.accessibility.getHighContrast();
-  }
+  // ================================
+  // READ ALOUD
+  // ================================
 
   readPage(): void {
 
@@ -54,12 +55,10 @@ export class AccessibilityControlsComponent {
 
     elements.forEach(element => {
 
-      // Don't read the accessibility controls themselves
       if (element.closest('app-accessibility-controls')) {
         return;
       }
 
-      // Don't read hidden Ionic pages
       const page = element.closest('.ion-page');
 
       if (
@@ -82,35 +81,46 @@ export class AccessibilityControlsComponent {
     );
   }
 
+  // ================================
+  // STOP READING
+  // ================================
+
   stopReading(): void {
     this.accessibility.stopReading();
   }
+
+  // ================================
+  // TEXT SIZE
+  // ================================
 
   changeTextSize(): void {
     this.accessibility.setTextSize(this.textSize);
   }
 
+  // ================================
+  // RESET ALL
+  // ================================
+
   resetAccessibility(): void {
 
-  // Stop any ongoing read-aloud
-  this.accessibility.stopReading();
+    this.accessibility.stopReading();
 
-  // Reset text size
-  this.textSize = 100;
-  this.accessibility.resetTextSize();
+    this.textSize = 100;
+    this.accessibility.resetTextSize();
 
-  // Disable high contrast
-  this.highContrast = false;
-  this.accessibility.setHighContrast(false);
+    this.accessibility.setHighContrast(false);
+  }
 
-}
+  // ================================
+  // HIGH CONTRAST
+  // ================================
 
   toggleHighContrast(): void {
-    this.highContrast = !this.highContrast;
 
     this.accessibility.setHighContrast(
-      this.highContrast
+      !this.highContrast()
     );
+
   }
 
 }

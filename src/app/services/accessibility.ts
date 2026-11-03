@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +7,12 @@ import { Injectable } from '@angular/core';
 export class Accessibility {
 
   private isSpeaking = false;
+
+  // Shared high-contrast state
+  private highContrastState = signal<boolean>(false);
+
+  // Public read-only signal for all components
+  highContrast = this.highContrastState.asReadonly();
 
   constructor() {
     this.loadSettings();
@@ -53,11 +60,9 @@ export class Accessibility {
     this.isSpeaking = true;
 
     speech.onend = () => {
-
       setTimeout(() => {
         this.readSections(sections, index + 1);
       }, 500);
-
     };
 
     speech.onerror = () => {
@@ -72,59 +77,67 @@ export class Accessibility {
   // ================================
 
   stopReading(): void {
-
     window.speechSynthesis.cancel();
-
     this.isSpeaking = false;
   }
 
-  
   // ================================
-// TEXT SIZE
-// ================================
+  // TEXT SIZE
+  // ================================
 
-setTextSize(size: number): void {
-  size = Math.max(80, Math.min(200, size));
+  setTextSize(size: number): void {
 
-  const app = document.querySelector('ion-app');
+    size = Math.max(80, Math.min(200, size));
 
-  if (app) {
-    (app as HTMLElement).style.zoom = `${size}%`;
+    const app = document.querySelector('ion-app');
+
+    if (app) {
+      (app as HTMLElement).style.zoom = `${size}%`;
+    }
+
+    localStorage.setItem(
+      'thutodata-text-size',
+      size.toString()
+    );
   }
 
-  localStorage.setItem(
-    'thutodata-text-size',
-    size.toString()
-  );
-}
+  getTextSize(): number {
 
-getTextSize(): number {
-  const savedSize = localStorage.getItem('thutodata-text-size');
+    const savedSize = localStorage.getItem(
+      'thutodata-text-size'
+    );
 
-  return savedSize ? Number(savedSize) : 100;
-}
-
-resetTextSize(): void {
-  const app = document.querySelector('ion-app');
-
-  if (app) {
-    (app as HTMLElement).style.zoom = '100%';
+    return savedSize ? Number(savedSize) : 100;
   }
 
-  localStorage.setItem('thutodata-text-size', '100');
-}
+  resetTextSize(): void {
+
+    const app = document.querySelector('ion-app');
+
+    if (app) {
+      (app as HTMLElement).style.zoom = '100%';
+    }
+
+    localStorage.setItem('thutodata-text-size', '100');
+  }
+
   // ================================
   // HIGH CONTRAST
   // ================================
 
   setHighContrast(enabled: boolean): void {
 
+    // Update the shared Signal
+    this.highContrastState.set(enabled);
+
+    // Update the global application class
     const app = document.querySelector('ion-app');
 
     if (app) {
       app.classList.toggle('high-contrast', enabled);
     }
 
+    // Save the setting
     localStorage.setItem(
       'thutodata-high-contrast',
       enabled.toString()
@@ -147,6 +160,9 @@ resetTextSize(): void {
     const savedSize = this.getTextSize();
     const savedContrast = this.getHighContrast();
 
+    // Restore the saved Signal value
+    this.highContrastState.set(savedContrast);
+
     setTimeout(() => {
 
       this.setTextSize(savedSize);
@@ -160,7 +176,6 @@ resetTextSize(): void {
   // ================================
 
   getSpeakingStatus(): boolean {
-
     return this.isSpeaking;
   }
 

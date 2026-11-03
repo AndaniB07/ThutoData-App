@@ -426,3 +426,207 @@ ion-content {
 .course-main {
   text-align: left;
 }
+
+/* =========================================
+   HIGH CONTRAST MODE
+========================================= */
+
+:host-context(ion-app.high-contrast) ion-content {
+  --background: #000000;
+  color: #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .saved-page {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* PAGE HEADER */
+
+:host-context(ion-app.high-contrast) .back-button {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .header-icon {
+  background: #000000;
+  border: 1px solid #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .header-icon ion-icon {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .header-content h1 {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .header-content p {
+  color: #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .saved-count {
+  background: #000000;
+  color: #ffff00;
+  border: 1px solid #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .saved-count ion-icon {
+  color: #ffff00;
+}
+
+/* SECTION HEADING */
+
+:host-context(ion-app.high-contrast) .section-heading h2 {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .section-heading p {
+  color: #ffffff;
+}
+
+/* COURSE CARDS */
+
+:host-context(ion-app.high-contrast) .course-card {
+  background: #000000;
+  border: 1px solid #ffffff;
+  box-shadow: none;
+}
+
+:host-context(ion-app.high-contrast) .course-card:hover {
+  border-color: #ffff00;
+  box-shadow: none;
+}
+
+/* COURSE INFORMATION BUTTON */
+
+:host-context(ion-app.high-contrast) .course-main {
+  background: #000000;
+  color: #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .course-main:hover {
+  background: #222222;
+}
+
+:host-context(ion-app.high-contrast) .course-information h3 {
+  color: #ffff00;
+}
+
+/* QUALIFICATION */
+
+:host-context(ion-app.high-contrast) .qualification {
+  color: #ffff00;
+}
+
+/* COURSE DETAILS */
+
+:host-context(ion-app.high-contrast) .course-detail {
+  color: #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .course-detail ion-icon {
+  color: #ffff00;
+}
+
+/* SAVED BADGE */
+
+:host-context(ion-app.high-contrast) .saved-badge {
+  background: #000000;
+  color: #ffff00;
+  border: 1px solid #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .saved-badge ion-icon {
+  color: #ffff00;
+}
+
+/* VIEW DETAILS */
+
+:host-context(ion-app.high-contrast) .view-details {
+  color: #ffff00;
+  border-top: 1px solid #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .view-details ion-icon {
+  color: #ffff00;
+}
+
+/* REMOVE BUTTON */
+
+:host-context(ion-app.high-contrast) .remove-button {
+  background: #000000;
+  color: #ffff00;
+  border-left: 1px solid #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .remove-button:hover {
+  background: #222222;
+}
+
+:host-context(ion-app.high-contrast) .remove-button ion-icon,
+:host-context(ion-app.high-contrast) .remove-button ion-spinner {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .remove-button:disabled {
+  opacity: 0.6;
+}
+
+/* LOADING, ERROR AND EMPTY STATES */
+
+:host-context(ion-app.high-contrast) .state-container {
+  background: #000000;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .state-container h3 {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .state-container p {
+  color: #ffffff;
+}
+
+:host-context(ion-app.high-contrast) .state-container > ion-spinner {
+  color: #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .state-container > ion-icon {
+  color: #ffff00;
+}
+
+/* EMPTY STATE ICON */
+
+:host-context(ion-app.high-contrast) .empty-icon {
+  background: #000000;
+  border: 1px solid #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .empty-icon ion-icon {
+  color: #ffff00;
+}
+
+/* BUTTONS */
+
+:host-context(ion-app.high-contrast) .primary-button {
+  background: #ffff00;
+  color: #000000;
+  border: 1px solid #ffff00;
+}
+
+:host-context(ion-app.high-contrast) .primary-button ion-icon {
+  color: #000000;
+}
+
+:host-context(ion-app.high-contrast) .primary-button:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* KEYBOARD FOCUS */
+
+:host-context(ion-app.high-contrast) button:focus-visible {
+  outline: 3px solid #ffff00;
+  outline-offset: 4px;
+}
