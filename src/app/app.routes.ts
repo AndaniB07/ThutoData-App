@@ -124,7 +124,8 @@ export const routes: Routes = [
   {
     path: 'reset-password',
     loadComponent: () => import('./pages/reset-password/reset-password.page').then( m => m.ResetPasswordPage)
-  },  {
+  },
+  {
     path: 'aps-calculator',
     loadComponent: () => import('./pages/aps-calculator/aps-calculator.page').then( m => m.ApsCalculatorPage)
   },
@@ -140,6 +141,14 @@ export const routes: Routes = [
     path: 'academic-calendar',
     loadComponent: () => import('./pages/academic-calendar/academic-calendar.page').then( m => m.AcademicCalendarPage)
   },
+    {
+    path: 'contact-us',
+    loadComponent: () =>
+      import('./pages/contact-us/contact-us.page')
+        .then(m => m.ContactUsPage)
+  }
+
+
 
 
 
